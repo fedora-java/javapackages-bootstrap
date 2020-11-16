@@ -1,0 +1,918 @@
+MOD ant
+  ART org.apache.ant ant-junit
+    DEP junit junit
+    DEP org.apache.ant ant
+  ART org.apache.ant ant-junit4
+    DEP junit junit
+    DEP org.apache.ant ant
+  ART org.apache.ant ant-bootstrap
+  ART org.apache.ant ant-launcher
+    ALIAS ant ant-launcher
+  ART org.apache.ant ant
+    ALIAS org.apache.ant ant-nodeps
+    ALIAS apache ant
+    ALIAS ant ant
+    DEP org.apache.ant ant-launcher
+MOD apiguardian
+  ART org.apiguardian apiguardian-api
+MOD asm
+  ART org.ow2.asm asm
+  ART org.ow2.asm asm-tree
+    DEP org.ow2.asm asm
+  ART org.ow2.asm asm-analysis
+    DEP org.ow2.asm asm-tree
+  ART org.ow2.asm asm-commons
+    DEP org.ow2.asm asm
+    DEP org.ow2.asm asm-tree
+    DEP org.ow2.asm asm-analysis
+  ART org.ow2.asm asm-util
+    DEP org.ow2.asm asm
+    DEP org.ow2.asm asm-tree
+    DEP org.ow2.asm asm-analysis
+MOD assertj-core
+  ART org.assertj assertj-core
+    DEP net.bytebuddy byte-buddy
+MOD bnd
+  ART biz.aQute.bnd aQute.libg
+    DEP org.osgi osgi.cmpn
+    DEP org.osgi osgi.core
+    DEP org.slf4j slf4j-api
+  ART biz.aQute.bnd biz.aQute.bnd.annotation
+    DEP org.osgi osgi.cmpn
+    DEP org.osgi osgi.core
+    DEP org.osgi osgi.annotation
+  ART biz.aQute.bnd biz.aQute.bndlib
+    ALIAS biz.aQute.bnd bndlib
+    ALIAS biz.aQute bndlib
+    DEP biz.aQute.bnd biz.aQute.bnd.annotation
+    DEP biz.aQute.bnd aQute.libg
+    DEP org.osgi osgi.cmpn
+    DEP org.osgi osgi.core
+    DEP org.slf4j slf4j-api
+MOD build-helper-maven-plugin
+  ART org.codehaus.mojo build-helper-maven-plugin
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-plugin-api
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.maven.shared file-management
+MOD byte-buddy
+  ART net.bytebuddy byte-buddy-agent
+  ART net.bytebuddy byte-buddy
+    ALIAS net.bytebuddy byte-buddy-dep
+    DEP org.ow2.asm asm
+    DEP org.ow2.asm asm-commons
+MOD cdi
+  ART javax.enterprise cdi-api
+    ALIAS jakarta.enterprise jakarta.enterprise.cdi-api
+    DEP javax.inject javax.inject
+MOD cglib
+  ART cglib cglib
+    ALIAS net.sf.cglib cglib
+    ALIAS cglib cglib-full
+    ALIAS cglib cglib-nodep
+    ALIAS org.sonatype.sisu.inject cglib
+    DEP org.ow2.asm asm
+MOD common-annotations-api
+  ART javax.annotation jsr250-api
+    ALIAS javax.annotation javax.annotation-api
+MOD commons-beanutils
+  ART commons-beanutils commons-beanutils
+    ALIAS commons-beanutils commons-beanutils-core
+    ALIAS commons-beanutils commons-beanutils-bean-collections
+    ALIAS org.apache.commons commons-beanutils
+    ALIAS org.apache.commons commons-beanutils-core
+    ALIAS org.apache.commons commons-beanutils-bean-collections
+    DEP commons-logging commons-logging
+    DEP commons-collections commons-collections
+MOD commons-cli
+  ART commons-cli commons-cli
+    ALIAS org.apache.commons commons-cli
+MOD commons-codec
+  ART commons-codec commons-codec
+MOD commons-collections
+  ART commons-collections commons-collections
+MOD commons-compress
+  ART org.apache.commons commons-compress
+    ALIAS commons commons-compress
+MOD commons-io
+  ART commons-io commons-io
+    ALIAS org.apache.commons commons-io
+MOD commons-jxpath
+  ART commons-jxpath commons-jxpath
+    ALIAS org.apache.commons commons-jxpath
+MOD commons-lang
+  ART org.apache.commons commons-lang3
+MOD commons-logging
+  ART commons-logging commons-logging
+    ALIAS org.apache.commons commons-logging
+    ALIAS apache commons-logging
+  ART commons-logging commons-logging-api
+    ALIAS org.apache.commons commons-logging-api
+    ALIAS apache commons-logging-api
+MOD cup
+  ART java_cup java_cup
+  ART java_cup java_cup-runtime
+MOD easymock
+  ART org.easymock easymock
+    DEP cglib cglib
+    DEP org.ow2.asm asm
+    DEP org.objenesis objenesis
+MOD felix-utils
+  ART org.apache.felix org.apache.felix.utils
+MOD guava
+  ART com.google.guava failureaccess
+  ART com.google.guava guava
+    DEP com.google.guava failureaccess
+    DEP com.google.code.findbugs jsr305
+MOD guice
+  ART com.google.inject.extensions guice-servlet
+    ALIAS org.sonatype.sisu.inject guice-servlet
+    DEP com.google.inject guice
+  ART com.google.inject guice
+    ALIAS com.google.inject guice no_aop
+    ALIAS org.sonatype.sisu sisu-guice
+    ALIAS org.sonatype.sisu sisu-guice no_aop
+    DEP javax.inject javax.inject
+    DEP com.google.guava guava
+MOD hamcrest
+  ART org.hamcrest hamcrest-core
+    ALIAS org.hamcrest hamcrest
+    ALIAS org.hamcrest hamcrest-all
+    ALIAS org.hamcrest hamcrest-library
+MOD httpcomponents-client
+  ART org.apache.httpcomponents httpclient
+    DEP org.apache.httpcomponents httpcore
+    DEP commons-codec commons-codec
+MOD httpcomponents-core
+  ART org.apache.httpcomponents httpcore
+MOD injection-api
+  ART javax.inject javax.inject
+    ALIAS jakarta.inject jakarta.inject-api
+MOD jansi
+  ART org.fusesource.jansi jansi
+MOD jcommander
+  ART com.beust jcommander
+MOD jdom
+  ART org.jdom jdom
+    ALIAS jdom jdom
+MOD jdom2
+  ART org.jdom jdom2
+MOD jflex
+  ART de.jflex jflex
+    DEP java_cup java_cup
+    DEP org.apache.ant ant
+MOD jsoup
+  ART org.jsoup jsoup
+MOD jsr-305
+  ART com.google.code.findbugs jsr305
+    ALIAS org.jsr-305 ri
+MOD junit4
+  ART junit junit
+    DEP org.hamcrest hamcrest-core
+MOD junit5-jupiter
+  ART org.junit.jupiter junit-jupiter-api
+    DEP org.opentest4j opentest4j
+    DEP org.junit.platform junit-platform-commons
+  ART org.junit.jupiter junit-jupiter-params
+    DEP com.univocity univocity-parsers
+    DEP org.junit.jupiter junit-jupiter-api
+  ART org.junit.jupiter junit-jupiter-engine
+    DEP org.junit.platform junit-platform-engine
+    DEP org.junit.jupiter junit-jupiter-api
+  ART org.junit.jupiter junit-jupiter
+    DEP org.junit.jupiter junit-jupiter-api
+    DEP org.junit.jupiter junit-jupiter-params
+    DEP org.junit.jupiter junit-jupiter-engine
+  ART org.junit.jupiter junit-jupiter-migrationsupport
+    DEP junit junit
+    DEP org.junit.jupiter junit-jupiter-api
+MOD junit5-platform
+  ART org.junit.platform junit-platform-commons
+  ART org.junit.platform junit-platform-engine
+    DEP org.opentest4j opentest4j
+    DEP org.junit.platform junit-platform-commons
+  ART org.junit.platform junit-platform-launcher
+    DEP org.junit.platform junit-platform-engine
+  ART org.junit.platform junit-platform-reporting
+    DEP org.junit.platform junit-platform-launcher
+  ART org.junit.platform junit-platform-suite-api
+  ART org.junit.platform junit-platform-runner
+    DEP junit junit
+    DEP org.junit.platform junit-platform-launcher
+    DEP org.junit.platform junit-platform-suite-api
+MOD junit5-vintage
+  ART org.junit.vintage junit-vintage-engine
+    DEP org.junit.platform junit-platform-engine
+    DEP junit junit
+MOD maven-antrun-plugin
+  ART org.apache.maven.plugins maven-antrun-plugin
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-artifact
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.ant ant
+MOD maven-archiver
+  ART org.apache.maven maven-archiver
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP commons-io commons-io
+    DEP org.codehaus.plexus plexus-archiver
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-interpolation
+MOD maven-artifact
+  ART org.apache.maven maven-artifact
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.commons commons-lang3
+MOD maven-artifact-transfer
+  ART org.apache.maven.shared maven-artifact-transfer
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-artifact
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.apache.maven.shared maven-common-artifact-filters
+    DEP org.codehaus.plexus plexus-utils
+    DEP commons-codec commons-codec
+    DEP org.slf4j slf4j-api
+MOD maven-assembly-plugin
+  ART org.apache.maven.plugins maven-assembly-plugin
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven.shared maven-common-artifact-filters
+    DEP org.apache.maven.shared maven-artifact-transfer
+    DEP org.codehaus.plexus plexus-interpolation
+    DEP org.codehaus.plexus plexus-archiver
+    DEP org.apache.maven.shared file-management
+    DEP org.apache.maven.shared maven-shared-io
+    DEP commons-io commons-io
+    DEP org.apache.maven.shared maven-filtering
+    DEP org.codehaus.plexus plexus-io
+    DEP org.apache.maven maven-archiver
+    DEP org.codehaus.plexus plexus-utils
+    DEP commons-codec commons-codec
+MOD maven-builder-support
+  ART org.apache.maven maven-builder-support
+MOD maven-bundle-plugin
+  ART org.apache.felix maven-bundle-plugin
+    DEP org.osgi osgi.core
+    DEP biz.aQute.bnd biz.aQute.bndlib
+    DEP org.slf4j slf4j-api
+    DEP org.apache.felix org.apache.felix.utils
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven maven-archiver
+    DEP org.apache.maven.shared maven-dependency-tree
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.sonatype.plexus plexus-build-api
+MOD maven-common-artifact-filters
+  ART org.apache.maven.shared maven-common-artifact-filters
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven.shared maven-shared-utils
+MOD maven-compat
+  ART org.apache.maven maven-compat
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-model-builder
+    DEP org.apache.maven maven-settings
+    DEP org.apache.maven maven-settings-builder
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-resolver-provider
+    DEP org.apache.maven maven-repository-metadata
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.maven.resolver maven-resolver-impl
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-interpolation
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.apache.maven.wagon wagon-provider-api
+MOD maven-compiler-plugin
+  ART org.apache.maven.plugins maven-compiler-plugin
+    DEP org.apache.maven.plugin-tools maven-plugin-annotations
+    DEP org.apache.maven.plugins maven-plugin-plugin
+    DEP org.apache.maven.shared maven-shared-incremental
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-plugin-api
+    DEP org.codehaus.plexus plexus-compiler-api
+    DEP org.codehaus.plexus plexus-compiler-javac
+    DEP org.codehaus.plexus plexus-compiler-manager
+    DEP org.codehaus.plexus plexus-component-metadata
+MOD maven-core
+  ART org.apache.maven maven-core
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-settings
+    DEP org.apache.maven maven-settings-builder
+    DEP org.apache.maven maven-builder-support
+    DEP org.apache.maven maven-repository-metadata
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-model-builder
+    DEP org.apache.maven maven-resolver-provider
+    DEP org.apache.maven.resolver maven-resolver-impl
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
+    DEP org.eclipse.sisu org.eclipse.sisu.inject
+    DEP com.google.inject guice
+    DEP javax.inject javax.inject
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-classworlds
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.apache.commons commons-lang3
+MOD maven-dependency-analyzer
+  ART org.apache.maven.shared maven-dependency-analyzer
+    DEP org.ow2.asm asm
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-artifact
+MOD maven-dependency-plugin
+  ART org.apache.maven.plugins maven-dependency-plugin
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-repository-metadata
+    DEP org.codehaus.plexus plexus-archiver
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.maven.shared file-management
+    DEP org.codehaus.plexus plexus-io
+    DEP org.apache.maven.shared maven-dependency-analyzer
+    DEP org.apache.maven.shared maven-dependency-tree
+    DEP org.apache.maven.shared maven-common-artifact-filters
+    DEP org.apache.maven.shared maven-artifact-transfer
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.apache.commons commons-lang3
+    DEP commons-collections commons-collections
+    DEP org.codehaus.plexus plexus-classworlds
+MOD maven-dependency-tree
+  ART org.apache.maven.shared maven-dependency-tree
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.apache.maven.resolver maven-resolver-util
+MOD maven-embedder
+  ART org.apache.maven maven-embedder
+    DEP org.apache.maven maven-settings
+    DEP org.apache.maven maven-settings-builder
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-model-builder
+    DEP org.apache.maven maven-builder-support
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP com.google.inject guice
+    DEP javax.inject javax.inject
+    DEP javax.annotation jsr250-api
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-classworlds
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
+    DEP org.sonatype.plexus plexus-sec-dispatcher
+    DEP org.sonatype.plexus plexus-cipher
+    DEP org.slf4j slf4j-api
+    DEP commons-cli commons-cli
+    DEP org.apache.commons commons-lang3
+    DEP org.fusesource.jansi jansi
+MOD maven-enforcer
+  ART org.apache.maven.enforcer enforcer-rules
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven.shared maven-common-artifact-filters
+    DEP org.apache.maven.shared maven-artifact-transfer
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.commons commons-lang3
+    DEP commons-codec commons-codec
+    DEP org.apache.maven.enforcer enforcer-api
+    DEP org.apache.maven.shared maven-dependency-tree
+  ART org.apache.maven.plugins maven-enforcer-plugin
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.maven.enforcer enforcer-api
+    DEP org.apache.maven.enforcer enforcer-rules
+  ART org.apache.maven.enforcer enforcer-api
+    DEP org.apache.maven maven-plugin-api
+    DEP org.codehaus.plexus plexus-container-default
+MOD maven-file-management
+  ART org.apache.maven.shared file-management
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven.shared maven-shared-io
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-filtering
+  ART org.apache.maven.shared maven-filtering
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-interpolation
+    DEP org.sonatype.plexus plexus-build-api
+MOD maven-jar-plugin
+  ART org.apache.maven.plugins maven-jar-plugin
+    DEP org.apache.maven.plugin-testing maven-plugin-testing-harness
+    DEP org.apache.maven.plugin-tools maven-plugin-annotations
+    DEP org.apache.maven.plugins maven-plugin-plugin
+    DEP org.apache.maven.shared file-management
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.apache.maven maven-archiver
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-plugin-api
+    DEP org.codehaus.plexus plexus-archiver
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-model
+  ART org.apache.maven maven-model
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-model-builder
+  ART org.apache.maven maven-model-builder
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-interpolation
+    DEP javax.inject javax.inject
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-builder-support
+    DEP org.eclipse.sisu org.eclipse.sisu.inject
+MOD maven-plugin-api
+  ART org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-artifact
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-classworlds
+MOD maven-plugin-testing
+  ART org.apache.maven.plugin-testing maven-plugin-testing-harness
+    ALIAS org.apache.maven.shared maven-plugin-testing-harness
+    DEP commons-io commons-io
+    DEP org.codehaus.plexus plexus-archiver
+MOD maven-plugin-tools
+  ART org.apache.maven.plugin-tools maven-plugin-tools-java
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven.plugin-tools maven-plugin-tools-api
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP com.thoughtworks.qdox qdox
+  ART org.apache.maven.plugin-tools maven-plugin-tools-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-artifact
+    DEP org.codehaus.plexus plexus-utils
+  ART org.apache.maven.plugins maven-plugin-plugin
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven.plugin-tools maven-plugin-tools-api
+    DEP org.apache.maven.plugin-tools maven-plugin-tools-generators
+    DEP org.apache.maven.plugin-tools maven-plugin-tools-java
+    DEP org.apache.maven.plugin-tools maven-plugin-tools-annotations
+    DEP org.apache.maven.plugin-tools maven-plugin-annotations
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-repository-metadata
+    DEP org.apache.maven maven-artifact
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.maven.surefire maven-surefire-common
+  ART org.apache.maven.plugin-tools maven-plugin-tools-annotations
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven.plugin-tools maven-plugin-tools-api
+    DEP org.apache.maven.plugin-tools maven-plugin-annotations
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.ow2.asm asm
+    DEP org.codehaus.plexus plexus-archiver
+    DEP com.thoughtworks.qdox qdox
+  ART org.apache.maven.plugin-tools maven-plugin-annotations
+    DEP org.apache.maven maven-artifact
+  ART org.apache.maven.plugin-tools maven-plugin-tools-generators
+    DEP org.apache.maven.plugin-tools maven-plugin-tools-api
+    DEP org.apache.maven maven-model
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.ow2.asm asm
+    DEP org.ow2.asm asm-commons
+MOD maven-remote-resources-plugin
+  ART org.apache.maven.plugins maven-remote-resources-plugin
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven maven-settings
+    DEP org.apache.maven maven-archiver
+    DEP org.apache.maven.shared maven-common-artifact-filters
+    DEP org.apache.maven.shared maven-filtering
+    DEP org.codehaus.plexus plexus-resources
+    DEP org.codehaus.plexus plexus-interpolation
+    DEP org.codehaus.plexus plexus-utils
+    DEP commons-io commons-io
+    DEP org.apache.velocity velocity
+MOD maven-repository-metadata
+  ART org.apache.maven maven-repository-metadata
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-resolver
+  ART org.apache.maven.resolver maven-resolver-api
+    ALIAS org.eclipse.aether aether-api
+  ART org.apache.maven.resolver maven-resolver-spi
+    ALIAS org.eclipse.aether aether-spi
+    DEP org.apache.maven.resolver maven-resolver-api
+  ART org.apache.maven.resolver maven-resolver-util
+    ALIAS org.eclipse.aether aether-util
+    DEP org.apache.maven.resolver maven-resolver-api
+  ART org.apache.maven.resolver maven-resolver-impl
+    ALIAS org.eclipse.aether aether-impl
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.slf4j slf4j-api
+  ART org.apache.maven.resolver maven-resolver-connector-basic
+    ALIAS org.eclipse.aether aether-connector-basic
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.slf4j slf4j-api
+  ART org.apache.maven.resolver maven-resolver-transport-wagon
+    ALIAS org.eclipse.aether aether-transport-wagon
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.maven.wagon wagon-provider-api
+    DEP org.slf4j slf4j-api
+MOD maven-resolver-provider
+  ART org.apache.maven maven-resolver-provider
+    ALIAS org.apache.maven maven-aether-provider
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-model-builder
+    DEP org.apache.maven maven-repository-metadata
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.maven.resolver maven-resolver-impl
+    DEP org.codehaus.plexus plexus-utils
+    DEP javax.inject javax.inject
+    DEP org.slf4j slf4j-api
+MOD maven-resources
+  ART org.apache apache-jar-resource-bundle
+MOD maven-resources-plugin
+  ART org.apache.maven.plugins maven-resources-plugin
+    DEP commons-io commons-io
+    DEP org.apache.maven.plugin-tools maven-plugin-annotations
+    DEP org.apache.maven.plugins maven-plugin-plugin
+    DEP org.apache.maven.shared maven-filtering
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-plugin-api
+    DEP org.codehaus.plexus plexus-interpolation
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-settings
+  ART org.apache.maven maven-settings
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-settings-builder
+  ART org.apache.maven maven-settings-builder
+    DEP org.apache.maven maven-builder-support
+    DEP javax.inject javax.inject
+    DEP org.codehaus.plexus plexus-interpolation
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.maven maven-settings
+    DEP org.sonatype.plexus plexus-sec-dispatcher
+MOD maven-shared-incremental
+  ART org.apache.maven.shared maven-shared-incremental
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.codehaus.plexus plexus-component-annotations
+MOD maven-shared-io
+  ART org.apache.maven.shared maven-shared-io
+    DEP org.apache.maven maven-artifact
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven.wagon wagon-provider-api
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-shared-utils
+  ART org.apache.maven.shared maven-shared-utils
+    DEP commons-io commons-io
+MOD maven-source-plugin
+  ART org.apache.maven.plugins maven-source-plugin
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-archiver
+    DEP org.codehaus.plexus plexus-archiver
+    DEP org.codehaus.plexus plexus-utils
+MOD maven-surefire
+  ART org.apache.maven.surefire common-junit3
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire common-junit4
+    DEP org.apache.maven.surefire common-junit3
+    DEP org.apache.maven.surefire common-java5
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire common-junit48
+    DEP org.apache.maven.surefire common-junit4
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-junit3
+    DEP org.apache.maven.surefire common-junit3
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-junit4
+    DEP org.apache.maven.surefire common-junit4
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-junit47
+    DEP org.apache.maven.surefire common-junit48
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-junit-platform
+    DEP org.apache.maven.surefire common-java5
+    DEP org.junit.platform junit-platform-launcher
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-testng-utils
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-testng
+    DEP org.apache.maven.surefire common-java5
+    DEP org.apache.maven.surefire surefire-testng-utils
+    DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-logger-api
+  ART org.apache.maven.surefire surefire-api
+    DEP org.apache.maven.surefire surefire-logger-api
+    DEP org.apache.maven.shared maven-shared-utils
+  ART org.apache.maven.surefire surefire-booter
+    DEP org.apache.maven.surefire surefire-api
+    DEP org.apache.commons commons-lang3
+    DEP commons-io commons-io
+  ART org.apache.maven.surefire common-java5
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.apache.maven.surefire surefire-api
+MOD maven-surefire-plugin
+  ART org.apache.maven.plugins maven-surefire-plugin
+    DEP org.apache.maven.surefire maven-surefire-common
+  ART org.apache.maven.plugins maven-failsafe-plugin
+    DEP org.apache.maven.surefire maven-surefire-common
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.apache.commons commons-lang3
+    DEP commons-io commons-io
+  ART org.apache.maven.surefire maven-surefire-common
+    DEP org.apache.maven.surefire surefire-api
+    DEP org.apache.maven.surefire surefire-booter
+    DEP org.apache.maven.shared maven-common-artifact-filters
+    DEP org.codehaus.plexus plexus-java
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP commons-io commons-io
+    DEP org.apache.commons commons-lang3
+MOD maven-verifier
+  ART org.apache.maven.shared maven-verifier
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP junit junit
+MOD maven-wagon
+  ART org.apache.maven.wagon wagon-provider-api
+    DEP org.codehaus.plexus plexus-utils
+  ART org.apache.maven.wagon wagon-file
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.maven.wagon wagon-provider-api
+  ART org.apache.maven.wagon wagon-http-shared
+    DEP org.jsoup jsoup
+    DEP org.apache.httpcomponents httpclient
+    DEP org.apache.httpcomponents httpcore
+    DEP commons-io commons-io
+    DEP org.slf4j slf4j-api
+    DEP org.apache.maven.wagon wagon-provider-api
+  ART org.apache.maven.wagon wagon-http
+    ALIAS org.apache.maven.wagon wagon-http shaded
+    DEP org.apache.maven.wagon wagon-http-shared
+    DEP org.apache.httpcomponents httpclient
+    DEP org.apache.httpcomponents httpcore
+    DEP org.slf4j jcl-over-slf4j
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.maven.wagon wagon-provider-api
+MOD mockito
+  ART org.mockito mockito-core
+    ALIAS org.mockito mockito-all
+    DEP org.ow2.asm asm
+    DEP net.bytebuddy byte-buddy
+    DEP net.bytebuddy byte-buddy-agent
+    DEP org.objenesis objenesis
+    DEP org.opentest4j opentest4j
+MOD modello
+  ART org.codehaus.modello modello-core
+    DEP org.sonatype.plexus plexus-build-api
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.plexus plexus-utils
+  ART org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.sonatype.plexus plexus-build-api
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-converters
+    DEP org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-dom4j
+    DEP org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-jdom
+    DEP org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-sax
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-stax
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-xsd
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-xdoc
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.modello modello-plugin-xsd
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.jsoup jsoup
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-xpp3
+    DEP org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
+MOD modello-maven-plugin
+  ART org.codehaus.modello modello-maven-plugin
+    DEP org.apache.maven maven-plugin-api
+    DEP org.codehaus.modello modello-core
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-core
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.modello modello-plugin-converters
+    DEP org.codehaus.modello modello-plugin-dom4j
+    DEP org.codehaus.modello modello-plugin-java
+    DEP org.codehaus.modello modello-plugin-jdom
+    DEP org.codehaus.modello modello-plugin-sax
+    DEP org.codehaus.modello modello-plugin-stax
+    DEP org.codehaus.modello modello-plugin-xdoc
+    DEP org.codehaus.modello modello-plugin-xpp3
+    DEP org.codehaus.modello modello-plugin-xsd
+    DEP org.sonatype.plexus plexus-build-api
+MOD munge-maven-plugin
+  ART org.sonatype.plugins munge-maven-plugin
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+MOD objenesis
+  ART org.objenesis objenesis
+MOD opentest4j
+  ART org.opentest4j opentest4j
+MOD osgi-annotation
+  ART org.osgi osgi.annotation
+    ALIAS org.osgi org.osgi.annotation
+MOD osgi-cmpn
+  ART org.osgi osgi.cmpn
+MOD osgi-core
+  ART org.osgi osgi.core
+    ALIAS org.osgi org.osgi.core
+MOD plexus-archiver
+  ART org.codehaus.plexus plexus-archiver
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-io
+    DEP org.apache.commons commons-compress
+    DEP org.tukaani xz
+MOD plexus-cipher
+  ART org.sonatype.plexus plexus-cipher
+MOD plexus-classworlds
+  ART org.codehaus.plexus plexus-classworlds
+    ALIAS classworlds classworlds
+MOD plexus-compiler
+  ART org.codehaus.plexus plexus-compiler-api
+    DEP org.codehaus.plexus plexus-utils
+  ART org.codehaus.plexus plexus-compiler-manager
+    DEP org.codehaus.plexus plexus-compiler-api
+  ART org.codehaus.plexus plexus-compiler-javac
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-compiler-api
+MOD plexus-component-annotations
+  ART org.codehaus.plexus plexus-component-annotations
+MOD plexus-containers
+  ART org.codehaus.plexus plexus-component-metadata
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.codehaus.plexus plexus-utils
+    DEP com.thoughtworks.qdox qdox
+    DEP org.jdom jdom2
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-core
+    DEP org.ow2.asm asm
+  ART org.codehaus.plexus plexus-container-default
+    ALIAS org.codehaus.plexus containers-component-api
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-classworlds
+    DEP org.apache.xbean xbean-reflect
+    DEP com.google.guava guava
+MOD plexus-interpolation
+  ART org.codehaus.plexus plexus-interpolation
+MOD plexus-io
+  ART org.codehaus.plexus plexus-io
+    DEP org.codehaus.plexus plexus-utils
+    DEP commons-io commons-io
+MOD plexus-java
+  ART org.codehaus.plexus plexus-java
+    DEP org.ow2.asm asm
+    DEP com.thoughtworks.qdox qdox
+MOD plexus-resources
+  ART org.codehaus.plexus plexus-resources
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-container-default
+MOD plexus-sec-dispatcher
+  ART org.sonatype.plexus plexus-sec-dispatcher
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.sonatype.plexus plexus-cipher
+MOD plexus-utils
+  ART org.codehaus.plexus plexus-utils
+    ALIAS plexus plexus-utils
+MOD qdox
+  ART com.thoughtworks.qdox qdox
+    ALIAS qdox qdox
+MOD servlet-api
+  ART javax.servlet javax.servlet-api
+    ALIAS javax.servlet servlet-api
+    ALIAS org.apache.geronimo.specs geronimo-servlet_3.0_spec
+    ALIAS org.eclipse.jetty.orbit javax.servlet
+MOD sisu-build-api
+  ART org.sonatype.plexus plexus-build-api
+    ALIAS org.sonatype.plexus plexus-build-api tests
+    DEP org.codehaus.plexus plexus-utils
+MOD sisu-inject
+  ART org.eclipse.sisu org.eclipse.sisu.inject
+    DEP javax.enterprise cdi-api
+MOD sisu-mojos
+  ART org.eclipse.sisu sisu-maven-plugin
+    ALIAS org.sonatype.plugins sisu-maven-plugin
+    DEP org.eclipse.sisu org.eclipse.sisu.inject
+    DEP org.slf4j slf4j-nop
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven.shared maven-common-artifact-filters
+    DEP org.codehaus.plexus plexus-utils
+MOD sisu-plexus
+  ART org.eclipse.sisu org.eclipse.sisu.plexus
+    ALIAS org.sonatype.sisu sisu-inject-plexus
+    DEP org.eclipse.sisu org.eclipse.sisu.inject
+    DEP org.codehaus.plexus plexus-classworlds
+    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.codehaus.plexus plexus-utils
+MOD slf4j
+  ART org.slf4j slf4j-api
+  ART org.slf4j slf4j-simple
+    ALIAS org.slf4j slf4j-simple sources
+    DEP org.slf4j slf4j-api
+  ART org.slf4j slf4j-nop
+    DEP org.slf4j slf4j-api
+  ART org.slf4j jcl-over-slf4j
+    DEP org.slf4j slf4j-api
+MOD testng
+  ART org.testng testng
+    ALIAS org.testng testng jdk15
+    DEP com.beust jcommander
+MOD univocity-parsers
+  ART com.univocity univocity-parsers
+MOD velocity-engine
+  ART org.apache.velocity velocity
+    ALIAS velocity velocity
+    DEP org.apache.commons commons-lang3
+    DEP commons-collections commons-collections
+MOD xbean
+  ART org.apache.xbean xbean-reflect
+MOD xmlunit
+  ART org.xmlunit xmlunit-assertj
+    DEP org.xmlunit xmlunit-core
+    DEP org.assertj assertj-core
+  ART org.xmlunit xmlunit-matchers
+    DEP org.xmlunit xmlunit-core
+    DEP org.hamcrest hamcrest-core
+  ART org.xmlunit xmlunit-core
+MOD xmvn
+  ART org.fedoraproject.xmvn xmvn-mojo
+    DEP org.apache.maven.resolver maven-resolver-util
+MOD xz-java
+  ART org.tukaani xz

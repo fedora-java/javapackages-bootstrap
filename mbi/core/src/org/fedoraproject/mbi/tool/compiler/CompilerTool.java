@@ -1,0 +1,146 @@
+/*-
+ * Copyright (c) 2020 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.fedoraproject.mbi.tool.compiler;
+
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import javax.tools.JavaCompiler;
+import javax.tools.JavaCompiler.CompilationTask;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
+
+import org.fedoraproject.mbi.Util;
+import org.fedoraproject.mbi.tool.Instruction;
+import org.fedoraproject.mbi.tool.Tool;
+
+/**
+ * @author Mikolaj Izdebski
+ */
+public class CompilerTool
+    extends Tool
+{
+    private final JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+
+    private final StandardJavaFileManager fileManager = compiler.getStandardFileManager( null, null, null );
+
+    private final List<String> sourceRoots = new ArrayList<>();
+
+    private final List<String> resources = new ArrayList<>();
+
+    private Predicate<Path> sourceFilter = source -> true;
+
+    private int release = 8;
+
+    @Instruction
+    public void release( String release )
+    {
+        this.release = Integer.parseInt( release );
+    }
+
+    @Instruction
+    public void addSourceRoot( String sourceRoot )
+    {
+        sourceRoots.add( sourceRoot );
+    }
+
+    @Instruction
+    public void excludeSourceClass( String className )
+    {
+        sourceFilter = sourceFilter.and( path -> !path.toString().endsWith( "/" + className + ".java" ) );
+    }
+
+    @Instruction
+    public void excludeSourceMatching( String regex )
+    {
+        sourceFilter = sourceFilter.and( path -> !path.toString().matches( ".*" + regex ) );
+    }
+
+    @Instruction
+    public void addResource( String resource )
+    {
+        resources.add( resource );
+    }
+
+    @Override
+    public void execute()
+        throws Exception
+    {
+        for ( String resource : resources )
+        {
+            Util.copy( getSourceRootDir().resolve( resource ), getClassesDir(),
+                       path -> !path.getFileName().toString().endsWith( ".java" ) );
+        }
+        List<Path> sourceDirs = new ArrayList<>();
+        if ( Files.exists( getGeneratedSourcesDir() ) )
+        {
+            sourceDirs.add( getGeneratedSourcesDir() );
+        }
+        for ( String sourceRoot : sourceRoots )
+        {
+            sourceDirs.add( getSourceRootDir().resolve( sourceRoot ) );
+        }
+        List<Path> allIncluded = new ArrayList<>();
+        EclipseProjectGenerator eclipse =
+            new EclipseProjectGenerator( getReactor(), getProject(), getModule(), release );
+        for ( Path sourceDir : sourceDirs )
+        {
+            List<Path> included = new ArrayList<>();
+            List<Path> excluded = new ArrayList<>();
+            Util.filterJavaSources( included, excluded, sourceDir, sourceFilter );
+            allIncluded.addAll( included );
+            eclipse.addSourceDir( sourceDir, excluded );
+        }
+        eclipse.generate();
+        Iterable<? extends JavaFileObject> compilationUnits =
+            fileManager.getJavaFileObjectsFromFiles( allIncluded.stream().map( Path::toFile ).collect( Collectors.toList() ) );
+        List<String> options = new ArrayList<>();
+        options.add( "-d" );
+        options.add( getClassesDir().toString() );
+        if ( release == 11 )
+        {
+            options.add( "-source" );
+            options.add( "11" );
+            options.add( "-target" );
+            options.add( "11" );
+        }
+        else
+        {
+            options.add( "-source" );
+            options.add( "1.8" );
+            options.add( "-target" );
+            options.add( "1.8" );
+            options.add( "-bootclasspath" );
+            options.add( "/usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar:/usr/lib/jvm/java-1.8.0-openjdk/jre/lib/jce.jar" );
+        }
+        options.add( "-cp" );
+        options.add( getClassPath().stream().map( Path::toString ).collect( Collectors.joining( ":" ) ) );
+        StringWriter compilerOutput = new StringWriter();
+        CompilationTask task = compiler.getTask( compilerOutput, fileManager, null, options, null, compilationUnits );
+        boolean success = task.call();
+        if ( !success )
+        {
+            System.err.print( compilerOutput.toString() );
+            throw new Exception( "Compilation failed" );
+        }
+    }
+}
