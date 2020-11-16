@@ -81,9 +81,12 @@ public class MavenDist
         linkJar( "xmvn", mavenHome.resolve( "lib/ext" ).resolve( "xmvn.jar" ) );
 
         Path binDir = dist.getInstallRoot().resolve( dist.getLaunchersPath() );
-        Files.createDirectories( binDir );
-        Files.createSymbolicLink( binDir.resolve( "mvn" ),
-                                  Paths.get( "/" ).resolve( dist.getMavenHomePath() ).resolve( "bin/mvn" ) );
+        if ( !binDir.equals( mavenHome.resolve( "bin" ) ) )
+        {
+            Files.createDirectories( binDir );
+            Files.createSymbolicLink( binDir.resolve( "mvn" ),
+                                      Paths.get( "/" ).resolve( dist.getMavenHomePath() ).resolve( "bin/mvn" ) );
+        }
         Files.createSymbolicLink( binDir.resolve( "xmvn" ), Paths.get( "mvn" ) );
 
         launcher( binDir.resolve( "xmvn-install" ), "org.fedoraproject.xmvn.tools.install.cli.InstallerCli", //
