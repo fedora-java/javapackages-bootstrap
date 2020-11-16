@@ -1,0 +1,17 @@
+<project>
+  <module>
+    <dependency>maven-resolver</dependency>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-model-builder</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/SonatypeAether.*</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+</project>

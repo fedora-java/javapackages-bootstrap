@@ -1,0 +1,15 @@
+<project>
+  <module>
+    <dependency>jsr-305</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>commons-io</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <!-- <cdc> -->
+      <!--   <gleanFromXML>src/main/resources/META-INF/plexus/components.xml</gleanFromXML> -->
+      <!-- </cdc> -->
+    </build>
+  </module>
+</project>

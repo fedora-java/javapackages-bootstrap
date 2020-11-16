@@ -1,0 +1,12 @@
+<project>
+  <module>
+    <dependency>jdom</dependency>
+    <dependency>commons-beanutils</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/java</addSourceRoot>
+        <excludeSourceMatching>/org/apache/commons/jxpath/servlet/.*</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+</project>

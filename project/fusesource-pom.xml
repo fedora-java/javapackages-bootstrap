@@ -1,0 +1,11 @@
+<project>
+  <module>
+    <subDir>fusesource-pom</subDir>
+    <build>
+      <pom>
+        <removePlugin>maven-scm-plugin</removePlugin>
+        <removeBuildExtensions/>
+      </pom>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,22 @@
+<project>
+  <module>
+    <dependency>maven-resolver</dependency>
+    <dependency>plexus-classworlds</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>plexus-component-annotations</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>commons-codec</dependency>
+    <dependency>maven-common-artifact-filters</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-model</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/Maven30.*</excludeSourceMatching>
+      </compiler>
+      <cdc/>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,22 @@
+<project>
+  <module>
+    <dependency>injection-api</dependency>
+    <dependency>guava</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>servlet-api</dependency>
+    <build>
+      <munge>
+        <setSourceRoot>core/src</setSourceRoot>
+      </munge>
+      <compiler>
+        <addSourceRoot>extensions/servlet/src</addSourceRoot>
+        <excludeSourceClass>LineNumbers</excludeSourceClass>
+        <excludeSourceClass>InterceptorBindingProcessor</excludeSourceClass>
+        <excludeSourceClass>ProxyFactory</excludeSourceClass>
+        <excludeSourceClass>InterceptorStackCallback</excludeSourceClass>
+        <excludeSourceClass>InterceptorBinding</excludeSourceClass>
+        <excludeSourceClass>MethodAspect</excludeSourceClass>
+      </compiler>
+    </build>
+  </module>
+</project>

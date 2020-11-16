@@ -1,0 +1,121 @@
+From a51ce1793a13146180c993437ec0819082fc5487 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 7 Dec 2018 08:20:44 +0100
+Subject: [PATCH 1/2] Disable incremental compilation
+
+---
+ .../plugin/compiler/AbstractCompilerMojo.java | 66 +------------------
+ 1 file changed, 2 insertions(+), 64 deletions(-)
+
+diff --git a/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java b/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java
+index c53fe78..807d87c 100644
+--- a/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java
++++ b/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java
+@@ -55,8 +55,6 @@ import org.apache.maven.plugins.annotations.Component;
+ import org.apache.maven.plugins.annotations.Parameter;
+ import org.apache.maven.project.MavenProject;
+ import org.apache.maven.repository.RepositorySystem;
+-import org.apache.maven.shared.incremental.IncrementalBuildHelper;
+-import org.apache.maven.shared.incremental.IncrementalBuildHelperRequest;
+ import org.apache.maven.shared.utils.ReaderFactory;
+ import org.apache.maven.shared.utils.StringUtils;
+ import org.apache.maven.shared.utils.io.FileUtils;
+@@ -483,7 +481,7 @@ public abstract class AbstractCompilerMojo
+      * to enable/disable incrementation compilation feature
+      * @since 3.1
+      */
+-    @Parameter( defaultValue = "true", property = "maven.compiler.useIncrementalCompilation" )
++    @Parameter( defaultValue = "false", property = "maven.compiler.useIncrementalCompilation" )
+     private boolean useIncrementalCompilation = true;
+ 
+     /**
+@@ -774,47 +772,11 @@ public abstract class AbstractCompilerMojo
+ 
+         boolean canUpdateTarget;
+ 
+-        IncrementalBuildHelper incrementalBuildHelper = new IncrementalBuildHelper( mojoExecution, session );
+-
+         final Set<File> sources;
+ 
+-        IncrementalBuildHelperRequest incrementalBuildHelperRequest = null;
+-
+         if ( useIncrementalCompilation )
+         {
+-            getLog().debug( "useIncrementalCompilation enabled" );
+-            try
+-            {
+-                canUpdateTarget = compiler.canUpdateTarget( compilerConfiguration );
+-
+-                sources = getCompileSources( compiler, compilerConfiguration );
+-                
+-                preparePaths( sources );
+-
+-                incrementalBuildHelperRequest = new IncrementalBuildHelperRequest().inputFiles( sources );
+-
+-                // CHECKSTYLE_OFF: LineLength
+-                if ( ( compiler.getCompilerOutputStyle().equals( CompilerOutputStyle.ONE_OUTPUT_FILE_FOR_ALL_INPUT_FILES ) && !canUpdateTarget )
+-                    || isDependencyChanged()
+-                    || isSourceChanged( compilerConfiguration, compiler )
+-                    || incrementalBuildHelper.inputFileTreeChanged( incrementalBuildHelperRequest ) )
+-                    // CHECKSTYLE_ON: LineLength
+-                {
+-                    getLog().info( "Changes detected - recompiling the module!" );
+-
+-                    compilerConfiguration.setSourceFiles( sources );
+-                }
+-                else
+-                {
+-                    getLog().info( "Nothing to compile - all classes are up to date" );
+-
+-                    return;
+-                }
+-            }
+-            catch ( CompilerException e )
+-            {
+-                throw new MojoExecutionException( "Error while computing stale sources.", e );
+-            }
++	    throw new MojoExecutionException( "incremental builds not supported" );
+         }
+         else
+         {
+@@ -1118,15 +1080,6 @@ public abstract class AbstractCompilerMojo
+         CompilerResult compilerResult;
+ 
+ 
+-        if ( useIncrementalCompilation )
+-        {
+-            incrementalBuildHelperRequest.outputDirectory( getOutputDirectory() );
+-
+-            incrementalBuildHelper.beforeRebuildExecution( incrementalBuildHelperRequest );
+-
+-            getLog().debug( "incrementalBuildHelper#beforeRebuildExecution" );
+-        }
+-
+         try
+         {
+             try
+@@ -1145,21 +1098,6 @@ public abstract class AbstractCompilerMojo
+             throw new MojoExecutionException( "Fatal error compiling", e );
+         }
+ 
+-        if ( useIncrementalCompilation )
+-        {
+-            if ( incrementalBuildHelperRequest.getOutputDirectory().exists() )
+-            {
+-                getLog().debug( "incrementalBuildHelper#afterRebuildExecution" );
+-                // now scan the same directory again and create a diff
+-                incrementalBuildHelper.afterRebuildExecution( incrementalBuildHelperRequest );
+-            }
+-            else
+-            {
+-                getLog().debug(
+-                    "skip incrementalBuildHelper#afterRebuildExecution as the output directory doesn't exist" );
+-            }
+-        }
+-
+         List<CompilerMessage> warnings = new ArrayList<>();
+         List<CompilerMessage> errors = new ArrayList<>();
+         List<CompilerMessage> others = new ArrayList<>();
+-- 
+2.26.2
+

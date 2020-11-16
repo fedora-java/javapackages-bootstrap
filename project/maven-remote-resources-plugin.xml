@@ -1,0 +1,33 @@
+<project>
+  <module>
+    <dependency>commons-io</dependency>
+    <dependency>maven-archiver</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-compat</dependency>
+    <dependency>maven-filtering</dependency>
+    <dependency>maven-common-artifact-filters</dependency>
+    <dependency>velocity-engine</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>plexus-resources</dependency>
+    <build>
+      <modello>
+        <model>src/main/mdo/remote-resources.mdo</model>
+        <version>1.1.0</version>
+        <output>java|xpp3-reader|xpp3-writer</output>
+      </modello>
+      <modello>
+        <model>src/main/mdo/supplemental-model.mdo</model>
+        <version>1.0.0</version>
+        <output>java|xpp3-reader|xpp3-writer</output>
+      </modello>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <pdc/>
+    </build>
+  </module>
+</project>

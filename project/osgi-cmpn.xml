@@ -1,0 +1,16 @@
+<project>
+  <module>
+    <dependency>osgi-annotation</dependency>
+    <dependency>osgi-core</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>OSGI-OPT/src</addSourceRoot>
+        <excludeSourceMatching>/org/osgi/service/http/.*</excludeSourceMatching>
+        <excludeSourceMatching>/org/osgi/service/io/.*</excludeSourceMatching>
+        <excludeSourceMatching>/org/osgi/service/jaxrs/.*</excludeSourceMatching>
+        <excludeSourceMatching>/org/osgi/service/jpa/.*</excludeSourceMatching>
+        <excludeSourceMatching>/org/osgi/service/transaction/control/jpa/.*</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+</project>

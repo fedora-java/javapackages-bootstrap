@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <dependency>sisu-plexus</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <cdc>
+        <addComponent>org.sonatype.plexus.components.cipher.DefaultPlexusCipher|org.sonatype.plexus.components.cipher.PlexusCipher|default</addComponent>
+      </cdc>
+    </build>
+  </module>
+</project>

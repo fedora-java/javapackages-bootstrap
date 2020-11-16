@@ -1,0 +1,22 @@
+<project>
+  <module>
+    <dependency>commons-io</dependency>
+    <dependency>commons-logging</dependency>
+    <dependency>httpcomponents-client</dependency>
+    <dependency>httpcomponents-core</dependency>
+    <dependency>jsoup</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>slf4j</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>wagon-provider-api/src/main/java</addSourceRoot>
+        <addSourceRoot>wagon-providers/wagon-file/src/main/java</addSourceRoot>
+        <addSourceRoot>wagon-providers/wagon-http-shared/src/main/java</addSourceRoot>
+      </compiler>
+      <cdc>
+        <addComponent>org.apache.maven.wagon.providers.file.FileWagon|org.apache.maven.wagon.Wagon|file</addComponent>
+        <gleanFromXML>wagon-providers/wagon-http/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
+      </cdc>
+    </build>
+  </module>
+</project>

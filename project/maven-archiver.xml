@@ -1,0 +1,16 @@
+<project>
+  <module>
+    <dependency>plexus-archiver</dependency>
+    <dependency>plexus-interpolation</dependency>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-model</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

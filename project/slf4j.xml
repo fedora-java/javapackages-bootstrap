@@ -1,0 +1,20 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>slf4j-api/src/main/java</addSourceRoot>
+        <addSourceRoot>slf4j-simple/src/main/java</addSourceRoot>
+        <excludeSourceMatching>/slf4j-api/src/main/java/org/slf4j/impl/Static(Marker|MDC|Logger)Binder.java$</excludeSourceMatching>
+      </compiler>
+      <ant>
+        <run>
+          [copy todir="${classes}"]
+            [fileset dir="${basedir}/slf4j-simple/src/main/java"]
+              [include name="org/slf4j/impl/*.java"/]
+            [/fileset]
+          [/copy]
+        </run>
+      </ant>
+    </build>
+  </module>
+</project>

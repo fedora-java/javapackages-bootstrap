@@ -1,0 +1,18 @@
+<project>
+  <module>
+    <dependency>commons-lang</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-filtering</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <pdc/>
+    </build>
+  </module>
+</project>

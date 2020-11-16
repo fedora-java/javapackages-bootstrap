@@ -1,0 +1,9 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

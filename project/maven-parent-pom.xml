@@ -1,0 +1,27 @@
+<project>
+  <module>
+    <build>
+      <pom>
+        <removePlugin>maven-enforcer-plugin</removePlugin>
+        <removePlugin>maven-checkstyle-plugin</removePlugin>
+        <removePlugin>apache-rat-plugin</removePlugin>
+      </pom>
+    </build>
+  </module>
+  <module>
+    <name>maven-plugins-pom</name>
+    <subDir>maven-plugins</subDir>
+    <build>
+      <pom>
+        <removePluginExecution>generate-helpmojo</removePluginExecution>
+      </pom>
+    </build>
+  </module>
+  <module>
+    <name>maven-shared-components-pom</name>
+    <subDir>maven-shared-components</subDir>
+    <build>
+      <pom/>
+    </build>
+  </module>
+</project>

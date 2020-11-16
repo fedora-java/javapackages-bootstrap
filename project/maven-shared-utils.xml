@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <dependency>jsr-305</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>commons-io</dependency>
+    <dependency>jansi</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

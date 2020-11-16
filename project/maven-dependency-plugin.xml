@@ -1,0 +1,45 @@
+<project>
+  <module>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-model-builder</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-artifact-transfer</dependency>
+    <dependency>maven-dependency-analyzer</dependency>
+    <dependency>maven-dependency-tree</dependency>
+    <dependency>maven-common-artifact-filters</dependency>
+    <dependency>maven-resolver</dependency>
+    <dependency>maven-settings</dependency>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>plexus-archiver</dependency>
+    <dependency>plexus-io</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>commons-lang</dependency>
+    <dependency>commons-collections</dependency>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/src/main/java"/]
+          [/copy]
+          [replaceregexp flags="m"]
+            [regexp pattern="import org\.apache\.commons\.lang(.*)"/]
+            [substitution expression="import org.apache.commons.lang3\1"/]
+            [fileset dir="${generatedSources}"]
+              [include name="**/*.java"/]
+            [/fileset]
+          [/replaceregexp]
+        </run>
+      </ant>
+      <compiler>
+        <excludeSourceClass>AnalyzeReportMojo</excludeSourceClass>
+        <excludeSourceClass>AnalyzeReportView</excludeSourceClass>
+        <addResource>src/main/resources</addResource>
+      </compiler>
+      <pdc/>
+    </build>
+  </module>
+</project>

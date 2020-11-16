@@ -1,0 +1,16 @@
+<project>
+  <module>
+    <dependency>maven-core</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-resolver</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-component-annotations</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceClass>Maven3DependencyGraphBuilder</excludeSourceClass>
+      </compiler>
+      <cdc/>
+    </build>
+  </module>
+</project>

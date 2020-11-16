@@ -1,0 +1,26 @@
+<project>
+  <module>
+    <dependency>junit4</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-compat</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-model-builder</dependency>
+    <dependency>maven-resolver-provider</dependency>
+    <dependency>maven-resolver</dependency>
+    <dependency>maven-wagon</dependency>
+    <dependency>guice</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-classworlds</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>plexus-archiver</dependency>
+    <dependency>commons-io</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>maven-plugin-testing-harness/src/main/java</addSourceRoot>
+        <addResource>maven-plugin-testing-harness/src/main/resources</addResource>
+      </compiler>
+    </build>
+  </module>
+</project>

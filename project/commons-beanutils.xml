@@ -1,0 +1,11 @@
+<project>
+  <module>
+    <dependency>commons-collections</dependency>
+    <dependency>commons-logging</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

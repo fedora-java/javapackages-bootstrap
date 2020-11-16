@@ -1,0 +1,12 @@
+<project>
+  <module>
+    <build>
+      <pom>
+        <removePlugin>maven-site-plugin</removePlugin>
+        <removePlugin>maven-enforcer-plugin</removePlugin>
+        <removePlugin>findbugs-maven-plugin</removePlugin>
+        <removePlugin>taglist-maven-plugin</removePlugin>
+      </pom>
+    </build>
+  </module>
+</project>

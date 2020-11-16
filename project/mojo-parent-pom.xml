@@ -1,0 +1,12 @@
+<project>
+  <module>
+    <build>
+      <pom>
+        <removePlugin>cobertura-maven-plugin</removePlugin>
+        <removePlugin>maven-enforcer-plugin</removePlugin>
+        <removePlugin>maven-site-plugin</removePlugin>
+        <removePlugin>maven-checkstyle-plugin</removePlugin>
+      </pom>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${classes}"]
+            [fileset dir="${basedir}/src/main/resources"/]
+          [/copy]
+        </run>
+      </ant>
+    </build>
+  </module>
+</project>

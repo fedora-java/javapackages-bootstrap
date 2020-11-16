@@ -1,0 +1,18 @@
+<project>
+  <module>
+    <dependency>junit4</dependency>
+    <dependency>guice</dependency>
+    <dependency>ant</dependency>
+    <dependency>jsr-305</dependency>
+    <dependency>jcommander</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceClass>org/testng/Converter</excludeSourceClass>
+        <excludeSourceClass>org/testng/internal/Yaml</excludeSourceClass>
+        <excludeSourceClass>org/testng/internal/YamlParser</excludeSourceClass>
+        <addResource>src/main/resources</addResource>
+      </compiler>
+    </build>
+  </module>
+</project>

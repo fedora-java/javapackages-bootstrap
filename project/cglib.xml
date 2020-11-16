@@ -1,0 +1,11 @@
+<project>
+  <module>
+    <dependency>asm</dependency>
+    <dependency>ant</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>cglib/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

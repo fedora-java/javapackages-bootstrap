@@ -1,0 +1,15 @@
+<project>
+  <module>
+    <name>plexus-java</name>
+    <dependency>injection-api</dependency>
+    <dependency>plexus-component-annotations</dependency>
+    <dependency>qdox</dependency>
+    <dependency>asm</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>plexus-java/src/main/java</addSourceRoot>
+      </compiler>
+      <cdc/>
+    </build>
+  </module>
+</project>

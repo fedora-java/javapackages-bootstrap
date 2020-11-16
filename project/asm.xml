@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>asm/src/main/java</addSourceRoot>
+        <addSourceRoot>asm-analysis/src/main/java</addSourceRoot>
+        <addSourceRoot>asm-commons/src/main/java</addSourceRoot>
+        <addSourceRoot>asm-tree/src/main/java</addSourceRoot>
+        <addSourceRoot>asm-util/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

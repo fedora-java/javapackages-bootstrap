@@ -1,0 +1,22 @@
+<project>
+  <module>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>sisu-inject</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>maven-common-artifact-filters</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-common-artifact-filters</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <pdc>
+        <groupId>org.eclipse.sisu</groupId>
+        <artifactId>sisu-maven-plugin</artifactId>
+      </pdc>
+    </build>
+  </module>
+</project>

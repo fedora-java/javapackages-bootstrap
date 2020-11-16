@@ -1,0 +1,12 @@
+<project>
+  <module>
+    <dependency>asm</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>xbean-reflect/src/main/java</addSourceRoot>
+        <excludeSourceClass>CommonsLoggingConverter</excludeSourceClass>
+        <excludeSourceClass>Log4jConverter</excludeSourceClass>
+      </compiler>
+    </build>
+  </module>
+</project>

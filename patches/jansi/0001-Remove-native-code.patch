@@ -1,0 +1,115 @@
+From 2c8a935a77ee96a6f4d6bf0ed5a72c6978cc0aad Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 7 Dec 2018 08:20:22 +0100
+Subject: [PATCH] Remove native code
+
+---
+ .../org/fusesource/jansi/AnsiConsole.java     | 71 +------------------
+ 1 file changed, 3 insertions(+), 68 deletions(-)
+
+diff --git a/jansi/src/main/java/org/fusesource/jansi/AnsiConsole.java b/jansi/src/main/java/org/fusesource/jansi/AnsiConsole.java
+index d7a37b0..acda853 100644
+--- a/jansi/src/main/java/org/fusesource/jansi/AnsiConsole.java
++++ b/jansi/src/main/java/org/fusesource/jansi/AnsiConsole.java
+@@ -15,10 +15,6 @@
+  */
+ package org.fusesource.jansi;
+ 
+-import static org.fusesource.jansi.internal.CLibrary.STDERR_FILENO;
+-import static org.fusesource.jansi.internal.CLibrary.STDOUT_FILENO;
+-import static org.fusesource.jansi.internal.CLibrary.isatty;
+-
+ import java.io.FilterOutputStream;
+ import java.io.IOException;
+ import java.io.OutputStream;
+@@ -40,6 +36,9 @@ import java.util.Locale;
+  */
+ public class AnsiConsole {
+ 
++    private static final int STDOUT_FILENO = 1;
++    private static final int STDERR_FILENO = 2;
++
+     public static final PrintStream system_out = System.out;
+     public static final PrintStream out;
+ 
+@@ -124,38 +123,6 @@ public class AnsiConsole {
+             return new AnsiOutputStream(stream);
+         }
+ 
+-        if (IS_WINDOWS && !IS_CYGWIN && !IS_MINGW_XTERM) {
+-
+-            // On windows we know the console does not interpret ANSI codes..
+-            try {
+-                jansiOutputType = JansiOutputType.WINDOWS;
+-                return new WindowsAnsiOutputStream(stream, fileno == STDOUT_FILENO);
+-            } catch (Throwable ignore) {
+-                // this happens when JNA is not in the path.. or
+-                // this happens when the stdout is being redirected to a file.
+-            }
+-
+-            // Use the ANSIOutputStream to strip out the ANSI escape sequences.
+-            jansiOutputType = JansiOutputType.STRIP_ANSI;
+-            return new AnsiOutputStream(stream);
+-        }
+-
+-        // We must be on some Unix variant, including Cygwin or MSYS(2) on Windows...
+-        try {
+-            // If the jansi.force property is set, then we force to output
+-            // the ansi escapes for piping it into ansi color aware commands (e.g. less -r)
+-            boolean forceColored = Boolean.getBoolean("jansi.force");
+-            // If we can detect that stdout is not a tty.. then setup
+-            // to strip the ANSI sequences..
+-            if (!forceColored && isatty(fileno) == 0) {
+-                jansiOutputType = JansiOutputType.STRIP_ANSI;
+-                return new AnsiOutputStream(stream);
+-            }
+-        } catch (Throwable ignore) {
+-            // These errors happen if the JNI lib is not available for your platform.
+-            // But since we are on ANSI friendly platform, assume the user is on the console.
+-        }
+-
+         // By default we assume your Unix tty can handle ANSI codes.
+         // Just wrap it up so that when we get closed, we reset the
+         // attributes.
+@@ -202,38 +169,6 @@ public class AnsiConsole {
+             return new AnsiPrintStream(ps);
+         }
+ 
+-        if (IS_WINDOWS && !IS_CYGWIN && !IS_MINGW_XTERM) {
+-
+-            // On windows we know the console does not interpret ANSI codes..
+-            try {
+-                jansiOutputType = JansiOutputType.WINDOWS;
+-                return new WindowsAnsiPrintStream(ps, fileno == STDOUT_FILENO);
+-            } catch (Throwable ignore) {
+-                // this happens when JNA is not in the path.. or
+-                // this happens when the stdout is being redirected to a file.
+-            }
+-
+-            // Use the AnsiPrintStream to strip out the ANSI escape sequences.
+-            jansiOutputType = JansiOutputType.STRIP_ANSI;
+-            return new AnsiPrintStream(ps);
+-        }
+-
+-        // We must be on some Unix variant, including Cygwin or MSYS(2) on Windows...
+-        try {
+-            // If the jansi.force property is set, then we force to output
+-            // the ansi escapes for piping it into ansi color aware commands (e.g. less -r)
+-            boolean forceColored = Boolean.getBoolean("jansi.force");
+-            // If we can detect that stdout is not a tty.. then setup
+-            // to strip the ANSI sequences..
+-            if (!forceColored && isatty(fileno) == 0) {
+-                jansiOutputType = JansiOutputType.STRIP_ANSI;
+-                return new AnsiPrintStream(ps);
+-            }
+-        } catch (Throwable ignore) {
+-            // These errors happen if the JNI lib is not available for your platform.
+-            // But since we are on ANSI friendly platform, assume the user is on the console.
+-        }
+-
+         // By default we assume your Unix tty can handle ANSI codes.
+         // Just wrap it up so that when we get closed, we reset the
+         // attributes.
+-- 
+2.25.4
+

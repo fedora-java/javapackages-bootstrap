@@ -1,0 +1,26 @@
+<project>
+  <module>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-compat</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-model-builder</dependency>
+    <dependency>maven-settings</dependency>
+    <dependency>maven-file-management</dependency>
+    <dependency>sisu-plexus</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceClass>BeanshellPropertyMojo</excludeSourceClass>
+        <addResource>src/main/resources</addResource>
+      </compiler>
+      <pdc>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+      </pdc>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,9 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>OSGI-OPT/src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

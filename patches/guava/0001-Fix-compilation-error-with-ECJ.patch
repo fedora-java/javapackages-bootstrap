@@ -1,0 +1,25 @@
+From 7e50fe0cb2ab5481a0f74657e234260ef0311c31 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 6 Jul 2020 15:00:26 +0200
+Subject: [PATCH 2/2] Fix compilation error with ECJ
+
+---
+ .../com/google/common/collect/MutableClassToInstanceMap.java    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/guava/src/com/google/common/collect/MutableClassToInstanceMap.java b/guava/src/com/google/common/collect/MutableClassToInstanceMap.java
+index 8c797c570..0e2e7d111 100644
+--- a/guava/src/com/google/common/collect/MutableClassToInstanceMap.java
++++ b/guava/src/com/google/common/collect/MutableClassToInstanceMap.java
+@@ -139,7 +139,7 @@ public final class MutableClassToInstanceMap<B> extends ForwardingMap<Class<? ex
+   public void putAll(Map<? extends Class<? extends B>, ? extends B> map) {
+     Map<Class<? extends B>, B> copy = new LinkedHashMap<>(map);
+     for (Entry<? extends Class<? extends B>, B> entry : copy.entrySet()) {
+-      cast(entry.getKey(), entry.getValue());
++      cast((Class)entry.getKey(), entry.getValue());
+     }
+     super.putAll(copy);
+   }
+-- 
+2.25.4
+

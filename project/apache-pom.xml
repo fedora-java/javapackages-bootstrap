@@ -1,0 +1,9 @@
+<project>
+  <module>
+    <build>
+      <pom>
+        <removePlugin>maven-site-plugin</removePlugin>
+      </pom>
+    </build>
+  </module>
+</project>

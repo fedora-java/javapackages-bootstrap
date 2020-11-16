@@ -1,0 +1,16 @@
+<project>
+  <module>
+    <dependency>osgi-annotation</dependency>
+    <dependency>osgi-core</dependency>
+    <dependency>osgi-cmpn</dependency>
+    <dependency>slf4j</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>aQute.libg/src</addSourceRoot>
+        <addSourceRoot>biz.aQute.bnd.annotation/src</addSourceRoot>
+        <addSourceRoot>biz.aQute.bndlib/src</addSourceRoot>
+        <addResource>biz.aQute.bndlib/src</addResource>
+      </compiler>
+    </build>
+  </module>
+</project>

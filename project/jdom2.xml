@@ -1,0 +1,10 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>core/src/java</addSourceRoot>
+        <excludeSourceMatching>/org/jdom2/xpath/.*</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+</project>

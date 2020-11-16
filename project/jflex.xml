@@ -1,0 +1,23 @@
+<project>
+  <module>
+    <dependency>cup</dependency>
+    <dependency>ant</dependency>
+    <build>
+      <ant>
+        <taskdef>cup=java_cup.anttask.CUPTask</taskdef>
+        <run>
+          [cup parser="LexParse"
+               destdir="${generatedSources}"
+               srcfile="${basedir}/jflex/src/main/cup/LexParse.cup"
+               interface="true"
+               locations="false"/]
+        </run>
+      </ant>
+      <compiler>
+        <addResource>jflex/src/main/resources</addResource>
+        <addSourceRoot>jflex/src/main/java</addSourceRoot>
+        <addSourceRoot>bootstrap</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,26 @@
+<project>
+  <module>
+    <dependency>commons-lang</dependency>
+    <dependency>commons-collections</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/java</addSourceRoot>
+        <excludeSourceMatching>/org/apache/velocity/(anakia|texen|servlet|convert)/.*</excludeSourceMatching>
+        <excludeSourceClass>org/apache/velocity/runtime/log/AvalonLogChute</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/runtime/log/AvalonLogSystem</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/runtime/log/CommonsLogLogChute</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/runtime/log/Log4JLogChute</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/runtime/log/Log4JLogSystem</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/runtime/log/ServletLogChute</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/runtime/log/SimpleLog4JLogSystem</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/runtime/log/VelocityFormatter</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeReference</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeHtmlReference</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeJavaScriptReference</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeSqlReference</excludeSourceClass>
+        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeXmlReference</excludeSourceClass>
+        <addResource>src/java</addResource>
+      </compiler>
+    </build>
+  </module>
+</project>

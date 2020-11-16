@@ -1,0 +1,15 @@
+<project>
+  <module>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-utils</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <addSourceRoot>src/test/java</addSourceRoot>
+      </compiler>
+      <cdc>
+        <addComponent>org.sonatype.plexus.build.incremental.DefaultBuildContext|org.sonatype.plexus.build.incremental.BuildContext|default</addComponent>
+      </cdc>
+    </build>
+  </module>
+</project>

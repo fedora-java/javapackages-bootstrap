@@ -1,0 +1,24 @@
+From 20ecba69067261c40cff13a2b5108e5008a8cc61 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Thu, 12 Dec 2019 09:53:24 +0100
+Subject: [PATCH] Remove unused import
+
+---
+ core/src/java/org/jdom2/JDOMConstants.java | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/core/src/java/org/jdom2/JDOMConstants.java b/core/src/java/org/jdom2/JDOMConstants.java
+index 3e17b02f..b4c3d5f5 100644
+--- a/core/src/java/org/jdom2/JDOMConstants.java
++++ b/core/src/java/org/jdom2/JDOMConstants.java
+@@ -59,7 +59,6 @@ import javax.xml.transform.TransformerFactory;
+ import org.jdom2.output.LineSeparator;
+ import org.jdom2.transform.JDOMResult;
+ import org.jdom2.transform.JDOMSource;
+-import org.jdom2.xpath.XPathFactory;
+ 
+ 
+ /**
+-- 
+2.21.0
+

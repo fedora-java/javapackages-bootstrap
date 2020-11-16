@@ -1,0 +1,10 @@
+<project>
+  <module>
+    <dependency>hamcrest</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

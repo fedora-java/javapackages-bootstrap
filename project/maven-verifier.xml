@@ -1,0 +1,11 @@
+<project>
+  <module>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>junit4</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

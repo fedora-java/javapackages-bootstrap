@@ -1,0 +1,70 @@
+From 6a94c7674f844218752827f2b62de629691fcf39 Mon Sep 17 00:00:00 2001
+From: Michael Simacek <msimacek@redhat.com>
+Date: Fri, 16 Mar 2018 13:45:01 +0100
+Subject: [PATCH 2/3] Port to current maven-shared-utils
+
+---
+ .../plugin/surefire/report/StatelessXmlReporter.java | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java
+index b89c4e9b0..8cf0b60c3 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java
+@@ -326,7 +326,7 @@ private static File getReportFile( ReportEntry report, File reportsDirectory, St
+     }
+ 
+     private static void startTestElement( XMLWriter ppw, WrappedReportEntry report, String reportNameSuffix,
+-                                          String timeAsString )
++                                          String timeAsString ) throws IOException
+     {
+         ppw.startElement( "testcase" );
+         ppw.addAttribute( "name", report.getReportName() );
+@@ -349,7 +349,7 @@ private static void startTestElement( XMLWriter ppw, WrappedReportEntry report,
+     }
+ 
+     private void createTestSuiteElement( XMLWriter ppw, WrappedReportEntry report, TestSetStats testSetStats,
+-                                         String timeAsString )
++                                         String timeAsString ) throws IOException
+     {
+         ppw.startElement( "testsuite" );
+ 
+@@ -377,7 +377,7 @@ private void createTestSuiteElement( XMLWriter ppw, WrappedReportEntry report, T
+ 
+     private static void getTestProblems( OutputStreamWriter outputStreamWriter, XMLWriter ppw,
+                                          WrappedReportEntry report, boolean trimStackTrace, OutputStream fw,
+-                                         String testErrorType, boolean createOutErrElementsInside )
++                                         String testErrorType, boolean createOutErrElementsInside ) throws IOException
+     {
+         ppw.startElement( testErrorType );
+ 
+@@ -434,7 +434,7 @@ private static void getTestProblems( OutputStreamWriter outputStreamWriter, XMLW
+ 
+     // Create system-out and system-err elements
+     private static void createOutErrElements( OutputStreamWriter outputStreamWriter, XMLWriter ppw,
+-                                              WrappedReportEntry report, OutputStream fw )
++                                              WrappedReportEntry report, OutputStream fw ) throws IOException
+     {
+         EncodingOutputStream eos = new EncodingOutputStream( fw );
+         addOutputStreamElement( outputStreamWriter, eos, ppw, report.getStdout(), "system-out" );
+@@ -444,7 +444,7 @@ private static void createOutErrElements( OutputStreamWriter outputStreamWriter,
+     private static void addOutputStreamElement( OutputStreamWriter outputStreamWriter,
+                                          EncodingOutputStream eos, XMLWriter xmlWriter,
+                                          Utf8RecodingDeferredFileOutputStream utf8RecodingDeferredFileOutputStream,
+-                                         String name )
++                                         String name ) throws IOException
+     {
+         if ( utf8RecodingDeferredFileOutputStream != null && utf8RecodingDeferredFileOutputStream.getByteCount() > 0 )
+         {
+@@ -474,7 +474,7 @@ private static void addOutputStreamElement( OutputStreamWriter outputStreamWrite
+      *
+      * @param xmlWriter The test suite to report to
+      */
+-    private static void showProperties( XMLWriter xmlWriter, Map<String, String> systemProperties )
++    private static void showProperties( XMLWriter xmlWriter, Map<String, String> systemProperties ) throws IOException
+     {
+         xmlWriter.startElement( "properties" );
+         for ( final Entry<String, String> entry : systemProperties.entrySet() )
+-- 
+2.25.2
+

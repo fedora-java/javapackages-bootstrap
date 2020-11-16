@@ -1,0 +1,18 @@
+<project>
+  <module>
+    <dependency>guice</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>junit4</dependency>
+    <dependency>testng</dependency>
+    <dependency>osgi-core</dependency>
+    <dependency>common-annotations-api</dependency>
+    <dependency>servlet-api</dependency>
+    <dependency>cdi</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>org.eclipse.sisu.inject/src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

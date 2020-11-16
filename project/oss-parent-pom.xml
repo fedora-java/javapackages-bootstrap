@@ -1,0 +1,9 @@
+<project>
+  <module>
+    <build>
+      <pom>
+        <removePlugin>maven-enforcer-plugin</removePlugin>
+      </pom>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,14 @@
+<project>
+  <module>
+    <dependency>xz-java</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/org/apache/commons/compress/(compressors|archivers)/(brotli|sevenz|lzma|zstandard|examples)/.*</excludeSourceMatching>
+        <excludeSourceClass>ArchiveStreamFactory</excludeSourceClass>
+        <excludeSourceClass>CompressorStreamFactory</excludeSourceClass>
+        <excludeSourceClass>Lister</excludeSourceClass>
+      </compiler>
+    </build>
+  </module>
+</project>

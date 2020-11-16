@@ -1,0 +1,20 @@
+<project>
+  <module>
+    <build>
+      <pom>
+        <removePlugin>commons-build-plugin</removePlugin>
+        <removePlugin>maven-scm-publish-plugin</removePlugin>
+        <removePlugin>apache-rat-plugin</removePlugin>
+        <removePlugin>buildnumber-maven-plugin</removePlugin>
+        <removePlugin>maven-enforcer-plugin</removePlugin>
+        <removePlugin>maven-site-plugin</removePlugin>
+        <removePlugin>maven-source-plugin</removePlugin>
+        <removeProfile>animal-sniffer</removeProfile>
+        <removeProfile>japicmp</removeProfile>
+        <removeProfile>jacoco</removeProfile>
+        <removeProfile>cobertura</removeProfile>
+        <removeProfile>clirr</removeProfile>
+      </pom>
+    </build>
+  </module>
+</project>

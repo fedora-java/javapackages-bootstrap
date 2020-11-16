@@ -1,0 +1,11 @@
+<project>
+  <module>
+    <dependency>ant</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src</addSourceRoot>
+        <addSourceRoot>bootstrap</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

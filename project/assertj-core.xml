@@ -1,0 +1,16 @@
+<project>
+  <module>
+    <dependency>jsr-305</dependency>
+    <dependency>hamcrest</dependency>
+    <dependency>junit4</dependency>
+    <dependency>junit5-jupiter</dependency>
+    <dependency>junit5-platform</dependency>
+    <dependency>opentest4j</dependency>
+    <dependency>byte-buddy</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

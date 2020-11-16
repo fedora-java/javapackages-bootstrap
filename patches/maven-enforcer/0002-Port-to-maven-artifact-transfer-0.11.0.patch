@@ -1,0 +1,43 @@
+From ebbb6a603eb04b1aafd605d290dcf8f28e469222 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 18 May 2020 09:44:16 +0200
+Subject: [PATCH 2/2] Port to maven-artifact-transfer 0.11.0
+
+---
+ .../apache/maven/plugins/enforcer/RequirePluginVersions.java  | 4 ++--
+ .../maven/plugins/enforcer/utils/EnforcerRuleUtils.java       | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequirePluginVersions.java b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequirePluginVersions.java
+index f2e2cc7..c81de9d 100644
+--- a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequirePluginVersions.java
++++ b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/RequirePluginVersions.java
+@@ -66,8 +66,8 @@ import org.apache.maven.project.DefaultProjectBuildingRequest;
+ import org.apache.maven.project.MavenProject;
+ import org.apache.maven.project.ProjectBuildingRequest;
+ import org.apache.maven.settings.Settings;
+-import org.apache.maven.shared.artifact.resolve.ArtifactResolver;
+-import org.apache.maven.shared.artifact.resolve.ArtifactResolverException;
++import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
++import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolverException;
+ import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
+ import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+ import org.codehaus.plexus.util.ReflectionUtils;
+diff --git a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/EnforcerRuleUtils.java b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/EnforcerRuleUtils.java
+index 3974a9e..d319e74 100644
+--- a/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/EnforcerRuleUtils.java
++++ b/enforcer-rules/src/main/java/org/apache/maven/plugins/enforcer/utils/EnforcerRuleUtils.java
+@@ -30,8 +30,8 @@ import org.apache.maven.plugin.logging.Log;
+ import org.apache.maven.project.DefaultProjectBuildingRequest;
+ import org.apache.maven.project.MavenProject;
+ import org.apache.maven.project.ProjectBuildingRequest;
+-import org.apache.maven.shared.artifact.resolve.ArtifactResolver;
+-import org.apache.maven.shared.artifact.resolve.ArtifactResolverException;
++import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
++import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolverException;
+ import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
+ import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
+ 
+-- 
+2.25.4
+

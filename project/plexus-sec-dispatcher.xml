@@ -1,0 +1,17 @@
+<project>
+  <module>
+    <dependency>plexus-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-cipher</dependency>
+    <build>
+      <modello>
+        <model>src/main/mdo/settings-security.mdo</model>
+        <version>1.0.0</version>
+        <output>java|xpp3-reader|xpp3-writer</output>
+      </modello>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

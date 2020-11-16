@@ -1,0 +1,14 @@
+<project>
+  <module>
+    <dependency>injection-api</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>api/src/main/java</addSourceRoot>
+        <excludeSourceMatching>/javax/enterprise/context/.*</excludeSourceMatching>
+        <excludeSourceMatching>/javax/enterprise/inject/(spi|se)/.*</excludeSourceMatching>
+        <excludeSourceMatching>/javax/enterprise/inject/Model.java</excludeSourceMatching>
+        <excludeSourceMatching>/javax/enterprise/inject/New.java</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+</project>

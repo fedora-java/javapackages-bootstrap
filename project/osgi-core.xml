@@ -1,0 +1,10 @@
+<project>
+  <module>
+    <dependency>osgi-annotation</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>OSGI-OPT/src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

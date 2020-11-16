@@ -1,0 +1,46 @@
+<project>
+  <module>
+    <dependency>jflex</dependency>
+    <dependency>cup</dependency>
+    <build>
+      <ant>
+        <taskdef>jflex=jflex.anttask.JFlexTask</taskdef>
+        <run>
+          [mkdir dir="${generatedSources}/com/thoughtworks/qdox/parser/impl"/]
+          [jflex destdir="${generatedSources}/"
+                 file="${basedir}/src/grammar/commentlexer.flex"/]
+          [jflex destdir="${generatedSources}/"
+                 file="${basedir}/src/grammar/lexer.flex"/]
+          [exec executable="byaccj"
+                dir="${generatedSources}/com/thoughtworks/qdox/parser/impl"
+                failonerror="true"
+                logerror="true"]
+            [arg value="-v"/]
+            [arg value="-Jnorun"/]
+            [arg value="-Jnoconstruct"/]
+            [arg value="-Jclass=DefaultJavaCommentParser"/]
+            [arg value="-Jpackage=com.thoughtworks.qdox.parser.impl"/]
+            [arg value="${basedir}/src/grammar/commentparser.y"/]
+          [/exec]
+          [exec executable="byaccj"
+                dir="${generatedSources}/com/thoughtworks/qdox/parser/impl"
+                failonerror="true"
+                logerror="true"]
+            [arg value="-v"/]
+            [arg value="-Jnorun"/]
+            [arg value="-Jnoconstruct"/]
+            [arg value="-Jclass=Parser"/]
+            [arg value="-Jimplements=CommentHandler"/]
+            [arg value="-Jsemantic=Value"/]
+            [arg value="-Jpackage=com.thoughtworks.qdox.parser.impl"/]
+            [arg value="-Jstack=500"/]
+            [arg value="${basedir}/src/grammar/parser.y"/]
+          [/exec]
+        </run>
+      </ant>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

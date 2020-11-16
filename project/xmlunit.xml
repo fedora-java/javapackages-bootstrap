@@ -1,0 +1,14 @@
+<project>
+  <module>
+    <dependency>byte-buddy</dependency>
+    <dependency>hamcrest</dependency>
+    <dependency>assertj-core</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>xmlunit-core/src/main/java</addSourceRoot>
+        <addSourceRoot>xmlunit-matchers/src/main/java</addSourceRoot>
+        <addSourceRoot>xmlunit-assertj/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

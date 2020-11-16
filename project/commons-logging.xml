@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceClass>org/apache/commons/logging/impl/AvalonLogger</excludeSourceClass>
+        <excludeSourceClass>org/apache/commons/logging/impl/Log4JLogger</excludeSourceClass>
+        <excludeSourceClass>org/apache/commons/logging/impl/LogKitLogger</excludeSourceClass>
+        <excludeSourceClass>org/apache/commons/logging/impl/ServletContextCleaner</excludeSourceClass>
+      </compiler>
+    </build>
+  </module>
+</project>

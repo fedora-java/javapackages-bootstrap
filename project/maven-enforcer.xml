@@ -1,0 +1,32 @@
+<project>
+  <module>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>jsr-305</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-model-builder</dependency>
+    <dependency>maven-settings</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-common-artifact-filters</dependency>
+    <dependency>maven-dependency-tree</dependency>
+    <dependency>maven-artifact-transfer</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>commons-lang</dependency>
+    <dependency>commons-codec</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>enforcer-api/src/main/java</addSourceRoot>
+        <addSourceRoot>enforcer-rules/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-enforcer-plugin/src/main/java</addSourceRoot>
+        <excludeSourceClass>EvaluateBeanshell</excludeSourceClass>
+        <addResource>maven-enforcer-plugin/src/main/resources</addResource>
+      </compiler>
+      <pdc>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </pdc>
+    </build>
+  </module>
+</project>

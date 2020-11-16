@@ -1,0 +1,18 @@
+<project>
+  <module>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>maven-shared-io</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <build>
+      <modello>
+        <model>src/main/mdo/fileset.mdo</model>
+        <version>1.1.0</version>
+        <output>java</output>
+      </modello>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <dependency>plexus-component-annotations</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-utils</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <cdc/>
+    </build>
+  </module>
+</project>

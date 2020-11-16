@@ -1,0 +1,9 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>src/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

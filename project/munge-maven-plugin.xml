@@ -1,0 +1,29 @@
+<project>
+  <module>
+    <name>munge</name>
+    <subDir>src</subDir>
+    <build>
+      <compiler>
+        <addSourceRoot>main/java</addSourceRoot>
+        <excludeSourceClass>MungeMojo</excludeSourceClass>
+        <excludeSourceClass>MungeForkMojo</excludeSourceClass>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>plexus-utils</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
+      </compiler>
+      <pdc>
+        <groupId>org.sonatype.plugins</groupId>
+        <gleanFromJavadoc>src/main/java</gleanFromJavadoc>
+      </pdc>
+    </build>
+  </module>
+</project>

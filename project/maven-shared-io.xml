@@ -1,0 +1,16 @@
+<project>
+  <module>
+    <dependency>maven-wagon</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-compat</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

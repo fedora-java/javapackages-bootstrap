@@ -1,0 +1,10 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>httpcore/src/main/java</addSourceRoot>
+        <addSourceRoot>httpcore/src/main/java-deprecated</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

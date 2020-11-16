@@ -1,0 +1,22 @@
+<project>
+  <module>
+    <dependency>plexus-utils</dependency>
+    <dependency>jsr-305</dependency>
+    <dependency>plexus-io</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>commons-compress</dependency>
+    <dependency>commons-io</dependency>
+    <dependency>xz-java</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/org/codehaus/plexus/archiver/snappy/.*</excludeSourceMatching>
+        <excludeSourceClass>org/codehaus/plexus/archiver/tar/SnappyTarFile</excludeSourceClass>
+        <excludeSourceClass>org/codehaus/plexus/archiver/tar/PlexusIoTarSnappyFileResourceCollection</excludeSourceClass>
+      </compiler>
+      <cdc>
+        <gleanFromXML>src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
+      </cdc>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,34 @@
+<project>
+  <module>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-compat</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-dependency-tree</dependency>
+    <dependency>maven-resolver</dependency>
+    <dependency>maven-archiver</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>plexus-archiver</dependency>
+    <dependency>sisu-build-api</dependency>
+    <dependency>osgi-core</dependency>
+    <dependency>osgi-cmpn</dependency>
+    <dependency>bnd</dependency>
+    <dependency>felix-utils</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/org/apache/maven/shared/dependency/.*</excludeSourceMatching>
+        <excludeSourceMatching>/org/apache/felix/bundleplugin/pom/.*</excludeSourceMatching>
+        <excludeSourceMatching>/org/apache/felix/obrplugin/.*</excludeSourceMatching>
+        <excludeSourceClass>BaselineReport</excludeSourceClass>
+        <addResource>src/main/resources</addResource>
+      </compiler>
+      <pdc>
+        <groupId>org.apache.felix</groupId>
+      </pdc>
+    </build>
+  </module>
+</project>

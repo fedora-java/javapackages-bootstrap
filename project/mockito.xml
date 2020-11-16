@@ -1,0 +1,27 @@
+<project>
+  <module>
+    <dependency>junit4</dependency>
+    <dependency>opentest4j</dependency>
+    <dependency>byte-buddy</dependency>
+    <dependency>asm</dependency>
+    <dependency>hamcrest</dependency>
+    <dependency>objenesis</dependency>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/src/main/java"/]
+          [/copy]
+          [replaceregexp flags="g"]
+            [regexp pattern="(.*)net\.bytebuddy\.jar\.asm(.*)"/]
+            [substitution expression="\1org.objectweb.asm\2"/]
+            [fileset dir="${generatedSources}"]
+              [include name="**/*.java"/]
+            [/fileset]
+          [/replaceregexp]
+        </run>
+      </ant>
+      <compiler/>
+    </build>
+  </module>
+</project>

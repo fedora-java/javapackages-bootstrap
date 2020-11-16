@@ -1,0 +1,10 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/org/apache/felix/utils/(extender|filter|log|properties|repository|resource|service|version)/.*</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+</project>

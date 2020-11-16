@@ -1,0 +1,14 @@
+<project>
+  <module>
+    <dependency>maven-core</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

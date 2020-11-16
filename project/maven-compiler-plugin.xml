@@ -1,0 +1,19 @@
+<project>
+  <module>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>plexus-compiler</dependency>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>asm</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>plexus-java</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <pdc/>
+    </build>
+  </module>
+</project>

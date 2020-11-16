@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>jansi/src/main/java</addSourceRoot>
+        <excludeSourceClass>WindowsAnsiOutputStream</excludeSourceClass>
+        <excludeSourceClass>WindowsAnsiPrintStream</excludeSourceClass>
+        <excludeSourceClass>WindowsSupport</excludeSourceClass>
+        <excludeSourceClass>AnsiMain</excludeSourceClass>
+      </compiler>
+    </build>
+  </module>
+</project>

@@ -1,0 +1,13 @@
+<project>
+  <module>
+    <dependency>httpcomponents-core</dependency>
+    <dependency>commons-logging</dependency>
+    <dependency>commons-codec</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>httpclient/src/main/java</addSourceRoot>
+        <addSourceRoot>httpclient/src/main/java-deprecated</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

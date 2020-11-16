@@ -1,0 +1,47 @@
+<project>
+  <module>
+    <dependency>jsr-305</dependency>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/guava/src"/]
+            [fileset dir="${basedir}/futures/failureaccess/src"/]
+          [/copy]
+          [fileset id="java_source_files" dir="${generatedSources}"]
+            [include name="**/*.java"/]
+          [/fileset]
+          [replaceregexp flags="g"]
+            [regexp pattern="import org\.checkerframework.*;"/]
+            [substitution expression=""/]
+            [fileset refid="java_source_files"/]
+          [/replaceregexp]
+          [replaceregexp flags="g"]
+            [regexp pattern="import com\.google.*\.annotations.*;"/]
+            [substitution expression=""/]
+            [fileset refid="java_source_files"/]
+          [/replaceregexp]
+          <!-- Match multi-line annnotations with parentheses. -->
+          [replaceregexp flags="sg"]
+            [regexp pattern="@DoNotMock\(.*?\).*?\n"/]
+            [substitution expression=""/]
+            [fileset refid="java_source_files"/]
+          [/replaceregexp]
+          <!-- Match single-line annnotations with parentheses. -->
+          [replaceregexp flags="sg"]
+            [regexp pattern="(@GwtCompatible|@GwtIncompatible|@VisibleForTesting|@Immutable|@CompatibleWith|@ReflectionSupport|@GuardedBy|@DoNotCall)\(.*?\)"/]
+            [substitution expression=""/]
+            [fileset refid="java_source_files"/]
+          [/replaceregexp]
+          <!-- Match one-word annotations i. e. not using parentheses -->
+          [replaceregexp flags="g"]
+            [regexp pattern="(@Beta|@GwtCompatible|@DoNotMock|@Nullable|@GwtIncompatible|@MonotonicNonNull|@WeakOuter|@VisibleForTesting|@Immutable|@CanIgnoreReturnValue|@NonNull|@J2ObjCIncompatible|@LazyInit|@RetainedWith|@ForOverride|@Weak|@MustBeClosed|@CheckReturnValue|@OverridingMethodsMustInvokeSuper)"/]
+            [substitution expression=""/]
+            [fileset refid="java_source_files"/]
+          [/replaceregexp]
+        </run>
+      </ant>
+      <compiler/>
+    </build>
+  </module>
+</project>

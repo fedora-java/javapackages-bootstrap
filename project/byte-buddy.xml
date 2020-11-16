@@ -1,0 +1,24 @@
+<project>
+  <module>
+    <dependency>asm</dependency>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/byte-buddy-dep/src/main/java"/]
+            [fileset dir="${basedir}/byte-buddy-agent/src/main/java"/]
+          [/copy]
+          <!-- Match single-line annnotations with parentheses. -->
+          [replaceregexp flags="g"]
+            [regexp pattern=".*SuppressFBWarnings.*"/]
+            [substitution expression=""/]
+            [fileset dir="${generatedSources}"]
+              [include name="**/*.java"/]
+            [/fileset]
+          [/replaceregexp]
+        </run>
+      </ant>
+      <compiler/>
+    </build>
+  </module>
+</project>

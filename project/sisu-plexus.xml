@@ -1,0 +1,21 @@
+<project>
+  <module>
+    <dependency>sisu-inject</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>plexus-classworlds</dependency>
+    <dependency>plexus-component-annotations</dependency>
+    <dependency>guice</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>junit4</dependency>
+    <dependency>osgi-core</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>org.eclipse.sisu.plexus/src</addSourceRoot>
+      </compiler>
+      <cdc>
+        <gleanFromXML>org.eclipse.sisu.plexus/META-INF/plexus/components.xml</gleanFromXML>
+      </cdc>
+    </build>
+  </module>
+</project>

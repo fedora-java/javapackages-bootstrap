@@ -1,0 +1,21 @@
+<project>
+  <module>
+    <dependency>commons-io</dependency>
+    <dependency>jsr-305</dependency>
+    <dependency>maven-shared-utils</dependency>
+    <dependency>plexus-component-annotations</dependency>
+    <dependency>plexus-interpolation</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>sisu-build-api</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-settings</dependency>
+    <dependency>maven-model</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <cdc/>
+    </build>
+  </module>
+</project>
