@@ -133,6 +133,57 @@ MBI provides the following tools that can be used as build steps:
 * `ant` - executes arbitrary Ant tasks.
 
 
+Usage
+-----
+
+First you need to obtain pristine upstream sources of all projects
+that will be built.  That can be done with the clone command:
+`./downstream.sh clone`.  It may take 10 or more minutes to complete,
+depending on your network speed.  That command reads upstream
+descriptors and fetches upstream sources, either by cloning Git
+repositories or downloading appropriate ZIP archives with the sources.
+Once the command completes it will create `upstream` directory.
+
+Once you have the upstream sources, you'll need to generate downstream
+sources based on upstream sources.  This is done by executing the prep
+command: `./downstream.sh prep`.  This command will create downstream
+directory with patched upstream sources that are ready to be built.
+
+Modules are built by executing `./mbi.j build` command.  That command
+accepts a few options:
+
+* `-incremental` or `-i` to skip building modules that have already
+  been built,
+
+* `-parallel` or `-j` to use multiple threads to execute independent
+  build steps in parallel and
+
+* `-keepGoing` or `-k` if you want MBI not to stop the build after
+  first failure, but rather continue and build as many projects as
+  possible.
+
+Once the build is done you can create binary distribution with the
+dist command, `./mbi.j dist`.  That command accepts several options
+that allow you to control the shape and the location of binary
+distribution:
+
+* `-installRoot` specifies directory into which distribution will be
+  installed (equivalent to `$RPM_BUILD_ROOT` in RPM build), by default
+  it's system root directory `/`.
+
+* `-mavenHomePath` specifies the directory into which XMvn will be
+  installed (`/usr/share/xmvn` in Fedora).
+
+* `-artifactsPath` specifies where produced binary artifacts should be
+  installed (`/usr/share/java` in Fedora).
+
+* `-metadataPath` points to directory for installing accompanying
+  Javapackages metadata files (`/usr/share/maven-metadada`).
+
+* `-launchersPath` specifies where executable binary launches should
+  be installed (`/usr/bin`).
+
+
 Copying
 -------
 
