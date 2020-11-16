@@ -236,14 +236,14 @@ class Director
         throws Exception
     {
         Repository installRepo = new Repository();
-        installRepo.setId( "xmvn-bootstrap-install" );
+        installRepo.setId( "javapackages-bootstrap-install" );
         installRepo.setType( "jpp" );
         installRepo.addProperty( "root", dist.getArtifactsPath().toString() );
         configurator.getConfiguration().addRepository( installRepo );
         configurator.getConfiguration().getInstallerSettings().setMetadataDir( dist.getMetadataPath().toString() );
 
         InstallationRequest request = new InstallationRequest();
-        request.setBasePackageName( "xmvn-bootstrap" );
+        request.setBasePackageName( dist.getBasePackageName() );
         request.setInstallRoot( dist.getInstallRoot() );
         request.setInstallationPlan( planPath );
         request.setRepositoryId( installRepo.getId() );

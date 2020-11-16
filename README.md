@@ -177,6 +177,9 @@ distribution:
 * `-artifactsPath` specifies where produced binary artifacts should be
   installed (`/usr/share/java` in Fedora).
 
+* `basePackageName` specifies package name to be used as subdirectory
+  of artifact paths.
+
 * `-metadataPath` points to directory for installing accompanying
   Javapackages metadata files (`/usr/share/maven-metadada`).
 

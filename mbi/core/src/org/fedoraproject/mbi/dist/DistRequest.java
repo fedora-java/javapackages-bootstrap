@@ -29,6 +29,8 @@ public class DistRequest
 
     private final Path workDir;
 
+    private final String basePackageName;
+
     private final Path installRoot;
 
     private final Path mavenHomePath;
@@ -46,11 +48,12 @@ public class DistRequest
     }
 
     public DistRequest( Reactor reactor, Path workDir, //
-                        String installRoot, String mavenHomePath, String metadataPath, String artifactsPath,
-                        String launchersPath )
+                        String basePackageName, String installRoot, String mavenHomePath, String metadataPath,
+                        String artifactsPath, String launchersPath )
     {
         this.reactor = reactor;
         this.workDir = workDir;
+        this.basePackageName = basePackageName;
         this.installRoot = Paths.get( installRoot );
         this.mavenHomePath = relativePath( mavenHomePath );
         this.metadataPath = relativePath( metadataPath );
@@ -66,6 +69,11 @@ public class DistRequest
     public Path getWorkDir()
     {
         return workDir;
+    }
+
+    public String getBasePackageName()
+    {
+        return basePackageName;
     }
 
     public Path getInstallRoot()
