@@ -353,7 +353,7 @@ public class ArtifactDist
     public Map<String, String> doDist()
         throws Exception
     {
-        Path mdTxtPath = reactor.getRootDir().resolve( "tool/dist/metadata.txt" );
+        Path mdTxtPath = reactor.getRootDir().resolve( "mbi/dist/metadata.txt" );
         List<UMod> mods = parseTextMetadata( mdTxtPath );
         resolveDeps( mods );
         dumpUMD( mods );
