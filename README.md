@@ -167,6 +167,9 @@ dist command, `./mbi.j dist`.  That command accepts several options
 that allow you to control the shape and the location of binary
 distribution:
 
+* `-javaCmdPath` points to `java` executable, for use in launcher
+  shebangs (defaults to `/usr/lib/jvm/java-11-openjdk`).
+
 * `-installRoot` specifies directory into which distribution will be
   installed (equivalent to `$RPM_BUILD_ROOT` in RPM build), by default
   it's system root directory `/`.

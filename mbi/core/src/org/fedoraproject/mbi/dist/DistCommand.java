@@ -55,13 +55,14 @@ public class DistCommand
         Path workDir = reactor.getTargetDir( distModule ).resolve( "dist-work" );
         Util.delete( workDir );
 
+        String javaCmdPath = getOption( "javaCmdPath", "/usr/lib/jvm/java-11-openjdk/bin/java" );
         String basePackageName = getOption( "basePackageName", "mbi" );
         String installRoot = getOption( "installRoot", "/" );
         String mavenHomePath = getOption( "mavenHomePath", "/opt/mbi/maven" );
         String metadataPath = getOption( "metadataPath", "/opt/mbi/metadata" );
         String artifactsPath = getOption( "artifactsPath", "/opt/mbi/artifacts" );
         String launchersPath = getOption( "launchersPath", "/opt/mbi/bin" );
-        DistRequest request = new DistRequest( reactor, workDir, basePackageName, //
+        DistRequest request = new DistRequest( reactor, workDir, javaCmdPath, basePackageName, //
                                                installRoot, mavenHomePath, metadataPath, artifactsPath, launchersPath );
 
         try ( URLClassLoader cl = ToolUtils.newClassLoader( reactor, distModule ) )

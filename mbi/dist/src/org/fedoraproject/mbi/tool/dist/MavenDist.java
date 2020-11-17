@@ -129,8 +129,7 @@ public class MavenDist
         try ( OutputStream os = Files.newOutputStream( launcherPath ) )
         {
             Files.setPosixFilePermissions( launcherPath, PosixFilePermissions.fromString( "rwxrwxr-x" ) );
-            // TODO make Java home configurable in dist descriptor
-            os.write( "#!/usr/lib/jvm/java-11-openjdk/bin/java -jar\n".getBytes() );
+            os.write( ( "#!" + dist.getJavaCmdPath() + " -jar\n" ).getBytes() );
             try ( Closeable jos = new JarOutputStream( os, mf ) )
             {
                 // Empty JAR
