@@ -105,7 +105,8 @@ public class MavenDist
 
     private Path distJarPath( String moduleName )
     {
-        return dist.getArtifactsPath().resolve( "xmvn-bootstrap" ).resolve( mod2art.get( moduleName ) + ".jar" );
+        return dist.getArtifactsPath().resolve( dist.getBasePackageName() ).resolve( mod2art.get( moduleName )
+            + ".jar" );
     }
 
     private void linkJar( String moduleName, Path dest )
