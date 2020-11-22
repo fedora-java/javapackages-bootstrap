@@ -1,14 +1,28 @@
-From 7e50fe0cb2ab5481a0f74657e234260ef0311c31 Mon Sep 17 00:00:00 2001
+From a70f7badf763bbfa7cb07313fc8fd88c30154ad3 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 6 Jul 2020 15:00:26 +0200
-Subject: [PATCH 2/2] Fix compilation error with ECJ
+Subject: [PATCH] Fix compilation error with ECJ
 
 ---
+ .../com/google/common/collect/ImmutableClassToInstanceMap.java  | 2 +-
  .../com/google/common/collect/MutableClassToInstanceMap.java    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/guava/src/com/google/common/collect/ImmutableClassToInstanceMap.java b/guava/src/com/google/common/collect/ImmutableClassToInstanceMap.java
+index 8370f0ae91..3d96c39090 100644
+--- a/guava/src/com/google/common/collect/ImmutableClassToInstanceMap.java
++++ b/guava/src/com/google/common/collect/ImmutableClassToInstanceMap.java
+@@ -151,7 +151,7 @@ public final class ImmutableClassToInstanceMap<B> extends ForwardingMap<Class<?
+       Map<? extends Class<? extends S>, ? extends S> map) {
+     if (map instanceof ImmutableClassToInstanceMap) {
+       @SuppressWarnings("unchecked") // covariant casts safe (unmodifiable)
+-      ImmutableClassToInstanceMap<B> cast = (ImmutableClassToInstanceMap<B>) map;
++      ImmutableClassToInstanceMap<B> cast = (ImmutableClassToInstanceMap) map;
+       return cast;
+     }
+     return new Builder<B>().putAll(map).build();
 diff --git a/guava/src/com/google/common/collect/MutableClassToInstanceMap.java b/guava/src/com/google/common/collect/MutableClassToInstanceMap.java
-index 8c797c570..0e2e7d111 100644
+index c3ad9080d2..0760842196 100644
 --- a/guava/src/com/google/common/collect/MutableClassToInstanceMap.java
 +++ b/guava/src/com/google/common/collect/MutableClassToInstanceMap.java
 @@ -139,7 +139,7 @@ public final class MutableClassToInstanceMap<B> extends ForwardingMap<Class<? ex
@@ -21,5 +35,5 @@ index 8c797c570..0e2e7d111 100644
      super.putAll(copy);
    }
 -- 
-2.25.4
+2.26.2
 
