@@ -23,7 +23,7 @@ while meeting Fedora policy that requires everything to be built from
 source, without using prebuilt binary artifacts, it is necessary to
 build the packages in a well-defined, acyclic order. Dependency cycles
 between packages are the biggest obstacle to achieving this goal and
-JPT is the biggest offender -- it requires more then a hundred of Java
+JPT is the biggest offender -- it requires more than a hundred of Java
 packages, all of which in turn build-require JPT.
 
 JPB comes with a solution to this problem -- it builds everything hat
