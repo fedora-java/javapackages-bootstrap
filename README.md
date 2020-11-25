@@ -26,7 +26,7 @@ between packages are the biggest obstacle to achieving this goal and
 JPT is the biggest offender -- it requires more than a hundred of Java
 packages, all of which in turn build-require JPT.
 
-JPB comes with a solution to this problem -- it builds everything hat
+JPB comes with a solution to this problem -- it builds everything that
 JPT needs to work, without reliance on any Java software other than
 OpenJDK.  JPT can depend on JPB for everything, without depending on
 any other Java packages.  For example, JPB contains embedded version
