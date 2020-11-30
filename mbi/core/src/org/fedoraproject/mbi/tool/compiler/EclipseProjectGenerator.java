@@ -81,8 +81,7 @@ class EclipseProjectGenerator
         }
         String vm = release == 11 ? "11" : "1.8";
         eclipseClasspath.append( "<classpathentry kind=\"con\""
-            + " path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-"
-            + vm + "\"/>\n" );
+            + " path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11\"/>\n" );
         eclipseClasspath.append( "<classpathentry kind=\"output\" path=\"bin\"/>\n" );
         try ( BufferedWriter bw = Files.newBufferedWriter( outputDir.resolve( ".classpath" ) ) )
         {
@@ -99,6 +98,8 @@ class EclipseProjectGenerator
             bw.write( "eclipse.preferences.version=1\n" );
             bw.write( "org.eclipse.jdt.core.compiler.compliance=" + vm + "\n" );
             bw.write( "org.eclipse.jdt.core.compiler.source=" + vm + "\n" );
+            bw.write( "org.eclipse.jdt.core.compiler.codegen.targetPlatform=" + vm + "\n" );
+            bw.write( "org.eclipse.jdt.core.compiler.release=enabled\n" );
             bw.write( "org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning\n" );
         }
     }
