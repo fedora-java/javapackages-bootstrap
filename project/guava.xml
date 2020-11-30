@@ -41,7 +41,12 @@
           [/replaceregexp]
         </run>
       </ant>
-      <compiler/>
+      <compiler>
+        <excludeSourceClass>com/google/common/cache/Striped64</excludeSourceClass>
+        <excludeSourceClass>com/google/common/cache/LongAdder</excludeSourceClass>
+        <excludeSourceClass>com/google/common/hash/Striped64</excludeSourceClass>
+        <excludeSourceClass>com/google/common/hash/LongAdder</excludeSourceClass>
+      </compiler>
     </build>
   </module>
 </project>
