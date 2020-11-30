@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Arrays;
 import java.util.Map;
@@ -57,12 +56,13 @@ public class MavenDist
     public void doDist()
         throws Exception
     {
-        Path mavenHome = dist.getInstallRoot().resolve( dist.getMavenHomePath() );
+        Path mavenHome = dist.getMavenHomePath();
         Path homeTemplate =
             reactor.getSourceRootDir( reactor.getModule( "maven-core" ) ).resolve( "../apache-maven/src" );
         for ( var subdir : Arrays.asList( "bin", "conf", "lib" ) )
         {
-            Util.copy( homeTemplate.resolve( subdir ), mavenHome.resolve( subdir ), x -> true );
+            Util.copy( homeTemplate.resolve( subdir ), dist.getInstallRoot().resolve( mavenHome ).resolve( subdir ),
+                       x -> true );
         }
         for ( String moduleName : Arrays.asList( "asm", "common-annotations-api", "commons-cli", "commons-io",
                                                  "commons-lang", "guava", "guice", "injection-api", "jansi", "jsr-305",
@@ -75,58 +75,59 @@ public class MavenDist
                                                  "plexus-interpolation", "plexus-sec-dispatcher", "plexus-utils",
                                                  "sisu-inject", "sisu-plexus", "slf4j" ) )
         {
-            linkJar( moduleName, mavenHome.resolve( "lib" ).resolve( moduleName + ".jar" ) );
+            symlink( mavenHome.resolve( "lib" ).resolve( moduleName + ".jar" ), distJarPath( moduleName ) );
         }
-        linkJar( "plexus-classworlds", mavenHome.resolve( "boot" ).resolve( "plexus-classworlds-X.jar" ) );
-        linkJar( "xmvn", mavenHome.resolve( "lib/ext" ).resolve( "xmvn.jar" ) );
+        symlink( mavenHome.resolve( "boot" ).resolve( "plexus-classworlds-X.jar" ),
+                 distJarPath( "plexus-classworlds" ) );
+        symlink( mavenHome.resolve( "lib/ext" ).resolve( "xmvn.jar" ), distJarPath( "xmvn" ) );
 
-        Path binDir = dist.getInstallRoot().resolve( dist.getLaunchersPath() );
+        Path binDir = dist.getLaunchersPath();
         if ( !binDir.equals( mavenHome.resolve( "bin" ) ) )
         {
-            Files.createDirectories( binDir );
-            Files.createSymbolicLink( binDir.resolve( "mvn" ),
-                                      Paths.get( "/" ).resolve( dist.getMavenHomePath() ).resolve( "bin/mvn" ) );
+            symlink( binDir.resolve( "mvn" ), dist.getMavenHomePath().resolve( "bin/mvn" ) );
         }
-        Files.createSymbolicLink( binDir.resolve( "xmvn" ), Paths.get( "mvn" ) );
+        symlink( binDir.resolve( "xmvn" ), dist.getLaunchersPath().resolve( "mvn" ) );
 
-        launcher( binDir.resolve( "xmvn-install" ), "org.fedoraproject.xmvn.tools.install.cli.InstallerCli", //
+        launcher( "xmvn-install", "org.fedoraproject.xmvn.tools.install.cli.InstallerCli", //
                   "xmvn", "jcommander", "slf4j", "commons-compress", "asm" );
-        launcher( binDir.resolve( "xmvn-resolve" ), "org.fedoraproject.xmvn.tools.resolve.ResolverCli", //
+        launcher( "xmvn-resolve", "org.fedoraproject.xmvn.tools.resolve.ResolverCli", //
                   "xmvn", "jcommander" );
-        launcher( binDir.resolve( "xmvn-subst" ), "org.fedoraproject.xmvn.tools.subst.SubstCli", //
+        launcher( "xmvn-subst", "org.fedoraproject.xmvn.tools.subst.SubstCli", //
                   "xmvn", "jcommander" );
-
-        launcher( binDir.resolve( "cup" ), "java_cup.Main", "cup" );
-        launcher( binDir.resolve( "jflex" ), "jflex.Main", "jflex", "cup" );
-        launcher( binDir.resolve( "ant" ), "org.apache.tools.ant.launch.Launcher", "ant" );
+        launcher( "cup", "java_cup.Main", "cup" );
+        launcher( "jflex", "jflex.Main", "jflex", "cup" );
+        launcher( "ant", "org.apache.tools.ant.launch.Launcher", "ant" );
 
         System.err.println( "BUILD SUCCESS" );
     }
 
+    private void symlink( Path link, Path target )
+        throws IOException
+    {
+        Files.createDirectories( dist.getInstallRoot().resolve( link.getParent() ) );
+        Files.createSymbolicLink( dist.getInstallRoot().resolve( link ), link.getParent().relativize( target ) );
+    }
+
     private Path distJarPath( String moduleName )
     {
+        reactor.getModule( moduleName ); // Ensure module with given name exists
         return dist.getArtifactsPath().resolve( dist.getBasePackageName() ).resolve( mod2art.get( moduleName )
             + ".jar" );
     }
 
-    private void linkJar( String moduleName, Path dest )
+    private void launcher( String launcherName, String mainClass, String... classPath )
         throws IOException
     {
-        reactor.getModule( moduleName ); // Ensure module with given name exists
-        Files.createDirectories( dest.getParent() );
-        Files.createSymbolicLink( dest, Paths.get( "/" ).resolve( distJarPath( moduleName ) ) );
-    }
-
-    private void launcher( Path launcherPath, String mainClass, String... classPath )
-        throws IOException
-    {
+        Path launcherPath = dist.getInstallRoot().resolve( dist.getLaunchersPath() ).resolve( launcherName );
         Manifest mf = new Manifest();
         Attributes attr = mf.getMainAttributes();
         attr.put( MANIFEST_VERSION, "1.0" );
         attr.put( MAIN_CLASS, mainClass );
-        attr.put( CLASS_PATH,
-                  String.join( " ",
-                               Arrays.asList( classPath ).stream().map( p -> distJarPath( p ) ).map( Paths.get( "/" )::resolve ).map( Path::toString ).toArray( String[]::new ) ) );
+        attr.put( CLASS_PATH, String.join( " ", Arrays.asList( classPath ).stream() //
+                                                      .map( this::distJarPath ) //
+                                                      .map( dist.getLaunchersPath()::relativize ) //
+                                                      .map( Path::toString ) //
+                                                      .toArray( String[]::new ) ) );
         try ( OutputStream os = Files.newOutputStream( launcherPath ) )
         {
             Files.setPosixFilePermissions( launcherPath, PosixFilePermissions.fromString( "rwxrwxr-x" ) );
