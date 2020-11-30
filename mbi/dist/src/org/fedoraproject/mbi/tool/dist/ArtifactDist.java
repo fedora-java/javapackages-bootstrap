@@ -17,6 +17,7 @@ package org.fedoraproject.mbi.tool.dist;
 
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -203,7 +204,10 @@ class Director
         if ( !Files.isRegularFile( pomPath ) )
         {
             Files.createDirectories( pomPath.getParent() );
-            Files.createFile( pomPath );
+            try ( Writer writer = Files.newBufferedWriter( pomPath, StandardCharsets.UTF_8 ) )
+            {
+                writer.write( "Dummy POM file for " + module.getName() + " module" );
+            }
         }
         pomRequest.setPlanPath( planPath );
         pomRequest.setArtifact( new DefaultArtifact( gid, aid, "pom", version ).setPath( pomPath ) );
