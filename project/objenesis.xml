@@ -3,6 +3,8 @@
     <build>
       <compiler>
         <addSourceRoot>main/src/main/java</addSourceRoot>
+        <excludeSourceClass>org/objenesis/instantiator/sun/UnsafeFactoryInstantiator</excludeSourceClass>
+        <excludeSourceClass>org/objenesis/instantiator/util/UnsafeUtils</excludeSourceClass>
       </compiler>
     </build>
   </module>
