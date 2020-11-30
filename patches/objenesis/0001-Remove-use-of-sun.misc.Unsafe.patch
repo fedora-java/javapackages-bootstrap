@@ -1,0 +1,104 @@
+From 65693a82d4e2cfe688a62b055d5575e36f54d9ff Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 30 Nov 2020 11:32:51 +0100
+Subject: [PATCH] Remove use of sun.misc.Unsafe
+
+---
+ .../instantiator/util/DefineClassHelper.java  | 36 +------------------
+ .../strategy/StdInstantiatorStrategy.java     |  5 ++-
+ 2 files changed, 3 insertions(+), 38 deletions(-)
+
+diff --git a/main/src/main/java/org/objenesis/instantiator/util/DefineClassHelper.java b/main/src/main/java/org/objenesis/instantiator/util/DefineClassHelper.java
+index 72ebd06..758d25b 100644
+--- a/main/src/main/java/org/objenesis/instantiator/util/DefineClassHelper.java
++++ b/main/src/main/java/org/objenesis/instantiator/util/DefineClassHelper.java
+@@ -15,7 +15,6 @@
+  */
+ package org.objenesis.instantiator.util;
+ 
+-import sun.misc.Unsafe;
+ import org.objenesis.ObjenesisException;
+ import org.objenesis.strategy.PlatformDescription;
+ 
+@@ -38,38 +37,6 @@ public final class DefineClassHelper {
+                                     ClassLoader loader, ProtectionDomain protectionDomain);
+    }
+ 
+-   private static class Java8 extends Helper {
+-
+-      private final MethodHandle defineClass = defineClass();
+-
+-      private MethodHandle defineClass() {
+-         MethodType mt = MethodType.methodType(Class.class, String.class, byte[].class, int.class, int.class, ClassLoader.class, ProtectionDomain.class);
+-         MethodHandle m;
+-         try {
+-            m = MethodHandles.publicLookup().findVirtual(Unsafe.class, "defineClass", mt);
+-         } catch(NoSuchMethodException | IllegalAccessException e) {
+-            throw new ObjenesisException(e);
+-         }
+-         Unsafe unsafe = UnsafeUtils.getUnsafe();
+-         return m.bindTo(unsafe);
+-      }
+-
+-      @Override
+-      Class<?> defineClass(String className, byte[] b, int off, int len, Class<?> neighbor, ClassLoader loader, ProtectionDomain protectionDomain) {
+-         try {
+-            return (Class<?>) defineClass.invokeExact(className, b, off, len, loader, protectionDomain);
+-         } catch (Throwable e) {
+-            if(e instanceof Error) {
+-               throw (Error) e;
+-            }
+-            if(e instanceof RuntimeException) {
+-               throw (RuntimeException) e;
+-            }
+-            throw new ObjenesisException(e);
+-         }
+-      }
+-   }
+-
+    private static class Java11 extends Helper {
+ 
+       private final Class<?> module = module();
+@@ -135,8 +102,7 @@ public final class DefineClassHelper {
+ 
+    // Java 11+ removed sun.misc.Unsafe.defineClass, so we fallback to invoking defineClass on
+    // ClassLoader until we have an implementation that uses MethodHandles.Lookup.defineClass
+-   private static final Helper privileged = PlatformDescription.isAfterJava11() ?
+-      new Java11() : new Java8();
++   private static final Helper privileged = new Java11();
+ 
+    public static Class<?> defineClass(String name, byte[] b, int off, int len, Class<?> neighbor,
+                                       ClassLoader loader, ProtectionDomain protectionDomain) {
+diff --git a/main/src/main/java/org/objenesis/strategy/StdInstantiatorStrategy.java b/main/src/main/java/org/objenesis/strategy/StdInstantiatorStrategy.java
+index 4ff00ff..4ed9729 100644
+--- a/main/src/main/java/org/objenesis/strategy/StdInstantiatorStrategy.java
++++ b/main/src/main/java/org/objenesis/strategy/StdInstantiatorStrategy.java
+@@ -24,7 +24,6 @@ import org.objenesis.instantiator.basic.ObjectInputStreamInstantiator;
+ import org.objenesis.instantiator.gcj.GCJInstantiator;
+ import org.objenesis.instantiator.perc.PercInstantiator;
+ import org.objenesis.instantiator.sun.SunReflectionFactoryInstantiator;
+-import org.objenesis.instantiator.sun.UnsafeFactoryInstantiator;
+ 
+ import java.io.Serializable;
+ 
+@@ -70,7 +69,7 @@ public class StdInstantiatorStrategy extends BaseInstantiatorStrategy {
+       else if(PlatformDescription.isThisJVM(DALVIK)) {
+          if(PlatformDescription.isAndroidOpenJDK()) {
+             // Starting at Android N which is based on OpenJDK
+-            return new UnsafeFactoryInstantiator<>(type);
++            return new ObjectInputStreamInstantiator<>(type);
+          }
+          if(ANDROID_VERSION <= 10) {
+             // Android 2.3 Gingerbread and lower
+@@ -91,7 +90,7 @@ public class StdInstantiatorStrategy extends BaseInstantiatorStrategy {
+       }
+ 
+       // Fallback instantiator, should work with most modern JVM
+-      return new UnsafeFactoryInstantiator<>(type);
++      return new ObjectInputStreamInstantiator<>(type);
+ 
+    }
+ }
+-- 
+2.26.2
+
