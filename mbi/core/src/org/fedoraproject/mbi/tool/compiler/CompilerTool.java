@@ -116,22 +116,8 @@ public class CompilerTool
         List<String> options = new ArrayList<>();
         options.add( "-d" );
         options.add( getClassesDir().toString() );
-        if ( release == 11 )
-        {
-            options.add( "-source" );
-            options.add( "11" );
-            options.add( "-target" );
-            options.add( "11" );
-        }
-        else
-        {
-            options.add( "-source" );
-            options.add( "1.8" );
-            options.add( "-target" );
-            options.add( "1.8" );
-            options.add( "-bootclasspath" );
-            options.add( "/usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar:/usr/lib/jvm/java-1.8.0-openjdk/jre/lib/jce.jar" );
-        }
+        options.add( "--release" );
+        options.add( release + "" );
         options.add( "-cp" );
         options.add( getClassPath().stream().map( Path::toString ).collect( Collectors.joining( ":" ) ) );
         StringWriter compilerOutput = new StringWriter();
