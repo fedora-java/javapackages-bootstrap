@@ -62,7 +62,7 @@ public class MavenDist
         for ( var subdir : Arrays.asList( "bin", "conf", "lib" ) )
         {
             Util.copy( homeTemplate.resolve( subdir ), dist.getInstallRoot().resolve( mavenHome ).resolve( subdir ),
-                       x -> true );
+                       p -> !p.getFileName().toString().startsWith( "." ) );
         }
         for ( String moduleName : Arrays.asList( "asm", "common-annotations-api", "commons-cli", "commons-io",
                                                  "commons-lang", "guava", "guice", "injection-api", "jansi", "jsr-305",
