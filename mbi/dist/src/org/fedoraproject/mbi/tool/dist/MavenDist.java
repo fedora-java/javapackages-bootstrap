@@ -130,7 +130,7 @@ public class MavenDist
                                                       .toArray( String[]::new ) ) );
         try ( OutputStream os = Files.newOutputStream( launcherPath ) )
         {
-            Files.setPosixFilePermissions( launcherPath, PosixFilePermissions.fromString( "rwxrwxr-x" ) );
+            Files.setPosixFilePermissions( launcherPath, PosixFilePermissions.fromString( "rwxr-xr-x" ) );
             os.write( ( "#!" + dist.getJavaCmdPath() + " -jar\n" ).getBytes() );
             try ( Closeable jos = new JarOutputStream( os, mf ) )
             {
