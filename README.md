@@ -189,7 +189,7 @@ distribution:
 * `-launchersPath` specifies where executable binary launches should
   be installed (`/usr/bin`).
 
-* `-licencesPath` specifies where license files should be installed
+* `-licensesPath` specifies where license files should be installed
   (`/usr/share/licenses`).
 
 

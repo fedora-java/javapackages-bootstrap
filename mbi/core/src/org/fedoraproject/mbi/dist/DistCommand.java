@@ -62,10 +62,10 @@ public class DistCommand
         String metadataPath = getOption( "metadataPath", "/opt/mbi/metadata" );
         String artifactsPath = getOption( "artifactsPath", "/opt/mbi/artifacts" );
         String launchersPath = getOption( "launchersPath", "/opt/mbi/bin" );
-        String licencesPath = getOption( "licencesPath", "/opt/mbi/licences" );
+        String licensesPath = getOption( "licensesPath", "/opt/mbi/licenses" );
         DistRequest request = new DistRequest( reactor, workDir, javaCmdPath, basePackageName, //
                                                installRoot, mavenHomePath, metadataPath, artifactsPath, launchersPath,
-                                               licencesPath );
+                                               licensesPath );
 
         try ( URLClassLoader cl = ToolUtils.newClassLoader( reactor, distModule ) )
         {
