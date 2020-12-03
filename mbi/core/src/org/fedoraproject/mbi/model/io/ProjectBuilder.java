@@ -19,6 +19,7 @@ import java.util.LinkedHashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import org.fedoraproject.mbi.model.LicensingDescriptor;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
 import org.fedoraproject.mbi.model.ProjectDescriptor;
 
@@ -31,12 +32,19 @@ class ProjectBuilder
 
     private final Properties properties;
 
+    private LicensingDescriptor licensing;
+
     private final Set<ModuleDescriptor> modules = new LinkedHashSet<>();
 
     public ProjectBuilder( String name, Properties properties )
     {
         this.name = name;
         this.properties = properties;
+    }
+
+    public void setLicensing( LicensingDescriptor licensing )
+    {
+        this.licensing = licensing;
     }
 
     public void addModule( ModuleDescriptor module )
@@ -46,6 +54,6 @@ class ProjectBuilder
 
     public ProjectDescriptor build()
     {
-        return new ProjectDescriptor( name, properties, modules );
+        return new ProjectDescriptor( name, properties, licensing, modules );
     }
 }

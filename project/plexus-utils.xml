@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0 and ASL 1.1 and BSD and xpp and Public Domain</tag>
+    <file>NOTICE.txt</file>
+  </licensing>
   <module>
     <build>
       <compiler>

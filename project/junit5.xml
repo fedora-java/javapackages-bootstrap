@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>EPL-2.0</tag>
+    <file>LICENSE.md</file>
+  </licensing>
   <module>
     <name>junit5-platform</name>
     <subDir>junit-platform-engine</subDir>

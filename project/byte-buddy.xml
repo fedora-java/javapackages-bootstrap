@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+    <file>NOTICE</file>
+  </licensing>
   <module>
     <dependency>asm</dependency>
     <build>

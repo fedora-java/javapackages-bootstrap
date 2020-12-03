@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>MIT and ASL 2.0</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
   <module>
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>

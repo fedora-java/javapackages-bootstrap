@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>BSD</tag>
+  </licensing>
   <module>
     <build>
       <compiler>

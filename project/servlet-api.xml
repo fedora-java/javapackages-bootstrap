@@ -1,4 +1,9 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0 and (EPL-2.0 or GPLv2 with exceptions)</tag>
+    <file>LICENSE.md</file>
+    <file>NOTICE.md</file>
+  </licensing>
   <module>
     <build>
       <compiler>

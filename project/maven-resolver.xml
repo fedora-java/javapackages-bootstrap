@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+  </licensing>
   <module>
     <dependency>slf4j</dependency>
     <dependency>guice</dependency>

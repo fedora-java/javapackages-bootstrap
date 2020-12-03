@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+  </licensing>
   <module>
     <dependency>maven-resolver</dependency>
     <dependency>plexus-classworlds</dependency>

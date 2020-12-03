@@ -28,12 +28,16 @@ public class ProjectDescriptor
 
     private final Properties properties;
 
+    private final LicensingDescriptor licensing;
+
     private final Set<ModuleDescriptor> modules;
 
-    public ProjectDescriptor( String name, Properties properties, Set<ModuleDescriptor> modules )
+    public ProjectDescriptor( String name, Properties properties, LicensingDescriptor licensing,
+                              Set<ModuleDescriptor> modules )
     {
         this.name = name;
         this.properties = properties;
+        this.licensing = licensing;
         this.modules = Collections.unmodifiableSet( modules );
     }
 
@@ -45,6 +49,11 @@ public class ProjectDescriptor
     public Properties getProperties()
     {
         return properties;
+    }
+
+    public LicensingDescriptor getLicensing()
+    {
+        return licensing;
     }
 
     public Set<ModuleDescriptor> getModules()

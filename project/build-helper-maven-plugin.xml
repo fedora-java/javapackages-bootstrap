@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>MIT</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
   <module>
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-plugin-tools</dependency>

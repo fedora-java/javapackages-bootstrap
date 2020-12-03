@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>EPL-1.0</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
   <module>
     <dependency>sisu-inject</dependency>
     <dependency>injection-api</dependency>

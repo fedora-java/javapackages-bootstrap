@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+    <file>notice.txt</file>
+  </licensing>
   <module>
     <subDir>fusesource-pom</subDir>
     <build>

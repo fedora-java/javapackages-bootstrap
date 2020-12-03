@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>EPL-1.0 and BSD</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
   <module>
     <dependency>guice</dependency>
     <dependency>injection-api</dependency>
