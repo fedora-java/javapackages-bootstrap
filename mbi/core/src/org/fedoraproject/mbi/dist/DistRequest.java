@@ -43,6 +43,8 @@ public class DistRequest
 
     private final Path launchersPath;
 
+    private final Path licensesPath;
+
     private static Path relativePath( String pathStr )
     {
         Path absolutePath = Paths.get( pathStr );
@@ -51,7 +53,7 @@ public class DistRequest
 
     public DistRequest( Reactor reactor, Path workDir, //
                         String javaCmdPath, String basePackageName, String installRoot, String mavenHomePath,
-                        String metadataPath, String artifactsPath, String launchersPath )
+                        String metadataPath, String artifactsPath, String launchersPath, String licensesPath )
     {
         this.reactor = reactor;
         this.workDir = workDir;
@@ -62,6 +64,7 @@ public class DistRequest
         this.metadataPath = relativePath( metadataPath );
         this.artifactsPath = relativePath( artifactsPath );
         this.launchersPath = relativePath( launchersPath );
+        this.licensesPath = relativePath( licensesPath );
     }
 
     public Reactor getReactor()
@@ -107,5 +110,10 @@ public class DistRequest
     public Path getLaunchersPath()
     {
         return launchersPath;
+    }
+
+    public Path getLicensesPath()
+    {
+        return licensesPath;
     }
 }
