@@ -135,7 +135,5 @@ for p; do
 done
 
 if [[ $cmd = archive ]]; then
-    rm -f mbi.tar mbi.tar.xz
-    git archive --prefix mbi/ HEAD >mbi.tar
-    echo mbi.tar archive/*.tar | xargs -n1 -P20 xz -9evT8
+    echo archive/*.tar | xargs -n1 -P20 xz -9evT8
 fi
