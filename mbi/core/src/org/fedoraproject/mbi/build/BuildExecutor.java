@@ -170,13 +170,20 @@ class BuildExecutor
             {
                 completeSteps.add( step );
             }
-            else if ( step.getDependencies().isEmpty() )
+        }
+
+        for ( var step : plan.getSteps() )
+        {
+            if ( !completeSteps.contains( step ) )
             {
-                completableSteps.add( step );
-            }
-            else
-            {
-                blockedSteps.add( step );
+                if ( completeSteps.containsAll( step.getDependencies() ) )
+                {
+                    completableSteps.add( step );
+                }
+                else
+                {
+                    blockedSteps.add( step );
+                }
             }
         }
 
