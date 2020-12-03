@@ -25,6 +25,7 @@ public class DistMain
     public static void main( DistRequest request )
         throws Exception
     {
+        new LicensingDist( request ).doDist();
         var mod2art = new ArtifactDist( request ).doDist();
         new MavenDist( request, mod2art ).doDist();
     }
