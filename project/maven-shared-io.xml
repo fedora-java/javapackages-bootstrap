@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+  </licensing>
   <module>
     <dependency>maven-wagon</dependency>
     <dependency>sisu-plexus</dependency>

@@ -15,20 +15,21 @@
  */
 package org.fedoraproject.mbi.model.io;
 
-import java.util.Properties;
+import static java.util.function.Function.identity;
 
 import org.fedoraproject.mbi.xml.Entity;
 
 /**
  * @author Mikolaj Izdebski
  */
-class ProjectEntity
-    extends Entity<ProjectBuilder>
+class LicensingEntity
+    extends Entity<LicensingBuilder>
 {
-    public ProjectEntity( String name, Properties properties )
+    public LicensingEntity()
     {
-        super( "project", () -> new ProjectBuilder( name, properties ) );
-        addRelationship( "licensing", bean::setLicensing, LicensingBuilder::build, false, true, LicensingEntity::new );
-        addRelationship( "module", bean::addModule, ModuleBuilder::build, true, false, () -> new ModuleEntity( name ) );
+        super( "licensing", LicensingBuilder::new );
+        addAttribute( "tag", bean::setTag, identity(), false, true );
+        addAttribute( "file", bean::addFile, identity(), true, false );
+        addAttribute( "text", bean::setText, identity(), true, true );
     }
 }

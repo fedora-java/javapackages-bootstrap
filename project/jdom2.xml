@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>BSD with advertising</tag>
+  </licensing>
   <module>
     <build>
       <compiler>

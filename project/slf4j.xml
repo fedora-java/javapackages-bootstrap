@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>MIT</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
   <module>
     <build>
       <compiler>

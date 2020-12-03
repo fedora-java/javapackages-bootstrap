@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>CDDL-1.0</tag>
+    <file>LICENSE</file>
+  </licensing>
   <module>
     <name>munge</name>
     <subDir>src</subDir>

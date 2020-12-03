@@ -15,20 +15,39 @@
  */
 package org.fedoraproject.mbi.model.io;
 
-import java.util.Properties;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import org.fedoraproject.mbi.xml.Entity;
+import org.fedoraproject.mbi.model.LicensingDescriptor;
 
 /**
  * @author Mikolaj Izdebski
  */
-class ProjectEntity
-    extends Entity<ProjectBuilder>
+class LicensingBuilder
 {
-    public ProjectEntity( String name, Properties properties )
+    private String tag;
+
+    private final Set<String> files = new LinkedHashSet<>();
+
+    private String text;
+
+    public void setTag( String tag )
     {
-        super( "project", () -> new ProjectBuilder( name, properties ) );
-        addRelationship( "licensing", bean::setLicensing, LicensingBuilder::build, false, true, LicensingEntity::new );
-        addRelationship( "module", bean::addModule, ModuleBuilder::build, true, false, () -> new ModuleEntity( name ) );
+        this.tag = tag;
+    }
+
+    public void addFile( String file )
+    {
+        files.add( file );
+    }
+
+    public void setText( String text )
+    {
+        this.text = text;
+    }
+
+    public LicensingDescriptor build()
+    {
+        return new LicensingDescriptor( tag, files, text );
     }
 }

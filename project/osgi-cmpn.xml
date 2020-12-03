@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+  </licensing>
   <module>
     <dependency>osgi-annotation</dependency>
     <dependency>osgi-core</dependency>

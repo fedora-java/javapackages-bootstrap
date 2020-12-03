@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+  </licensing>
   <module>
     <dependency>jsr-305</dependency>
     <dependency>sisu-plexus</dependency>

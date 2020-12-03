@@ -1,4 +1,9 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+    <file>../LICENSE</file>
+    <file>../NOTICE</file>
+  </licensing>
   <module>
     <name>mbi-core</name>
     <subDir>core</subDir>

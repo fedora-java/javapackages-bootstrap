@@ -13,22 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.model.io;
+package org.fedoraproject.mbi.model;
 
-import java.util.Properties;
-
-import org.fedoraproject.mbi.xml.Entity;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * @author Mikolaj Izdebski
  */
-class ProjectEntity
-    extends Entity<ProjectBuilder>
+public class LicensingDescriptor
 {
-    public ProjectEntity( String name, Properties properties )
+    private final String tag;
+
+    private final Set<String> files;
+
+    private final String text;
+
+    public LicensingDescriptor( String tag, Set<String> files, String text )
     {
-        super( "project", () -> new ProjectBuilder( name, properties ) );
-        addRelationship( "licensing", bean::setLicensing, LicensingBuilder::build, false, true, LicensingEntity::new );
-        addRelationship( "module", bean::addModule, ModuleBuilder::build, true, false, () -> new ModuleEntity( name ) );
+        this.tag = tag;
+        this.files = Collections.unmodifiableSet( files );
+        this.text = text;
     }
+
+    public String getTag()
+    {
+        return tag;
+    }
+
+    public Set<String> getFiles()
+    {
+        return files;
+    }
+
+    public String getText()
+    {
+        return text;
+    }
+
 }

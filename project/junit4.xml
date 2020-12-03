@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>EPL-1.0</tag>
+    <file>LICENSE-junit.txt</file>
+  </licensing>
   <module>
     <dependency>hamcrest</dependency>
     <build>

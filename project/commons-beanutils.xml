@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+    <file>NOTICE.txt</file>
+  </licensing>
   <module>
     <dependency>commons-collections</dependency>
     <dependency>commons-logging</dependency>

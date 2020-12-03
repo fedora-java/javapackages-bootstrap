@@ -1,4 +1,8 @@
 <project>
+  <licensing>
+    <tag>MIT</tag>
+    <file>LICENSE</file>
+  </licensing>
   <module>
     <dependency>junit4</dependency>
     <dependency>opentest4j</dependency>

@@ -1,4 +1,7 @@
 <project>
+  <licensing>
+    <tag>Public Domain</tag>
+  </licensing>
   <module>
     <build>
       <compiler>
