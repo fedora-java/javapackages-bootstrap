@@ -1,0 +1,28 @@
+#!/bin/bash
+#-
+# Copyright (c) 2020 Red Hat, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Author: Mikolaj Izdebski
+
+set -e
+
+if [ -z "${JAVA_HOME}" ]; then
+    echo "Please set the JAVA_HOME environment variable"
+    exit 1
+fi
+
+mkdir -p build/mbi-launcher/classes
+$JAVA_HOME/bin/javac -d build/mbi-launcher/classes $(find mbi/core -name *.java)
+exec $JAVA_HOME/bin/java -cp build/mbi-launcher/classes org.fedoraproject.mbi.Main "${@}"

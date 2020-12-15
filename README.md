@@ -149,7 +149,7 @@ sources based on upstream sources.  This is done by executing the prep
 command: `./downstream.sh prep`.  This command will create downstream
 directory with patched upstream sources that are ready to be built.
 
-Modules are built by executing `./mbi.j build` command.  That command
+Modules are built by executing `./mbi.sh build` command.  That command
 accepts a few options:
 
 * `-incremental` or `-i` to skip building modules that have already
@@ -163,7 +163,7 @@ accepts a few options:
   possible.
 
 Once the build is done you can create binary distribution with the
-dist command, `./mbi.j dist`.  That command accepts several options
+dist command, `./mbi.sh dist`.  That command accepts several options
 that allow you to control the shape and the location of binary
 distribution:
 
