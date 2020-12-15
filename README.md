@@ -149,8 +149,12 @@ sources based on upstream sources.  This is done by executing the prep
 command: `./downstream.sh prep`.  This command will create downstream
 directory with patched upstream sources that are ready to be built.
 
-Modules are built by executing `./mbi.sh build` command.  That command
-accepts a few options:
+Modules are built by executing `./mbi.sh build` command. It requires the
+environment variable `JAVA_HOME` to be set and pointed to JDK installation
+which will be used (e. g. `/usr/lib/jvm/java-11`). The minimal required
+version of JDK is 11.
+
+The `build` command accepts a few options:
 
 * `-incremental` or `-i` to skip building modules that have already
   been built,
