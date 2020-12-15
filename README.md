@@ -197,6 +197,16 @@ distribution:
   (`/usr/share/licenses`).
 
 
+Additionally there is `./mbi.sh graph` command which is used to directly
+output the dependency graph of the modules in the `.dot` format. An `.svg`
+diagram can be obtained by executing the following chain of commands:
+
+`./mbi.sh graph | tred | dot -Tsvg > graph.svg`
+
+That creates the following diagram:
+
+![graph](graph.svg?raw=true&sanitize=true)
+
 Copying
 -------
 
