@@ -16,6 +16,7 @@
 package org.fedoraproject.mbi.tool.dist;
 
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 import org.fedoraproject.mbi.Reactor;
 import org.fedoraproject.mbi.dist.DistRequest;
@@ -55,7 +56,8 @@ public class LicensingDist
             }
             if ( licensing.getText() != null )
             {
-                Files.writeString( licensesDir.resolve( project.getName() + "-" + "COPYING" ), licensing.getText() );
+                Files.writeString( licensesDir.resolve( project.getName() + "-" + "COPYING" ), licensing.getText(),
+                                   StandardOpenOption.CREATE_NEW );
             }
         }
     }
