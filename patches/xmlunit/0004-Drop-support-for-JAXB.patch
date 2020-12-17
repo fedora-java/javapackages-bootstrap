@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Tue, 5 Nov 2019 12:14:08 +0100
 Subject: [PATCH 4/4] Drop support for JAXB
 
+Forwarded: not-needed
+
 ---
  xmlunit-core/src/main/java/org/xmlunit/builder/Input.java  | 4 ++--
  .../src/test/java/org/xmlunit/builder/InputTest.java       | 7 -------

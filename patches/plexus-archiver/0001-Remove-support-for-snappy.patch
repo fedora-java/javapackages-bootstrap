@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sat, 23 Sep 2017 11:43:45 +0200
 Subject: [PATCH] Remove support for snappy
 
+Forwarded: not-needed
+
 ---
  .../java/org/codehaus/plexus/archiver/tar/TarArchiver.java     | 3 +--
  .../java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java   | 3 +--

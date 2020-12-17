@@ -3,6 +3,8 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Thu, 31 Oct 2019 14:35:40 +0100
 Subject: [PATCH 1/2] Port to apache-commons-lang3
 
+Forwarded: no
+
 ---
  pom.xml                                                     | 6 +++---
  .../velocity/app/event/implement/EscapeHtmlReference.java   | 4 ++--

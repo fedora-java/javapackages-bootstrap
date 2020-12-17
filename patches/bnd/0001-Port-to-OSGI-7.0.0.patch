@@ -3,6 +3,8 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Thu, 11 Jul 2019 14:29:26 +0200
 Subject: [PATCH] Port to OSGI 7.0.0
 
+Forwarded: not-needed
+
 ---
  .../src/aQute/bnd/junit/ConsoleLogger.java    | 62 +++++++++++++++++++
  1 file changed, 62 insertions(+)

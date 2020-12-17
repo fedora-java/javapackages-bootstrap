@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 18 May 2020 09:44:16 +0200
 Subject: [PATCH 2/2] Port to maven-artifact-transfer 0.11.0
 
+Forwarded: no
+
 ---
  .../apache/maven/plugins/enforcer/RequirePluginVersions.java  | 4 ++--
  .../maven/plugins/enforcer/utils/EnforcerRuleUtils.java       | 4 ++--

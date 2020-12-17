@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 15 May 2020 09:56:26 +0200
 Subject: [PATCH 2/2] Force use of JDK log chute
 
+Forwarded: not-needed
+
 ---
  .../org/apache/velocity/runtime/defaults/velocity.properties    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

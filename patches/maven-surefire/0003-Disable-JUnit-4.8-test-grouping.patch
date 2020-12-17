@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 10:45:30 +0200
 Subject: [PATCH 3/3] Disable JUnit 4.8 test grouping
 
+Forwarded: not-needed
+
 ---
  .../surefire/junitcore/JUnitCoreProvider.java | 25 +++--------------
  .../maven/surefire/testng/TestNGExecutor.java | 27 -------------------

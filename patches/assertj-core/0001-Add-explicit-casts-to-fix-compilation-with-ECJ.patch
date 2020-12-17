@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sun, 22 Nov 2020 17:59:12 +0100
 Subject: [PATCH] Add explicit casts to fix compilation with ECJ
 
+Forwarded: no
+
 ---
  .../java/org/assertj/core/api/AbstractObjectAssert.java   | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)

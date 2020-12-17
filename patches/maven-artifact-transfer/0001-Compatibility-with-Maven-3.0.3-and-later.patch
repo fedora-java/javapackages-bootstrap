@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 12 Oct 2015 13:28:56 +0200
 Subject: [PATCH] Compatibility with Maven 3.0.3 and later
 
+Forwarded: no
+
 ---
  .../Maven31ArtifactRepositoryAdapter.java     | 20 +++++++++++++++++++
  1 file changed, 20 insertions(+)

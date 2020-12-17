@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 30 Nov 2020 11:32:51 +0100
 Subject: [PATCH] Remove use of sun.misc.Unsafe
 
+Forwarded: not-needed
+
 ---
  .../instantiator/util/DefineClassHelper.java  | 36 +------------------
  .../strategy/StdInstantiatorStrategy.java     |  5 ++-

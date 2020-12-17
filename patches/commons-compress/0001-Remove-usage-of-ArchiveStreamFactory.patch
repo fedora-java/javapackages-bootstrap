@@ -3,6 +3,8 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Mon, 17 Aug 2020 13:39:11 +0200
 Subject: [PATCH] Remove usage of ArchiveStreamFactory
 
+Forwarded: not-needed
+
 ---
  .../archivers/zip/ZipSplitReadOnlySeekableByteChannel.java     | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)

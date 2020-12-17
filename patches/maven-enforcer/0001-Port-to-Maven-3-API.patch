@@ -3,6 +3,10 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 12 Oct 2015 15:48:16 +0200
 Subject: [PATCH 1/2] Port to Maven 3 API
 
+Related: https://issues.apache.org/jira/browse/MENFORCER-277
+
+Forwarded: no
+
 ---
  enforcer-rules/pom.xml                        |  6 ++-
  .../enforcer/AbstractBanDependencies.java     | 13 +++--

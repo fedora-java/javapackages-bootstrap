@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Tue, 5 Nov 2019 14:50:23 +0100
 Subject: [PATCH] Fix build with OpenJDK 11
 
+Forwarded: no
+
 ---
  .../src/main/java/org/hamcrest/collection/ArrayMatching.java  | 3 ++-
  .../org/hamcrest/collection/IsArrayContainingInAnyOrder.java  | 2 +-

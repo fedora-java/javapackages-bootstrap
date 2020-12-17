@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 6 Jul 2020 15:00:26 +0200
 Subject: [PATCH 1/2] Fix compilation error with ECJ
 
+Forwarded: no
+
 ---
  .../com/google/common/collect/ImmutableClassToInstanceMap.java  | 2 +-
  .../com/google/common/collect/MutableClassToInstanceMap.java    | 2 +-

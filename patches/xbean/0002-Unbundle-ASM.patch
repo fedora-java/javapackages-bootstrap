@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Thu, 12 Dec 2019 08:51:57 +0100
 Subject: [PATCH 2/3] Unbundle ASM
 
+Forwarded: not-needed
+
 ---
  .../xbean/recipe/XbeanAsmParameterNameLoader.java    | 12 ++++++------
  1 file changed, 6 insertions(+), 6 deletions(-)

@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 12:57:13 +0200
 Subject: [PATCH 3/3] Disable reporting
 
+Forwarded: not-needed
+
 ---
  .../plugin/generator/GeneratorUtils.java      | 62 -------------------
  1 file changed, 62 deletions(-)

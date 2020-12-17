@@ -3,6 +3,8 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Wed, 30 Sep 2020 13:04:45 +0200
 Subject: [PATCH] Remove dependency on jna
 
+Forwarded: not-needed
+
 ---
  .../net/bytebuddy/agent/VirtualMachine.java   | 2275 +++--------------
  1 file changed, 357 insertions(+), 1918 deletions(-)
