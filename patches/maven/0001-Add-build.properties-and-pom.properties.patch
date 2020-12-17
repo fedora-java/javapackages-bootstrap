@@ -15,7 +15,7 @@ index 000000000..1cf421139
 --- /dev/null
 +++ b/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
 @@ -0,0 +1 @@
-+version=3.5.0
++version=3.6.3
 diff --git a/maven-core/src/main/resources/org/apache/maven/messages/build.properties b/maven-core/src/main/resources/org/apache/maven/messages/build.properties
 index 20f386ba0..3ff0e7c9a 100644
 --- a/maven-core/src/main/resources/org/apache/maven/messages/build.properties
