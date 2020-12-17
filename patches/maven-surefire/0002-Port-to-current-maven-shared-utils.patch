@@ -3,6 +3,8 @@ From: Michael Simacek <msimacek@redhat.com>
 Date: Fri, 16 Mar 2018 13:45:01 +0100
 Subject: [PATCH 2/3] Port to current maven-shared-utils
 
+Forwarded: no
+
 ---
  .../plugin/surefire/report/StatelessXmlReporter.java | 12 ++++++------
  1 file changed, 6 insertions(+), 6 deletions(-)

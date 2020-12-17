@@ -3,6 +3,8 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Fri, 11 Sep 2020 12:17:15 +0200
 Subject: [PATCH] Port to maven-shared-utils 3.3.3
 
+Forwarded: no
+
 ---
  .../DefaultForkConfiguration.java             | 26 ++++++++++++-------
  1 file changed, 16 insertions(+), 10 deletions(-)

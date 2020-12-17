@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Wed, 25 Mar 2020 05:22:42 +0100
 Subject: [PATCH] Port to Plexus Utils 3.3.0
 
+Forwarded: no
+
 ---
  .../org/sonatype/plexus/build/incremental/EmptyScanner.java   | 4 ++++
  .../build/incremental/test/TestIncrementalBuildContext.java   | 4 ++++

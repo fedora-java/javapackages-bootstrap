@@ -3,6 +3,8 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Thu, 29 Aug 2019 13:58:24 +0200
 Subject: [PATCH 2/4] Port to hamcrest 2.1
 
+Forwarded: no
+
 ---
  .../src/main/java/org/xmlunit/matchers/CompareMatcher.java   | 3 ---
  .../main/java/org/xmlunit/matchers/EvaluateXPathMatcher.java | 2 --

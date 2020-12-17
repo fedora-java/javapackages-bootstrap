@@ -7,6 +7,9 @@ Generated with:
 
     sed /^%inputstreamctor/d jflex/src/main/jflex/LexScan.flex >LexScan.flex
     java -cp jflex.jar:java_cup-runtime.jar jflex.Main -d bootstrap/jflex --skel jflex/src/main/jflex/skeleton.nested LexScan.flex
+
+Forwarded: not-needed
+
 ---
  bootstrap/jflex/LexScan.java | 3661 ++++++++++++++++++++++++++++++++++
  1 file changed, 3661 insertions(+)

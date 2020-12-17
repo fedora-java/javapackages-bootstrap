@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 12 Oct 2015 13:03:40 +0200
 Subject: [PATCH] Remove Maven 3.0 specific code
 
+Forwarded: not-needed
+
 ---
  .../ArtifactTransitivityFilter.java           | 32 +------------------
  1 file changed, 1 insertion(+), 31 deletions(-)

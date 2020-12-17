@@ -3,6 +3,11 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 27 Mar 2015 06:51:35 +0100
 Subject: [PATCH 1/2] Port to plexus-utils 3.0.21
 
+Fixed in 3.4.0-SNAPSHOT
+
+Bug: https://issues.apache.org/jira/browse/MPLUGINTESTING-69
+Forwarded: no
+
 ---
  .../main/java/org/apache/maven/plugin/testing/AbstractMojoTestCase.java | 2 +-
  pom.xml                                                                 | 2 +-

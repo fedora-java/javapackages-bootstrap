@@ -3,6 +3,8 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Fri, 6 Mar 2020 14:28:05 +0100
 Subject: [PATCH] Port to hamcrest 2.2
 
+Forwarded: no
+
 ---
  .../org/junit/internal/matchers/StacktracePrintingMatcher.java | 3 ---
  .../org/junit/internal/matchers/ThrowableCauseMatcher.java     | 2 --

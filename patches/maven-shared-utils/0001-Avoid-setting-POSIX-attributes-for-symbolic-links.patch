@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Thu, 24 Sep 2020 20:17:56 +0200
 Subject: [PATCH] Avoid setting POSIX attributes for symbolic links
 
+Forwarded: no
+
 ---
  src/main/java/org/apache/maven/shared/utils/io/FileUtils.java | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

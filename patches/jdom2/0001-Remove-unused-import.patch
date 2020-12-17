@@ -3,6 +3,11 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Thu, 12 Dec 2019 09:53:24 +0100
 Subject: [PATCH] Remove unused import
 
+This import is required only for Javadoc generation, but we don't
+generate Javadocs and thus don't need it.
+
+Forwarded: not-needed
+
 ---
  core/src/java/org/jdom2/JDOMConstants.java | 1 -
  1 file changed, 1 deletion(-)

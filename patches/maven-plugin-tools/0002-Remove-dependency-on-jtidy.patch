@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 12:56:04 +0200
 Subject: [PATCH 2/3] Remove dependency on jtidy
 
+Forwarded: not-needed
+
 ---
  .../plugin/generator/GeneratorUtils.java      | 55 +------------------
  1 file changed, 1 insertion(+), 54 deletions(-)

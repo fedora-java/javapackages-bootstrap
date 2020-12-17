@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 30 Nov 2020 12:16:22 +0100
 Subject: [PATCH 2/2] Remove use of sun.misc.Unsafe
 
+Forwarded: not-needed
+
 ---
  .../com/google/common/cache/LongAddables.java |  11 +-
  .../common/hash/LittleEndianByteArray.java    | 109 +--------------

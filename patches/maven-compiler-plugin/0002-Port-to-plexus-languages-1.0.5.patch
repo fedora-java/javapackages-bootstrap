@@ -3,6 +3,8 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Wed, 5 Aug 2020 14:53:53 +0200
 Subject: [PATCH 2/2] Port to plexus-languages 1.0.5
 
+Forwarded: no
+
 ---
  .../java/org/apache/maven/plugin/compiler/CompilerMojo.java     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
