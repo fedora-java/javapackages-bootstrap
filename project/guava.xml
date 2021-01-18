@@ -26,7 +26,7 @@
           [/replaceregexp]
           <!-- Match multi-line annnotations with parentheses. -->
           [replaceregexp flags="sg"]
-            [regexp pattern="@DoNotMock\(.*?\).*?\n"/]
+            [regexp pattern="@[[a-zA-A\.]]*DoNotMock\(.*?\)\n"/]
             [substitution expression=""/]
             [fileset refid="java_source_files"/]
           [/replaceregexp]
