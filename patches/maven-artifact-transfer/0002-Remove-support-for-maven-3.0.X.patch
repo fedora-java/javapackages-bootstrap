@@ -1,6 +1,6 @@
-From 6519dbc4b142129470c2bafd0b5a586fed9f1b3d Mon Sep 17 00:00:00 2001
+From 21bf966408cf1bceaa6603e45958bc30ddae8c83 Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
-Date: Fri, 21 Aug 2020 09:08:47 +0200
+Date: Thu, 14 Jan 2021 18:21:21 +0100
 Subject: [PATCH] Remove support for maven 3.0.X
 
 Forwarded: not-needed
@@ -8,44 +8,45 @@ Forwarded: not-needed
 ---
  .../deploy/internal/DefaultArtifactDeployer.java |  8 +-------
  .../internal/DefaultArtifactInstaller.java       |  8 +-------
- .../internal/DefaultArtifactResolver.java        | 14 +-------------
- .../internal/DefaultDependencyCollector.java     | 16 +---------------
- .../internal/DefaultDependencyResolver.java      | 16 +---------------
+ .../internal/DefaultArtifactResolver.java        | 11 +----------
+ .../internal/DefaultDependencyCollector.java     | 12 +-----------
+ .../internal/DefaultDependencyCollector.java     | 13 +------------
+ .../internal/DefaultDependencyResolver.java      | 13 +------------
  .../internal/DefaultRepositoryManager.java       | 16 +---------------
- 6 files changed, 6 insertions(+), 72 deletions(-)
+ 7 files changed, 7 insertions(+), 74 deletions(-)
 
 diff --git a/src/main/java/org/apache/maven/shared/transfer/artifact/deploy/internal/DefaultArtifactDeployer.java b/src/main/java/org/apache/maven/shared/transfer/artifact/deploy/internal/DefaultArtifactDeployer.java
-index c6f2858..d462cb4 100644
+index 11a268c..9b24335 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/artifact/deploy/internal/DefaultArtifactDeployer.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/artifact/deploy/internal/DefaultArtifactDeployer.java
-@@ -141,13 +141,7 @@ class DefaultArtifactDeployer
+@@ -133,13 +133,7 @@ class DefaultArtifactDeployer implements ArtifactDeployer, Contextualizable
          }
          else
          {
--            org.sonatype.aether.RepositorySystem repositorySystem =
--                            container.lookup( org.sonatype.aether.RepositorySystem.class );
--            
--            org.sonatype.aether.RepositorySystemSession session =
--                (org.sonatype.aether.RepositorySystemSession) Invoker.invoke( buildingRequest, "getRepositorySession" );
--            
+-            org.sonatype.aether.RepositorySystem repositorySystem = container.lookup(
+-                    org.sonatype.aether.RepositorySystem.class );
+-
+-            org.sonatype.aether.RepositorySystemSession session = Invoker.invoke( buildingRequest,
+-                    "getRepositorySession" );
+-
 -            return new Maven30ArtifactDeployer( repositorySystem, session );
 +            throw new UnsupportedOperationException("Maven 3.0.X is not supported");
          }
      }
  }
 diff --git a/src/main/java/org/apache/maven/shared/transfer/artifact/install/internal/DefaultArtifactInstaller.java b/src/main/java/org/apache/maven/shared/transfer/artifact/install/internal/DefaultArtifactInstaller.java
-index f8a56f7..ae16297 100644
+index 238e814..000bdbb 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/artifact/install/internal/DefaultArtifactInstaller.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/artifact/install/internal/DefaultArtifactInstaller.java
-@@ -155,13 +155,7 @@ class DefaultArtifactInstaller
+@@ -150,13 +150,7 @@ class DefaultArtifactInstaller implements ArtifactInstaller, Contextualizable
          }
          else
          {
--            org.sonatype.aether.RepositorySystem repositorySystem =
--                            container.lookup( org.sonatype.aether.RepositorySystem.class );
--            
--            org.sonatype.aether.RepositorySystemSession session =
--                (org.sonatype.aether.RepositorySystemSession) Invoker.invoke( buildingRequest, "getRepositorySession" );
+-            org.sonatype.aether.RepositorySystem repositorySystem = container.lookup(
+-                    org.sonatype.aether.RepositorySystem.class );
+-
+-            org.sonatype.aether.RepositorySystemSession session = Invoker.invoke( buildingRequest,
+-                    "getRepositorySession" );
 -
 -            return new Maven30ArtifactInstaller( repositorySystem, session );
 +            throw new UnsupportedOperationException("Maven 3.0.X is not supported");
@@ -53,86 +54,100 @@ index f8a56f7..ae16297 100644
      }
  }
 diff --git a/src/main/java/org/apache/maven/shared/transfer/artifact/resolve/internal/DefaultArtifactResolver.java b/src/main/java/org/apache/maven/shared/transfer/artifact/resolve/internal/DefaultArtifactResolver.java
-index 9f1826b..dcd8920 100644
+index 83d7517..cfb5b61 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/artifact/resolve/internal/DefaultArtifactResolver.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/artifact/resolve/internal/DefaultArtifactResolver.java
-@@ -156,19 +156,7 @@ class DefaultArtifactResolver
+@@ -146,16 +146,7 @@ class DefaultArtifactResolver implements ArtifactResolver, Contextualizable
          }
          else
          {
--            org.sonatype.aether.RepositorySystem repositorySystem =
--                            container.lookup( org.sonatype.aether.RepositorySystem.class );
--            
--            @SuppressWarnings( "unchecked" )
--            List<org.sonatype.aether.repository.RemoteRepository> aetherRepositories =
--                (List<org.sonatype.aether.repository.RemoteRepository>) Invoker.invoke( RepositoryUtils.class,
--                                                                            "toRepos", List.class,
--                                                                            buildingRequest.getRemoteRepositories() );
+-            org.sonatype.aether.RepositorySystem repositorySystem = container.lookup(
+-                    org.sonatype.aether.RepositorySystem.class );
 -
--            org.sonatype.aether.RepositorySystemSession session =
--                (org.sonatype.aether.RepositorySystemSession) Invoker.invoke( buildingRequest, "getRepositorySession" );
--            
+-            List<org.sonatype.aether.repository.RemoteRepository> aetherRepositories = Invoker.invoke(
+-                    RepositoryUtils.class, "toRepos", List.class, buildingRequest.getRemoteRepositories() );
+-
+-            org.sonatype.aether.RepositorySystemSession session = Invoker.invoke( buildingRequest,
+-                    "getRepositorySession" );
+-
 -            return new Maven30ArtifactResolver( repositorySystem, aetherRepositories, session );
 +            throw new UnsupportedOperationException("Maven 3.0.X is not supported");
          }
  
  
+diff --git a/src/main/java/org/apache/maven/shared/transfer/collection/internal/DefaultDependencyCollector.java b/src/main/java/org/apache/maven/shared/transfer/collection/internal/DefaultDependencyCollector.java
+index e6ce50e..bfb7797 100644
+--- a/src/main/java/org/apache/maven/shared/transfer/collection/internal/DefaultDependencyCollector.java
++++ b/src/main/java/org/apache/maven/shared/transfer/collection/internal/DefaultDependencyCollector.java
+@@ -177,17 +177,7 @@ class DefaultDependencyCollector implements DependencyCollector, Contextualizabl
+         }
+         else
+         {
+-            org.sonatype.aether.RepositorySystem m30RepositorySystem = container.lookup(
+-                    org.sonatype.aether.RepositorySystem.class );
+-
+-            org.sonatype.aether.RepositorySystemSession session = Invoker.invoke( buildingRequest,
+-                    "getRepositorySession" );
+-
+-            List<org.sonatype.aether.repository.RemoteRepository> aetherRepositories = Invoker.invoke(
+-                    RepositoryUtils.class, "toRepos", List.class, buildingRequest.getRemoteRepositories() );
+-
+-            return new Maven30DependencyCollector( m30RepositorySystem, artifactHandlerManager, session,
+-                    aetherRepositories );
++            throw new UnsupportedOperationException("Maven 3.0.X is not supported");
+         }
+ 
+     }
 diff --git a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java
-index 9904731..2933620 100644
+index bf84fc9..c906534 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java
-@@ -198,21 +198,7 @@ class DefaultDependencyCollector implements DependencyCollector, Contextualizabl
+@@ -179,18 +179,7 @@ class DefaultDependencyCollector implements DependencyCollector, Contextualizabl
          }
          else
          {
 -
--            org.sonatype.aether.RepositorySystem m30RepositorySystem =
--                            container.lookup( org.sonatype.aether.RepositorySystem.class );
+-            org.sonatype.aether.RepositorySystem m30RepositorySystem = container.lookup(
+-                    org.sonatype.aether.RepositorySystem.class );
 -
--            org.sonatype.aether.RepositorySystemSession session =
--                (org.sonatype.aether.RepositorySystemSession) Invoker.invoke( buildingRequest, "getRepositorySession" );
+-            org.sonatype.aether.RepositorySystemSession session = Invoker.invoke( buildingRequest,
+-                    "getRepositorySession" );
 -
--            @SuppressWarnings( "unchecked" )
--            List<org.sonatype.aether.repository.RemoteRepository> aetherRepositories =
--                (List<org.sonatype.aether.repository.RemoteRepository>) Invoker.invoke( RepositoryUtils.class,
--                                                                            "toRepos", List.class,
--                                                                            buildingRequest.getRemoteRepositories() );
+-            List<org.sonatype.aether.repository.RemoteRepository> aetherRepositories = Invoker.invoke(
+-                    RepositoryUtils.class, "toRepos", List.class, buildingRequest.getRemoteRepositories() );
 -
 -            return new Maven30DependencyCollector( m30RepositorySystem, artifactHandlerManager, session,
--                                                   aetherRepositories );
+-                    aetherRepositories );
 +            throw new UnsupportedOperationException("Maven 3.0.X is not supported");
          }
  
      }
 diff --git a/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java b/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java
-index f3a6866..715b500 100644
+index 28289a8..34779d2 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java
-@@ -180,21 +180,7 @@ class DefaultDependencyResolver
+@@ -164,18 +164,7 @@ class DefaultDependencyResolver implements DependencyResolver, Contextualizable
          }
          else
          {
--            org.sonatype.aether.RepositorySystem m30RepositorySystem =
--                container.lookup( org.sonatype.aether.RepositorySystem.class );
+-            org.sonatype.aether.RepositorySystem m30RepositorySystem = container.lookup(
+-                    org.sonatype.aether.RepositorySystem.class );
 -
--            org.sonatype.aether.RepositorySystemSession session =
--                (org.sonatype.aether.RepositorySystemSession) Invoker.invoke( buildingRequest, "getRepositorySession" );
+-            org.sonatype.aether.RepositorySystemSession session = Invoker.invoke( buildingRequest,
+-                    "getRepositorySession" );
 -
--            List<org.sonatype.aether.repository.RemoteRepository> aetherRepositories =
--                (List<org.sonatype.aether.repository.RemoteRepository>) Invoker.invoke( RepositoryUtils.class,
--                                                                            "toRepos", 
--                                                                            List.class,
--                                                                            buildingRequest.getRemoteRepositories() );
+-            List<org.sonatype.aether.repository.RemoteRepository> aetherRepositories = Invoker.invoke(
+-                    RepositoryUtils.class, "toRepos", List.class, buildingRequest.getRemoteRepositories() );
 -
 -            return new Maven30DependencyResolver( m30RepositorySystem, artifactHandlerManager, session,
--                                                  aetherRepositories );
+-                    aetherRepositories );
 -
 +            throw new UnsupportedOperationException("Maven 3.0.X is not supported");
          }
      }
  
 diff --git a/src/main/java/org/apache/maven/shared/transfer/repository/internal/DefaultRepositoryManager.java b/src/main/java/org/apache/maven/shared/transfer/repository/internal/DefaultRepositoryManager.java
-index a38dce6..61ed93f 100644
+index c29cc08..add22fa 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/repository/internal/DefaultRepositoryManager.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/repository/internal/DefaultRepositoryManager.java
 @@ -166,21 +166,7 @@ class DefaultRepositoryManager
@@ -142,8 +157,8 @@ index a38dce6..61ed93f 100644
 -            org.sonatype.aether.RepositorySystem m30RepositorySystem =
 -                container.lookup( org.sonatype.aether.RepositorySystem.class );
 -
--            org.sonatype.aether.RepositorySystemSession session =
--                (org.sonatype.aether.RepositorySystemSession) Invoker.invoke( buildingRequest, "getRepositorySession" );
+-            org.sonatype.aether.RepositorySystemSession session = Invoker.invoke( buildingRequest,
+-                    "getRepositorySession" );
 -            
 -            if ( isMaven302() )
 -            {
@@ -159,5 +174,5 @@ index a38dce6..61ed93f 100644
      }
      
 -- 
-2.25.4
+2.29.2
 
