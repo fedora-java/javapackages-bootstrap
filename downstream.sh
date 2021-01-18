@@ -46,7 +46,11 @@ function sub_version()
 function clone()
 {
     if [[ "$type" = git ]]; then
-        git clone --mirror "$url" "upstream/$p.git"
+        if [[ -d "upstream/$p.git" ]]; then
+            git -C "upstream/$p.git" fetch
+        else
+            git clone --mirror "$url" "upstream/$p.git"
+        fi
     elif [[ "$type" = zip ]]; then
         curl -f -o "upstream/$p-$version.zip" "$url"
     else
@@ -57,6 +61,7 @@ function clone()
 
 function prep()
 {
+    rm -rf "downstream/$p"
     if [[ "$type" = git ]]; then
         git clone "upstream/$p.git" "downstream/$p"
         git -C "downstream/$p" checkout -b upstream-base "$ref"
