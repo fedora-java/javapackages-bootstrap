@@ -36,7 +36,7 @@ index 203d2ef731..cbca0cd1d3 100644
            new Supplier<LongAddable>() {
              @Override
 diff --git a/guava/src/com/google/common/hash/LittleEndianByteArray.java b/guava/src/com/google/common/hash/LittleEndianByteArray.java
-index 91f57371d9..56369b7e0b 100644
+index 22ef4f044f..56369b7e0b 100644
 --- a/guava/src/com/google/common/hash/LittleEndianByteArray.java
 +++ b/guava/src/com/google/common/hash/LittleEndianByteArray.java
 @@ -16,7 +16,6 @@ package com.google.common.hash;
@@ -153,16 +153,16 @@ index 91f57371d9..56369b7e0b 100644
      LittleEndianBytes theGetter = JavaLittleEndianBytes.INSTANCE;
 -    try {
 -      /*
--        UnsafeByteArray uses Unsafe.getLong() in an unsupported way, which is known to cause crashes
--        on Android when running in 32-bit mode. For maximum safety, we shouldn't use
--        Unsafe.getLong() at all, but the performance benefit on x86_64 is too great to ignore, so as
--        a compromise, we enable the optimization only on platforms that we specifically know to
--        work.
--
--        In the future, the use of Unsafe.getLong() should be replaced by ByteBuffer.getLong(), which
--        will have an efficient native implementation in JDK 9.
--
--      */
+-       * UnsafeByteArray uses Unsafe.getLong() in an unsupported way, which is known to cause
+-       * crashes on Android when running in 32-bit mode. For maximum safety, we shouldn't use
+-       * Unsafe.getLong() at all, but the performance benefit on x86_64 is too great to ignore, so
+-       * as a compromise, we enable the optimization only on platforms that we specifically know to
+-       * work.
+-       *
+-       * In the future, the use of Unsafe.getLong() should be replaced by ByteBuffer.getLong(),
+-       * which will have an efficient native implementation in JDK 9.
+-       *
+-       */
 -      final String arch = System.getProperty("os.arch");
 -      if ("amd64".equals(arch)) {
 -        theGetter =
@@ -352,10 +352,10 @@ index 4275f8a6ec..da6013abd0 100644
        }
      }
 diff --git a/guava/src/com/google/common/util/concurrent/AbstractFuture.java b/guava/src/com/google/common/util/concurrent/AbstractFuture.java
-index 9cace28eac..992d7580fa 100644
+index 06feb5a214..fa96da4566 100644
 --- a/guava/src/com/google/common/util/concurrent/AbstractFuture.java
 +++ b/guava/src/com/google/common/util/concurrent/AbstractFuture.java
-@@ -142,13 +142,9 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
+@@ -144,13 +144,9 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
  
    static {
      AtomicHelper helper;
@@ -370,7 +370,7 @@ index 9cace28eac..992d7580fa 100644
        // catch absolutely everything and fall through to our 'SafeAtomicHelper'
        // The access control checks that ARFU does means the caller class has to be AbstractFuture
        // instead of SafeAtomicHelper, so we annoyingly define these here
-@@ -179,7 +175,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
+@@ -181,7 +177,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
      // Log after all static init is finished; if an installed logger uses any Futures methods, it
      // shouldn't break in cases where reflection is missing/broken.
      if (thrownAtomicReferenceFieldUpdaterFailure != null) {
@@ -378,7 +378,7 @@ index 9cace28eac..992d7580fa 100644
        log.log(
            Level.SEVERE, "SafeAtomicHelper is broken!", thrownAtomicReferenceFieldUpdaterFailure);
      }
-@@ -1200,89 +1195,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
+@@ -1239,89 +1234,6 @@ public abstract class AbstractFuture<V> extends InternalFutureFailureAccess
      abstract boolean casValue(AbstractFuture<?> future, Object expect, Object update);
    }
  
@@ -469,5 +469,5 @@ index 9cace28eac..992d7580fa 100644
    private static final class SafeAtomicHelper extends AtomicHelper {
      final AtomicReferenceFieldUpdater<Waiter, Thread> waiterThreadUpdater;
 -- 
-2.26.2
+2.29.2
 
