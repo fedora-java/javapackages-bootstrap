@@ -10,10 +10,10 @@ Forwarded: not-needed
  .../internal/DefaultArtifactInstaller.java       |  8 +-------
  .../internal/DefaultArtifactResolver.java        | 11 +----------
  .../internal/DefaultDependencyCollector.java     | 12 +-----------
- .../internal/DefaultDependencyCollector.java     | 13 +------------
+ .../internal/DefaultDependencyCollector.java     | 12 +-----------
  .../internal/DefaultDependencyResolver.java      | 13 +------------
  .../internal/DefaultRepositoryManager.java       | 16 +---------------
- 7 files changed, 7 insertions(+), 74 deletions(-)
+ 7 files changed, 7 insertions(+), 73 deletions(-)
 
 diff --git a/src/main/java/org/apache/maven/shared/transfer/artifact/deploy/internal/DefaultArtifactDeployer.java b/src/main/java/org/apache/maven/shared/transfer/artifact/deploy/internal/DefaultArtifactDeployer.java
 index 11a268c..9b24335 100644
@@ -99,14 +99,13 @@ index e6ce50e..bfb7797 100644
  
      }
 diff --git a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java
-index bf84fc9..c906534 100644
+index fb1e498..dc55484 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/DefaultDependencyCollector.java
-@@ -179,18 +179,7 @@ class DefaultDependencyCollector implements DependencyCollector, Contextualizabl
-         }
+@@ -180,17 +180,7 @@ class DefaultDependencyCollector implements DependencyCollector, Contextualizabl
          else
          {
--
+ 
 -            org.sonatype.aether.RepositorySystem m30RepositorySystem = container.lookup(
 -                    org.sonatype.aether.RepositorySystem.class );
 -
@@ -123,7 +122,7 @@ index bf84fc9..c906534 100644
  
      }
 diff --git a/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java b/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java
-index 28289a8..34779d2 100644
+index 7718c19..6fbcfe6 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/dependencies/resolve/internal/DefaultDependencyResolver.java
 @@ -164,18 +164,7 @@ class DefaultDependencyResolver implements DependencyResolver, Contextualizable

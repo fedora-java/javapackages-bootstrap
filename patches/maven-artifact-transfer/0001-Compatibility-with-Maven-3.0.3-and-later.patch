@@ -47,7 +47,7 @@ index d53a452..9d93f31 100644
 +    }
  }
 diff --git a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java
-index f450dfd..d5716bb 100644
+index 854cf4a..846559a 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java
 @@ -19,6 +19,7 @@ package org.apache.maven.shared.transfer.dependencies.collect.internal;
