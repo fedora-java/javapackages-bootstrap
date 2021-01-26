@@ -10,7 +10,7 @@
       <compiler>
         <addSourceRoot>xmlunit-core/src/main/java</addSourceRoot>
         <addSourceRoot>xmlunit-matchers/src/main/java</addSourceRoot>
-        <addSourceRoot>xmlunit-assertj/src/main/java</addSourceRoot>
+        <addSourceRoot>xmlunit-assertj3/src/main/java</addSourceRoot>
         <excludeSourceClass>org/xmlunit/builder/JaxbBuilder</excludeSourceClass>
       </compiler>
     </build>

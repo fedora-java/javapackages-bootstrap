@@ -906,7 +906,8 @@ MOD velocity-engine
 MOD xbean
   ART org.apache.xbean xbean-reflect
 MOD xmlunit
-  ART org.xmlunit xmlunit-assertj
+  ART org.xmlunit xmlunit-assertj3
+    ALIAS org.xmlunit xmlunit-assertj
     DEP org.xmlunit xmlunit-core
     DEP org.assertj assertj-core
   ART org.xmlunit xmlunit-matchers

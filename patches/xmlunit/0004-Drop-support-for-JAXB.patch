@@ -11,10 +11,10 @@ Forwarded: not-needed
  2 files changed, 2 insertions(+), 9 deletions(-)
 
 diff --git a/xmlunit-core/src/main/java/org/xmlunit/builder/Input.java b/xmlunit-core/src/main/java/org/xmlunit/builder/Input.java
-index 5321ff7..2b13cac 100644
+index 27d9c5a..81165cc 100644
 --- a/xmlunit-core/src/main/java/org/xmlunit/builder/Input.java
 +++ b/xmlunit-core/src/main/java/org/xmlunit/builder/Input.java
-@@ -150,8 +150,8 @@ public class Input {
+@@ -153,8 +153,8 @@ public class Input {
      /**
       * Build a Source from a Jaxb-Object.
       */
@@ -26,7 +26,7 @@ index 5321ff7..2b13cac 100644
  
      /**
 diff --git a/xmlunit-core/src/test/java/org/xmlunit/builder/InputTest.java b/xmlunit-core/src/test/java/org/xmlunit/builder/InputTest.java
-index 83ff38a..fac270d 100644
+index e767f38..98e3fe7 100644
 --- a/xmlunit-core/src/test/java/org/xmlunit/builder/InputTest.java
 +++ b/xmlunit-core/src/test/java/org/xmlunit/builder/InputTest.java
 @@ -31,7 +31,6 @@ import org.w3c.dom.Document;
@@ -37,7 +37,7 @@ index 83ff38a..fac270d 100644
  import org.xmlunit.util.Convert;
  import org.xmlunit.xpath.JAXPXPathEngine;
  
-@@ -148,10 +147,6 @@ public class InputTest {
+@@ -132,10 +131,6 @@ public class InputTest {
          allIsWellFor(s, "furry");
      }
  
@@ -48,15 +48,15 @@ index 83ff38a..fac270d 100644
      @Test public void shouldParseUnknownToSource() throws Exception {
          // from Source
          allIsWellFor(Input.from(Input.fromByteArray(readTestFile()).build()).build());
-@@ -169,8 +164,6 @@ public class InputTest {
+@@ -153,8 +148,6 @@ public class InputTest {
          allIsWellFor(Input.from(new URI("file:" + TestResources.ANIMAL_FILE)).build());
          // from URL
          allIsWellFor(Input.from(new URL("file:" + TestResources.ANIMAL_FILE)).build());
 -        // from Jaxb-Object
 -        allIsWellFor(Input.from(new ComplexNode()).build(), "complexNode");
          // from InputStream
-         FileInputStream is = null;
-         try {
+         try (FileInputStream is = new FileInputStream(TestResources.ANIMAL_FILE)) {
+             allIsWellFor(Input.from(is).build());
 -- 
-2.21.0
+2.29.2
 
