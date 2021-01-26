@@ -3,6 +3,7 @@
     <tag>ASL 2.0</tag>
   </licensing>
   <module>
+    <dependency>commons-lang</dependency>
     <dependency>slf4j</dependency>
     <dependency>guice</dependency>
     <dependency>injection-api</dependency>
