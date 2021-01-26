@@ -10,28 +10,35 @@ Forwarded: not-needed
  1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/xbean-reflect/src/main/java/org/apache/xbean/recipe/XbeanAsmParameterNameLoader.java b/xbean-reflect/src/main/java/org/apache/xbean/recipe/XbeanAsmParameterNameLoader.java
-index 7ced2653..1d4b00bc 100644
+index 20b646c..9e96775 100644
 --- a/xbean-reflect/src/main/java/org/apache/xbean/recipe/XbeanAsmParameterNameLoader.java
 +++ b/xbean-reflect/src/main/java/org/apache/xbean/recipe/XbeanAsmParameterNameLoader.java
-@@ -17,12 +17,12 @@
+@@ -17,11 +17,11 @@
   */
  package org.apache.xbean.recipe;
  
--import org.apache.xbean.asm7.ClassReader;
--import org.apache.xbean.asm7.ClassVisitor;
--import org.apache.xbean.asm7.Label;
--import org.apache.xbean.asm7.MethodVisitor;
--import org.apache.xbean.asm7.Opcodes;
--import org.apache.xbean.asm7.Type;
+-import org.apache.xbean.asm9.ClassReader;
+-import org.apache.xbean.asm9.ClassVisitor;
+-import org.apache.xbean.asm9.Label;
+-import org.apache.xbean.asm9.MethodVisitor;
+-import org.apache.xbean.asm9.Type;
 +import org.objectweb.asm.ClassReader;
 +import org.objectweb.asm.ClassVisitor;
 +import org.objectweb.asm.Label;
 +import org.objectweb.asm.MethodVisitor;
-+import org.objectweb.asm.Opcodes;
 +import org.objectweb.asm.Type;
  
  import java.io.IOException;
  import java.io.InputStream;
+@@ -36,7 +36,7 @@ import java.util.List;
+ import java.util.Map;
+ import java.util.WeakHashMap;
+ 
+-import static org.apache.xbean.asm9.shade.commons.AsmConstants.ASM_VERSION;
++import static org.apache.xbean.asm9.original.commons.AsmConstants.ASM_VERSION;
+ 
+ /**
+  * Implementation of ParameterNameLoader that uses ASM to read the parameter names from the local variable table in the
 -- 
-2.21.0
+2.29.2
 
