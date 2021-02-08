@@ -218,6 +218,7 @@ class BuildExecutor
         else
         {
             System.err.println( "BUILD FAILURE" );
+            System.exit( 1 );
         }
     }
 }
