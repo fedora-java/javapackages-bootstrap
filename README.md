@@ -1,3 +1,5 @@
+![example workflow name](https://github.com/fedora-java/javapackages-bootstrap/workflows/Continuous%20Integration/badge.svg)
+
 Java Packages Bootstrap
 =======================
 

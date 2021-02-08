@@ -17,6 +17,8 @@
 
 set -eu
 
+git="git -c user.name=root -c user.email=root@localhost"
+
 if [[ $# -eq 0 ]]; then
     echo "$0: command must be specified as first argument" >&2
     exit 1
@@ -47,9 +49,9 @@ function clone()
 {
     if [[ "$type" = git ]]; then
         if [[ -d "upstream/$p.git" ]]; then
-            git -C "upstream/$p.git" fetch
+            $git -C "upstream/$p.git" fetch
         else
-            git clone --mirror "$url" "upstream/$p.git"
+            $git clone --mirror "$url" "upstream/$p.git"
         fi
     elif [[ "$type" = zip ]]; then
         curl -f -o "upstream/$p-$version.zip" "$url"
@@ -63,19 +65,19 @@ function prep()
 {
     rm -rf "downstream/$p"
     if [[ "$type" = git ]]; then
-        git clone "upstream/$p.git" "downstream/$p"
-        git -C "downstream/$p" checkout -b upstream-base "$ref"
+        $git clone "upstream/$p.git" "downstream/$p"
+        $git -C "downstream/$p" checkout -b upstream-base "$ref"
     elif [[ "$type" = zip ]]; then
-        git init "downstream/$p"
+        $git init "downstream/$p"
         unzip "upstream/$p-$version.zip" -d "downstream/$p"
         dir="downstream/$p"/$(ls "downstream/$p")
         if [[ -d "$dir" ]]; then
             mv "$dir"/* "downstream/$p"
             rmdir "$dir"
         fi
-        git -C "downstream/$p" add .
-        git -C "downstream/$p" commit -m "Import version $version"
-        git -C "downstream/$p" checkout -b upstream-base
+        $git -C "downstream/$p" add .
+        $git -C "downstream/$p" commit -m "Import version $version"
+        $git -C "downstream/$p" checkout -b upstream-base
     else
         echo "$0: $p: unsupported upstream type: $type" >&2
         exit 1
@@ -97,12 +99,12 @@ function prep()
         rm -rf downstream/testng/src/test/
         >downstream/testng/src/main/resources/org/testng/jquery-*.min.js
     fi
-    git -C "downstream/$p" commit --allow-empty -a -m 'Remove binary files'
-    git -C "downstream/$p" checkout -b downstream upstream-base
+    $git -C "downstream/$p" commit --allow-empty -a -m 'Remove binary files'
+    $git -C "downstream/$p" checkout -b downstream upstream-base
     if [[ -d patches/$p ]]; then
         set patches/$p/*.patch
         set ${@//patches/../../patches}
-        git -C "downstream/$p" am --ignore-whitespace $@
+        $git -C "downstream/$p" am --ignore-whitespace $@
     fi
 }
 
@@ -132,7 +134,7 @@ for p; do
     elif [[ "$cmd" = archive ]]; then
         mkdir -p archive
         rm -f archive/$p.tar archive/$p.tar.xz
-        git -C "downstream/$p" archive --prefix downstream/$p/ upstream-base >archive/$p.tar
+        $git -C "downstream/$p" archive --prefix downstream/$p/ upstream-base >archive/$p.tar
     else
         echo "$0: unknown command: $cmd" >&2
         exit 1
