@@ -5,11 +5,7 @@
   <module>
     <build>
       <compiler>
-        <addSourceRoot>jansi/src/main/java</addSourceRoot>
-        <excludeSourceClass>WindowsAnsiOutputStream</excludeSourceClass>
-        <excludeSourceClass>WindowsAnsiPrintStream</excludeSourceClass>
-        <excludeSourceClass>WindowsSupport</excludeSourceClass>
-        <excludeSourceClass>AnsiMain</excludeSourceClass>
+        <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
     </build>
   </module>
