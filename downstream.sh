@@ -82,7 +82,7 @@ function prep()
         echo "$0: $p: unsupported upstream type: $type" >&2
         exit 1
     fi
-    find "downstream/$p" -type f -regextype posix-egrep -regex '.*\.(class|jar|bar|war|ear|zip|gz|7z|bz2|ttf|so|dll|o|exe)$' -delete
+    find "downstream/$p" -type f -regextype posix-egrep -regex '.*\.(class|jar|bar|war|ear|zip|gz|7z|bz2|ttf|so|dll|o|exe|dylib|jnilib)$' -delete
     if [[ "$p" == bnd ]]; then
         rm -rf downstream/bnd/docs/
     elif [[ "$p" == easymock ]]; then
