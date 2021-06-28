@@ -91,6 +91,8 @@ function prep()
         rm -rf downstream/qdox/bootstrap/
     elif [[ "$p" == mockito ]]; then
         rm -rf downstream/mockito/src/javadoc/
+    elif [[ "$p" == jansi ]]; then
+        rm -rf downstream/jansi/src/main/native/
     elif [[ "$p" == jflex ]]; then
         rm -rf downstream/jflex/jflex/examples/
     elif [[ "$p" == jsoup ]]; then
