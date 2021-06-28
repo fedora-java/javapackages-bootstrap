@@ -1,0 +1,148 @@
+From e88ff42a58ca59da344ab67a427d5391764ae3a2 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 28 Jun 2021 15:53:32 +0200
+Subject: [PATCH] Remove native code
+
+Forwarded: not-needed
+---
+ .../org/fusesource/jansi/AnsiConsole.java     | 106 +-----------------
+ 1 file changed, 2 insertions(+), 104 deletions(-)
+
+diff --git a/src/main/java/org/fusesource/jansi/AnsiConsole.java b/src/main/java/org/fusesource/jansi/AnsiConsole.java
+index facd1d4..54e7539 100644
+--- a/src/main/java/org/fusesource/jansi/AnsiConsole.java
++++ b/src/main/java/org/fusesource/jansi/AnsiConsole.java
+@@ -26,22 +26,10 @@ import java.nio.charset.Charset;
+ import java.nio.charset.UnsupportedCharsetException;
+ import java.util.Locale;
+ 
+-import org.fusesource.jansi.internal.CLibrary;
+-import org.fusesource.jansi.internal.CLibrary.WinSize;
+ import org.fusesource.jansi.io.AnsiOutputStream;
+ import org.fusesource.jansi.io.AnsiProcessor;
+ import org.fusesource.jansi.io.FastBufferedOutputStream;
+ import org.fusesource.jansi.io.WindowsAnsiProcessor;
+-import org.fusesource.jansi.internal.Kernel32.CONSOLE_SCREEN_BUFFER_INFO;
+-
+-import static org.fusesource.jansi.internal.CLibrary.ioctl;
+-import static org.fusesource.jansi.internal.CLibrary.isatty;
+-import static org.fusesource.jansi.internal.Kernel32.GetConsoleMode;
+-import static org.fusesource.jansi.internal.Kernel32.GetStdHandle;
+-import static org.fusesource.jansi.internal.Kernel32.STD_ERROR_HANDLE;
+-import static org.fusesource.jansi.internal.Kernel32.STD_OUTPUT_HANDLE;
+-import static org.fusesource.jansi.internal.Kernel32.SetConsoleMode;
+-import static org.fusesource.jansi.internal.Kernel32.GetConsoleScreenBufferInfo;
+ 
+ /**
+  * Provides consistent access to an ANSI aware console PrintStream or an ANSI codes stripping PrintStream
+@@ -237,24 +225,8 @@ public class AnsiConsole {
+ 
+         String enc = System.getProperty(stdout ? "sun.stdout.encoding" : "sun.stderr.encoding");
+ 
+-        final boolean isatty;
+-        boolean isAtty;
+-        boolean withException;
+-        // Do not use the CLibrary.STDOUT_FILENO to avoid errors in case
+-        // the library can not be loaded on unsupported platforms
+-        final int fd = stdout ? STDOUT_FILENO : STDERR_FILENO;
+-        try {
+-            // If we can detect that stdout is not a tty.. then setup
+-            // to strip the ANSI sequences..
+-            isAtty = isatty(fd) != 0;
+-            withException = false;
+-        } catch (Throwable ignore) {
+-            // These errors happen if the JNI lib is not available for your platform.
+-            // But since we are on ANSI friendly platform, assume the user is on the console.
+-            isAtty = false;
+-            withException = true;
+-        }
+-        isatty = isAtty;
++        final boolean isatty = false;
++        boolean withException = false;
+ 
+         final AnsiOutputStream.WidthSupplier width;
+         final AnsiProcessor processor;
+@@ -267,80 +239,6 @@ public class AnsiConsole {
+             installer = uninstaller = null;
+             width = new AnsiOutputStream.ZeroWidthSupplier();
+         }
+-        else if (IS_WINDOWS) {
+-            final long console = GetStdHandle(stdout ? STD_OUTPUT_HANDLE : STD_ERROR_HANDLE);
+-            final int[] mode = new int[1];
+-            final boolean isConsole = GetConsoleMode(console, mode) != 0;
+-            if (isConsole
+-                    && SetConsoleMode(console, mode[0] | ENABLE_VIRTUAL_TERMINAL_PROCESSING) != 0) {
+-                SetConsoleMode(console, mode[0]); // set it back for now, but we know it works
+-                processor = null;
+-                type = AnsiType.VirtualTerminal;
+-                installer = new AnsiOutputStream.IoRunnable() {
+-                    @Override
+-                    public void run() throws IOException {
+-                        virtualProcessing++;
+-                        SetConsoleMode(console, mode[0] | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+-                    }
+-                };
+-                uninstaller = new AnsiOutputStream.IoRunnable() {
+-                    @Override
+-                    public void run() throws IOException {
+-                        if (--virtualProcessing == 0) {
+-                            SetConsoleMode(console, mode[0]);
+-                        }
+-                    }
+-                };
+-            }
+-            else if ((IS_CONEMU || IS_CYGWIN || IS_MSYSTEM) && !isConsole) {
+-                // ANSI-enabled ConEmu, Cygwin or MSYS(2) on Windows...
+-                processor = null;
+-                type = AnsiType.Native;
+-                installer = uninstaller = null;
+-            }
+-            else {
+-                // On Windows, when no ANSI-capable terminal is used, we know the console does not natively interpret ANSI
+-                // codes but we can use jansi Kernel32 API for console
+-                AnsiProcessor proc;
+-                AnsiType ttype;
+-                try {
+-                    proc = new WindowsAnsiProcessor(out, console);
+-                    ttype = AnsiType.Emulation;
+-                } catch (Throwable ignore) {
+-                    // this happens when the stdout is being redirected to a file.
+-                    // Use the AnsiProcessor to strip out the ANSI escape sequences.
+-                    proc = new AnsiProcessor(out);
+-                    ttype = AnsiType.Unsupported;
+-                }
+-                processor = proc;
+-                type = ttype;
+-                installer = uninstaller = null;
+-            }
+-            width = new AnsiOutputStream.WidthSupplier() {
+-                @Override
+-                public int getTerminalWidth() {
+-                    CONSOLE_SCREEN_BUFFER_INFO info = new CONSOLE_SCREEN_BUFFER_INFO();
+-                    GetConsoleScreenBufferInfo(console, info);
+-                    return info.windowWidth();
+-                }
+-            };
+-        }
+-
+-        // We must be on some Unix variant...
+-        else {
+-            // ANSI-enabled ConEmu, Cygwin or MSYS(2) on Windows...
+-            processor = null;
+-            type = AnsiType.Native;
+-            installer = uninstaller = null;
+-            width = new AnsiOutputStream.WidthSupplier() {
+-                @Override
+-                public int getTerminalWidth() {
+-                    WinSize sz = new WinSize();
+-                    ioctl(fd, CLibrary.TIOCGWINSZ, sz);
+-                    return sz.ws_col;
+-                }
+-            };
+-        }
+ 
+         AnsiMode mode;
+ 
+-- 
+2.31.1
+
