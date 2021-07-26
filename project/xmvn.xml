@@ -35,7 +35,7 @@
       <compiler>
         <release>11</release>
         <addSourceRoot>xmvn-api/src/main/java</addSourceRoot>
-        <addSourceRoot>xmvn-connector-aether/src/main/java</addSourceRoot>
+        <addSourceRoot>xmvn-connector/src/main/java</addSourceRoot>
         <addSourceRoot>xmvn-core/src/main/java</addSourceRoot>
         <addSourceRoot>xmvn-mojo/src/main/java</addSourceRoot>
         <addSourceRoot>xmvn-tools/xmvn-install/src/main/java</addSourceRoot>
