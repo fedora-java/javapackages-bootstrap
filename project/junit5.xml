@@ -17,6 +17,7 @@
         <addSourceRoot>../junit-platform-reporting/src/main/java</addSourceRoot>
         <addSourceRoot>../junit-platform-runner/src/main/java</addSourceRoot>
         <addSourceRoot>../junit-platform-suite-api/src/main/java</addSourceRoot>
+        <addSourceRoot>../junit-platform-suite-commons/src/main/java</addSourceRoot>
       </compiler>
     </build>
   </module>
