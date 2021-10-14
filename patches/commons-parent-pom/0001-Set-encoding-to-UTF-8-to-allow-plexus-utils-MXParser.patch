@@ -1,0 +1,24 @@
+From bc3c6a944160ba2843f116d31326857920ffbdd1 Mon Sep 17 00:00:00 2001
+From: mkoncek <marian.koncek@mailbox.org>
+Date: Thu, 14 Oct 2021 17:10:26 +0200
+Subject: [PATCH] Set encoding to UTF-8 to allow plexus-utils MXParser to parse
+ the file
+
+Forwarded: no
+---
+ pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pom.xml b/pom.xml
+index 6571e70..91a7208 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -1,4 +1,4 @@
+-<?xml version="1.0" encoding="ISO-8859-1"?>
++<?xml version="1.0" encoding="UTF-8"?>
+ <!--
+ 
+    Licensed to the Apache Software Foundation (ASF) under one or more
+-- 
+2.31.1
+
