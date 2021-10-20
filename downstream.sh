@@ -49,6 +49,7 @@ function clone()
 {
     if [[ "$type" = git ]]; then
         if [[ -d "upstream/$p.git" ]]; then
+            $git -C "upstream/$p.git" remote set-url origin "$url"
             $git -C "upstream/$p.git" fetch
         else
             $git clone --mirror "$url" "upstream/$p.git"
