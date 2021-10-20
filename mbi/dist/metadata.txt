@@ -377,8 +377,8 @@ MOD maven-embedder
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.eclipse.sisu org.eclipse.sisu.plexus
-    DEP org.sonatype.plexus plexus-sec-dispatcher
-    DEP org.sonatype.plexus plexus-cipher
+    DEP org.codehaus.plexus plexus-sec-dispatcher
+    DEP org.codehaus.plexus plexus-cipher
     DEP org.slf4j slf4j-api
     DEP commons-cli commons-cli
     DEP org.apache.commons commons-lang3
@@ -584,7 +584,7 @@ MOD maven-settings-builder
     DEP org.codehaus.plexus plexus-interpolation
     DEP org.codehaus.plexus plexus-utils
     DEP org.apache.maven maven-settings
-    DEP org.sonatype.plexus plexus-sec-dispatcher
+    DEP org.codehaus.plexus plexus-sec-dispatcher
 MOD maven-shared-incremental
   ART org.apache.maven.shared maven-shared-incremental
     DEP org.apache.maven maven-plugin-api
@@ -801,7 +801,7 @@ MOD plexus-archiver
     DEP org.apache.commons commons-compress
     DEP org.tukaani xz
 MOD plexus-cipher
-  ART org.sonatype.plexus plexus-cipher
+  ART org.codehaus.plexus plexus-cipher
 MOD plexus-classworlds
   ART org.codehaus.plexus plexus-classworlds
     ALIAS classworlds classworlds
@@ -847,9 +847,9 @@ MOD plexus-resources
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-container-default
 MOD plexus-sec-dispatcher
-  ART org.sonatype.plexus plexus-sec-dispatcher
+  ART org.codehaus.plexus plexus-sec-dispatcher
     DEP org.codehaus.plexus plexus-utils
-    DEP org.sonatype.plexus plexus-cipher
+    DEP org.codehaus.plexus plexus-cipher
 MOD plexus-utils
   ART org.codehaus.plexus plexus-utils
     ALIAS plexus plexus-utils
@@ -861,7 +861,7 @@ MOD servlet-api
     ALIAS javax.servlet servlet-api
     ALIAS org.apache.geronimo.specs geronimo-servlet_3.0_spec
     ALIAS org.eclipse.jetty.orbit javax.servlet
-MOD sisu-build-api
+MOD plexus-build-api
   ART org.sonatype.plexus plexus-build-api
     ALIAS org.sonatype.plexus plexus-build-api tests
     DEP org.codehaus.plexus plexus-utils

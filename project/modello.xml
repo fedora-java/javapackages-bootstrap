@@ -6,7 +6,7 @@
   <module>
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>sisu-build-api</dependency>
+    <dependency>plexus-build-api</dependency>
     <dependency>jsoup</dependency>
     <build>
       <compiler>
@@ -46,7 +46,7 @@
     <dependency>maven-model</dependency>
     <dependency>maven-core</dependency>
     <dependency>plexus-utils</dependency>
-    <dependency>sisu-build-api</dependency>
+    <dependency>plexus-build-api</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>

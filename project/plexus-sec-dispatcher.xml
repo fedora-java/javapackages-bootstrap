@@ -3,6 +3,7 @@
     <tag>ASL 2.0</tag>
   </licensing>
   <module>
+    <dependency>injection-api</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>plexus-cipher</dependency>
@@ -15,6 +16,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
+      <cdc/>
     </build>
   </module>
 </project>

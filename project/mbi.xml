@@ -73,7 +73,7 @@
     <dependency>plexus-component-annotations</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>guava</dependency>
-    <dependency>sisu-build-api</dependency>
+    <dependency>plexus-build-api</dependency>
     <build>
       <compiler>
         <release>11</release>
