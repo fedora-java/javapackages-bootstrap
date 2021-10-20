@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.apache.tools.ant.ExitException;
 import org.apache.tools.ant.Main;
-import org.apache.tools.ant.util.optional.NoExitSecurityManager;
 import org.fedoraproject.mbi.tool.Instruction;
 import org.fedoraproject.mbi.tool.Tool;
 
@@ -85,14 +84,17 @@ public class AntTool
         Exception exception = null;
         PrintStream out = System.out;
         PrintStream err = System.err;
-        SecurityManager securityManager = System.getSecurityManager();
-        System.setSecurityManager( new NoExitSecurityManager() );
         try ( PrintStream log = new PrintStream( Files.newOutputStream( logFile ) ) )
         {
             System.setOut( log );
             System.setErr( log );
-            System.setSecurityManager( new NoExitSecurityManager() );
-            Main.main( new String[] { "-f", buildFile.toString() } );
+            new Main()
+            {
+                protected void exit( int exitCode )
+                {
+                    throw new ExitException( exitCode );
+                }
+            }.startAnt( new String[] { "-f", buildFile.toString() }, null, null );
         }
         catch ( ExitException e )
         {
@@ -103,7 +105,6 @@ public class AntTool
         }
         finally
         {
-            System.setSecurityManager( securityManager );
             System.setOut( out );
             System.setErr( err );
         }
