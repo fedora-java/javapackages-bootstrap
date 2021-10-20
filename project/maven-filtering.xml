@@ -9,7 +9,7 @@
     <dependency>plexus-component-annotations</dependency>
     <dependency>plexus-interpolation</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>sisu-build-api</dependency>
+    <dependency>plexus-build-api</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-settings</dependency>
