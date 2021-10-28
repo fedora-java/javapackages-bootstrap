@@ -802,6 +802,7 @@ MOD plexus-archiver
     DEP org.tukaani xz
 MOD plexus-cipher
   ART org.codehaus.plexus plexus-cipher
+    ALIAS org.sonatype.plexus plexus-cipher
 MOD plexus-classworlds
   ART org.codehaus.plexus plexus-classworlds
     ALIAS classworlds classworlds
