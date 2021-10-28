@@ -848,6 +848,7 @@ MOD plexus-resources
     DEP org.codehaus.plexus plexus-container-default
 MOD plexus-sec-dispatcher
   ART org.codehaus.plexus plexus-sec-dispatcher
+    ALIAS org.sonatype.plexus plexus-sec-dispatcher
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-cipher
 MOD plexus-utils
