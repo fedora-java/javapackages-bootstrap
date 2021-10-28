@@ -8,6 +8,8 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <!-- maven-filtering tests need TestIncrementalBuildContext -->
+        <addSourceRoot>src/test/java</addSourceRoot>
       </compiler>
       <cdc>
         <addComponent>org.sonatype.plexus.build.incremental.DefaultBuildContext|org.sonatype.plexus.build.incremental.BuildContext|default</addComponent>
