@@ -98,9 +98,6 @@ function prep()
         rm -rf downstream/jflex/jflex/examples/
     elif [[ "$p" == jsoup ]]; then
         rm -rf downstream/jsoup/src/test/resources/
-    elif [[ "$p" == testng ]]; then
-        rm -rf downstream/testng/src/test/
-        >downstream/testng/src/main/resources/org/testng/jquery-*.min.js
     fi
     $git -C "downstream/$p" commit --allow-empty -a -m 'Remove binary files'
     $git -C "downstream/$p" checkout -b downstream upstream-base
