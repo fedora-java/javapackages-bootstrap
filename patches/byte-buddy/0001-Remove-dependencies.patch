@@ -1,16 +1,15 @@
-From 4dcae48a47d1c2123d5ec86f3e2d6ef1adab8a83 Mon Sep 17 00:00:00 2001
+From c54cc280a38d05ffe93a1af6922afcefe4d0cf71 Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
-Date: Wed, 30 Sep 2020 13:04:45 +0200
-Subject: [PATCH] Remove dependency on jna
-
-Forwarded: not-needed
+Date: Mon, 1 Nov 2021 12:51:02 +0100
+Subject: [PATCH] Remove dependencies
 
 ---
- .../net/bytebuddy/agent/VirtualMachine.java   | 2275 +++--------------
- 1 file changed, 357 insertions(+), 1918 deletions(-)
+ .../net/bytebuddy/agent/VirtualMachine.java   | 1978 +----------------
+ .../dynamic/loading/ClassInjector.java        |  104 +-
+ 2 files changed, 2 insertions(+), 2080 deletions(-)
 
 diff --git a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java
-index 245581d..80cab63 100644
+index 32fe7d1fad..795d648512 100644
 --- a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java
 +++ b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java
 @@ -15,13 +15,6 @@
@@ -27,7 +26,24 @@ index 245581d..80cab63 100644
  import java.io.*;
  import java.net.ServerSocket;
  import java.net.Socket;
-@@ -227,23 +220,6 @@ public interface VirtualMachine {
+@@ -149,15 +142,7 @@ public interface VirtualMachine {
+          * {@inheritDoc}
+          */
+         public Class<? extends VirtualMachine> run() {
+-            try {
+-                Class.forName("com.sun.jna.Platform");
+-            } catch (ClassNotFoundException exception) {
+-                throw new IllegalStateException("Optional JNA dependency is not available", exception);
+-            }
+-            return System.getProperty("java.vm.name", "").toUpperCase(Locale.US).contains("J9")
+-                    ? ForOpenJ9.class
+-                    : ForHotSpot.class;
+-
++            throw new IllegalStateException("Optional JNA dependency is not available");
+         }
+     }
+ 
+@@ -227,23 +212,6 @@ public interface VirtualMachine {
              this.connection = connection;
          }
  
@@ -51,7 +67,7 @@ index 245581d..80cab63 100644
          /**
           * Attaches to the supplied process id using the supplied connection factory.
           *
-@@ -515,7 +491,6 @@ public interface VirtualMachine {
+@@ -515,7 +483,6 @@ public interface VirtualMachine {
                      /**
                       * {@inheritDoc}
                       */
@@ -59,40 +75,26 @@ index 245581d..80cab63 100644
                      public Connection connect(String processId) throws IOException {
                          File socket = new File(temporaryDirectory, SOCKET_FILE_PREFIX + processId);
                          if (!socket.exists()) {
-@@ -679,1949 +654,413 @@ public interface VirtualMachine {
+@@ -679,1949 +646,6 @@ public interface VirtualMachine {
                   */
                  protected abstract int read(T connection, byte[] buffer) throws IOException;
              }
-+        }
-+    }
- 
+-
 -            /**
 -             * Implements a connection for a Posix socket in JNA.
 -             */
 -            class ForJnaPosixSocket extends OnPersistentByteChannel<Integer> {
-+    /**
-+     * A virtual machine attachment implementation for OpenJ9 or any compatible JVM.
-+     */
-+    class ForOpenJ9 extends AbstractBase {
- 
+-
 -                /**
 -                 * The JNA library to use.
 -                 */
 -                private final PosixLibrary library;
-+        /**
-+         * The temporary folder for attachment files for OpenJ9 VMs.
-+         */
-+        private static final String IBM_TEMPORARY_FOLDER = "com.ibm.tools.attach.directory";
- 
+-
 -                /**
 -                 * The POSIX socket.
 -                 */
 -                private final File socket;
-+        /**
-+         * The socket on which this VM and the target VM communicate.
-+         */
-+        private final Socket socket;
- 
+-
 -                /**
 -                 * Creates a connection for a virtual posix socket implemented in JNA.
 -                 *
@@ -103,39 +105,13 @@ index 245581d..80cab63 100644
 -                    this.library = library;
 -                    this.socket = socket;
 -                }
-+        /**
-+         * Creates a new virtual machine connection for OpenJ9.
-+         *
-+         * @param socket The socket on which this VM and the target VM communicate.
-+         */
-+        protected ForOpenJ9(Socket socket) {
-+            this.socket = socket;
-+        }
- 
+-
 -                @Override
 -                protected Integer connect() {
 -                    int handle = library.socket(1, 1, 0);
-+        /**
-+         * Attaches to the supplied process id.
-+         *
-+         * @param processId  The process id.
-+         * @param timeout    The timeout for establishing the socket connection.
-+         * @param dispatcher The connector to use to communicate with the target VM.
-+         * @return A suitable virtual machine implementation.
-+         * @throws IOException If an IO exception occurs during establishing the connection.
-+         */
-+        public static VirtualMachine attach(String processId, int timeout, Dispatcher dispatcher) throws IOException {
-+            File directory = new File(System.getProperty(IBM_TEMPORARY_FOLDER, dispatcher.getTemporaryFolder()), ".com_ibm_tools_attach");
-+            RandomAccessFile attachLock = new RandomAccessFile(new File(directory, "_attachlock"), "rw");
-+            try {
-+                FileLock attachLockLock = attachLock.getChannel().lock();
-+                try {
-+                    List<Properties> virtualMachines;
-+                    RandomAccessFile master = new RandomAccessFile(new File(directory, "_master"), "rw");
-                     try {
+-                    try {
 -                        PosixLibrary.SocketAddress address = new PosixLibrary.SocketAddress();
-+                        FileLock masterLock = master.getChannel().lock();
-                         try {
+-                        try {
 -                            address.setPath(socket.getAbsolutePath());
 -                            library.connect(handle, address, address.size());
 -                            return handle;
@@ -267,10 +243,7 @@ index 245581d..80cab63 100644
 -                                System.arraycopy(new byte[]{0}, 0, this.path, path.length(), 1);
 -                            } catch (UnsupportedEncodingException exception) {
 -                                throw new IllegalStateException(exception);
-+                            File[] vmFolder = directory.listFiles();
-+                            if (vmFolder == null) {
-+                                throw new IllegalStateException("No descriptor files found in " + directory);
-                             }
+-                            }
 -                        }
 -
 -                        @Override
@@ -325,54 +298,13 @@ index 245581d..80cab63 100644
 -                                    temporaryDirectory = "/tmp";
 -                                } else {
 -                                    temporaryDirectory = memory.getString(0);
-+                            long userId = dispatcher.userId();
-+                            virtualMachines = new ArrayList<Properties>();
-+                            for (File aVmFolder : vmFolder) {
-+                                if (aVmFolder.isDirectory() && dispatcher.getOwnerIdOf(aVmFolder) == userId) {
-+                                    File attachInfo = new File(aVmFolder, "attachInfo");
-+                                    if (attachInfo.isFile()) {
-+                                        Properties virtualMachine = new Properties();
-+                                        FileInputStream inputStream = new FileInputStream(attachInfo);
-+                                        try {
-+                                            virtualMachine.load(inputStream);
-+                                        } finally {
-+                                            inputStream.close();
-+                                        }
-+                                        int targetProcessId = Integer.parseInt(virtualMachine.getProperty("processId"));
-+                                        long targetUserId;
-+                                        try {
-+                                            targetUserId = Long.parseLong(virtualMachine.getProperty("userUid"));
-+                                        } catch (NumberFormatException ignored) {
-+                                            targetUserId = 0L;
-+                                        }
-+                                        if (userId != 0L && targetUserId == 0L) {
-+                                            targetUserId = dispatcher.getOwnerIdOf(attachInfo);
-+                                        }
-+                                        if (targetProcessId == 0L || dispatcher.isExistingProcess(targetProcessId)) {
-+                                            virtualMachines.add(virtualMachine);
-+                                        } else if (userId == 0L || targetUserId == userId) {
-+                                            File[] vmFile = aVmFolder.listFiles();
-+                                            if (vmFile != null) {
-+                                                for (File aVmFile : vmFile) {
-+                                                    if (!aVmFile.delete()) {
-+                                                        aVmFile.deleteOnExit();
-+                                                    }
-+                                                }
-+                                            }
-+                                            if (!aVmFolder.delete()) {
-+                                                aVmFolder.deleteOnExit();
-+                                            }
-+                                        }
-+                                    }
-                                 }
+-                                }
 -                            } finally {
 -                                memory = null;
-                             }
+-                            }
 -                        } else {
 -                            temporaryDirectory = "/tmp";
-+                        } finally {
-+                            masterLock.release();
-                         }
+-                        }
 -                        return new Factory(temporaryDirectory, attempts, pause, timeUnit);
 -                    }
 -
@@ -405,9 +337,7 @@ index 245581d..80cab63 100644
 -                         * @return The amount of bytes written to the buffer.
 -                         */
 -                        long confstr(int name, Pointer buffer, long length);
-+                    } finally {
-+                        master.close();
-                     }
+-                    }
 -                }
 -            }
 -
@@ -473,13 +403,7 @@ index 245581d..80cab63 100644
 -                        throw new IllegalArgumentException("Unknown protocol version: " + protocol);
 -                    } else if (argument.length > 4) {
 -                        throw new IllegalArgumentException("Cannot supply more then four arguments to Windows attach mechanism: " + Arrays.asList(argument));
-+                    Properties target = null;
-+                    for (Properties virtualMachine : virtualMachines) {
-+                        if (virtualMachine.getProperty("processId").equalsIgnoreCase(processId)) {
-+                            target = virtualMachine;
-+                            break;
-+                        }
-                     }
+-                    }
 -                    String name = "\\\\.\\pipe\\javatool" + Math.abs(random.nextInt() + 1);
 -                    WinNT.HANDLE pipe = Kernel32.INSTANCE.CreateNamedPipe(name,
 -                            WinBase.PIPE_ACCESS_INBOUND,
@@ -491,11 +415,8 @@ index 245581d..80cab63 100644
 -                            null);
 -                    if (pipe == null) {
 -                        throw new Win32Exception(Native.getLastError());
-+                    if (target == null) {
-+                        throw new IllegalStateException("Could not locate target process info in " + directory);
-                     }
-+                    ServerSocket serverSocket = new ServerSocket(0);
-                     try {
+-                    }
+-                    try {
 -                        WinDef.LPVOID data = attachLibrary.allocate_remote_argument(process,
 -                                name,
 -                                argument.length < 1 ? null : argument[0],
@@ -505,19 +426,12 @@ index 245581d..80cab63 100644
 -                        if (data == null) {
 -                            throw new Win32Exception(Native.getLastError());
 -                        }
-+                        serverSocket.setSoTimeout(timeout);
-+                        File receiver = new File(directory, target.getProperty("vmId"));
-+                        String key = Long.toHexString(new SecureRandom().nextLong());
-+                        File reply = new File(receiver, "replyInfo");
-                         try {
+-                        try {
 -                            WinNT.HANDLE thread = library.CreateRemoteThread(process, null, 0, code.getPointer(), data.getPointer(), null, null);
 -                            if (thread == null) {
 -                                throw new Win32Exception(Native.getLastError());
-+                            if (reply.createNewFile()) {
-+                                dispatcher.setPermissions(reply, 0600);
-                             }
-+                            FileOutputStream outputStream = new FileOutputStream(reply);
-                             try {
+-                            }
+-                            try {
 -                                int result = Kernel32.INSTANCE.WaitForSingleObject(thread, WinBase.INFINITE);
 -                                if (result != 0) {
 -                                    throw new Win32Exception(result);
@@ -526,7 +440,7 @@ index 245581d..80cab63 100644
 -                                if (!library.GetExitCodeThread(thread, exitCode)) {
 -                                    throw new Win32Exception(Native.getLastError());
 -                                } else if (exitCode.getValue() != 0) {
--                                    throw new IllegalStateException("Target could not dispatch command successfully");
+-                                    throw new IllegalStateException("Target VM could not dispatch command successfully: " + exitCode.getValue());
 -                                }
 -                                if (!Kernel32.INSTANCE.ConnectNamedPipe(pipe, null)) {
 -                                    int code = Native.getLastError();
@@ -535,11 +449,7 @@ index 245581d..80cab63 100644
 -                                    }
 -                                }
 -                                return new NamedPipeResponse(pipe);
-+                                outputStream.write(key.getBytes("UTF-8"));
-+                                outputStream.write("\n".getBytes("UTF-8"));
-+                                outputStream.write(Long.toString(serverSocket.getLocalPort()).getBytes("UTF-8"));
-+                                outputStream.write("\n".getBytes("UTF-8"));
-                             } finally {
+-                            } finally {
 -                                if (!Kernel32.INSTANCE.CloseHandle(thread)) {
 -                                    throw new Win32Exception(Native.getLastError());
 -                                }
@@ -547,8 +457,7 @@ index 245581d..80cab63 100644
 -                        } finally {
 -                            if (!library.VirtualFreeEx(process, data.getPointer(), 0, MEM_RELEASE)) {
 -                                throw new Win32Exception(Native.getLastError());
-+                                outputStream.close();
-                             }
+-                            }
 -                        }
 -                    } catch (Throwable throwable) {
 -                        if (!Kernel32.INSTANCE.CloseHandle(pipe)) {
@@ -1547,8 +1456,7 @@ index 245581d..80cab63 100644
 -                        boolean exited = false;
 -                        String line = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8")).readLine();
 -                        do {
-+                            Map<RandomAccessFile, FileLock> locks = new HashMap<RandomAccessFile, FileLock>();
-                             try {
+-                            try {
 -                                if (process.exitValue() != 0) {
 -                                    throw new IllegalStateException("Error while executing stat");
 -                                }
@@ -1560,20 +1468,7 @@ index 245581d..80cab63 100644
 -                                } catch (InterruptedException exception) {
 -                                    Thread.currentThread().interrupt();
 -                                    throw new IllegalStateException(exception);
-+                                String pid = Long.toString(dispatcher.pid());
-+                                for (Properties virtualMachine : virtualMachines) {
-+                                    if (!virtualMachine.getProperty("processId").equalsIgnoreCase(pid)) {
-+                                        String attachNotificationSync = virtualMachine.getProperty("attachNotificationSync");
-+                                        RandomAccessFile syncFile = new RandomAccessFile(attachNotificationSync == null
-+                                                ? new File(directory, "attachNotificationSync")
-+                                                : new File(attachNotificationSync), "rw");
-+                                        try {
-+                                            locks.put(syncFile, syncFile.getChannel().lock());
-+                                        } catch (IOException ignored) {
-+                                            syncFile.close();
-+                                        }
-+                                    }
-                                 }
+-                                }
 -                            }
 -                        } while (--attempts > 0);
 -                        if (!exited) {
@@ -1633,19 +1528,7 @@ index 245581d..80cab63 100644
 -                                    break;
 -                                } else {
 -                                    throw exception;
-+                                int notifications = 0;
-+                                File[] item = directory.listFiles();
-+                                if (item != null) {
-+                                    for (File anItem : item) {
-+                                        String name = anItem.getName();
-+                                        if (!name.startsWith(".trash_")
-+                                                && !name.equalsIgnoreCase("_attachlock")
-+                                                && !name.equalsIgnoreCase("_master")
-+                                                && !name.equalsIgnoreCase("_notifier")) {
-+                                            notifications += 1;
-+                                        }
-+                                    }
-                                 }
+-                                }
 -                            }
 -                        }
 -                    } finally {
@@ -1935,22 +1818,10 @@ index 245581d..80cab63 100644
 -                                    mutex = library.OpenMutex(WinNT.STANDARD_RIGHTS_REQUIRED | WinNT.SYNCHRONIZE | 0x0001, false, CREATION_MUTEX_NAME);
 -                                    if (mutex == null) {
 -                                        throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
-+                                boolean global = Boolean.parseBoolean(target.getProperty("globalSemaphore"));
-+                                dispatcher.incrementSemaphore(directory, "_notifier", global, notifications);
-+                                try {
-+                                    Socket socket = serverSocket.accept();
-+                                    String answer = new String(read(socket), "UTF-8");
-+                                    if (answer.contains(' ' + key + ' ')) {
-+                                        return new ForOpenJ9(socket);
-+                                    } else {
-+                                        socket.close();
-+                                        throw new IllegalStateException("Unexpected answered to attachment: " + answer);
-                                     }
+-                                    }
 -                                } else {
 -                                    throw new Win32Exception(lastError);
-+                                } finally {
-+                                    dispatcher.decrementSemaphore(directory, "_notifier", global, notifications);
-                                 }
+-                                }
 -                            }
 -                            int result = Kernel32.INSTANCE.WaitForSingleObject(mutex, 2000);
 -                            switch (result) {
@@ -1958,9 +1829,7 @@ index 245581d..80cab63 100644
 -                                case WinError.WAIT_TIMEOUT:
 -                                    throw new Win32Exception(result);
 -                                default:
-+                            } finally {
-+                                for (Map.Entry<RandomAccessFile, FileLock> entry : locks.entrySet()) {
-                                     try {
+-                                    try {
 -                                        String target = (global ? "Global\\" : "")
 -                                                + (directory.getAbsolutePath() + '_' + name).replaceAll("[^a-zA-Z0-9_]", "")
 -                                                + "_semaphore";
@@ -1985,62 +1854,27 @@ index 245581d..80cab63 100644
 -                                    } finally {
 -                                        if (!library.ReleaseMutex(mutex)) {
 -                                            throw new Win32Exception(Native.getLastError());
-+                                        try {
-+                                            entry.getValue().release();
-+                                        } finally {
-+                                            entry.getKey().close();
-                                         }
-+                                    } catch (Throwable ignored) {
-+                                        /* do nothing */
-                                     }
-+                                }
-                             }
-                         } finally {
+-                                        }
+-                                    }
+-                            }
+-                        } finally {
 -                            securityAttributes = null;
-+                            if (!reply.delete()) {
-+                                reply.deleteOnExit();
-+                            }
-                         }
-                     } finally {
+-                        }
+-                    } finally {
 -                        securityDescriptor = null;
-+                        serverSocket.close();
-                     }
-+                } finally {
-+                    attachLockLock.release();
-                 }
-+            } finally {
-+                attachLock.close();
-+            }
-+        }
- 
+-                    }
+-                }
+-
 -                /**
 -                 * A library for interacting with Windows.
 -                 */
 -                protected interface WindowsLibrary extends StdCallLibrary {
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public Properties getSystemProperties() throws IOException {
-+            write(socket, "ATTACH_GETSYSTEMPROPERTIES".getBytes("UTF-8"));
-+            Properties properties = new Properties();
-+            properties.load(new ByteArrayInputStream(read(socket)));
-+            return properties;
-+        }
- 
+-
 -                    /**
 -                     * Indicates that a semaphore requires all access rights.
 -                     */
 -                    int SEMAPHORE_ALL_ACCESS = 0x1F0003;
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public Properties getAgentProperties() throws IOException {
-+            write(socket, "ATTACH_GETAGENTPROPERTIES".getBytes("UTF-8"));
-+            Properties properties = new Properties();
-+            properties.load(new ByteArrayInputStream(read(socket)));
-+            return properties;
-+        }
- 
+-
 -                    /**
 -                     * Opens an existing semaphore.
 -                     *
@@ -2051,19 +1885,7 @@ index 245581d..80cab63 100644
 -                     */
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinNT.HANDLE OpenSemaphoreW(int access, boolean inheritHandle, String name);
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public void loadAgent(String jarFile, String argument) throws IOException {
-+            write(socket, ("ATTACH_LOADAGENT(instrument," + jarFile + '=' + (argument == null ? "" : argument) + ')').getBytes("UTF-8"));
-+            String answer = new String(read(socket), "UTF-8");
-+            if (answer.startsWith("ATTACH_ERR")) {
-+                throw new IllegalStateException("Target VM failed loading agent: " + answer);
-+            } else if (!answer.startsWith("ATTACH_ACK") && !answer.startsWith("ATTACH_RESULT=")) {
-+                throw new IllegalStateException("Unexpected response: " + answer);
-+            }
-+        }
- 
+-
 -                    /**
 -                     * Creates a new semaphore.
 -                     *
@@ -2075,19 +1897,7 @@ index 245581d..80cab63 100644
 -                     */
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinNT.HANDLE CreateSemaphoreW(WinBase.SECURITY_ATTRIBUTES securityAttributes, long count, long maximumCount, String name);
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public void loadAgentPath(String path, String argument) throws IOException {
-+            write(socket, ("ATTACH_LOADAGENTPATH(" + path + (argument == null ? "" : (',' + argument)) + ')').getBytes("UTF-8"));
-+            String answer = new String(read(socket), "UTF-8");
-+            if (answer.startsWith("ATTACH_ERR")) {
-+                throw new IllegalStateException("Target VM failed loading native agent: " + answer);
-+            } else if (!answer.startsWith("ATTACH_ACK") && !answer.startsWith("ATTACH_RESULT=")) {
-+                throw new IllegalStateException("Unexpected response: " + answer);
-+            }
-+        }
- 
+-
 -                    /**
 -                     * Releases the semaphore.
 -                     *
@@ -2098,19 +1908,7 @@ index 245581d..80cab63 100644
 -                     */
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    boolean ReleaseSemaphore(WinNT.HANDLE handle, long count, Long previousCount);
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public void loadAgentLibrary(String library, String argument) throws IOException {
-+            write(socket, ("ATTACH_LOADAGENTLIBRARY(" + library + (argument == null ? "" : (',' + argument)) + ')').getBytes("UTF-8"));
-+            String answer = new String(read(socket), "UTF-8");
-+            if (answer.startsWith("ATTACH_ERR")) {
-+                throw new IllegalStateException("Target VM failed loading native library: " + answer);
-+            } else if (!answer.startsWith("ATTACH_ACK") && !answer.startsWith("ATTACH_RESULT=")) {
-+                throw new IllegalStateException("Unexpected response: " + answer);
-+            }
-+        }
- 
+-
 -                    /**
 -                     * Create or opens a mutex.
 -                     *
@@ -2121,22 +1919,7 @@ index 245581d..80cab63 100644
 -                     */
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinNT.HANDLE CreateMutex(SecurityAttributes attributes, boolean owner, String name);
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public void startManagementAgent(Properties properties) throws IOException {
-+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-+            properties.store(outputStream, null);
-+            write(socket, "ATTACH_START_MANAGEMENT_AGENT".getBytes("UTF-8"));
-+            write(socket, outputStream.toByteArray());
-+            String answer = new String(read(socket), "UTF-8");
-+            if (answer.startsWith("ATTACH_ERR")) {
-+                throw new IllegalStateException("Target VM could not start management agent: " + answer);
-+            } else if (!answer.startsWith("ATTACH_ACK") && !answer.startsWith("ATTACH_RESULT=")) {
-+                throw new IllegalStateException("Unexpected response: " + answer);
-+            }
-+        }
- 
+-
 -                    /**
 -                     * Opens an existing object.
 -                     *
@@ -2147,23 +1930,7 @@ index 245581d..80cab63 100644
 -                     */
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinNT.HANDLE OpenMutex(int access, boolean inherit, String name);
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public String startLocalManagementAgent() throws IOException {
-+            write(socket, "ATTACH_START_LOCAL_MANAGEMENT_AGENT".getBytes("UTF-8"));
-+            String answer = new String(read(socket), "UTF-8");
-+            if (answer.startsWith("ATTACH_ERR")) {
-+                throw new IllegalStateException("Target VM could not start management agent: " + answer);
-+            } else if (answer.startsWith("ATTACH_ACK")) {
-+                return answer.substring("ATTACH_ACK".length());
-+            } else if (answer.startsWith("ATTACH_RESULT=")) {
-+                return answer.substring("ATTACH_RESULT=".length());
-+            } else {
-+                throw new IllegalStateException("Unexpected response: " + answer);
-+            }
-+        }
- 
+-
 -                    /**
 -                     * Releases the supplied mutex.
 -                     *
@@ -2172,18 +1939,7 @@ index 245581d..80cab63 100644
 -                     */
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    boolean ReleaseMutex(WinNT.HANDLE handle);
-+        /**
-+         * {@inheritDoc}
-+         */
-+        public void detach() throws IOException {
-+            try {
-+                write(socket, "ATTACH_DETACH".getBytes("UTF-8"));
-+                read(socket); // The answer is intentionally ignored.
-+            } finally {
-+                socket.close();
-+            }
-+        }
- 
+-
 -                    /**
 -                     * A structure representing a mutex's security attributes.
 -                     */
@@ -2211,72 +1967,23 @@ index 245581d..80cab63 100644
 -                            return Arrays.asList("length", "securityDescriptor", "inherit");
 -                        }
 -                    }
-+        /**
-+         * Writes the supplied value to the target socket.
-+         *
-+         * @param socket The socket to write to.
-+         * @param value  The value being written.
-+         * @throws IOException If an I/O exception occurs.
-+         */
-+        private static void write(Socket socket, byte[] value) throws IOException {
-+            socket.getOutputStream().write(value);
-+            socket.getOutputStream().write(0);
-+            socket.getOutputStream().flush();
-+        }
-+
-+        /**
-+         * Reads a {@code '\0'}-terminated value from the target socket.
-+         *
-+         * @param socket The socket to read from.
-+         * @return The value that was read.
-+         * @throws IOException If an I/O exception occurs.
-+         */
-+        private static byte[] read(Socket socket) throws IOException {
-+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-+            byte[] buffer = new byte[1024];
-+            int length;
-+            while ((length = socket.getInputStream().read(buffer)) != -1) {
-+                if (length > 0 && buffer[length - 1] == 0) {
-+                    outputStream.write(buffer, 0, length - 1);
-+                    break;
-+                } else {
-+                    outputStream.write(buffer, 0, length);
-                 }
-+            }
-+            return outputStream.toByteArray();
-+        }
- 
+-                }
+-
 -                /**
 -                 * A handle for an attachment which is represented by a pair of handles.
 -                 */
 -                protected static class AttachmentHandle implements Closeable {
-+        /**
-+         * A dispatcher for native operations being used for communication with an OpenJ9 virtual machine.
-+         */
-+        public interface Dispatcher {
- 
+-
 -                    /**
 -                     * The parent handle.
 -                     */
 -                    private final WinNT.HANDLE parent;
-+            /**
-+             * Returns this machine's temporary folder.
-+             *
-+             * @return The temporary folder.
-+             */
-+            String getTemporaryFolder();
- 
+-
 -                    /**
 -                     * The child handle.
 -                     */
 -                    private final WinNT.HANDLE child;
-+            /**
-+             * Returns the process id of this process.
-+             *
-+             * @return The process id of this process.
-+             */
-+            int pid();
- 
+-
 -                    /**
 -                     * Creates a new attachment handle.
 -                     *
@@ -2287,13 +1994,7 @@ index 245581d..80cab63 100644
 -                        this.parent = parent;
 -                        this.child = child;
 -                    }
-+            /**
-+             * Returns the user id of this process.
-+             *
-+             * @return The user id of this process
-+             */
-+            int userId();
- 
+-
 -                    /**
 -                     * Returns the handle on which signals are to be sent.
 -                     *
@@ -2302,14 +2003,7 @@ index 245581d..80cab63 100644
 -                    protected WinNT.HANDLE getHandle() {
 -                        return child;
 -                    }
-+            /**
-+             * Returns {@code true} if the supplied process id is a running process.
-+             *
-+             * @param processId The process id to evaluate.
-+             * @return {@code true} if the supplied process id is currently running.
-+             */
-+            boolean isExistingProcess(int processId);
- 
+-
 -                    /**
 -                     * {@inheritDoc}
 -                     */
@@ -2328,44 +2022,198 @@ index 245581d..80cab63 100644
 -                    }
 -                }
 -            }
-+            /**
-+             * Returns the user id of the owner of the supplied file.
-+             *
-+             * @param file The file for which to locate the owner.
-+             * @return The owner id of the supplied file.
-+             */
-+            int getOwnerIdOf(File file);
-+
-+            /**
-+             * Sets permissions for the supplied file.
-+             *
-+             * @param file        The file for which to set the permissions.
-+             * @param permissions The permission bits to set.
-+             */
-+            void setPermissions(File file, int permissions);
-+
-+            /**
-+             * Increments a semaphore.
-+             *
-+             * @param directory The sempahore's control directory.
-+             * @param name      The semaphore's name.
-+             * @param global    {@code true} if the semaphore is in the global namespace (only applicable on Windows).
-+             * @param count     The amount of increments.
-+             */
-+            void incrementSemaphore(File directory, String name, boolean global, int count);
-+
-+            /**
-+             * Decrements a semaphore.
-+             *
-+             * @param directory The sempahore's control directory.
-+             * @param name      The semaphore's name.
-+             * @param global    {@code true} if the semaphore is in the global namespace (only applicable on Windows).
-+             * @param count     The amount of decrements.
-+             */
-+            void decrementSemaphore(File directory, String name, boolean global, int count);
+         }
+     }
+ }
+diff --git a/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java b/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java
+index 279b6497d2..a63ce63d5c 100644
+--- a/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java
++++ b/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java
+@@ -15,8 +15,6 @@
+  */
+ package net.bytebuddy.dynamic.loading;
+ 
+-import com.sun.jna.*;
+-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+ import net.bytebuddy.ByteBuddy;
+ import net.bytebuddy.ClassFileVersion;
+ import net.bytebuddy.asm.MemberRemoval;
+@@ -507,7 +505,6 @@ public interface ClassInjector {
+                 /**
+                  * {@inheritDoc}
+                  */
+-                @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception should not be rethrown but trigger a fallback")
+                 public Initializable run() {
+                     try {
+                         if (JavaModule.isSupported()) {
+@@ -583,7 +580,6 @@ public interface ClassInjector {
+                  * @return A direct dispatcher for class injection.
+                  * @throws Exception If the creation is impossible.
+                  */
+-                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit caller responsibility")
+                 protected static Initializable make() throws Exception {
+                     Method getDefinedPackage;
+                     if (JavaModule.isSupported()) { // Avoid accidental lookup of method with same name in Java 8 J9 VM.
+@@ -888,7 +884,6 @@ public interface ClassInjector {
+                  * @return An indirect dispatcher for class creation.
+                  * @throws Exception If the dispatcher cannot be created.
+                  */
+-                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit caller responsibility")
+                 protected static Initializable make() throws Exception {
+                     if (Boolean.getBoolean(UsingUnsafe.SAFE_PROPERTY)) {
+                         return new Initializable.Unavailable("Use of Unsafe was disabled by system property");
+@@ -1150,7 +1145,6 @@ public interface ClassInjector {
+                  * @return An appropriate initializable.
+                  * @throws Exception If the injector cannot be created.
+                  */
+-                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit caller responsibility")
+                 protected static Initializable make() throws Exception {
+                     if (Boolean.getBoolean(UsingUnsafe.SAFE_PROPERTY)) {
+                         return new Initializable.Unavailable("Use of Unsafe was disabled by system property");
+@@ -1888,7 +1882,6 @@ public interface ClassInjector {
+                 /**
+                  * {@inheritDoc}
+                  */
+-                @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception should not be rethrown but trigger a fallback")
+                 public Initializable run() {
+                     if (Boolean.getBoolean(SAFE_PROPERTY)) {
+                         return new Unavailable("Use of Unsafe was disabled by system property");
+@@ -2093,7 +2086,6 @@ public interface ClassInjector {
+              *
+              * @param accessResolver The access resolver to use.
+              */
+-            @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception is captured to trigger lazy error upon use.")
+             public Factory(AccessResolver accessResolver) {
+                 Dispatcher.Initializable dispatcher;
+                 if (DISPATCHER.isAvailable()) {
+@@ -2151,7 +2143,6 @@ public interface ClassInjector {
+              *                        other classes within this class's module.
+              * @return An appropriate injection strategy.
+              */
+-            @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception intends to trigger disabled injection strategy.")
+             public static Factory resolve(Instrumentation instrumentation, boolean local) {
+                 if (ClassInjector.UsingUnsafe.isAvailable() || !JavaModule.isSupported()) {
+                     return new Factory();
+@@ -2733,85 +2724,18 @@ public interface ClassInjector {
+                 /**
+                  * {@inheritDoc}
+                  */
+-                @SuppressWarnings("deprecation")
+                 public Dispatcher run() {
+                     if (System.getProperty("java.vm.name", "").toUpperCase(Locale.US).contains("J9")) {
+                         return new Unavailable("J9 does not support JNA-based class definition");
+                     }
+                     try {
+-                        Map<String, Object> options = new HashMap<String, Object>();
+-                        options.put(Library.OPTION_ALLOW_OBJECTS, Boolean.TRUE);
+-                        if (Platform.isWindows() && !Platform.is64Bit()) {
+-                            options.put(Library.OPTION_FUNCTION_MAPPER, Windows32BitFunctionMapper.INSTANCE);
+-                        }
+-                        return new Enabled(Native.loadLibrary("jvm", Jvm.class, options));
++                        return new Unavailable("JNA is not available");
+                     } catch (Throwable throwable) {
+                         return new Unavailable(throwable.getMessage());
+                     }
+                 }
+             }
+ 
+-            /**
+-             * A mapper for 32-bit Windows functions where names are defined with different convention.
+-             */
+-            enum Windows32BitFunctionMapper implements FunctionMapper {
+-
+-                /**
+-                 * The singleton instance.
+-                 */
+-                INSTANCE;
+-
+-                /**
+-                 * {@inheritDoc}
+-                 */
+-                public String getFunctionName(NativeLibrary library, Method method) {
+-                    if (method.getName().equals("JVM_DefineClass")) {
+-                        return "_JVM_DefineClass@24";
+-                    }
+-                    return method.getName();
+-                }
+-            }
+-
+-            /**
+-             * An enabled dispatcher for JNA-based class injection.
+-             */
+-            @HashCodeAndEqualsPlugin.Enhance
+-            class Enabled implements Dispatcher {
+-
+-                /**
+-                 * The JNA-dispatcher to use for invoking JNI's class definition utilities.
+-                 */
+-                private final Jvm jvm;
+-
+-                /**
+-                 * Creates a new dispatcher for a JNI's class definition utilities.
+-                 *
+-                 * @param jvm The JNA-dispatcher to use for invoking JNI's class definition utilities.
+-                 */
+-                protected Enabled(Jvm jvm) {
+-                    this.jvm = jvm;
+-                }
+-
+-                /**
+-                 * {@inheritDoc}
+-                 */
+-                public boolean isAvailable() {
+-                    return true;
+-                }
+-
+-                /**
+-                 * {@inheritDoc}
+-                 */
+-                public Class<?> defineClass(ClassLoader classLoader, String name, byte[] binaryRepresentation, ProtectionDomain protectionDomain) {
+-                    return jvm.JVM_DefineClass(JNIEnv.CURRENT,
+-                            name.replace('.', '/'),
+-                            classLoader,
+-                            binaryRepresentation,
+-                            binaryRepresentation.length,
+-                            protectionDomain);
+-                }
+-            }
+-
+             /**
+              * An unavailable dispatcher for JNA-based class injection.
+              */
+@@ -2846,32 +2770,6 @@ public interface ClassInjector {
+                     throw new UnsupportedOperationException("JNA is not available and JNA-based injection cannot be used: " + error);
+                 }
+             }
+-
+-            /**
+-             * A JNA dispatcher for the JVM's <i>JVM_DefineClass</i> method.
+-             */
+-            interface Jvm extends Library {
+-
+-                /**
+-                 * Defines a new class into a given class loader.
+-                 *
+-                 * @param env                  The JNI environment.
+-                 * @param name                 The internal name of the class.
+-                 * @param classLoader          The class loader to inject into or {@code null} if injecting into the bootstrap loader.
+-                 * @param binaryRepresentation The class's binary representation.
+-                 * @param length               The length of the class's binary representation.
+-                 * @param protectionDomain     The protection domain or {@code null} if no explicit protection domain should be used.
+-                 * @return The class that was defined.
+-                 * @throws LastErrorException If an error occurs during injection.
+-                 */
+-                @SuppressWarnings("checkstyle:methodname")
+-                Class<?> JVM_DefineClass(JNIEnv env,
+-                                         String name,
+-                                         ClassLoader classLoader,
+-                                         byte[] binaryRepresentation,
+-                                         int length,
+-                                         ProtectionDomain protectionDomain) throws LastErrorException;
+-            }
          }
      }
  }
 -- 
-2.26.2
+2.31.1
 
