@@ -85,19 +85,19 @@ function prep()
     fi
     find "downstream/$p" -type f -regextype posix-egrep -regex '.*\.(class|jar|bar|war|ear|zip|gz|7z|bz2|ttf|so|dll|o|exe|dylib|jnilib)$' -delete
     if [[ "$p" == bnd ]]; then
-        rm -rf downstream/bnd/docs/
+        rm -r downstream/bnd/docs/
     elif [[ "$p" == easymock ]]; then
-        rm -rf downstream/easymock/website/js/vendor/
+        rm -r downstream/easymock/website/js/vendor/
     elif [[ "$p" == qdox ]]; then
-        rm -rf downstream/qdox/bootstrap/
+        rm -r downstream/qdox/bootstrap/
     elif [[ "$p" == mockito ]]; then
-        rm -rf downstream/mockito/src/javadoc/
+        rm -r downstream/mockito/src/javadoc/
     elif [[ "$p" == jansi ]]; then
-        rm -rf downstream/jansi/src/main/native/
+        rm -r downstream/jansi/src/main/native/
     elif [[ "$p" == jflex ]]; then
-        rm -rf downstream/jflex/jflex/examples/
+        rm -r downstream/jflex/jflex/examples/
     elif [[ "$p" == jsoup ]]; then
-        rm -rf downstream/jsoup/src/test/resources/
+        rm -r downstream/jsoup/src/test/resources/
     fi
     $git -C "downstream/$p" commit --allow-empty -a -m 'Remove binary files'
     $git -C "downstream/$p" checkout -b downstream upstream-base
