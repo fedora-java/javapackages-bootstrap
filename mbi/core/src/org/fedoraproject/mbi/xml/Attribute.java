@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2020-2021 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package org.fedoraproject.mbi.xml;
 
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 import javax.xml.stream.XMLStreamException;
@@ -23,22 +22,38 @@ import javax.xml.stream.XMLStreamException;
 /**
  * @author Mikolaj Izdebski
  */
-class Attribute<AttributeType>
-    extends Constituent<AttributeType, String>
+class Attribute<EnclosingType, EnclosingBean, AttributeType>
+    extends Constituent<EnclosingType, EnclosingBean, AttributeType, String>
 {
-    public Attribute( String tag, Consumer<AttributeType> setter, Function<String, AttributeType> adapter,
-                      boolean optional, boolean unique )
+    private final Function<AttributeType, String> toStringAdapter;
+
+    private final Function<String, AttributeType> fromStringAdapter;
+
+    public Attribute( String tag, Getter<EnclosingType, Iterable<AttributeType>> getter,
+                      Setter<EnclosingBean, AttributeType> setter, Function<AttributeType, String> toStringAdapter,
+                      Function<String, AttributeType> fromStringAdapter, boolean optional, boolean unique )
     {
-        super( tag, setter, adapter, optional, unique );
+        super( tag, getter, setter, optional, unique );
+        this.toStringAdapter = toStringAdapter;
+        this.fromStringAdapter = fromStringAdapter;
     }
 
     @Override
-    protected String parse( XMLParser parser )
+    protected void dump( XMLDumper dumper, AttributeType value )
+        throws XMLStreamException
+    {
+        dumper.dumpStartElement( getTag() );
+        dumper.dumpText( toStringAdapter.apply( value ) );
+        dumper.dumpEndElement();
+    }
+
+    @Override
+    protected AttributeType parse( XMLParser parser )
         throws XMLStreamException
     {
         parser.parseStartElement( getTag() );
         String text = parser.parseText();
         parser.parseEndElement( getTag() );
-        return text;
+        return fromStringAdapter.apply( text );
     }
 }

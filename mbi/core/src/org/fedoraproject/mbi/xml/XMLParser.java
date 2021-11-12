@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2020-2021 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -149,18 +149,18 @@ public class XMLParser
         expectToken( END_DOCUMENT, "end of document" );
     }
 
-    public <Bean> void parseEntity( Entity<Bean> entity )
+    public <Type, Bean extends Builder<Type>> void parseEntity( Entity<Type, Bean> entity, Bean bean )
         throws XMLStreamException
     {
         parseStartElement( entity.getTag() );
 
-        Set<Constituent<?, ?>> allowedElements = new LinkedHashSet<>( entity.getElements() );
+        Set<Constituent<Type, Bean, ?, ?>> allowedElements = new LinkedHashSet<>( entity.getElements() );
 
-        for ( Iterator<Constituent<?, ?>> iterator = allowedElements.iterator(); iterator.hasNext(); )
+        for ( Iterator<Constituent<Type, Bean, ?, ?>> iterator = allowedElements.iterator(); iterator.hasNext(); )
         {
-            Constituent<?, ?> constituent = iterator.next();
+            Constituent<Type, Bean, ?, ?> constituent = iterator.next();
 
-            if ( constituent.tryParse( this ) )
+            if ( constituent.tryParse( this, bean ) )
             {
                 if ( constituent.isUnique() )
                 {
@@ -173,7 +173,7 @@ public class XMLParser
 
         parseEndElement( entity.getTag() );
 
-        for ( Constituent<?, ?> constituent : allowedElements )
+        for ( Constituent<Type, Bean, ?, ?> constituent : allowedElements )
         {
             if ( !constituent.isOptional() )
             {
@@ -182,11 +182,13 @@ public class XMLParser
         }
     }
 
-    public <Bean> void parseDocument( Entity<Bean> rootEntity )
+    public <Type, Bean extends Builder<Type>> Type parseDocument( Entity<Type, Bean> rootEntity )
         throws XMLStreamException
     {
+        Bean rootBean = rootEntity.newBean();
         parseStartDocument();
-        parseEntity( rootEntity );
+        parseEntity( rootEntity, rootBean );
         parseEndDocument();
+        return rootBean.build();
     }
 }

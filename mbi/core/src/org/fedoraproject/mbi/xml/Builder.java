@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2021 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.model.io;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Properties;
-
-import javax.xml.stream.XMLStreamException;
-
-import org.fedoraproject.mbi.model.ProjectDescriptor;
+package org.fedoraproject.mbi.xml;
 
 /**
  * @author Mikolaj Izdebski
  */
-public class ProjectDescriptorReader
+public interface Builder<Type>
 {
-    public ProjectDescriptor read( String name, Properties properties, Path path )
-        throws IOException, XMLStreamException
-    {
-        return new ProjectEntity( name, properties ).readFromXML( path );
-    }
+    Type build();
 }

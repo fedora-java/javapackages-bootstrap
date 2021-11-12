@@ -22,11 +22,13 @@ import java.util.Set;
 import org.fedoraproject.mbi.model.LicensingDescriptor;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
 import org.fedoraproject.mbi.model.ProjectDescriptor;
+import org.fedoraproject.mbi.xml.Builder;
 
 /**
  * @author Mikolaj Izdebski
  */
 class ProjectBuilder
+    implements Builder<ProjectDescriptor>
 {
     private final String name;
 
@@ -52,6 +54,7 @@ class ProjectBuilder
         modules.add( module );
     }
 
+    @Override
     public ProjectDescriptor build()
     {
         return new ProjectDescriptor( name, properties, licensing, modules );

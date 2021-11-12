@@ -17,18 +17,19 @@ package org.fedoraproject.mbi.model.io;
 
 import java.util.Properties;
 
+import org.fedoraproject.mbi.model.ProjectDescriptor;
 import org.fedoraproject.mbi.xml.Entity;
 
 /**
  * @author Mikolaj Izdebski
  */
 class ProjectEntity
-    extends Entity<ProjectBuilder>
+    extends Entity<ProjectDescriptor, ProjectBuilder>
 {
     public ProjectEntity( String name, Properties properties )
     {
         super( "project", () -> new ProjectBuilder( name, properties ) );
-        addRelationship( "licensing", bean::setLicensing, LicensingBuilder::build, false, true, LicensingEntity::new );
-        addRelationship( "module", bean::addModule, ModuleBuilder::build, true, false, () -> new ModuleEntity( name ) );
+        addSingularRelationship( new LicensingEntity(), ProjectDescriptor::getLicensing, ProjectBuilder::setLicensing );
+        addRelationship( new ModuleEntity( name ), ProjectDescriptor::getModules, ProjectBuilder::addModule );
     }
 }

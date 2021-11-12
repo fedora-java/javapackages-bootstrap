@@ -149,10 +149,7 @@ public class Reactor
             {
                 String name = path.getFileName().toString().replaceAll( "\\.xml$", "" );
                 Properties properties = loadProperties( path.getParent(), name );
-                try ( Reader reader = Files.newBufferedReader( path ) )
-                {
-                    addProject( projectDescriptorReader.read( name, properties, reader ) );
-                }
+                addProject( projectDescriptorReader.read( name, properties, path ) );
             }
         }
     }

@@ -15,21 +15,20 @@
  */
 package org.fedoraproject.mbi.model.io;
 
-import static java.util.function.Function.identity;
-
+import org.fedoraproject.mbi.model.LicensingDescriptor;
 import org.fedoraproject.mbi.xml.Entity;
 
 /**
  * @author Mikolaj Izdebski
  */
 class LicensingEntity
-    extends Entity<LicensingBuilder>
+    extends Entity<LicensingDescriptor, LicensingBuilder>
 {
     public LicensingEntity()
     {
         super( "licensing", LicensingBuilder::new );
-        addAttribute( "tag", bean::setTag, identity(), false, true );
-        addAttribute( "file", bean::addFile, identity(), true, false );
-        addAttribute( "text", bean::setText, identity(), true, true );
+        addAttribute( "tag", LicensingDescriptor::getTag, LicensingBuilder::setTag );
+        addMultiAttribute( "file", LicensingDescriptor::getFiles, LicensingBuilder::addFile );
+        addOptionalAttribute( "text", LicensingDescriptor::getText, LicensingBuilder::setText );
     }
 }

@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2020-2021 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,33 +15,37 @@
  */
 package org.fedoraproject.mbi.xml;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import javax.xml.stream.XMLStreamException;
 
 /**
  * @author Mikolaj Izdebski
  */
-class Relationship<RelatedType, RelatedBean>
-    extends Constituent<RelatedType, RelatedBean>
+class Relationship<EnclosingType, EnclosingBean, RelatedType, RelatedBean extends Builder<RelatedType>>
+    extends Constituent<EnclosingType, EnclosingBean, RelatedType, RelatedBean>
 {
-    private final Supplier<Entity<RelatedBean>> constructor;
+    private final Entity<RelatedType, RelatedBean> relatedEntity;
 
-    public Relationship( String tag, Consumer<RelatedType> setter, Function<RelatedBean, RelatedType> adapter,
-                         boolean mandatory, boolean unique, Supplier<Entity<RelatedBean>> constructor )
+    public Relationship( Entity<RelatedType, RelatedBean> relatedEntity,
+                         Getter<EnclosingType, Iterable<RelatedType>> getter, Setter<EnclosingBean, RelatedType> setter,
+                         boolean mandatory, boolean unique )
     {
-        super( tag, setter, adapter, mandatory, unique );
-        this.constructor = constructor;
+        super( relatedEntity.getTag(), getter, setter, mandatory, unique );
+        this.relatedEntity = relatedEntity;
     }
 
     @Override
-    protected RelatedBean parse( XMLParser parser )
+    protected void dump( XMLDumper dumper, RelatedType value )
         throws XMLStreamException
     {
-        Entity<RelatedBean> relatedEntity = constructor.get();
-        parser.parseEntity( relatedEntity );
-        return relatedEntity.bean;
+        dumper.dumpEntity( relatedEntity, value );
+    }
+
+    @Override
+    protected RelatedType parse( XMLParser parser )
+        throws XMLStreamException
+    {
+        RelatedBean relatedBean = relatedEntity.newBean();
+        parser.parseEntity( relatedEntity, relatedBean );
+        return relatedBean.build();
     }
 }

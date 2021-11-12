@@ -17,25 +17,28 @@ package org.fedoraproject.mbi.model.io;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import javax.xml.stream.XMLStreamException;
 
 import org.fedoraproject.mbi.model.Execution;
 import org.fedoraproject.mbi.model.Instruction;
+import org.fedoraproject.mbi.model.ModuleDescriptor;
 import org.fedoraproject.mbi.xml.Constituent;
+import org.fedoraproject.mbi.xml.Getter;
+import org.fedoraproject.mbi.xml.GetterAdapter;
+import org.fedoraproject.mbi.xml.Setter;
+import org.fedoraproject.mbi.xml.XMLDumper;
 import org.fedoraproject.mbi.xml.XMLParser;
 
 /**
  * @author Mikolaj Izdebski
  */
 class XBuild
-    extends Constituent<List<Execution>, List<Execution>>
+    extends Constituent<ModuleDescriptor, ModuleBuilder, List<Execution>, List<Execution>>
 {
-    public XBuild( Consumer<List<Execution>> setter )
+    public XBuild( Getter<ModuleDescriptor, List<Execution>> getter, Setter<ModuleBuilder, List<Execution>> setter )
     {
-        super( "build", setter, Function.identity(), false, true );
+        super( "build", new GetterAdapter<>( getter ), setter, false, true );
     }
 
     @Override
@@ -66,5 +69,12 @@ class XBuild
         }
         parser.parseEndElement( toolName );
         return new Execution( toolName, instructions );
+    }
+
+    @Override
+    protected void dump( XMLDumper dumper, List<Execution> value )
+        throws XMLStreamException
+    {
+        throw new IllegalStateException( "Dumping is not implemented" );
     }
 }
