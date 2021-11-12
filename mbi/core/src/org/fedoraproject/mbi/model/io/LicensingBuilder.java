@@ -19,11 +19,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.fedoraproject.mbi.model.LicensingDescriptor;
+import org.fedoraproject.mbi.xml.Builder;
 
 /**
  * @author Mikolaj Izdebski
  */
 class LicensingBuilder
+    implements Builder<LicensingDescriptor>
 {
     private String tag;
 
@@ -46,6 +48,7 @@ class LicensingBuilder
         this.text = text;
     }
 
+    @Override
     public LicensingDescriptor build()
     {
         return new LicensingDescriptor( tag, files, text );

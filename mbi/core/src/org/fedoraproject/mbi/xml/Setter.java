@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2021 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,38 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.model.io;
-
-import org.fedoraproject.mbi.model.Upstream;
+package org.fedoraproject.mbi.xml;
 
 /**
  * @author Mikolaj Izdebski
  */
-public class UpstreamBuilder
+@FunctionalInterface
+public interface Setter<OuterType, NestedType>
 {
-    private String url;
-
-    private String ref;
-
-    private String version;
-
-    public void setUrl( String url )
-    {
-        this.url = url;
-    }
-
-    public void setRef( String ref )
-    {
-        this.ref = ref;
-    }
-
-    public void setVersion( String version )
-    {
-        this.version = version;
-    }
-
-    public Upstream build()
-    {
-        return new Upstream( url, ref, version );
-    }
+    void set( OuterType object, NestedType value );
 }

@@ -22,11 +22,13 @@ import java.util.Set;
 
 import org.fedoraproject.mbi.model.Execution;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
+import org.fedoraproject.mbi.xml.Builder;
 
 /**
  * @author Mikolaj Izdebski
  */
 class ModuleBuilder
+    implements Builder<ModuleDescriptor>
 {
     private String name;
 
@@ -64,6 +66,7 @@ class ModuleBuilder
         this.executions = executions;
     }
 
+    @Override
     public ModuleDescriptor build()
     {
         return new ModuleDescriptor( name, projectName, projectSubDir, dependencies, executions );

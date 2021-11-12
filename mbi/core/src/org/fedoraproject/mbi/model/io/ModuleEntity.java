@@ -15,24 +15,25 @@
  */
 package org.fedoraproject.mbi.model.io;
 
-import static java.util.function.Function.identity;
-
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.fedoraproject.mbi.model.ModuleDescriptor;
 import org.fedoraproject.mbi.xml.Entity;
 
 /**
  * @author Mikolaj Izdebski
  */
 class ModuleEntity
-    extends Entity<ModuleBuilder>
+    extends Entity<ModuleDescriptor, ModuleBuilder>
 {
     public ModuleEntity( String projectName )
     {
         super( "module", () -> new ModuleBuilder( projectName ) );
-        addAttribute( "name", bean::setName, identity(), true, true );
-        addAttribute( "subDir", bean::setProjectSubDir, Paths::get, true, true );
-        addAttribute( "dependency", bean::addDependency, identity(), true, false );
-        addCustomElement( new XBuild( bean::setExecutions ) );
+        addOptionalAttribute( "name", ModuleDescriptor::getName, ModuleBuilder::setName );
+        addOptionalAttribute( "subDir", ModuleDescriptor::getProjectSubDir, ModuleBuilder::setProjectSubDir,
+                              Path::toString, Paths::get );
+        addMultiAttribute( "dependency", ModuleDescriptor::getDependencies, ModuleBuilder::addDependency );
+        addCustomElement( new XBuild( ModuleDescriptor::getExecutions, ModuleBuilder::setExecutions ) );
     }
 }

@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2021 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.model.io;
-
-import static java.util.function.Function.identity;
-
-import org.fedoraproject.mbi.xml.Entity;
+package org.fedoraproject.mbi.xml;
 
 /**
  * @author Mikolaj Izdebski
  */
-class UpstreamEntity
-    extends Entity<UpstreamBuilder>
+@FunctionalInterface
+public interface Factory<Type>
 {
-    public UpstreamEntity()
-    {
-        super( "upstream", UpstreamBuilder::new );
-        addAttribute( "url", bean::setUrl, identity(), false, true );
-        addAttribute( "ref", bean::setRef, identity(), false, true );
-        addAttribute( "version", bean::setVersion, identity(), false, true );
-    }
+    Type newInstance();
 }
