@@ -20,6 +20,7 @@
         <addSourceRoot>maven-resolver-util/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-connector-basic/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-transport-wagon/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-resolver-named-locks/src/main/java</addSourceRoot>
       </compiler>
       <cdc/>
     </build>
