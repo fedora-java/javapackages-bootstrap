@@ -82,6 +82,7 @@
     <dependency>maven-shared-utils</dependency>
     <dependency>commons-lang</dependency>
     <dependency>maven-resolver-provider</dependency>
+    <dependency>slf4j</dependency>
     <build>
       <modello>
         <model>src/main/mdo/toolchains.mdo</model>
@@ -214,6 +215,7 @@
     <dependency>maven-model-builder</dependency>
     <dependency>guice</dependency>
     <dependency>maven-builder-support</dependency>
+    <dependency>slf4j</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
@@ -244,7 +246,7 @@
     <build>
       <modello>
         <model>src/main/mdo/settings.mdo</model>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
         <output>java|xpp3-reader|xpp3-writer</output>
       </modello>
       <compiler>

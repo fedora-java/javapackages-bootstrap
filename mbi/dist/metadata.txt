@@ -328,6 +328,7 @@ MOD maven-core
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.codehaus.plexus plexus-component-annotations
     DEP org.apache.commons commons-lang3
+    DEP org.slf4j slf4j-api
 MOD maven-dependency-analyzer
   ART org.apache.maven.shared maven-dependency-analyzer
     DEP org.ow2.asm asm
