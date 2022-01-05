@@ -17,6 +17,8 @@
 
 set -eu
 
+export LC_ALL='C.UTF-8'
+
 git="git -c user.name=root -c user.email=root@localhost"
 
 if [[ $# -eq 0 ]]; then
