@@ -7,7 +7,6 @@
     <dependency>commons-logging</dependency>
     <dependency>httpcomponents-client</dependency>
     <dependency>httpcomponents-core</dependency>
-    <dependency>jsoup</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>slf4j</dependency>
     <build>
