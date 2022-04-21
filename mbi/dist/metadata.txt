@@ -678,7 +678,6 @@ MOD maven-wagon
     DEP org.codehaus.plexus plexus-utils
     DEP org.apache.maven.wagon wagon-provider-api
   ART org.apache.maven.wagon wagon-http-shared
-    DEP org.jsoup jsoup
     DEP org.apache.httpcomponents httpclient
     DEP org.apache.httpcomponents httpcore
     DEP commons-io commons-io
