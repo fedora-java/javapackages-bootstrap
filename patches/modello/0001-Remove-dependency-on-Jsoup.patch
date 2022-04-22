@@ -1,0 +1,52 @@
+From 12cc1a306dc83b9bd6b49486e0c2e7403c569f40 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 22 Apr 2022 18:25:53 +0200
+Subject: [PATCH] Remove dependency on Jsoup
+
+---
+ modello-plugins/modello-plugin-xdoc/pom.xml                 | 5 -----
+ .../org/codehaus/modello/plugin/xdoc/XdocGenerator.java     | 6 +-----
+ 2 files changed, 1 insertion(+), 10 deletions(-)
+
+diff --git a/modello-plugins/modello-plugin-xdoc/pom.xml b/modello-plugins/modello-plugin-xdoc/pom.xml
+index 8e6705ad..2d3ad6b5 100644
+--- a/modello-plugins/modello-plugin-xdoc/pom.xml
++++ b/modello-plugins/modello-plugin-xdoc/pom.xml
+@@ -27,11 +27,6 @@
+       <groupId>org.codehaus.plexus</groupId>
+       <artifactId>plexus-utils</artifactId>
+     </dependency>
+-    <dependency>
+-      <groupId>org.jsoup</groupId>
+-      <artifactId>jsoup</artifactId>
+-      <version>1.14.3</version>
+-    </dependency>
+     <dependency>
+       <groupId>org.xmlunit</groupId>
+       <artifactId>xmlunit-core</artifactId>
+diff --git a/modello-plugins/modello-plugin-xdoc/src/main/java/org/codehaus/modello/plugin/xdoc/XdocGenerator.java b/modello-plugins/modello-plugin-xdoc/src/main/java/org/codehaus/modello/plugin/xdoc/XdocGenerator.java
+index ad3bc2d1..5ff5b952 100644
+--- a/modello-plugins/modello-plugin-xdoc/src/main/java/org/codehaus/modello/plugin/xdoc/XdocGenerator.java
++++ b/modello-plugins/modello-plugin-xdoc/src/main/java/org/codehaus/modello/plugin/xdoc/XdocGenerator.java
+@@ -56,8 +56,6 @@ import org.codehaus.plexus.util.StringUtils;
+ import org.codehaus.plexus.util.WriterFactory;
+ import org.codehaus.plexus.util.xml.PrettyPrintXMLWriter;
+ import org.codehaus.plexus.util.xml.XMLWriter;
+-import org.jsoup.Jsoup;
+-import org.jsoup.nodes.Document;
+ 
+ /**
+  * @author <a href="mailto:jason@modello.org">Jason van Zyl</a>
+@@ -787,8 +785,6 @@ public class XdocGenerator
+      */
+     private static String rewrite( String text )
+     {
+-        Document document = Jsoup.parseBodyFragment( text );
+-        document.outputSettings().syntax( Document.OutputSettings.Syntax.xml );
+-        return document.body().html();
++        return text;
+     }
+ }
+-- 
+2.35.1
+

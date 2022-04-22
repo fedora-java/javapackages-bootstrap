@@ -98,8 +98,6 @@ function prep()
         rm -r downstream/jansi/src/main/native/
     elif [[ "$p" == jflex ]]; then
         rm -r downstream/jflex/jflex/examples/
-    elif [[ "$p" == jsoup ]]; then
-        rm -r downstream/jsoup/src/test/resources/
     elif [[ "$p" == testng ]]; then
         mkdir -p downstream/testng/src/main/resources/META-INF/webjars/jquery/3.5.1
         rm -rf downstream/testng/src/test/

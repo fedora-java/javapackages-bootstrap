@@ -7,7 +7,6 @@
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>plexus-build-api</dependency>
-    <dependency>jsoup</dependency>
     <build>
       <compiler>
         <addSourceRoot>modello-core/src/main/java</addSourceRoot>
