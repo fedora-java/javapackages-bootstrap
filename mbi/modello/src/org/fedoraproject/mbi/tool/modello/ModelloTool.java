@@ -41,7 +41,7 @@ public class ModelloTool
     {
         params.setProperty( "modello.dom.xpp3", "true" );
         params.setProperty( "modello.package.with.version", "false" );
-        params.setProperty( "modello.output.useJava5", "true" );
+        params.setProperty( "modello.output.java.source", "8" );
         params.setProperty( "modello.output.encoding", "UTF-8" );
     }
 
