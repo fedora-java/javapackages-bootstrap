@@ -1,4 +1,4 @@
-From 6e2004d90deab2f59af01629187006e320444e34 Mon Sep 17 00:00:00 2001
+From b9a95a75b6ae83230866787d5b659382457c8ce0 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sat, 23 Sep 2017 11:43:45 +0200
 Subject: [PATCH] Remove support for snappy
@@ -11,18 +11,18 @@ Forwarded: not-needed
  2 files changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java b/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java
-index 8eec881..be8e7a3 100644
+index 46978ab9..3d8ffcc8 100644
 --- a/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java
 +++ b/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java
-@@ -38,7 +38,6 @@
+@@ -41,7 +41,6 @@
  import org.codehaus.plexus.components.io.resources.PlexusIoResource;
  import org.codehaus.plexus.util.IOUtil;
  import org.codehaus.plexus.util.StringUtils;
 -import org.iq80.snappy.SnappyOutputStream;
- import static org.codehaus.plexus.archiver.util.Streams.bufferedOutputStream;
  
  /**
-@@ -489,7 +488,7 @@ else if ( TarCompressionMethod.bzip2.equals( tarCompressionMethod ) )
+  * @author <a href="mailto:evenisse@codehaus.org">Emmanuel Venisse</a>
+@@ -498,7 +497,7 @@ else if ( TarCompressionMethod.bzip2.equals( tarCompressionMethod ) )
          }
          else if ( TarCompressionMethod.snappy.equals( tarCompressionMethod ) )
          {
@@ -32,18 +32,18 @@ index 8eec881..be8e7a3 100644
          else if ( TarCompressionMethod.xz.equals( tarCompressionMethod ) )
          {
 diff --git a/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java b/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java
-index 2316d4e..c2e2b83 100644
+index 6a5b43c6..a46c3007 100644
 --- a/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java
 +++ b/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java
-@@ -31,7 +31,6 @@
+@@ -32,7 +32,6 @@
+ import org.codehaus.plexus.archiver.ArchiverException;
  import org.codehaus.plexus.archiver.util.Streams;
  import org.codehaus.plexus.components.io.filemappers.FileMapper;
- import org.codehaus.plexus.util.IOUtil;
 -import org.iq80.snappy.SnappyInputStream;
  
  /**
   * @author <a href="mailto:evenisse@codehaus.org">Emmanuel Venisse</a>
-@@ -154,7 +153,7 @@ else if ( compression == UntarCompressionMethod.BZIP2 )
+@@ -150,7 +149,7 @@ else if ( compression == UntarCompressionMethod.BZIP2 )
          }
          else if ( compression == UntarCompressionMethod.SNAPPY )
          {
@@ -53,5 +53,5 @@ index 2316d4e..c2e2b83 100644
          else if ( compression == UntarCompressionMethod.XZ )
          {
 -- 
-2.21.0
+2.35.1
 
