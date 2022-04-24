@@ -1,19 +1,18 @@
-From a51ce1793a13146180c993437ec0819082fc5487 Mon Sep 17 00:00:00 2001
+From 83d85fa8e9ebe647205d550cdceeb0386690ec93 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
-Date: Fri, 7 Dec 2018 08:20:44 +0100
-Subject: [PATCH 1/2] Disable incremental compilation
+Date: Sun, 24 Apr 2022 23:10:50 +0200
+Subject: [PATCH] Disable incremental compilation
 
 Forwarded: not-needed
-
 ---
- .../plugin/compiler/AbstractCompilerMojo.java | 66 +------------------
- 1 file changed, 2 insertions(+), 64 deletions(-)
+ .../plugin/compiler/AbstractCompilerMojo.java | 67 +------------------
+ 1 file changed, 2 insertions(+), 65 deletions(-)
 
 diff --git a/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java b/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java
-index c53fe78..807d87c 100644
+index e0ec1db..8e7d678 100644
 --- a/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java
 +++ b/src/main/java/org/apache/maven/plugin/compiler/AbstractCompilerMojo.java
-@@ -55,8 +55,6 @@ import org.apache.maven.plugins.annotations.Component;
+@@ -56,8 +56,6 @@ import org.apache.maven.plugins.annotations.Component;
  import org.apache.maven.plugins.annotations.Parameter;
  import org.apache.maven.project.MavenProject;
  import org.apache.maven.repository.RepositorySystem;
@@ -22,8 +21,8 @@ index c53fe78..807d87c 100644
  import org.apache.maven.shared.utils.ReaderFactory;
  import org.apache.maven.shared.utils.StringUtils;
  import org.apache.maven.shared.utils.io.FileUtils;
-@@ -483,7 +481,7 @@ public abstract class AbstractCompilerMojo
-      * to enable/disable incrementation compilation feature
+@@ -537,7 +535,7 @@ public abstract class AbstractCompilerMojo
+      *
       * @since 3.1
       */
 -    @Parameter( defaultValue = "true", property = "maven.compiler.useIncrementalCompilation" )
@@ -31,7 +30,7 @@ index c53fe78..807d87c 100644
      private boolean useIncrementalCompilation = true;
  
      /**
-@@ -774,47 +772,11 @@ public abstract class AbstractCompilerMojo
+@@ -846,47 +844,11 @@ public abstract class AbstractCompilerMojo
  
          boolean canUpdateTarget;
  
@@ -80,10 +79,11 @@ index c53fe78..807d87c 100644
          }
          else
          {
-@@ -1118,15 +1080,6 @@ public abstract class AbstractCompilerMojo
+@@ -1192,16 +1154,6 @@ public abstract class AbstractCompilerMojo
+ 
          CompilerResult compilerResult;
  
- 
+-
 -        if ( useIncrementalCompilation )
 -        {
 -            incrementalBuildHelperRequest.outputDirectory( getOutputDirectory() );
@@ -96,8 +96,8 @@ index c53fe78..807d87c 100644
          try
          {
              try
-@@ -1145,21 +1098,6 @@ public abstract class AbstractCompilerMojo
-             throw new MojoExecutionException( "Fatal error compiling", e );
+@@ -1235,21 +1187,6 @@ public abstract class AbstractCompilerMojo
+             }
          }
  
 -        if ( useIncrementalCompilation )
@@ -119,5 +119,5 @@ index c53fe78..807d87c 100644
          List<CompilerMessage> errors = new ArrayList<>();
          List<CompilerMessage> others = new ArrayList<>();
 -- 
-2.26.2
+2.35.1
 
