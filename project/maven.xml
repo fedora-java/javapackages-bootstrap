@@ -123,6 +123,7 @@
     <dependency>plexus-cipher</dependency>
     <dependency>maven-builder-support</dependency>
     <dependency>maven-artifact</dependency>
+    <dependency>plexus-interpolation</dependency>
     <build>
       <modello>
         <model>src/main/mdo/core-extensions.mdo</model>
