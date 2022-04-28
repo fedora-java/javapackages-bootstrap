@@ -1,4 +1,4 @@
-From 39be64eff05c5db20b863ac971d2de5707ae8017 Mon Sep 17 00:00:00 2001
+From 6953b37ee5a7c0566d2e11e7141768f8a4c03fa2 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 12:56:04 +0200
 Subject: [PATCH 2/3] Remove dependency on jtidy
@@ -10,18 +10,18 @@ Forwarded: not-needed
  1 file changed, 1 insertion(+), 54 deletions(-)
 
 diff --git a/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java b/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java
-index 771b08b..0346778 100644
+index e9ec47fe..1393b507 100644
 --- a/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java
 +++ b/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java
-@@ -51,7 +51,6 @@ import org.apache.maven.reporting.MavenReport;
+@@ -52,7 +52,6 @@ import org.apache.maven.reporting.MavenReport;
  import org.codehaus.plexus.component.repository.ComponentDependency;
  import org.codehaus.plexus.util.StringUtils;
  import org.codehaus.plexus.util.xml.XMLWriter;
 -import org.w3c.tidy.Tidy;
  
- /**
-  * Convenience methods to play with Maven plugins.
-@@ -254,58 +253,6 @@ public final class GeneratorUtils
+ import static java.nio.charset.StandardCharsets.UTF_8;
+ 
+@@ -262,58 +261,6 @@ public final class GeneratorUtils
          return decoded.toString();
      }
  
@@ -55,7 +55,7 @@ index 771b08b..0346778 100644
 -        try
 -        {
 -            ByteArrayOutputStream out = new ByteArrayOutputStream( commentCleaned.length() + 256 );
--            tidy.parse( new ByteArrayInputStream( commentCleaned.getBytes( "UTF-8" ) ), out );
+-            tidy.parse( new ByteArrayInputStream( commentCleaned.getBytes( UTF_8 ) ), out );
 -            commentCleaned = out.toString( "UTF-8" );
 -        }
 -        catch ( UnsupportedEncodingException e )
@@ -80,7 +80,7 @@ index 771b08b..0346778 100644
      /**
       * Converts a HTML fragment as extracted from a javadoc comment to a plain text string. This method tries to retain
       * as much of the text formatting as possible by means of the following transformations:
-@@ -337,7 +284,7 @@ public final class GeneratorUtils
+@@ -345,7 +292,7 @@ public final class GeneratorUtils
  
          try
          {
@@ -90,5 +90,5 @@ index 771b08b..0346778 100644
          catch ( IOException e )
          {
 -- 
-2.25.2
+2.35.1
 

@@ -1,4 +1,4 @@
-From 8d455cd296ab9b3d762ddac71b3f51df234b66c1 Mon Sep 17 00:00:00 2001
+From 3eeaf5c2131d6a13dc15e116a8d08de57298289e Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 12:57:13 +0200
 Subject: [PATCH 3/3] Disable reporting
@@ -10,10 +10,10 @@ Forwarded: not-needed
  1 file changed, 62 deletions(-)
 
 diff --git a/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java b/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java
-index 0346778..6ac66f8 100644
+index 1393b507..3f8d05e4 100644
 --- a/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java
 +++ b/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/GeneratorUtils.java
-@@ -47,7 +47,6 @@ import org.apache.maven.model.Dependency;
+@@ -48,7 +48,6 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
  import org.apache.maven.plugin.descriptor.MojoDescriptor;
  import org.apache.maven.plugin.descriptor.PluginDescriptor;
  import org.apache.maven.project.MavenProject;
@@ -21,7 +21,7 @@ index 0346778..6ac66f8 100644
  import org.codehaus.plexus.component.repository.ComponentDependency;
  import org.codehaus.plexus.util.StringUtils;
  import org.codehaus.plexus.util.xml.XMLWriter;
-@@ -592,65 +591,4 @@ public final class GeneratorUtils
+@@ -605,65 +604,4 @@ public final class GeneratorUtils
          return packageName;
      }
  
@@ -88,5 +88,5 @@ index 0346778..6ac66f8 100644
 -
  }
 -- 
-2.25.2
+2.35.1
 
