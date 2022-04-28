@@ -469,18 +469,13 @@ MOD maven-plugin-tools
     DEP org.apache.maven maven-artifact
     DEP org.codehaus.plexus plexus-utils
   ART org.apache.maven.plugins maven-plugin-plugin
-    DEP org.apache.maven maven-compat
     DEP org.apache.maven.plugin-tools maven-plugin-tools-api
     DEP org.apache.maven.plugin-tools maven-plugin-tools-generators
     DEP org.apache.maven.plugin-tools maven-plugin-tools-java
     DEP org.apache.maven.plugin-tools maven-plugin-tools-annotations
     DEP org.apache.maven.plugin-tools maven-plugin-annotations
-    DEP org.apache.maven maven-plugin-api
-    DEP org.apache.maven maven-model
-    DEP org.apache.maven maven-repository-metadata
-    DEP org.apache.maven maven-artifact
     DEP org.codehaus.plexus plexus-utils
-    DEP org.apache.maven.surefire maven-surefire-common
+    DEP org.sonatype.plexus plexus-build-api
   ART org.apache.maven.plugin-tools maven-plugin-tools-annotations
     DEP org.apache.maven maven-compat
     DEP org.apache.maven.plugin-tools maven-plugin-tools-api
