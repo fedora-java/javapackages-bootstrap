@@ -17,6 +17,7 @@
     <dependency>qdox</dependency>
     <dependency>plexus-archiver</dependency>
     <dependency>plexus-io</dependency>
+    <dependency>plexus-build-api</dependency>
     <build>
       <compiler>
         <addSourceRoot>maven-plugin-annotations/src/main/java</addSourceRoot>
