@@ -291,17 +291,12 @@ MOD maven-compat
     DEP org.apache.maven.wagon wagon-provider-api
 MOD maven-compiler-plugin
   ART org.apache.maven.plugins maven-compiler-plugin
-    DEP org.apache.maven.plugin-tools maven-plugin-annotations
-    DEP org.apache.maven.plugins maven-plugin-plugin
-    DEP org.apache.maven.shared maven-shared-incremental
     DEP org.apache.maven.shared maven-shared-utils
-    DEP org.apache.maven maven-artifact
-    DEP org.apache.maven maven-core
-    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven.shared maven-shared-incremental
+    DEP org.codehaus.plexus plexus-java
     DEP org.codehaus.plexus plexus-compiler-api
-    DEP org.codehaus.plexus plexus-compiler-javac
     DEP org.codehaus.plexus plexus-compiler-manager
-    DEP org.codehaus.plexus plexus-component-metadata
+    DEP org.codehaus.plexus plexus-compiler-javac
 MOD maven-core
   ART org.apache.maven maven-core
     DEP org.apache.maven maven-model

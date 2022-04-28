@@ -6,6 +6,7 @@
     <dependency>maven-plugin-tools</dependency>
     <dependency>plexus-compiler</dependency>
     <dependency>maven-shared-utils</dependency>
+    <dependency>maven-shared-incremental</dependency>
     <dependency>asm</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
