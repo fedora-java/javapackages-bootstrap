@@ -5,13 +5,16 @@
   <module>
     <dependency>maven-core</dependency>
     <dependency>maven-artifact</dependency>
+    <dependency>maven-model</dependency>
     <dependency>maven-resolver</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>plexus-component-annotations</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/org/apache/maven/shared/dependency/graph/internal/maven30/.*</excludeSourceMatching>
         <excludeSourceClass>Maven3DependencyGraphBuilder</excludeSourceClass>
+        <excludeSourceClass>Maven3DependencyCollectorBuilder</excludeSourceClass>
       </compiler>
       <cdc/>
     </build>
