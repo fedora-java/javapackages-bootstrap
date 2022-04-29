@@ -332,14 +332,8 @@ MOD maven-dependency-analyzer
     DEP org.apache.maven maven-artifact
 MOD maven-dependency-plugin
   ART org.apache.maven.plugins maven-dependency-plugin
-    DEP org.apache.maven maven-artifact
-    DEP org.apache.maven maven-plugin-api
-    DEP org.apache.maven maven-model
-    DEP org.apache.maven maven-core
-    DEP org.apache.maven maven-repository-metadata
     DEP org.codehaus.plexus plexus-archiver
     DEP org.codehaus.plexus plexus-utils
-    DEP org.apache.maven.shared file-management
     DEP org.codehaus.plexus plexus-io
     DEP org.apache.maven.shared maven-dependency-analyzer
     DEP org.apache.maven.shared maven-dependency-tree
@@ -348,7 +342,7 @@ MOD maven-dependency-plugin
     DEP org.apache.maven.shared maven-shared-utils
     DEP org.apache.commons commons-lang3
     DEP commons-collections commons-collections
-    DEP org.codehaus.plexus plexus-classworlds
+    DEP commons-beanutils commons-beanutils
 MOD maven-dependency-tree
   ART org.apache.maven.shared maven-dependency-tree
     DEP org.codehaus.plexus plexus-component-annotations
