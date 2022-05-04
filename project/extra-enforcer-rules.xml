@@ -1,0 +1,24 @@
+<project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
+  <module>
+    <dependency>commons-codec</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-enforcer</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>maven-compat</dependency>
+    <dependency>maven-dependency-tree</dependency>
+    <dependency>maven-common-artifact-filters</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

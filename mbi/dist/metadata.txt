@@ -117,6 +117,14 @@ MOD easymock
     DEP cglib cglib
     DEP org.ow2.asm asm
     DEP org.objenesis objenesis
+MOD extra-enforcer-rules
+  ART org.codehaus.mojo extra-enforcer-rules
+    DEP org.apache.maven.enforcer enforcer-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-compat
+    DEP org.apache.maven.shared maven-dependency-tree
+    DEP commons-codec commons-codec
+    DEP org.apache.maven.shared maven-common-artifact-filters
 MOD felix-utils
   ART org.apache.felix org.apache.felix.utils
 MOD guava
