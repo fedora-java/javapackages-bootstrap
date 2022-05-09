@@ -64,6 +64,10 @@ public class MavenDist
             Util.copy( homeTemplate.resolve( subdir ), dist.getInstallRoot().resolve( mavenHome ).resolve( subdir ),
                        p -> !p.getFileName().toString().startsWith( "." ) );
         }
+        for ( String executable : Arrays.asList( "mvn", "mvnDebug", "mvnyjp" ) )
+        {
+            Files.setPosixFilePermissions( dist.getInstallRoot().resolve( mavenHome ).resolve( "bin" ).resolve( executable ), PosixFilePermissions.fromString( "rwxr-xr-x" ) );
+        }
         for ( String moduleName : Arrays.asList( "asm", "common-annotations-api", "commons-cli", "commons-io",
                                                  "commons-lang", "guava", "guice", "injection-api", "jansi", "jsr-305",
                                                  "maven-artifact", "maven-builder-support", "maven-compat",
