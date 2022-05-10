@@ -1,15 +1,15 @@
-From e88ff42a58ca59da344ab67a427d5391764ae3a2 Mon Sep 17 00:00:00 2001
+From 4bd6761af7790c9975be717c2df9e72f78104f0b Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 28 Jun 2021 15:53:32 +0200
 Subject: [PATCH] Remove native code
 
 Forwarded: not-needed
 ---
- .../org/fusesource/jansi/AnsiConsole.java     | 106 +-----------------
- 1 file changed, 2 insertions(+), 104 deletions(-)
+ .../org/fusesource/jansi/AnsiConsole.java     | 111 +-----------------
+ 1 file changed, 2 insertions(+), 109 deletions(-)
 
 diff --git a/src/main/java/org/fusesource/jansi/AnsiConsole.java b/src/main/java/org/fusesource/jansi/AnsiConsole.java
-index facd1d4..54e7539 100644
+index 497a924..3161554 100644
 --- a/src/main/java/org/fusesource/jansi/AnsiConsole.java
 +++ b/src/main/java/org/fusesource/jansi/AnsiConsole.java
 @@ -26,22 +26,10 @@ import java.nio.charset.Charset;
@@ -35,7 +35,7 @@ index facd1d4..54e7539 100644
  
  /**
   * Provides consistent access to an ANSI aware console PrintStream or an ANSI codes stripping PrintStream
-@@ -237,24 +225,8 @@ public class AnsiConsole {
+@@ -243,29 +231,8 @@ public class AnsiConsole {
  
          String enc = System.getProperty(stdout ? "sun.stdout.encoding" : "sun.stderr.encoding");
  
@@ -49,6 +49,11 @@ index facd1d4..54e7539 100644
 -            // If we can detect that stdout is not a tty.. then setup
 -            // to strip the ANSI sequences..
 -            isAtty = isatty(fd) != 0;
+-            String term = System.getenv("TERM");
+-            String emacs = System.getenv("INSIDE_EMACS");
+-            if (isAtty && "dumb".equals(term) && emacs != null && !emacs.contains("comint")) {
+-                isAtty = false;
+-            }
 -            withException = false;
 -        } catch (Throwable ignore) {
 -            // These errors happen if the JNI lib is not available for your platform.
@@ -62,7 +67,7 @@ index facd1d4..54e7539 100644
  
          final AnsiOutputStream.WidthSupplier width;
          final AnsiProcessor processor;
-@@ -267,80 +239,6 @@ public class AnsiConsole {
+@@ -278,80 +245,6 @@ public class AnsiConsole {
              installer = uninstaller = null;
              width = new AnsiOutputStream.ZeroWidthSupplier();
          }
@@ -144,5 +149,5 @@ index facd1d4..54e7539 100644
          AnsiMode mode;
  
 -- 
-2.31.1
+2.35.1
 
