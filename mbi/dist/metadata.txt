@@ -837,7 +837,8 @@ MOD plexus-java
 MOD plexus-resources
   ART org.codehaus.plexus plexus-resources
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-container-default
+    DEP javax.inject javax.inject
+    DEP org.slf4j slf4j-api
 MOD plexus-sec-dispatcher
   ART org.codehaus.plexus plexus-sec-dispatcher
     ALIAS org.sonatype.plexus plexus-sec-dispatcher
