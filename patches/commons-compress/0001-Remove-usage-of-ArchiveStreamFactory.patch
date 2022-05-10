@@ -1,16 +1,15 @@
-From 1fa840c8aa80527991f73ee8ad9d2c2361a92947 Mon Sep 17 00:00:00 2001
+From ebb8f31b84299d5564e26ecb22845133819c9aae Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
 Date: Mon, 17 Aug 2020 13:39:11 +0200
 Subject: [PATCH] Remove usage of ArchiveStreamFactory
 
 Forwarded: not-needed
-
 ---
  .../archivers/zip/ZipSplitReadOnlySeekableByteChannel.java     | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/src/main/java/org/apache/commons/compress/archivers/zip/ZipSplitReadOnlySeekableByteChannel.java b/src/main/java/org/apache/commons/compress/archivers/zip/ZipSplitReadOnlySeekableByteChannel.java
-index edf8b7d3..2156ab87 100644
+index b37daff0..a83a40a3 100644
 --- a/src/main/java/org/apache/commons/compress/archivers/zip/ZipSplitReadOnlySeekableByteChannel.java
 +++ b/src/main/java/org/apache/commons/compress/archivers/zip/ZipSplitReadOnlySeekableByteChannel.java
 @@ -18,7 +18,6 @@
@@ -21,15 +20,15 @@ index edf8b7d3..2156ab87 100644
  import org.apache.commons.compress.utils.FileNameUtils;
  import org.apache.commons.compress.utils.MultiReadOnlySeekableByteChannel;
  
-@@ -158,7 +157,7 @@ public static SeekableByteChannel forOrderedSeekableByteChannels(SeekableByteCha
+@@ -156,7 +155,7 @@ public static SeekableByteChannel forOrderedSeekableByteChannels(final SeekableB
       */
-     public static SeekableByteChannel buildFromLastSplitSegment(File lastSegmentFile) throws IOException {
-         String extension = FileNameUtils.getExtension(lastSegmentFile.getCanonicalPath());
+     public static SeekableByteChannel buildFromLastSplitSegment(final File lastSegmentFile) throws IOException {
+         final String extension = FileNameUtils.getExtension(lastSegmentFile.getCanonicalPath());
 -        if (!extension.equalsIgnoreCase(ArchiveStreamFactory.ZIP)) {
 +        if (!extension.equalsIgnoreCase("zip")) {
              throw new IllegalArgumentException("The extension of last zip split segment should be .zip");
          }
  
 -- 
-2.25.4
+2.35.1
 
