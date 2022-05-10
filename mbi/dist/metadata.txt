@@ -383,14 +383,16 @@ MOD maven-enforcer
   ART org.apache.maven.enforcer enforcer-rules
     DEP org.apache.maven maven-artifact
     DEP org.apache.maven maven-plugin-api
-    DEP org.apache.maven maven-compat
+    DEP org.apache.maven maven-core
     DEP org.apache.maven.shared maven-common-artifact-filters
-    DEP org.apache.maven.shared maven-artifact-transfer
     DEP org.codehaus.plexus plexus-utils
     DEP org.apache.commons commons-lang3
     DEP commons-codec commons-codec
+    DEP commons-io commons-io
     DEP org.apache.maven.enforcer enforcer-api
     DEP org.apache.maven.shared maven-dependency-tree
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.maven maven-compat
   ART org.apache.maven.plugins maven-enforcer-plugin
     DEP org.apache.maven maven-artifact
     DEP org.apache.maven maven-plugin-api
@@ -400,7 +402,6 @@ MOD maven-enforcer
     DEP org.apache.maven.enforcer enforcer-rules
   ART org.apache.maven.enforcer enforcer-api
     DEP org.apache.maven maven-plugin-api
-    DEP org.codehaus.plexus plexus-container-default
 MOD maven-file-management
   ART org.apache.maven.shared file-management
     DEP org.apache.maven maven-plugin-api

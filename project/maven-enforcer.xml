@@ -10,16 +10,18 @@
     <dependency>maven-plugin-api</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>maven-core</dependency>
+    <dependency>maven-compat</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-model-builder</dependency>
     <dependency>maven-settings</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-common-artifact-filters</dependency>
     <dependency>maven-dependency-tree</dependency>
-    <dependency>maven-artifact-transfer</dependency>
+    <dependency>maven-shared-utils</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>commons-lang</dependency>
     <dependency>commons-codec</dependency>
+    <dependency>commons-io</dependency>
     <build>
       <compiler>
         <addSourceRoot>enforcer-api/src/main/java</addSourceRoot>
