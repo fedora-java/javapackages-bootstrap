@@ -13,6 +13,7 @@
         <removePlugin>maven-enforcer-plugin</removePlugin>
         <removePlugin>maven-site-plugin</removePlugin>
         <removePlugin>maven-source-plugin</removePlugin>
+        <removePlugin>versions-maven-plugin</removePlugin>
         <removeProfile>animal-sniffer</removeProfile>
         <removeProfile>japicmp</removeProfile>
         <removeProfile>jacoco</removeProfile>
