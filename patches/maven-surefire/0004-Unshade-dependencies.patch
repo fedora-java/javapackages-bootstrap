@@ -1,0 +1,1392 @@
+From 8977691d5ff2842b06c5cfa5b8a2b14b3e7d684a Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Thu, 12 May 2022 06:57:19 +0200
+Subject: [PATCH 4/4] Unshade dependencies
+
+Patch can be generated with:
+
+    find -name \*.java -exec sed \
+      -e s/org.apache.maven.surefire.shared.utils/org.apache.maven.shared.utils/ \
+      -e s/org.apache.maven.surefire.shared.io/org.apache.commons.io/ \
+      -e s/org.apache.maven.surefire.shared.lang3/org.apache.commons.lang3/ \
+      -e s/org.apache.maven.surefire.shared.compress/org.apache.commons.compress/ \
+      -i \{\} \;
+
+Forwarded: not-needed
+---
+ .../maven/plugin/failsafe/VerifyMojo.java     |  2 +-
+ .../util/FailsafeSummaryXmlUtils.java         |  8 +++----
+ .../plugin/surefire/AbstractSurefireMojo.java | 22 +++++++++----------
+ .../surefire/StartupReportConfiguration.java  |  2 +-
+ .../maven/plugin/surefire/SurefireHelper.java |  2 +-
+ .../plugin/surefire/SurefireProperties.java   |  2 +-
+ .../maven/plugin/surefire/TestClassPath.java  |  2 +-
+ .../ClasspathForkConfiguration.java           |  2 +-
+ .../DefaultForkConfiguration.java             |  2 +-
+ .../surefire/booterclient/ForkStarter.java    |  4 ++--
+ .../JarManifestForkConfiguration.java         |  8 +++----
+ .../ModularClasspathForkConfiguration.java    |  2 +-
+ .../lazytestprovider/Commandline.java         |  6 ++---
+ .../extensions/SurefireForkChannel.java       |  4 ++--
+ .../surefire/report/ConsoleReporter.java      |  4 ++--
+ .../report/DefaultReporterFactory.java        |  4 ++--
+ .../plugin/surefire/report/FileReporter.java  |  2 +-
+ .../surefire/report/FileReporterUtils.java    |  2 +-
+ .../surefire/report/StatelessXmlReporter.java |  6 ++---
+ .../plugin/surefire/report/TestSetStats.java  |  4 ++--
+ .../surefire/report/WrappedReportEntry.java   |  2 +-
+ .../plugin/surefire/util/FileScanner.java     |  2 +-
+ .../plugin/surefire/util/ScannerUtil.java     |  2 +-
+ .../surefire/util/SpecificFileFilter.java     |  2 +-
+ .../maven/surefire/stream/EventDecoder.java   |  2 +-
+ .../surefire/AbstractSurefireMojoTest.java    |  6 ++---
+ .../AbstractSurefireMojoToolchainsTest.java   |  2 +-
+ .../plugin/surefire/SurefireHelperTest.java   |  2 +-
+ ...DeserializerProviderConfigurationTest.java |  2 +-
+ ...rDeserializerStartupConfigurationTest.java |  2 +-
+ .../booterclient/ForkConfigurationTest.java   | 16 +++++++-------
+ .../booterclient/ForkStarterTest.java         |  6 ++---
+ ...ModularClasspathForkConfigurationTest.java |  2 +-
+ .../lazytestprovider/CommandlineTest.java     |  4 ++--
+ .../report/DefaultReporterFactoryTest.java    |  2 +-
+ .../report/StatelessXmlReporterTest.java      |  6 ++---
+ .../surefire/report/TestSetStatsTest.java     |  2 +-
+ .../runorder/RunEntryStatisticsMapTest.java   |  2 +-
+ .../StatelessTestsetInfoReporterTest.java     |  2 +-
+ .../report/ConsoleOutputFileReporterTest.java |  2 +-
+ .../maven/surefire/api/booter/Command.java    |  2 +-
+ .../api/filter/SpecificTestClassFilter.java   |  2 +-
+ .../report/LegacyPojoStackTraceWriter.java    |  2 +-
+ .../api/stream/AbstractStreamDecoder.java     |  2 +-
+ .../surefire/api/testset/ResolvedTest.java    | 14 ++++++------
+ .../api/testset/TestListResolver.java         | 10 ++++-----
+ .../api/util/DefaultDirectoryScanner.java     |  4 ++--
+ .../api/util/internal/ClassMethod.java        |  2 +-
+ .../api/util/internal/ObjectUtils.java        |  4 ++--
+ .../api/util/internal/ObjectUtilsTest.java    |  4 ++--
+ .../maven/surefire/booter/CommandReader.java  |  4 ++--
+ .../maven/surefire/booter/ForkedBooter.java   |  2 +-
+ .../maven/surefire/booter/PpidChecker.java    | 12 +++++-----
+ .../surefire/booter/ProcessCheckerType.java   |  2 +-
+ .../surefire/booter/PropertiesWrapper.java    |  2 +-
+ .../booter/SurefireBooterForkException.java   |  2 +-
+ .../maven/surefire/booter/SystemUtils.java    | 14 ++++++------
+ .../booter/stream/CommandDecoder.java         |  2 +-
+ .../surefire/booter/ForkedBooterMockTest.java |  2 +-
+ .../surefire/booter/ForkedBooterTest.java     |  2 +-
+ .../booter/IsolatedClassLoaderTest.java       |  2 +-
+ .../surefire/booter/NewClassLoaderRunner.java |  2 +-
+ .../surefire/booter/PpidCheckerTest.java      |  4 ++--
+ .../surefire/booter/SystemUtilsTest.java      | 12 +++++-----
+ .../extensions/ConsoleOutputReporter.java     |  2 +-
+ .../extensions/StatelessReporter.java         |  2 +-
+ .../extensions/util/CommandlineExecutor.java  |  8 +++----
+ .../extensions/CommandlineExecutorTest.java   |  4 ++--
+ .../report/SmartStackTraceParser.java         |  4 ++--
+ .../junit4/JUnit4RunListenerFactory.java      |  2 +-
+ .../common/junit48/FilterFactory.java         |  2 +-
+ .../common/junit48/FilterFactoryTest.java     |  2 +-
+ .../junitplatform/JUnitPlatformProvider.java  |  4 ++--
+ .../junitplatform/RunListenerAdapter.java     |  2 +-
+ .../surefire/junit/JUnitTestSetTest.java      |  4 ++--
+ .../testng/TestNGDirectoryTestSuite.java      |  2 +-
+ .../maven/surefire/testng/TestNGExecutor.java |  2 +-
+ 77 files changed, 154 insertions(+), 154 deletions(-)
+
+diff --git a/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/VerifyMojo.java b/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/VerifyMojo.java
+index 9c91bf70d..f3832727f 100644
+--- a/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/VerifyMojo.java
++++ b/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/VerifyMojo.java
+@@ -39,7 +39,7 @@
+ import java.util.Collection;
+ 
+ import static org.apache.maven.plugin.surefire.SurefireHelper.reportExecution;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.capitalizeFirstLetter;
++import static org.apache.maven.shared.utils.StringUtils.capitalizeFirstLetter;
+ import static org.apache.maven.surefire.api.suite.RunResult.noTestsRun;
+ 
+ /**
+diff --git a/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/util/FailsafeSummaryXmlUtils.java b/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/util/FailsafeSummaryXmlUtils.java
+index 03e340ca7..b77c1b515 100644
+--- a/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/util/FailsafeSummaryXmlUtils.java
++++ b/maven-failsafe-plugin/src/main/java/org/apache/maven/plugin/failsafe/util/FailsafeSummaryXmlUtils.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.io.IOUtils;
++import org.apache.commons.io.IOUtils;
+ import org.apache.maven.surefire.api.suite.RunResult;
+ import org.w3c.dom.Node;
+ import org.xml.sax.InputSource;
+@@ -39,9 +39,9 @@
+ import static java.lang.String.format;
+ import static java.nio.charset.StandardCharsets.UTF_8;
+ import static javax.xml.xpath.XPathConstants.NODE;
+-import static org.apache.maven.surefire.shared.lang3.StringEscapeUtils.escapeXml10;
+-import static org.apache.maven.surefire.shared.lang3.StringEscapeUtils.unescapeXml;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.commons.lang3.StringEscapeUtils.escapeXml10;
++import static org.apache.commons.lang3.StringEscapeUtils.unescapeXml;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  * @author <a href="mailto:tibordigana@apache.org">Tibor Digana (tibor17)</a>
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java
+index 1937d75c7..7a7973069 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java
+@@ -110,7 +110,7 @@
+ import org.apache.maven.surefire.providerapi.ProviderDetector;
+ import org.apache.maven.surefire.providerapi.ProviderInfo;
+ import org.apache.maven.surefire.providerapi.ProviderRequirements;
+-import org.apache.maven.surefire.shared.utils.io.FileUtils;
++import org.apache.maven.shared.utils.io.FileUtils;
+ import org.apache.maven.toolchain.DefaultToolchain;
+ import org.apache.maven.toolchain.Toolchain;
+ import org.apache.maven.toolchain.ToolchainManager;
+@@ -147,16 +147,16 @@
+ import static org.apache.maven.surefire.booter.SystemUtils.isJava9AtLeast;
+ import static org.apache.maven.surefire.booter.SystemUtils.toJdkHomeFromJvmExec;
+ import static org.apache.maven.surefire.booter.SystemUtils.toJdkVersionFromReleaseFile;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_RECENT;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.substringBeforeLast;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.capitalizeFirstLetter;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isEmpty;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotEmpty;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.split;
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.removeShutdownHook;
++import static org.apache.commons.lang3.JavaVersion.JAVA_RECENT;
++import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.maven.shared.utils.StringUtils.capitalizeFirstLetter;
++import static org.apache.maven.shared.utils.StringUtils.isEmpty;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotEmpty;
++import static org.apache.maven.shared.utils.StringUtils.split;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.removeShutdownHook;
+ 
+ /**
+  * Abstract base class for running tests using Surefire.
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/StartupReportConfiguration.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/StartupReportConfiguration.java
+index a15f8027e..02ec44b8e 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/StartupReportConfiguration.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/StartupReportConfiguration.java
+@@ -41,7 +41,7 @@
+ import java.util.concurrent.ConcurrentHashMap;
+ 
+ import static java.nio.charset.StandardCharsets.UTF_8;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.trimToNull;
++import static org.apache.commons.lang3.StringUtils.trimToNull;
+ import static org.apache.maven.plugin.surefire.SurefireHelper.replaceForkThreadsInPath;
+ import static org.apache.maven.plugin.surefire.report.ConsoleReporter.BRIEF;
+ import static org.apache.maven.plugin.surefire.report.ConsoleReporter.PLAIN;
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireHelper.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireHelper.java
+index 582245104..e9b7cfcf3 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireHelper.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireHelper.java
+@@ -39,7 +39,7 @@
+ 
+ import static java.util.Collections.unmodifiableList;
+ import static org.apache.maven.surefire.api.util.internal.DumpFileUtils.newFormattedDateFileName;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.apache.maven.surefire.api.booter.DumpErrorSingleton.DUMPSTREAM_FILE_EXT;
+ import static org.apache.maven.surefire.api.booter.DumpErrorSingleton.DUMP_FILE_EXT;
+ import static org.apache.maven.surefire.api.cli.CommandLineOption.LOGGING_LEVEL_DEBUG;
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireProperties.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireProperties.java
+index 2f5e91945..fb78191a8 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireProperties.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/SurefireProperties.java
+@@ -35,7 +35,7 @@
+ 
+ import org.apache.maven.surefire.booter.Classpath;
+ import org.apache.maven.surefire.booter.KeyValueSource;
+-import org.apache.maven.surefire.shared.utils.StringUtils;
++import org.apache.maven.shared.utils.StringUtils;
+ 
+ import static java.util.Arrays.asList;
+ import static java.util.Map.Entry;
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java
+index ba7336177..3a37816c0 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java
+@@ -29,7 +29,7 @@
+ import java.util.Map;
+ 
+ import static java.util.Collections.addAll;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.split;
++import static org.apache.maven.shared.utils.StringUtils.split;
+ 
+ final class TestClassPath
+ {
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ClasspathForkConfiguration.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ClasspathForkConfiguration.java
+index 1ce9d617e..54f9fa9b1 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ClasspathForkConfiguration.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ClasspathForkConfiguration.java
+@@ -32,7 +32,7 @@
+ import java.util.Map;
+ import java.util.Properties;
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.join;
++import static org.apache.maven.shared.utils.StringUtils.join;
+ 
+ /**
+  * @author <a href="mailto:tibordigana@apache.org">Tibor Digana (tibor17)</a>
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java
+index c7a77e77f..8932ba4a7 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java
+@@ -28,7 +28,7 @@
+ import org.apache.maven.surefire.booter.SurefireBooterForkException;
+ import org.apache.maven.surefire.extensions.ForkNodeFactory;
+ import org.apache.maven.surefire.api.util.internal.ImmutableMap;
+-import org.apache.maven.surefire.shared.utils.cli.CommandLineException;
++import org.apache.maven.shared.utils.cli.CommandLineException;
+ 
+ import javax.annotation.Nonnull;
+ import javax.annotation.Nullable;
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ForkStarter.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ForkStarter.java
+index 17b0e5412..796235c6d 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ForkStarter.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ForkStarter.java
+@@ -97,8 +97,8 @@
+ import static org.apache.maven.plugin.surefire.booterclient.lazytestprovider.TestLessInputStream.TestLessInputStreamBuilder;
+ import static org.apache.maven.surefire.booter.SystemPropertyManager.writePropertiesFile;
+ import static org.apache.maven.surefire.api.cli.CommandLineOption.SHOW_ERRORS;
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.removeShutdownHook;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.removeShutdownHook;
+ import static org.apache.maven.surefire.api.suite.RunResult.SUCCESS;
+ import static org.apache.maven.surefire.api.suite.RunResult.failure;
+ import static org.apache.maven.surefire.api.suite.RunResult.timeout;
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/JarManifestForkConfiguration.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/JarManifestForkConfiguration.java
+index 50caad055..40a57f797 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/JarManifestForkConfiguration.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/JarManifestForkConfiguration.java
+@@ -19,9 +19,9 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.compress.archivers.zip.Zip64Mode;
+-import org.apache.maven.surefire.shared.compress.archivers.zip.ZipArchiveEntry;
+-import org.apache.maven.surefire.shared.compress.archivers.zip.ZipArchiveOutputStream;
++import org.apache.commons.compress.archivers.zip.Zip64Mode;
++import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
++import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
+ import org.apache.maven.plugin.surefire.booterclient.lazytestprovider.Commandline;
+ import org.apache.maven.plugin.surefire.booterclient.output.InPluginProcessDumpSingleton;
+ import org.apache.maven.plugin.surefire.log.api.ConsoleLogger;
+@@ -54,7 +54,7 @@
+ import static org.apache.maven.plugin.surefire.SurefireHelper.escapeToPlatformPath;
+ import static org.apache.maven.plugin.surefire.booterclient.JarManifestForkConfiguration.ClasspathElementUri.absolute;
+ import static org.apache.maven.plugin.surefire.booterclient.JarManifestForkConfiguration.ClasspathElementUri.relative;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
+ import static org.apache.maven.surefire.api.util.internal.StringUtils.NL;
+ 
+ /**
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java
+index 0fd796cdd..4ad180256 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java
+@@ -46,7 +46,7 @@
+ import static java.io.File.pathSeparatorChar;
+ import static org.apache.maven.plugin.surefire.SurefireHelper.escapeToPlatformPath;
+ import static org.apache.maven.surefire.api.util.internal.StringUtils.NL;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.replace;
++import static org.apache.maven.shared.utils.StringUtils.replace;
+ 
+ /**
+  * @author <a href="mailto:tibordigana@apache.org">Tibor Digana (tibor17)</a>
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/Commandline.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/Commandline.java
+index bbc14bfe8..d01e48b18 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/Commandline.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/Commandline.java
+@@ -25,17 +25,17 @@
+ import java.util.Set;
+ import java.util.concurrent.ConcurrentLinkedDeque;
+ 
+-import org.apache.maven.surefire.shared.utils.cli.CommandLineUtils;
++import org.apache.maven.shared.utils.cli.CommandLineUtils;
+ 
+ import static java.util.Collections.addAll;
+ 
+ /**
+- * A {@link org.apache.maven.surefire.shared.utils.cli.Commandline} implementation.
++ * A {@link org.apache.maven.shared.utils.cli.Commandline} implementation.
+  *
+  * @author Andreas Gudian
+  */
+ public class Commandline
+-    extends org.apache.maven.surefire.shared.utils.cli.Commandline
++    extends org.apache.maven.shared.utils.cli.Commandline
+ {
+     private final Collection<String> excludedEnvironmentVariables;
+     private final Set<String> addedEnvironmentVariables;
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/extensions/SurefireForkChannel.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/extensions/SurefireForkChannel.java
+index f0c5bbfef..a744f952a 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/extensions/SurefireForkChannel.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/extensions/SurefireForkChannel.java
+@@ -58,8 +58,8 @@
+ import static org.apache.maven.surefire.api.util.internal.Channels.newInputStream;
+ import static org.apache.maven.surefire.api.util.internal.Channels.newOutputStream;
+ import static org.apache.maven.surefire.api.util.internal.DaemonThreadFactory.newDaemonThreadFactory;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.isBlank;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.isNotBlank;
++import static org.apache.commons.lang3.StringUtils.isBlank;
++import static org.apache.commons.lang3.StringUtils.isNotBlank;
+ 
+ /**
+  * The TCP/IP server accepting only one client connection. The forked JVM connects to the server using the
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/ConsoleReporter.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/ConsoleReporter.java
+index 6541b05fb..00671663a 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/ConsoleReporter.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/ConsoleReporter.java
+@@ -22,14 +22,14 @@
+ import java.util.List;
+ 
+ import org.apache.maven.plugin.surefire.log.api.ConsoleLogger;
+-import org.apache.maven.surefire.shared.utils.logging.MessageBuilder;
++import org.apache.maven.shared.utils.logging.MessageBuilder;
+ import org.apache.maven.plugin.surefire.log.api.Level;
+ import org.apache.maven.surefire.extensions.StatelessTestsetInfoConsoleReportEventListener;
+ import org.apache.maven.surefire.api.report.TestSetReportEntry;
+ 
+ import static org.apache.maven.plugin.surefire.log.api.Level.resolveLevel;
+ import static org.apache.maven.plugin.surefire.report.TestSetStats.concatenateWithTestGroup;
+-import static org.apache.maven.surefire.shared.utils.logging.MessageUtils.buffer;
++import static org.apache.maven.shared.utils.logging.MessageUtils.buffer;
+ 
+ /**
+  * Base class for console reporters.
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactory.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactory.java
+index d45ae83cf..34f38b5a3 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactory.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactory.java
+@@ -24,7 +24,7 @@
+ import org.apache.maven.plugin.surefire.log.api.Level;
+ import org.apache.maven.plugin.surefire.runorder.StatisticsReporter;
+ import org.apache.maven.surefire.api.report.TestOutputReportEntry;
+-import org.apache.maven.surefire.shared.utils.logging.MessageBuilder;
++import org.apache.maven.shared.utils.logging.MessageBuilder;
+ import org.apache.maven.surefire.extensions.ConsoleOutputReportEventListener;
+ import org.apache.maven.surefire.extensions.StatelessReportEventListener;
+ import org.apache.maven.surefire.extensions.StatelessTestsetInfoConsoleReportEventListener;
+@@ -55,7 +55,7 @@
+ import static org.apache.maven.plugin.surefire.report.ReportEntryType.ERROR;
+ import static org.apache.maven.plugin.surefire.report.ReportEntryType.FAILURE;
+ import static org.apache.maven.plugin.surefire.report.ReportEntryType.SUCCESS;
+-import static org.apache.maven.surefire.shared.utils.logging.MessageUtils.buffer;
++import static org.apache.maven.shared.utils.logging.MessageUtils.buffer;
+ import static org.apache.maven.surefire.api.util.internal.ObjectUtils.useNonNull;
+ 
+ /**
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporter.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporter.java
+index b3410f70b..eafba006f 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporter.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporter.java
+@@ -32,7 +32,7 @@
+ import java.util.List;
+ 
+ import static org.apache.maven.plugin.surefire.report.FileReporterUtils.stripIllegalFilenameChars;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
+ 
+ /**
+  * Base class for file reporters.
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporterUtils.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporterUtils.java
+index 5ef061015..e27fe6d97 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporterUtils.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/FileReporterUtils.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ 
+ /**
+  * Utils class for file-based reporters
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java
+index 45f1c5003..e27691278 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporter.java
+@@ -20,8 +20,8 @@
+  */
+ 
+ import org.apache.maven.plugin.surefire.booterclient.output.InPluginProcessDumpSingleton;
+-import org.apache.maven.surefire.shared.utils.xml.PrettyPrintXMLWriter;
+-import org.apache.maven.surefire.shared.utils.xml.XMLWriter;
++import org.apache.maven.shared.utils.xml.PrettyPrintXMLWriter;
++import org.apache.maven.shared.utils.xml.XMLWriter;
+ import org.apache.maven.surefire.extensions.StatelessReportEventListener;
+ import org.apache.maven.surefire.api.report.SafeThrowable;
+ 
+@@ -47,7 +47,7 @@
+ import static org.apache.maven.plugin.surefire.report.FileReporterUtils.stripIllegalFilenameChars;
+ import static org.apache.maven.plugin.surefire.report.ReportEntryType.SKIPPED;
+ import static org.apache.maven.plugin.surefire.report.ReportEntryType.SUCCESS;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ @SuppressWarnings( { "javadoc", "checkstyle:javadoctype" } )
+ // CHECKSTYLE_OFF: LineLength
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/TestSetStats.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/TestSetStats.java
+index 869f58a5a..dcf6b0709 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/TestSetStats.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/TestSetStats.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.utils.logging.MessageBuilder;
++import org.apache.maven.shared.utils.logging.MessageBuilder;
+ import org.apache.maven.surefire.api.report.ReportEntry;
+ 
+ import java.util.ArrayList;
+@@ -28,7 +28,7 @@
+ import java.util.Queue;
+ import java.util.concurrent.ConcurrentLinkedQueue;
+ 
+-import static org.apache.maven.surefire.shared.utils.logging.MessageUtils.buffer;
++import static org.apache.maven.shared.utils.logging.MessageUtils.buffer;
+ import static org.apache.maven.surefire.api.report.CategorizedReportEntry.GROUP_PREFIX;
+ 
+ /**
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/WrappedReportEntry.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/WrappedReportEntry.java
+index bc2fca0c5..1520caeb6 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/WrappedReportEntry.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/report/WrappedReportEntry.java
+@@ -31,7 +31,7 @@
+ import static java.util.Collections.unmodifiableMap;
+ import static org.apache.maven.plugin.surefire.report.ReporterUtils.formatElapsedTime;
+ import static org.apache.maven.surefire.api.util.internal.StringUtils.NL;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  * @author Kristian Rosenvold
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/FileScanner.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/FileScanner.java
+index 69a6945a9..4fc533d3f 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/FileScanner.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/FileScanner.java
+@@ -24,7 +24,7 @@
+ import java.io.File;
+ import java.util.Collection;
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ final class FileScanner
+ {
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/ScannerUtil.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/ScannerUtil.java
+index afd9cf23e..8073907a8 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/ScannerUtil.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/ScannerUtil.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.lang3.StringUtils;
++import org.apache.commons.lang3.StringUtils;
+ import javax.annotation.Nonnull;
+ 
+ final class ScannerUtil
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/SpecificFileFilter.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/SpecificFileFilter.java
+index 00ea5990a..6b97b2f4f 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/SpecificFileFilter.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/util/SpecificFileFilter.java
+@@ -24,7 +24,7 @@
+ 
+ import javax.annotation.Nullable;
+ 
+-import org.apache.maven.surefire.shared.utils.io.SelectorUtils;
++import org.apache.maven.shared.utils.io.SelectorUtils;
+ 
+ import static org.apache.maven.plugin.surefire.util.ScannerUtil.convertSlashToSystemFileSeparator;
+ 
+diff --git a/maven-surefire-common/src/main/java/org/apache/maven/surefire/stream/EventDecoder.java b/maven-surefire-common/src/main/java/org/apache/maven/surefire/stream/EventDecoder.java
+index ea1188984..70ebd3c56 100644
+--- a/maven-surefire-common/src/main/java/org/apache/maven/surefire/stream/EventDecoder.java
++++ b/maven-surefire-common/src/main/java/org/apache/maven/surefire/stream/EventDecoder.java
+@@ -72,7 +72,7 @@
+ import static org.apache.maven.surefire.api.stream.SegmentType.RUN_MODE;
+ import static org.apache.maven.surefire.api.stream.SegmentType.STRING_ENCODING;
+ import static org.apache.maven.surefire.api.stream.SegmentType.TEST_RUN_ID;
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
+ 
+ /**
+  *
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java
+index ec00a22a4..7bd3154cb 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java
+@@ -97,9 +97,9 @@
+ import static java.util.Collections.singletonList;
+ import static org.apache.maven.artifact.versioning.VersionRange.createFromVersion;
+ import static org.apache.maven.artifact.versioning.VersionRange.createFromVersionSpec;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_9;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_RECENT;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.JavaVersion.JAVA_9;
++import static org.apache.commons.lang3.JavaVersion.JAVA_RECENT;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.codehaus.plexus.languages.java.jpms.ModuleNameSource.MODULEDESCRIPTOR;
+ import static org.junit.Assert.fail;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoToolchainsTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoToolchainsTest.java
+index 4ebe62a6e..6c5110f79 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoToolchainsTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoToolchainsTest.java
+@@ -21,7 +21,7 @@
+ 
+ import org.apache.maven.execution.MavenSession;
+ import org.apache.maven.plugin.MojoFailureException;
+-import org.apache.maven.surefire.shared.io.FilenameUtils;
++import org.apache.commons.io.FilenameUtils;
+ import org.apache.maven.toolchain.Toolchain;
+ import org.apache.maven.toolchain.ToolchainManager;
+ import org.apache.maven.toolchain.java.DefaultJavaToolChain;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/SurefireHelperTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/SurefireHelperTest.java
+index dbe2c3697..570adf32b 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/SurefireHelperTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/SurefireHelperTest.java
+@@ -40,7 +40,7 @@
+ import static java.util.Collections.singleton;
+ import static org.apache.maven.plugin.surefire.SurefireHelper.escapeToPlatformPath;
+ import static org.apache.maven.plugin.surefire.SurefireHelper.reportExecution;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.hamcrest.Matchers.containsString;
+ import static org.junit.Assume.assumeTrue;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerProviderConfigurationTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerProviderConfigurationTest.java
+index 55f63f358..34c021269 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerProviderConfigurationTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerProviderConfigurationTest.java
+@@ -21,7 +21,7 @@
+ 
+ import junit.framework.Assert;
+ import junit.framework.TestCase;
+-import org.apache.maven.surefire.shared.io.FileUtils;
++import org.apache.commons.io.FileUtils;
+ import org.apache.maven.surefire.booter.BooterDeserializer;
+ import org.apache.maven.surefire.booter.ClassLoaderConfiguration;
+ import org.apache.maven.surefire.booter.ClasspathConfiguration;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerStartupConfigurationTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerStartupConfigurationTest.java
+index 9baf914af..a2041a541 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerStartupConfigurationTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/BooterDeserializerStartupConfigurationTest.java
+@@ -31,7 +31,7 @@
+ import org.apache.maven.surefire.booter.StartupConfiguration;
+ import org.apache.maven.surefire.api.cli.CommandLineOption;
+ import org.apache.maven.surefire.api.report.ReporterConfiguration;
+-import org.apache.maven.surefire.shared.io.FileUtils;
++import org.apache.commons.io.FileUtils;
+ import org.apache.maven.surefire.api.testset.DirectoryScannerParameters;
+ import org.apache.maven.surefire.api.testset.RunOrderParameters;
+ import org.apache.maven.surefire.api.testset.TestArtifactInfo;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java
+index d1771889e..89aeb679e 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java
+@@ -31,7 +31,7 @@
+ import org.apache.maven.surefire.booter.StartupConfiguration;
+ import org.apache.maven.surefire.booter.SurefireBooterForkException;
+ import org.apache.maven.surefire.extensions.ForkNodeFactory;
+-import org.apache.maven.surefire.shared.io.FileUtils;
++import org.apache.commons.io.FileUtils;
+ import org.junit.After;
+ import org.junit.Before;
+ import org.junit.Test;
+@@ -54,7 +54,7 @@
+ import static org.apache.maven.surefire.api.util.internal.StringUtils.NL;
+ import static org.apache.maven.surefire.booter.Classpath.emptyClasspath;
+ import static org.apache.maven.surefire.booter.ProcessCheckerType.ALL;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.apache.commons.io.FileUtils.getTempDirectory;
+ import static org.junit.Assert.assertEquals;
+@@ -128,7 +128,7 @@ protected void resolveClasspath( @Nonnull Commandline cli,
+         ClassLoaderConfiguration clc = new ClassLoaderConfiguration( true, true );
+         StartupConfiguration startup = new StartupConfiguration( "cls", cpConfig, clc, ALL, providerJpmsArgs );
+ 
+-        org.apache.maven.surefire.shared.utils.cli.Commandline
++        org.apache.maven.shared.utils.cli.Commandline
+                 cli = config.createCommandLine( startup, 1, getTempDirectory() );
+ 
+         assertThat( cli.getEnvironmentVariables() )
+@@ -159,7 +159,7 @@ public void testCliArgs() throws Exception
+         ClassLoaderConfiguration clc = new ClassLoaderConfiguration( true, true );
+         StartupConfiguration startup = new StartupConfiguration( "cls", cpConfig, clc, ALL, providerJpmsArgs );
+ 
+-        org.apache.maven.surefire.shared.utils.cli.Commandline
++        org.apache.maven.shared.utils.cli.Commandline
+                 cli = config.createCommandLine( startup, 1, getTempDirectory() );
+         String cliAsString = cli.toString();
+ 
+@@ -237,7 +237,7 @@ protected void resolveClasspath( @Nonnull Commandline cli,
+         assertThat( startup.isShadefire() )
+             .isFalse();
+ 
+-        org.apache.maven.surefire.shared.utils.cli.Commandline
++        org.apache.maven.shared.utils.cli.Commandline
+                 cli = config.createCommandLine( startup, 1, getTempDirectory() );
+ 
+         assertThat( cli.toString() )
+@@ -259,7 +259,7 @@ public void testCreateCommandLine_UseSystemClassLoaderForkOnce_ShouldConstructMa
+         StartupConfiguration startup =
+             new StartupConfiguration( "", cpConfig, clc, ALL, Collections.<String[]>emptyList() );
+ 
+-        org.apache.maven.surefire.shared.utils.cli.Commandline
++        org.apache.maven.shared.utils.cli.Commandline
+                 cli = config.createCommandLine( startup, 1, getTempDirectory() );
+ 
+         String line = join( " ", cli.getCommandline() );
+@@ -281,7 +281,7 @@ public void testArglineWithNewline()
+         StartupConfiguration startup =
+             new StartupConfiguration( "", cpConfig, clc, ALL, Collections.<String[]>emptyList() );
+ 
+-        org.apache.maven.surefire.shared.utils.cli.Commandline
++        org.apache.maven.shared.utils.cli.Commandline
+                 commandLine = config.createCommandLine( startup, 1, getTempDirectory() );
+         assertThat( commandLine.toString() ).contains( IS_OS_WINDOWS ? "abc def" : "'abc' 'def'" );
+     }
+@@ -298,7 +298,7 @@ public void testCurrentWorkingDirectoryPropagationIncludingForkNumberExpansion()
+         StartupConfiguration startup =
+             new StartupConfiguration( "", cpConfig, clc, ALL, Collections.<String[]>emptyList() );
+         ForkConfiguration config = getForkConfiguration( cwd.getCanonicalFile() );
+-        org.apache.maven.surefire.shared.utils.cli.Commandline
++        org.apache.maven.shared.utils.cli.Commandline
+                 commandLine = config.createCommandLine( startup, 1, getTempDirectory() );
+ 
+         File forkDirectory = new File( basedir, "fork_1" );
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkStarterTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkStarterTest.java
+index ff04152a5..7b88ada69 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkStarterTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkStarterTest.java
+@@ -43,9 +43,9 @@
+ import org.apache.maven.surefire.booter.SurefireBooterForkException;
+ import org.apache.maven.surefire.extensions.ForkNodeFactory;
+ import org.apache.maven.surefire.api.report.ReporterConfiguration;
+-import org.apache.maven.surefire.shared.compress.archivers.zip.Zip64Mode;
+-import org.apache.maven.surefire.shared.compress.archivers.zip.ZipArchiveEntry;
+-import org.apache.maven.surefire.shared.compress.archivers.zip.ZipArchiveOutputStream;
++import org.apache.commons.compress.archivers.zip.Zip64Mode;
++import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
++import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
+ import org.junit.AfterClass;
+ import org.junit.BeforeClass;
+ import org.junit.Rule;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java
+index 668859185..bca3acd9c 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java
+@@ -45,7 +45,7 @@
+ import static java.util.Arrays.asList;
+ import static java.util.Collections.singleton;
+ import static org.apache.maven.surefire.booter.Classpath.emptyClasspath;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.replace;
++import static org.apache.maven.shared.utils.StringUtils.replace;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.mockito.Mockito.mock;
+ 
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/CommandlineTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/CommandlineTest.java
+index 86d3f3c22..40ad62dd5 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/CommandlineTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/lazytestprovider/CommandlineTest.java
+@@ -19,11 +19,11 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.utils.cli.CommandLineException;
++import org.apache.maven.shared.utils.cli.CommandLineException;
+ import org.assertj.core.api.Condition;
+ import org.junit.Test;
+ 
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.assertj.core.api.Assertions.assertThat;
+ 
+ /**
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactoryTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactoryTest.java
+index ded28a3d3..8d03ee1b7 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactoryTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/DefaultReporterFactoryTest.java
+@@ -35,7 +35,7 @@
+ import org.apache.maven.plugin.surefire.log.api.ConsoleLogger;
+ import org.apache.maven.surefire.api.report.TestOutputReportEntry;
+ import org.apache.maven.surefire.api.report.TestReportListener;
+-import org.apache.maven.surefire.shared.utils.logging.MessageUtils;
++import org.apache.maven.shared.utils.logging.MessageUtils;
+ import org.apache.maven.surefire.report.RunStatistics;
+ import org.apache.maven.surefire.api.report.SafeThrowable;
+ import org.apache.maven.surefire.api.report.StackTraceWriter;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporterTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporterTest.java
+index 8744c91f0..99d4dcfed 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporterTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/StatelessXmlReporterTest.java
+@@ -24,8 +24,8 @@
+ import org.apache.maven.surefire.api.report.ReportEntry;
+ import org.apache.maven.surefire.api.report.SimpleReportEntry;
+ import org.apache.maven.surefire.api.report.StackTraceWriter;
+-import org.apache.maven.surefire.shared.utils.xml.Xpp3Dom;
+-import org.apache.maven.surefire.shared.utils.xml.Xpp3DomBuilder;
++import org.apache.maven.shared.utils.xml.Xpp3Dom;
++import org.apache.maven.shared.utils.xml.Xpp3DomBuilder;
+ 
+ import java.io.ByteArrayOutputStream;
+ import java.io.File;
+@@ -49,7 +49,7 @@
+ import static org.apache.maven.surefire.api.report.RunMode.NORMAL_RUN;
+ import static org.apache.maven.surefire.api.report.RunMode.RERUN_TEST_AFTER_FAILURE;
+ import static org.apache.maven.surefire.api.util.internal.ObjectUtils.systemProps;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isEmpty;
++import static org.apache.maven.shared.utils.StringUtils.isEmpty;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.mockito.Mockito.doThrow;
+ import static org.mockito.Mockito.mock;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/TestSetStatsTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/TestSetStatsTest.java
+index 0d9bd6a48..c26051c26 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/TestSetStatsTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/report/TestSetStatsTest.java
+@@ -26,7 +26,7 @@
+ import org.powermock.core.classloader.annotations.PowerMockIgnore;
+ import org.powermock.modules.junit4.PowerMockRunner;
+ 
+-import static org.apache.maven.surefire.shared.utils.logging.MessageUtils.buffer;
++import static org.apache.maven.shared.utils.logging.MessageUtils.buffer;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.mockito.Mockito.times;
+ import static org.mockito.Mockito.verify;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/runorder/RunEntryStatisticsMapTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/runorder/RunEntryStatisticsMapTest.java
+index 8f5f58054..86db1648d 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/runorder/RunEntryStatisticsMapTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/runorder/RunEntryStatisticsMapTest.java
+@@ -39,7 +39,7 @@
+ 
+ import static java.nio.charset.StandardCharsets.UTF_8;
+ import static org.apache.maven.surefire.api.report.RunMode.NORMAL_RUN;
+-import static org.apache.maven.surefire.shared.io.IOUtils.readLines;
++import static org.apache.commons.io.IOUtils.readLines;
+ import static org.apache.maven.surefire.api.util.internal.StringUtils.NL;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.powermock.reflect.Whitebox.getInternalState;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/surefire/extensions/StatelessTestsetInfoReporterTest.java b/maven-surefire-common/src/test/java/org/apache/maven/surefire/extensions/StatelessTestsetInfoReporterTest.java
+index 58d2803e8..3abdc2927 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/surefire/extensions/StatelessTestsetInfoReporterTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/surefire/extensions/StatelessTestsetInfoReporterTest.java
+@@ -27,7 +27,7 @@
+ import org.apache.maven.plugin.surefire.report.TestSetStats;
+ import org.apache.maven.plugin.surefire.report.WrappedReportEntry;
+ import org.apache.maven.surefire.api.report.TestSetReportEntry;
+-import org.apache.maven.surefire.shared.utils.logging.MessageUtils;
++import org.apache.maven.shared.utils.logging.MessageUtils;
+ import org.junit.Test;
+ import org.junit.runner.RunWith;
+ import org.mockito.ArgumentCaptor;
+diff --git a/maven-surefire-common/src/test/java/org/apache/maven/surefire/report/ConsoleOutputFileReporterTest.java b/maven-surefire-common/src/test/java/org/apache/maven/surefire/report/ConsoleOutputFileReporterTest.java
+index 6b0ee446a..71d70a7f4 100644
+--- a/maven-surefire-common/src/test/java/org/apache/maven/surefire/report/ConsoleOutputFileReporterTest.java
++++ b/maven-surefire-common/src/test/java/org/apache/maven/surefire/report/ConsoleOutputFileReporterTest.java
+@@ -31,7 +31,7 @@
+ import org.apache.maven.surefire.api.report.SimpleReportEntry;
+ import org.apache.maven.surefire.api.report.TestOutputReportEntry;
+ import org.apache.maven.surefire.api.report.TestSetReportEntry;
+-import org.apache.maven.surefire.shared.utils.io.FileUtils;
++import org.apache.maven.shared.utils.io.FileUtils;
+ 
+ import static java.nio.charset.StandardCharsets.US_ASCII;
+ import static org.apache.maven.surefire.api.report.RunMode.NORMAL_RUN;
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/booter/Command.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/booter/Command.java
+index d768e1142..a74d97fe0 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/booter/Command.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/booter/Command.java
+@@ -22,7 +22,7 @@
+ import java.util.Objects;
+ 
+ import static java.util.Objects.requireNonNull;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  * Encapsulates data and command sent from master to forked process.
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/filter/SpecificTestClassFilter.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/filter/SpecificTestClassFilter.java
+index 112f5eece..a768b15dd 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/filter/SpecificTestClassFilter.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/filter/SpecificTestClassFilter.java
+@@ -22,7 +22,7 @@
+ import java.util.Collections;
+ import java.util.HashSet;
+ import java.util.Set;
+-import org.apache.maven.surefire.shared.utils.io.SelectorUtils;
++import org.apache.maven.shared.utils.io.SelectorUtils;
+ import org.apache.maven.surefire.api.util.ScannerFilter;
+ 
+ /**
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/report/LegacyPojoStackTraceWriter.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/report/LegacyPojoStackTraceWriter.java
+index ffb09c7fa..83bf77834 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/report/LegacyPojoStackTraceWriter.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/report/LegacyPojoStackTraceWriter.java
+@@ -21,7 +21,7 @@
+ 
+ 
+ import org.apache.maven.surefire.api.util.internal.StringUtils;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotEmpty;
++import static org.apache.maven.shared.utils.StringUtils.isNotEmpty;
+ 
+ import java.io.PrintWriter;
+ import java.io.StringWriter;
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/stream/AbstractStreamDecoder.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/stream/AbstractStreamDecoder.java
+index facf30bcb..4614926ea 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/stream/AbstractStreamDecoder.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/stream/AbstractStreamDecoder.java
+@@ -46,7 +46,7 @@
+ import static org.apache.maven.surefire.api.booter.Constants.DEFAULT_STREAM_ENCODING;
+ import static org.apache.maven.surefire.api.stream.AbstractStreamDecoder.StreamReadStatus.OVERFLOW;
+ import static org.apache.maven.surefire.api.stream.AbstractStreamDecoder.StreamReadStatus.UNDERFLOW;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.isBlank;
++import static org.apache.commons.lang3.StringUtils.isBlank;
+ 
+ /**
+  * @param <M> message object
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/ResolvedTest.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/ResolvedTest.java
+index 24503581c..aa690d34e 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/ResolvedTest.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/ResolvedTest.java
+@@ -19,18 +19,18 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.utils.StringUtils;
+-import org.apache.maven.surefire.shared.utils.io.MatchPatterns;
++import org.apache.maven.shared.utils.StringUtils;
++import org.apache.maven.shared.utils.io.MatchPatterns;
+ 
+ import java.util.regex.Pattern;
+ 
+ import static java.io.File.separatorChar;
+ import static java.util.regex.Pattern.compile;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
+-import static org.apache.maven.surefire.shared.utils.io.MatchPatterns.from;
+-import static org.apache.maven.surefire.shared.utils.io.SelectorUtils.PATTERN_HANDLER_SUFFIX;
+-import static org.apache.maven.surefire.shared.utils.io.SelectorUtils.REGEX_HANDLER_PREFIX;
+-import static org.apache.maven.surefire.shared.utils.io.SelectorUtils.matchPath;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.io.MatchPatterns.from;
++import static org.apache.maven.shared.utils.io.SelectorUtils.PATTERN_HANDLER_SUFFIX;
++import static org.apache.maven.shared.utils.io.SelectorUtils.REGEX_HANDLER_PREFIX;
++import static org.apache.maven.shared.utils.io.SelectorUtils.matchPath;
+ 
+ /**
+  * Single pattern test filter resolved from multi pattern filter -Dtest=MyTest#test,AnotherTest#otherTest.
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/TestListResolver.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/TestListResolver.java
+index bae7c2924..799011a69 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/TestListResolver.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/testset/TestListResolver.java
+@@ -26,11 +26,11 @@
+ import java.util.Set;
+ 
+ import static java.util.Collections.unmodifiableSet;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.split;
+-import static org.apache.maven.surefire.shared.utils.io.SelectorUtils.PATTERN_HANDLER_SUFFIX;
+-import static org.apache.maven.surefire.shared.utils.io.SelectorUtils.REGEX_HANDLER_PREFIX;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.split;
++import static org.apache.maven.shared.utils.io.SelectorUtils.PATTERN_HANDLER_SUFFIX;
++import static org.apache.maven.shared.utils.io.SelectorUtils.REGEX_HANDLER_PREFIX;
+ import static java.util.Collections.singleton;
+ import static org.apache.maven.surefire.api.testset.ResolvedTest.Type.CLASS;
+ import static org.apache.maven.surefire.api.testset.ResolvedTest.Type.METHOD;
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/util/DefaultDirectoryScanner.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/util/DefaultDirectoryScanner.java
+index fcdba6bd7..8edee7816 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/util/DefaultDirectoryScanner.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/util/DefaultDirectoryScanner.java
+@@ -109,8 +109,8 @@ String[] collectTests()
+         String[] tests = EMPTY_STRING_ARRAY;
+         if ( basedir.exists() )
+         {
+-            org.apache.maven.surefire.shared.utils.io.DirectoryScanner scanner =
+-                new org.apache.maven.surefire.shared.utils.io.DirectoryScanner();
++            org.apache.maven.shared.utils.io.DirectoryScanner scanner =
++                new org.apache.maven.shared.utils.io.DirectoryScanner();
+ 
+             scanner.setBasedir( basedir );
+ 
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ClassMethod.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ClassMethod.java
+index 03661d825..1d2a060d6 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ClassMethod.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ClassMethod.java
+@@ -21,7 +21,7 @@
+ 
+ import java.util.Objects;
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  * Data transfer object of class and method literals.
+diff --git a/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ObjectUtils.java b/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ObjectUtils.java
+index 9ee7571e4..58276b9d0 100644
+--- a/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ObjectUtils.java
++++ b/surefire-api/src/main/java/org/apache/maven/surefire/api/util/internal/ObjectUtils.java
+@@ -22,8 +22,8 @@
+ import java.lang.management.ManagementFactory;
+ import java.util.Map;
+ 
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_17;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_RECENT;
++import static org.apache.commons.lang3.JavaVersion.JAVA_17;
++import static org.apache.commons.lang3.JavaVersion.JAVA_RECENT;
+ 
+ /**
+  * Similar to Java 7 java.util.Objects.
+diff --git a/surefire-api/src/test/java/org/apache/maven/surefire/api/util/internal/ObjectUtilsTest.java b/surefire-api/src/test/java/org/apache/maven/surefire/api/util/internal/ObjectUtilsTest.java
+index ef5035ec4..303b0ea85 100644
+--- a/surefire-api/src/test/java/org/apache/maven/surefire/api/util/internal/ObjectUtilsTest.java
++++ b/surefire-api/src/test/java/org/apache/maven/surefire/api/util/internal/ObjectUtilsTest.java
+@@ -21,8 +21,8 @@
+ 
+ import org.junit.Test;
+ 
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_17;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_RECENT;
++import static org.apache.commons.lang3.JavaVersion.JAVA_17;
++import static org.apache.commons.lang3.JavaVersion.JAVA_RECENT;
+ import static org.assertj.core.api.Assertions.assertThat;
+ 
+ /**
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/CommandReader.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/CommandReader.java
+index 609327ccf..a88bbd621 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/CommandReader.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/CommandReader.java
+@@ -54,8 +54,8 @@
+ import static org.apache.maven.surefire.api.booter.MasterProcessCommand.NOOP;
+ import static org.apache.maven.surefire.api.booter.MasterProcessCommand.SHUTDOWN;
+ import static org.apache.maven.surefire.api.booter.MasterProcessCommand.SKIP_SINCE_NEXT_TEST;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
+ import static org.apache.maven.surefire.api.util.internal.DaemonThreadFactory.newDaemonThread;
+ 
+ /**
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ForkedBooter.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ForkedBooter.java
+index bd44d55c4..e750194bf 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ForkedBooter.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ForkedBooter.java
+@@ -34,7 +34,7 @@
+ import org.apache.maven.surefire.api.testset.TestSetFailedException;
+ import org.apache.maven.surefire.booter.spi.LegacyMasterProcessChannelProcessorFactory;
+ import org.apache.maven.surefire.booter.spi.SurefireMasterProcessChannelProcessorFactory;
+-import org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils;
++import org.apache.maven.shared.utils.cli.ShutdownHookUtils;
+ import org.apache.maven.surefire.spi.MasterProcessChannelProcessorFactory;
+ 
+ import java.io.File;
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PpidChecker.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PpidChecker.java
+index 1fb8a30ae..4e21f43c9 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PpidChecker.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PpidChecker.java
+@@ -45,12 +45,12 @@
+ import static java.util.concurrent.TimeUnit.HOURS;
+ import static java.util.concurrent.TimeUnit.MINUTES;
+ import static java.util.regex.Pattern.compile;
+-import static org.apache.maven.surefire.shared.io.IOUtils.closeQuietly;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.isNotBlank;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_HP_UX;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_LINUX;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_UNIX;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.io.IOUtils.closeQuietly;
++import static org.apache.commons.lang3.StringUtils.isNotBlank;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_HP_UX;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_LINUX;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_UNIX;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.apache.maven.surefire.booter.ProcessInfo.unixProcessInfo;
+ import static org.apache.maven.surefire.booter.ProcessInfo.windowsProcessInfo;
+ import static org.apache.maven.surefire.booter.ProcessInfo.ERR_PROCESS_INFO;
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ProcessCheckerType.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ProcessCheckerType.java
+index 03a0e880d..281d5b4f0 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ProcessCheckerType.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/ProcessCheckerType.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  *
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PropertiesWrapper.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PropertiesWrapper.java
+index b5cccf478..13e60aec0 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PropertiesWrapper.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/PropertiesWrapper.java
+@@ -23,7 +23,7 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ import java.util.Map;
+-import org.apache.maven.surefire.shared.utils.StringUtils;
++import org.apache.maven.shared.utils.StringUtils;
+ 
+ /**
+  * @author Kristian Rosenvold
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SurefireBooterForkException.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SurefireBooterForkException.java
+index bae4ed086..8620be11b 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SurefireBooterForkException.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SurefireBooterForkException.java
+@@ -22,7 +22,7 @@
+ 
+ import org.apache.maven.surefire.api.suite.RunResult;
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
+ 
+ /**
+  * Encapsulates exceptions thrown during Surefire forking.
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SystemUtils.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SystemUtils.java
+index 674cb22ed..844c4ce11 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SystemUtils.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/SystemUtils.java
+@@ -36,15 +36,15 @@
+ import static java.lang.Thread.currentThread;
+ import static java.util.Objects.requireNonNull;
+ import static org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_RECENT;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_9;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.isNumeric;
++import static org.apache.commons.lang3.JavaVersion.JAVA_RECENT;
++import static org.apache.commons.lang3.JavaVersion.JAVA_9;
++import static org.apache.commons.lang3.StringUtils.isNumeric;
+ import static org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodChain;
+ import static org.apache.maven.surefire.api.util.ReflectionUtils.tryLoadClass;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_LINUX;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_FREE_BSD;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_NET_BSD;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_OPEN_BSD;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_LINUX;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_FREE_BSD;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_NET_BSD;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_OPEN_BSD;
+ 
+ /**
+  * JDK 9 support.
+diff --git a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/stream/CommandDecoder.java b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/stream/CommandDecoder.java
+index 4a7e257f7..86235dbfc 100644
+--- a/surefire-booter/src/main/java/org/apache/maven/surefire/booter/stream/CommandDecoder.java
++++ b/surefire-booter/src/main/java/org/apache/maven/surefire/booter/stream/CommandDecoder.java
+@@ -48,7 +48,7 @@
+ import static org.apache.maven.surefire.api.stream.SegmentType.DATA_STRING;
+ import static org.apache.maven.surefire.api.stream.SegmentType.END_OF_FRAME;
+ import static org.apache.maven.surefire.api.stream.SegmentType.STRING_ENCODING;
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
+ 
+ /**
+  *
+diff --git a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterMockTest.java b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterMockTest.java
+index 62df89930..fe02fdc7e 100644
+--- a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterMockTest.java
++++ b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterMockTest.java
+@@ -29,7 +29,7 @@
+ import org.apache.maven.surefire.booter.spi.EventChannelEncoder;
+ import org.apache.maven.surefire.booter.spi.LegacyMasterProcessChannelProcessorFactory;
+ import org.apache.maven.surefire.booter.spi.SurefireMasterProcessChannelProcessorFactory;
+-import org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils;
++import org.apache.maven.shared.utils.cli.ShutdownHookUtils;
+ import org.apache.maven.surefire.spi.MasterProcessChannelProcessorFactory;
+ import org.junit.Rule;
+ import org.junit.Test;
+diff --git a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java
+index b5a1851ea..e367798fe 100644
+--- a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java
++++ b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.io.FileUtils;
++import org.apache.commons.io.FileUtils;
+ import org.junit.Test;
+ 
+ import java.io.File;
+diff --git a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/IsolatedClassLoaderTest.java b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/IsolatedClassLoaderTest.java
+index 801346633..3eff7b13c 100644
+--- a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/IsolatedClassLoaderTest.java
++++ b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/IsolatedClassLoaderTest.java
+@@ -20,7 +20,7 @@
+  */
+ 
+ import org.apache.maven.surefire.api.provider.AbstractProvider;
+-import org.apache.maven.surefire.shared.utils.io.FileUtils;
++import org.apache.maven.shared.utils.io.FileUtils;
+ import org.junit.Before;
+ import org.junit.Test;
+ 
+diff --git a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/NewClassLoaderRunner.java b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/NewClassLoaderRunner.java
+index ecc997d97..188cff090 100644
+--- a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/NewClassLoaderRunner.java
++++ b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/NewClassLoaderRunner.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.utils.io.FileUtils;
++import org.apache.maven.shared.utils.io.FileUtils;
+ import org.junit.After;
+ import org.junit.Before;
+ import org.junit.Test;
+diff --git a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/PpidCheckerTest.java b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/PpidCheckerTest.java
+index c5d916e5e..fa6d0df88 100644
+--- a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/PpidCheckerTest.java
++++ b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/PpidCheckerTest.java
+@@ -38,8 +38,8 @@
+ import static java.nio.charset.StandardCharsets.US_ASCII;
+ import static java.nio.file.Files.readAllBytes;
+ import static java.util.concurrent.TimeUnit.SECONDS;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_UNIX;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_UNIX;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.apache.maven.surefire.booter.ProcessInfo.unixProcessInfo;
+ import static org.apache.maven.surefire.booter.ProcessInfo.windowsProcessInfo;
+ import static org.assertj.core.api.Assertions.assertThat;
+diff --git a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/SystemUtilsTest.java b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/SystemUtilsTest.java
+index 6b2ac265f..3fa825cab 100644
+--- a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/SystemUtilsTest.java
++++ b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/SystemUtilsTest.java
+@@ -32,12 +32,12 @@
+ import java.math.BigDecimal;
+ 
+ import static java.io.File.separator;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_9;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_RECENT;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_FREE_BSD;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_LINUX;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_NET_BSD;
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_OPEN_BSD;
++import static org.apache.commons.lang3.JavaVersion.JAVA_9;
++import static org.apache.commons.lang3.JavaVersion.JAVA_RECENT;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_FREE_BSD;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_LINUX;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_NET_BSD;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_OPEN_BSD;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.junit.Assume.assumeTrue;
+ import static org.mockito.Matchers.any;
+diff --git a/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/ConsoleOutputReporter.java b/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/ConsoleOutputReporter.java
+index ae9d92799..eaf017b12 100644
+--- a/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/ConsoleOutputReporter.java
++++ b/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/ConsoleOutputReporter.java
+@@ -22,7 +22,7 @@
+ import java.io.File;
+ import java.io.PrintStream;
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  * Extension for logger.
+diff --git a/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/StatelessReporter.java b/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/StatelessReporter.java
+index effb7de73..3dd0678b1 100644
+--- a/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/StatelessReporter.java
++++ b/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/StatelessReporter.java
+@@ -21,7 +21,7 @@
+ 
+ import org.apache.maven.surefire.api.report.TestSetReportEntry;
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  * Extension for stateless reporter.
+diff --git a/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/util/CommandlineExecutor.java b/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/util/CommandlineExecutor.java
+index 14a055d94..ddb96cf67 100644
+--- a/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/util/CommandlineExecutor.java
++++ b/surefire-extensions-api/src/main/java/org/apache/maven/surefire/extensions/util/CommandlineExecutor.java
+@@ -19,13 +19,13 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.utils.cli.CommandLineException;
+-import org.apache.maven.surefire.shared.utils.cli.Commandline;
++import org.apache.maven.shared.utils.cli.CommandLineException;
++import org.apache.maven.shared.utils.cli.Commandline;
+ 
+ import java.io.Closeable;
+ 
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
+-import static org.apache.maven.surefire.shared.utils.cli.ShutdownHookUtils.removeShutdownHook;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.addShutDownHook;
++import static org.apache.maven.shared.utils.cli.ShutdownHookUtils.removeShutdownHook;
+ 
+ /**
+  * Programming model with this class:
+diff --git a/surefire-extensions-api/src/test/java/org/apache/maven/plugin/surefire/extensions/CommandlineExecutorTest.java b/surefire-extensions-api/src/test/java/org/apache/maven/plugin/surefire/extensions/CommandlineExecutorTest.java
+index e3197befe..4f98c9634 100644
+--- a/surefire-extensions-api/src/test/java/org/apache/maven/plugin/surefire/extensions/CommandlineExecutorTest.java
++++ b/surefire-extensions-api/src/test/java/org/apache/maven/plugin/surefire/extensions/CommandlineExecutorTest.java
+@@ -24,7 +24,7 @@
+ import org.apache.maven.surefire.extensions.util.CommandlineStreams;
+ import org.apache.maven.surefire.extensions.util.CountdownCloseable;
+ import org.apache.maven.surefire.extensions.util.LineConsumerThread;
+-import org.apache.maven.surefire.shared.utils.cli.Commandline;
++import org.apache.maven.shared.utils.cli.Commandline;
+ import org.junit.After;
+ import org.junit.Before;
+ import org.junit.Test;
+@@ -32,7 +32,7 @@
+ import java.io.Closeable;
+ import java.nio.file.Paths;
+ 
+-import static org.apache.maven.surefire.shared.lang3.SystemUtils.IS_OS_WINDOWS;
++import static org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS;
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.assertj.core.util.Files.delete;
+ import static org.mockito.ArgumentMatchers.contains;
+diff --git a/surefire-providers/common-java5/src/main/java/org/apache/maven/surefire/report/SmartStackTraceParser.java b/surefire-providers/common-java5/src/main/java/org/apache/maven/surefire/report/SmartStackTraceParser.java
+index 3770f2bab..4e3396a4e 100644
+--- a/surefire-providers/common-java5/src/main/java/org/apache/maven/surefire/report/SmartStackTraceParser.java
++++ b/surefire-providers/common-java5/src/main/java/org/apache/maven/surefire/report/SmartStackTraceParser.java
+@@ -27,8 +27,8 @@
+ 
+ import static java.util.Arrays.asList;
+ import static java.util.Collections.reverse;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.chompLast;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotEmpty;
++import static org.apache.maven.shared.utils.StringUtils.chompLast;
++import static org.apache.maven.shared.utils.StringUtils.isNotEmpty;
+ 
+ /**
+  * @author Kristian Rosenvold
+diff --git a/surefire-providers/common-junit4/src/main/java/org/apache/maven/surefire/common/junit4/JUnit4RunListenerFactory.java b/surefire-providers/common-junit4/src/main/java/org/apache/maven/surefire/common/junit4/JUnit4RunListenerFactory.java
+index f1f54e076..d6478f3c4 100644
+--- a/surefire-providers/common-junit4/src/main/java/org/apache/maven/surefire/common/junit4/JUnit4RunListenerFactory.java
++++ b/surefire-providers/common-junit4/src/main/java/org/apache/maven/surefire/common/junit4/JUnit4RunListenerFactory.java
+@@ -26,7 +26,7 @@
+ 
+ import org.junit.runner.notification.RunListener;
+ 
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
+ 
+ /**
+  * @author Kristian Rosenvold
+diff --git a/surefire-providers/common-junit48/src/main/java/org/apache/maven/surefire/common/junit48/FilterFactory.java b/surefire-providers/common-junit48/src/main/java/org/apache/maven/surefire/common/junit48/FilterFactory.java
+index c532404e5..5f3400e26 100644
+--- a/surefire-providers/common-junit48/src/main/java/org/apache/maven/surefire/common/junit48/FilterFactory.java
++++ b/surefire-providers/common-junit48/src/main/java/org/apache/maven/surefire/common/junit48/FilterFactory.java
+@@ -32,7 +32,7 @@
+ 
+ import static org.apache.maven.surefire.api.booter.ProviderParameterNames.TESTNG_EXCLUDEDGROUPS_PROP;
+ import static org.apache.maven.surefire.api.booter.ProviderParameterNames.TESTNG_GROUPS_PROP;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isNotBlank;
++import static org.apache.maven.shared.utils.StringUtils.isNotBlank;
+ 
+ /**
+  * @author Todd Lipcon
+diff --git a/surefire-providers/common-junit48/src/test/java/org/apache/maven/surefire/common/junit48/FilterFactoryTest.java b/surefire-providers/common-junit48/src/test/java/org/apache/maven/surefire/common/junit48/FilterFactoryTest.java
+index a69d87007..f3c41ef3f 100644
+--- a/surefire-providers/common-junit48/src/test/java/org/apache/maven/surefire/common/junit48/FilterFactoryTest.java
++++ b/surefire-providers/common-junit48/src/test/java/org/apache/maven/surefire/common/junit48/FilterFactoryTest.java
+@@ -19,7 +19,7 @@
+  * under the License.
+  */
+ 
+-import org.apache.maven.surefire.shared.utils.io.MatchPatterns;
++import org.apache.maven.shared.utils.io.MatchPatterns;
+ import org.apache.maven.surefire.common.junit48.tests.pt.PT;
+ import org.apache.maven.surefire.api.testset.ResolvedTest;
+ import org.apache.maven.surefire.api.testset.TestListResolver;
+diff --git a/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/JUnitPlatformProvider.java b/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/JUnitPlatformProvider.java
+index ad2ec944d..5022107a5 100644
+--- a/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/JUnitPlatformProvider.java
++++ b/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/JUnitPlatformProvider.java
+@@ -34,7 +34,7 @@
+ import static org.apache.maven.surefire.api.report.RunMode.RERUN_TEST_AFTER_FAILURE;
+ import static org.apache.maven.surefire.api.testset.TestListResolver.optionallyWildcardFilter;
+ import static org.apache.maven.surefire.api.util.TestsToRun.fromClass;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
+ import static org.junit.platform.engine.discovery.DiscoverySelectors.selectUniqueId;
+ import static org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder.request;
+@@ -60,7 +60,7 @@
+ import org.apache.maven.surefire.api.util.ScanResult;
+ import org.apache.maven.surefire.api.util.SurefireReflectionException;
+ import org.apache.maven.surefire.api.util.TestsToRun;
+-import org.apache.maven.surefire.shared.utils.StringUtils;
++import org.apache.maven.shared.utils.StringUtils;
+ import org.junit.platform.engine.DiscoverySelector;
+ import org.junit.platform.engine.Filter;
+ import org.junit.platform.launcher.EngineFilter;
+diff --git a/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/RunListenerAdapter.java b/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/RunListenerAdapter.java
+index aeb24576e..3fd39d4b3 100644
+--- a/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/RunListenerAdapter.java
++++ b/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/RunListenerAdapter.java
+@@ -22,7 +22,7 @@
+ import static java.util.Collections.emptyMap;
+ import static java.util.stream.Collectors.joining;
+ import static org.apache.maven.surefire.api.util.internal.ObjectUtils.systemProps;
+-import static org.apache.maven.surefire.shared.lang3.StringUtils.isNotBlank;
++import static org.apache.commons.lang3.StringUtils.isNotBlank;
+ import static org.junit.platform.engine.TestExecutionResult.Status.FAILED;
+ 
+ import java.util.Map;
+diff --git a/surefire-providers/surefire-junit3/src/test/java/org/apache/maven/surefire/junit/JUnitTestSetTest.java b/surefire-providers/surefire-junit3/src/test/java/org/apache/maven/surefire/junit/JUnitTestSetTest.java
+index 417511a72..6593fbd4a 100644
+--- a/surefire-providers/surefire-junit3/src/test/java/org/apache/maven/surefire/junit/JUnitTestSetTest.java
++++ b/surefire-providers/surefire-junit3/src/test/java/org/apache/maven/surefire/junit/JUnitTestSetTest.java
+@@ -36,8 +36,8 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_17;
+-import static org.apache.maven.surefire.shared.lang3.JavaVersion.JAVA_RECENT;
++import static org.apache.commons.lang3.JavaVersion.JAVA_17;
++import static org.apache.commons.lang3.JavaVersion.JAVA_RECENT;
+ 
+ /**
+  *
+diff --git a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGDirectoryTestSuite.java b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGDirectoryTestSuite.java
+index e9ede9d15..8d56b5653 100644
+--- a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGDirectoryTestSuite.java
++++ b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGDirectoryTestSuite.java
+@@ -34,7 +34,7 @@
+ 
+ import static java.util.Collections.singleton;
+ import static org.apache.maven.surefire.testng.TestNGExecutor.run;
+-import static org.apache.maven.surefire.shared.utils.StringUtils.isBlank;
++import static org.apache.maven.shared.utils.StringUtils.isBlank;
+ 
+ /**
+  * Test suite for TestNG based on a directory of Java test classes. Can also execute JUnit tests.
+diff --git a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java
+index 07d3ad33c..ba5610bb6 100644
+--- a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java
++++ b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java
+@@ -29,7 +29,7 @@
+ import org.apache.maven.surefire.testng.utils.Stoppable;
+ import org.apache.maven.surefire.api.testset.TestListResolver;
+ import org.apache.maven.surefire.api.testset.TestSetFailedException;
+-import org.apache.maven.surefire.shared.utils.StringUtils;
++import org.apache.maven.shared.utils.StringUtils;
+ import org.testng.ITestNGListener;
+ import org.testng.TestNG;
+ import org.testng.annotations.Test;
+-- 
+2.35.1
+

@@ -1,4 +1,4 @@
-From 14196b58bc1d96d76636914b575dc22b7cc94b1a Mon Sep 17 00:00:00 2001
+From 219edb700ee76f167a329e5bab64feceee5b6b8f Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 10 Jul 2017 10:37:50 +0200
 Subject: [PATCH 1/4] Port to TestNG 7.4.0
@@ -11,21 +11,21 @@ Forwarded: no
  3 files changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/surefire-providers/surefire-testng/pom.xml b/surefire-providers/surefire-testng/pom.xml
-index 49e75b6ea..a9db4a8d9 100644
+index ece647d6a..682f296e6 100644
 --- a/surefire-providers/surefire-testng/pom.xml
 +++ b/surefire-providers/surefire-testng/pom.xml
 @@ -51,8 +51,7 @@
-     <dependency>
-       <groupId>org.testng</groupId>
-       <artifactId>testng</artifactId>
--      <version>5.10</version>
--      <classifier>jdk15</classifier>
-+      <version>7.4.0</version>
-       <scope>provided</scope>
-     </dependency>
-   </dependencies>
+         <dependency>
+             <groupId>org.testng</groupId>
+             <artifactId>testng</artifactId>
+-            <version>5.10</version>
+-            <classifier>jdk15</classifier>
++            <version>7.4.0</version>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
 diff --git a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java
-index e9667316b..7021ef561 100644
+index ed918f538..c4a0cd19d 100644
 --- a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java
 +++ b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java
 @@ -63,7 +63,7 @@ public void configure( TestNG testng, Map<String, String> options )
@@ -38,7 +38,7 @@ index e9667316b..7021ef561 100644
  
      @Override
 diff --git a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java
-index b6bf82e03..8164f4f4d 100755
+index 6caf82459..2d988381f 100755
 --- a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java
 +++ b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java
 @@ -68,7 +68,7 @@ public void configure( XmlSuite suite, Map<String, String> options )
@@ -51,5 +51,5 @@ index b6bf82e03..8164f4f4d 100755
      }
  
 -- 
-2.31.1
+2.35.1
 

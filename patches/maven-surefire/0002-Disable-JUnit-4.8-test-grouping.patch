@@ -1,37 +1,36 @@
-From 21890515f3eeba73065b79b6a65678ec1e2a821d Mon Sep 17 00:00:00 2001
+From 68a41813f6fad18f5192932d5c07d89ef090643c Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 10:45:30 +0200
-Subject: [PATCH 3/3] Disable JUnit 4.8 test grouping
+Subject: [PATCH 2/4] Disable JUnit 4.8 test grouping
 
 Forwarded: not-needed
-
 ---
  .../surefire/junitcore/JUnitCoreProvider.java | 25 +++--------------
  .../maven/surefire/testng/TestNGExecutor.java | 27 -------------------
  2 files changed, 3 insertions(+), 49 deletions(-)
 
 diff --git a/surefire-providers/surefire-junit47/src/main/java/org/apache/maven/surefire/junitcore/JUnitCoreProvider.java b/surefire-providers/surefire-junit47/src/main/java/org/apache/maven/surefire/junitcore/JUnitCoreProvider.java
-index 7c74e8b86..c86bb276c 100644
+index 7ed483426..1ffd826db 100644
 --- a/surefire-providers/surefire-junit47/src/main/java/org/apache/maven/surefire/junitcore/JUnitCoreProvider.java
 +++ b/surefire-providers/surefire-junit47/src/main/java/org/apache/maven/surefire/junitcore/JUnitCoreProvider.java
-@@ -25,7 +25,6 @@
+@@ -40,7 +40,6 @@
  import org.apache.maven.surefire.common.junit4.JUnit4RunListener;
  import org.apache.maven.surefire.common.junit4.JUnitTestFailureListener;
  import org.apache.maven.surefire.common.junit4.Notifier;
 -import org.apache.maven.surefire.common.junit48.FilterFactory;
  import org.apache.maven.surefire.common.junit48.JUnit48Reflector;
  import org.apache.maven.surefire.common.junit48.JUnit48TestChecker;
- import org.apache.maven.surefire.providerapi.AbstractProvider;
-@@ -47,6 +46,7 @@
- import java.util.concurrent.ConcurrentHashMap;
- 
- import static org.apache.maven.surefire.booter.CommandReader.getReader;
+ import org.junit.runner.Description;
+@@ -51,6 +50,7 @@
+ import static org.apache.maven.surefire.api.report.RunMode.RERUN_TEST_AFTER_FAILURE;
+ import static org.apache.maven.surefire.api.testset.TestListResolver.optionallyWildcardFilter;
+ import static org.apache.maven.surefire.api.util.TestsToRun.fromClass;
 +import static org.apache.maven.surefire.common.junit4.JUnit4ProviderUtil.createMatchAnyDescriptionFilter;
  import static org.apache.maven.surefire.common.junit4.JUnit4ProviderUtil.generateFailingTestDescriptions;
  import static org.apache.maven.surefire.common.junit4.JUnit4RunListenerFactory.createCustomListeners;
  import static org.apache.maven.surefire.common.junit4.Notifier.pureNotifier;
 @@ -126,7 +126,7 @@ public RunResult invoke( Object forkTestSet )
-             new Notifier( createRunListener( reporterFactory, consoleStream ), getSkipAfterFailureCount() );
+         Notifier notifier = new Notifier( listener, getSkipAfterFailureCount() );
          // startCapture() called in createRunListener() in prior to setTestsToRun()
  
 -        Filter filter = jUnit48Reflector.isJUnit48Available() ? createJUnit48Filter() : null;
@@ -39,7 +38,7 @@ index 7c74e8b86..c86bb276c 100644
  
          if ( testsToRun == null )
          {
-@@ -168,8 +168,7 @@ public RunResult invoke( Object forkTestSet )
+@@ -169,8 +169,7 @@ public RunResult invoke( Object forkTestSet )
                  {
                      Set<Description> failures = generateFailingTestDescriptions( testFailureListener.getAllFailures() );
                      testFailureListener.reset();
@@ -49,7 +48,7 @@ index 7c74e8b86..c86bb276c 100644
                      rerunCore.execute( testsToRun, failureDescriptionFilter );
                  }
              }
-@@ -270,24 +269,6 @@ private boolean isParallelTypes()
+@@ -271,24 +270,6 @@ private boolean isParallelTypes()
          return jUnitCoreParameters.isParallelClasses() || jUnitCoreParameters.isParallelSuites();
      }
  
@@ -75,10 +74,10 @@ index 7c74e8b86..c86bb276c 100644
      {
          TestsToRun scanned = scanResult.applyFilter( scannerFilter, testClassLoader );
 diff --git a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java
-index 6bc30a300..05c55f55a 100644
+index 7ed1719a8..07d3ad33c 100644
 --- a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java
 +++ b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/TestNGExecutor.java
-@@ -237,36 +237,9 @@ private static XmlMethodSelector createMethodNameFilteringSelector( TestListReso
+@@ -278,36 +278,9 @@ private static XmlMethodSelector createMethodNameFilteringSelector( TestListReso
      private static XmlMethodSelector createGroupMatchingSelector( Map<String, String> options )
          throws TestSetFailedException
      {
@@ -116,5 +115,5 @@ index 6bc30a300..05c55f55a 100644
  
      static void run( List<String> suiteFiles, String testSourceDirectory,
 -- 
-2.25.2
+2.35.1
 

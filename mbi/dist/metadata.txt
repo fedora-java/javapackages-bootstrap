@@ -615,6 +615,7 @@ MOD maven-surefire
     DEP org.apache.maven.surefire surefire-api
   ART org.apache.maven.surefire surefire-junit3
     DEP org.apache.maven.surefire common-junit3
+    DEP org.apache.maven.surefire common-java5
     DEP org.apache.maven.surefire surefire-api
   ART org.apache.maven.surefire surefire-junit4
     DEP org.apache.maven.surefire common-junit4
@@ -632,33 +633,40 @@ MOD maven-surefire
     DEP org.apache.maven.surefire common-java5
     DEP org.apache.maven.surefire surefire-testng-utils
     DEP org.apache.maven.surefire surefire-api
+  ART org.apache.maven.surefire surefire-shared-utils
+    DEP org.apache.maven.shared maven-shared-utils
+    DEP commons-io commons-io
+    DEP org.apache.commons commons-lang3
+    DEP org.apache.commons commons-compress
   ART org.apache.maven.surefire surefire-logger-api
   ART org.apache.maven.surefire surefire-api
     DEP org.apache.maven.surefire surefire-logger-api
-    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.apache.maven.surefire surefire-shared-utils
+  ART org.apache.maven.surefire surefire-extensions-api
+    DEP org.apache.maven.surefire surefire-shared-utils
+  ART org.apache.maven.surefire surefire-extensions-spi
+    DEP org.apache.maven.surefire surefire-api
   ART org.apache.maven.surefire surefire-booter
     DEP org.apache.maven.surefire surefire-api
-    DEP org.apache.commons commons-lang3
-    DEP commons-io commons-io
+    DEP org.apache.maven.surefire surefire-extensions-spi
   ART org.apache.maven.surefire common-java5
-    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.apache.maven.surefire surefire-shared-utils
     DEP org.apache.maven.surefire surefire-api
 MOD maven-surefire-plugin
   ART org.apache.maven.plugins maven-surefire-plugin
     DEP org.apache.maven.surefire maven-surefire-common
   ART org.apache.maven.plugins maven-failsafe-plugin
     DEP org.apache.maven.surefire maven-surefire-common
-    DEP org.apache.maven.shared maven-shared-utils
-    DEP org.apache.commons commons-lang3
-    DEP commons-io commons-io
   ART org.apache.maven.surefire maven-surefire-common
     DEP org.apache.maven.surefire surefire-api
+    DEP org.apache.maven.surefire surefire-extensions-api
     DEP org.apache.maven.surefire surefire-booter
     DEP org.apache.maven.shared maven-common-artifact-filters
-    DEP org.codehaus.plexus plexus-java
     DEP org.apache.maven.shared maven-shared-utils
-    DEP commons-io commons-io
-    DEP org.apache.commons commons-lang3
+    DEP org.apache.maven maven-model
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
+    DEP org.codehaus.plexus plexus-java
+    DEP org.apache.maven.surefire surefire-shared-utils
 MOD maven-verifier
   ART org.apache.maven.shared maven-verifier
     DEP org.apache.maven.shared maven-shared-utils
