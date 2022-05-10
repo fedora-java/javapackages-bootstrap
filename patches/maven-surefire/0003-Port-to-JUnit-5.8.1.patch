@@ -1,0 +1,71 @@
+From 3d0dad9c32ce059b8f562e3c5bd754f6b3394a74 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 22 Apr 2022 00:28:31 +0200
+Subject: [PATCH 3/4] Port to JUnit 5.8.1
+
+Forwarded: no
+---
+ pom.xml                                            |  6 +++---
+ .../maven/surefire/junitplatform/LazyLauncher.java | 14 ++++++++++++++
+ 2 files changed, 17 insertions(+), 3 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index c261bf3c2..a75e156ce 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -250,17 +250,17 @@
+       <dependency>
+         <groupId>org.junit.platform</groupId>
+         <artifactId>junit-platform-launcher</artifactId>
+-        <version>1.3.2</version>
++        <version>1.8.1</version>
+       </dependency>
+       <dependency>
+         <groupId>org.junit.jupiter</groupId>
+         <artifactId>junit-jupiter-engine</artifactId>
+-        <version>5.3.2</version>
++        <version>5.8.1</version>
+       </dependency>
+       <dependency>
+         <groupId>org.junit.jupiter</groupId>
+         <artifactId>junit-jupiter-params</artifactId>
+-        <version>5.3.2</version>
++        <version>5.8.1</version>
+       </dependency>
+       <dependency>
+         <groupId>org.mockito</groupId>
+diff --git a/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/LazyLauncher.java b/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/LazyLauncher.java
+index 6a1a3b3b3..dee110e3c 100644
+--- a/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/LazyLauncher.java
++++ b/surefire-providers/surefire-junit-platform/src/main/java/org/apache/maven/surefire/junitplatform/LazyLauncher.java
+@@ -21,6 +21,7 @@
+ 
+ import org.apache.maven.surefire.api.util.ReflectionUtils;
+ import org.junit.platform.launcher.Launcher;
++import org.junit.platform.launcher.LauncherDiscoveryListener;
+ import org.junit.platform.launcher.LauncherDiscoveryRequest;
+ import org.junit.platform.launcher.TestExecutionListener;
+ import org.junit.platform.launcher.TestPlan;
+@@ -55,6 +56,19 @@ public void execute( LauncherDiscoveryRequest launcherDiscoveryRequest,
+         launcher().execute( launcherDiscoveryRequest, testExecutionListeners );
+     }
+ 
++    @Override
++    public void execute( TestPlan testPlan,
++                         TestExecutionListener... testExecutionListeners )
++    {
++        launcher().execute( testPlan, testExecutionListeners );
++    }
++
++    @Override
++    public void registerLauncherDiscoveryListeners( LauncherDiscoveryListener... launcherDiscoveryListeners )
++    {
++        launcher().registerLauncherDiscoveryListeners( launcherDiscoveryListeners );
++    }
++
+     private Launcher launcher()
+     {
+         if ( launcher == null )
+-- 
+2.35.1
+
