@@ -1,0 +1,30 @@
+From 64b34bc217f861e84017b56522e8e0efbc267405 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 13 May 2022 14:11:25 +0200
+Subject: [PATCH] Remove dependency on junit-bom
+
+---
+ pom.xml | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index 8785f76..5b2c08b 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -275,13 +275,6 @@
+         <version>4.13.2</version>
+         <scope>test</scope>
+       </dependency>
+-      <dependency>
+-        <groupId>org.junit</groupId>
+-        <artifactId>junit-bom</artifactId>
+-        <version>${junit5.version}</version>
+-        <type>pom</type>
+-        <scope>import</scope>
+-      </dependency>
+       <dependency>
+         <groupId>org.apache.maven.plugin-tools</groupId>
+         <artifactId>maven-plugin-annotations</artifactId>
+-- 
+2.35.1
+
