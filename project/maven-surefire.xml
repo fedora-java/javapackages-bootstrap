@@ -30,6 +30,7 @@
         <excludeSourceClass>org/apache/maven/surefire/common/junit48/FilterFactory</excludeSourceClass>
         <excludeSourceClass>org/apache/maven/surefire/common/junit48/GroupMatcherCategoryFilter</excludeSourceClass>
         <excludeSourceClass>org/apache/maven/surefire/testng/utils/GroupMatcherMethodSelector</excludeSourceClass>
+        <addResource>surefire-booter/src/main/resources</addResource>
       </compiler>
     </build>
   </module>
