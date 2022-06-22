@@ -98,10 +98,6 @@ function prep()
         rm -r downstream/jansi/src/main/native/
     elif [[ "$p" == jflex ]]; then
         rm -r downstream/jflex/jflex/examples/
-    elif [[ "$p" == testng ]]; then
-        mkdir -p downstream/testng/src/main/resources/META-INF/webjars/jquery/3.5.1
-        rm -rf downstream/testng/src/test/
-        >downstream/testng/src/main/resources/META-INF/webjars/jquery/3.5.1/jquery.min.js
     fi
     $git -C "downstream/$p" commit --allow-empty -a -m 'Remove binary files'
     $git -C "downstream/$p" checkout -b downstream upstream-base
