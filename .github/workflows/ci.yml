@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
+      - name: Check for Forwarded tag in patch files
+        run: |
+          grep -L ^Forwarded: patches/*/*.patch | awk '{print "Patch " $0 " does not contain Forwarded tag"}' | grep .
       - name: Import cached upstream sources
         run: cp -R /var/cache/upstream .
       - name: Fetch latest upstream sources
