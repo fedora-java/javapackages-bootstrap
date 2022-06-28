@@ -3,6 +3,7 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Mon, 1 Nov 2021 12:51:02 +0100
 Subject: [PATCH] Remove dependencies
 
+Forwarded: not-needed
 ---
  .../net/bytebuddy/agent/VirtualMachine.java   | 1978 +----------------
  .../dynamic/loading/ClassInjector.java        |  104 +-
