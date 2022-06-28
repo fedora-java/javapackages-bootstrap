@@ -3,6 +3,7 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 22 Apr 2022 18:25:53 +0200
 Subject: [PATCH] Remove dependency on Jsoup
 
+Forwarded: not-needed
 ---
  modello-plugins/modello-plugin-xdoc/pom.xml                 | 5 -----
  .../org/codehaus/modello/plugin/xdoc/XdocGenerator.java     | 6 +-----

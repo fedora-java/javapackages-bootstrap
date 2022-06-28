@@ -4,6 +4,7 @@ Date: Fri, 22 Apr 2022 11:15:38 +0200
 Subject: [PATCH 3/3] Restore DefaultModelValidator compatibility with Maven
  3.5.4
 
+Forwarded: no
 ---
  .../maven/model/validation/DefaultModelValidator.java       | 6 ++++++
  1 file changed, 6 insertions(+)

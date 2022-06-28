@@ -3,6 +3,7 @@ From: Michael Simacek <msimacek@redhat.com>
 Date: Wed, 18 Jul 2018 15:57:49 +0200
 Subject: [PATCH] Replace bundled jquery with CDN link
 
+Forwarded: not-needed
 ---
  src/main/java/org/testng/reporters/jq/Main.java | 1 -
  src/main/resources/org/testng/header            | 2 +-

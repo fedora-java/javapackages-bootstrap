@@ -3,6 +3,7 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 13 May 2022 14:11:25 +0200
 Subject: [PATCH] Remove dependency on junit-bom
 
+Forwarded: not-needed
 ---
  pom.xml | 7 -------
  1 file changed, 7 deletions(-)

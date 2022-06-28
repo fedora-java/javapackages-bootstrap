@@ -3,6 +3,7 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Fri, 17 Dec 2021 13:42:11 +0100
 Subject: [PATCH] Port to maven 3.8.1
 
+Forwarded: no
 ---
  .../plugin/testing/stubs/StubArtifactRepository.java | 12 ++++++++++++
  1 file changed, 12 insertions(+)

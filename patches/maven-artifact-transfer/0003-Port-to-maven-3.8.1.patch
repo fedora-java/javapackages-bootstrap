@@ -3,6 +3,7 @@ From: Marian Koncek <mkoncek@redhat.com>
 Date: Fri, 17 Dec 2021 13:33:49 +0100
 Subject: [PATCH] Port to maven 3.8.1
 
+Forwarded: no
 ---
  .../internal/Maven31ArtifactRepositoryAdapter.java   | 12 ++++++++++++
  .../internal/Maven31ArtifactRepositoryAdapter.java   | 12 ++++++++++++
