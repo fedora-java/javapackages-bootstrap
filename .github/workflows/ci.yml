@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
+      - name: Ensure patches have Forwarded tag
+        run: "! grep -L ^Forwarded: patches/*/*.patch | grep ."
       - name: Import cached upstream sources
         run: cp -R /var/cache/upstream .
       - name: Fetch latest upstream sources
