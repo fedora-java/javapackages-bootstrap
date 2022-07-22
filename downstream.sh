@@ -98,6 +98,8 @@ function prep()
         rm -r downstream/jansi/src/main/native/
     elif [[ "$p" == jflex ]]; then
         rm -r downstream/jflex/jflex/examples/
+    elif [[ "$p" == osgi ]]; then
+        rm -r downstream/osgi/licensed/
     fi
     $git -C "downstream/$p" commit --allow-empty -a -m 'Remove binary files'
     $git -C "downstream/$p" checkout -b downstream upstream-base

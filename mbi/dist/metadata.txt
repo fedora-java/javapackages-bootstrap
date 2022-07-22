@@ -785,12 +785,10 @@ MOD objenesis
   ART org.objenesis objenesis
 MOD opentest4j
   ART org.opentest4j opentest4j
-MOD osgi-annotation
+MOD osgi
   ART org.osgi osgi.annotation
     ALIAS org.osgi org.osgi.annotation
-MOD osgi-cmpn
   ART org.osgi osgi.cmpn
-MOD osgi-core
   ART org.osgi osgi.core
     ALIAS org.osgi org.osgi.core
 MOD plexus-archiver
