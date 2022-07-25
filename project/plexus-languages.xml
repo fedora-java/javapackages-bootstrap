@@ -12,6 +12,12 @@
       <compiler>
         <addSourceRoot>plexus-java/src/main/java</addSourceRoot>
       </compiler>
+      <compiler>
+        <release>9</release>
+        <multiRelease/>
+        <addSourceRoot>plexus-java/src/main/java9</addSourceRoot>
+        <excludeSourceMatching>/module-info\.java</excludeSourceMatching>
+      </compiler>
       <cdc/>
     </build>
   </module>
