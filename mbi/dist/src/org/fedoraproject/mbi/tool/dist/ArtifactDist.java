@@ -27,7 +27,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.codehaus.plexus.archiver.ArchiverException;
 import org.codehaus.plexus.archiver.jar.JarArchiver;
+import org.codehaus.plexus.archiver.jar.Manifest;
+import org.codehaus.plexus.archiver.jar.ManifestException;
 import org.fedoraproject.mbi.Reactor;
 import org.fedoraproject.mbi.dist.DistRequest;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
@@ -166,6 +169,37 @@ class Director
         deploy( module, art.gid, art.aid, art );
     }
 
+    private static class MbiJarArchiver extends JarArchiver
+    {
+        private boolean multiRelease;
+
+        public MbiJarArchiver( boolean multiRelease )
+        {
+            super();
+            this.multiRelease = multiRelease;
+        }
+
+        @Override
+        protected Manifest createManifest() throws ArchiverException
+        {
+            Manifest manifest = super.createManifest();
+
+            if ( multiRelease )
+            {
+                try
+                {
+                    manifest.addConfiguredAttribute( new Manifest.Attribute( "Multi-Release", "true" ) );
+                }
+                catch (ManifestException ex)
+                {
+                    throw new ArchiverException( "Error adding manifest attribute", ex );
+                }
+            }
+
+            return manifest;
+        }
+    }
+
     public void deploy( ModuleDescriptor module, String gid, String aid, UArt art )
         throws Exception
     {
@@ -178,7 +212,7 @@ class Director
         if ( art != null )
         {
             Path jarPath = artifactsDir.resolve( aid + ".jar" );
-            JarArchiver archiver = new JarArchiver();
+            JarArchiver archiver = new MbiJarArchiver( Files.isDirectory( reactor.getClassesDir( module ).resolve( "META-INF" ).resolve( "versions" ) ) );
             archiver.setDestFile( jarPath.toFile() );
             archiver.addDirectory( reactor.getClassesDir( module ).toFile() );
             archiver.createArchive();

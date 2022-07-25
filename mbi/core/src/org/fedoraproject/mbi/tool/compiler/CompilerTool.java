@@ -19,6 +19,7 @@ import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -51,10 +52,18 @@ public class CompilerTool
 
     private int release = 8;
 
+    private boolean multiRelease = false;
+
     @Instruction
     public void release( String release )
     {
         this.release = Integer.parseInt( release );
+    }
+
+    @Instruction
+    public void multiRelease( String value )
+    {
+        this.multiRelease = true;
     }
 
     @Instruction
@@ -79,6 +88,32 @@ public class CompilerTool
     public void addResource( String resource )
     {
         resources.add( resource );
+    }
+
+    @Override
+    protected Path getClassesDir()
+    {
+        Path result = super.getClassesDir();
+
+        if ( multiRelease )
+        {
+            result = result.resolve( "META-INF" ).resolve( "versions" ).resolve( String.valueOf( release ) );
+        }
+
+        return result;
+    }
+
+    @Override
+    protected Collection<Path> getClassPath()
+    {
+        Collection<Path> result = new ArrayList<>( super.getClassPath() );
+
+        if ( multiRelease )
+        {
+            result.add( super.getClassesDir() );
+        }
+
+        return result;
     }
 
     @Override

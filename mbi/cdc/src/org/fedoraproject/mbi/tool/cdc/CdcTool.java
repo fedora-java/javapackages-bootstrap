@@ -140,7 +140,7 @@ public class CdcTool
     private void gleanFromClasses()
         throws Exception
     {
-        for ( Path classFile : Files.walk( getClassesDir() ).filter( Files::isRegularFile ).filter( path -> path.toString().endsWith( ".class" ) ).collect( Collectors.toList() ) )
+        for ( Path classFile : Files.walk( getClassesDir() ).filter( Files::isRegularFile ).filter( path -> !path.startsWith( getClassesDir().resolve( "META-INF" ) ) && path.toString().endsWith( ".class" ) ).collect( Collectors.toList() ) )
         {
             String className =
                 getClassesDir().relativize( classFile ).toString().replaceAll( ".class$", "" ).replace( '/', '.' );
