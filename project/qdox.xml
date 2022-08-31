@@ -39,6 +39,8 @@
             [arg value="-Jstack=500"/]
             [arg value="${basedir}/src/grammar/parser.y"/]
           [/exec]
+          [echo file="${classes}/META-INF/MANIFEST.MF" append="false"]Automatic-Module-Name: com.thoughtworks.qdox
+[/echo]
         </run>
       </ant>
       <compiler>
