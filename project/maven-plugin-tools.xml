@@ -6,6 +6,7 @@
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>asm</dependency>
+    <dependency>asm-commons</dependency>
     <dependency>plexus-component-annotations</dependency>
     <dependency>plexus-classworlds</dependency>
     <dependency>maven-artifact</dependency>
