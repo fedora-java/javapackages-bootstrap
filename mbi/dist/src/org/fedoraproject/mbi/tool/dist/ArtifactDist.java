@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.codehaus.plexus.archiver.jar.JarArchiver;
+import org.codehaus.plexus.archiver.jar.JarArchiver.FilesetManifestConfig;
 import org.fedoraproject.mbi.Reactor;
 import org.fedoraproject.mbi.dist.DistRequest;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
@@ -179,6 +180,7 @@ class Director
         {
             Path jarPath = artifactsDir.resolve( aid + ".jar" );
             JarArchiver archiver = new JarArchiver();
+            archiver.setFilesetmanifest( FilesetManifestConfig.merge );
             archiver.setDestFile( jarPath.toFile() );
             archiver.addDirectory( reactor.getClassesDir( module ).toFile() );
             archiver.createArchive();
