@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021 Red Hat, Inc
+# Copyright (c) 2021-2022 Red Hat, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
 # limitations under the License.
 #
 
-FROM registry.access.redhat.com/ubi8
+FROM registry.access.redhat.com/ubi9
 
 ENV LC_ALL=C.utf8 \
-    JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+    JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 
 RUN dnf -y update \
  && dnf -y install git-core \
                    unzip \
-                   java-11-openjdk-devel \
-                   https://kojipkgs.fedoraproject.org/vol/fedora_koji_archive02/packages/byaccj/1.15/17.fc28/x86_64/byaccj-1.15-17.fc28.x86_64.rpm \
+                   java-17-openjdk-devel \
+                   https://kojipkgs.fedoraproject.org/packages/byaccj/1.15/25.fc34/x86_64/byaccj-1.15-25.fc34.x86_64.rpm \
  && dnf -y clean all \
  && git config --global user.email root@localhost \
  && git config --global user.name root
