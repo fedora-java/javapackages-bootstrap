@@ -17,18 +17,23 @@ MOD apiguardian
   ART org.apiguardian apiguardian-api
 MOD asm
   ART org.ow2.asm asm
-  ART org.ow2.asm asm-tree
-    DEP org.ow2.asm asm
+MOD asm-analysis
   ART org.ow2.asm asm-analysis
+    DEP org.ow2.asm asm
     DEP org.ow2.asm asm-tree
+MOD asm-commons
   ART org.ow2.asm asm-commons
     DEP org.ow2.asm asm
-    DEP org.ow2.asm asm-tree
     DEP org.ow2.asm asm-analysis
+    DEP org.ow2.asm asm-tree
+MOD asm-tree
+  ART org.ow2.asm asm-tree
+    DEP org.ow2.asm asm
+MOD asm-util
   ART org.ow2.asm asm-util
     DEP org.ow2.asm asm
-    DEP org.ow2.asm asm-tree
     DEP org.ow2.asm asm-analysis
+    DEP org.ow2.asm asm-tree
 MOD assertj-core
   ART org.assertj assertj-core
     DEP net.bytebuddy byte-buddy

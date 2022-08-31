@@ -5,6 +5,7 @@
   </licensing>
   <module>
     <dependency>asm</dependency>
+    <dependency>asm-commons</dependency>
     <build>
       <ant>
         <run>

@@ -3,14 +3,111 @@
     <tag>BSD</tag>
   </licensing>
   <module>
+    <name>asm-tools-retrofitter</name>
     <build>
       <compiler>
+        <release>11</release>
         <addSourceRoot>asm/src/main/java</addSourceRoot>
-        <addSourceRoot>asm-analysis/src/main/java</addSourceRoot>
-        <addSourceRoot>asm-commons/src/main/java</addSourceRoot>
-        <addSourceRoot>asm-tree/src/main/java</addSourceRoot>
-        <addSourceRoot>asm-util/src/main/java</addSourceRoot>
+        <addSourceRoot>tools/retrofitter/src/main/java</addSourceRoot>
       </compiler>
+    </build>
+  </module>
+  <module>
+    <dependency>asm-tools-retrofitter</dependency>
+    <subDir>asm</subDir>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <ant>
+        <run>
+          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
+            [arg value="${classes}"/]
+            [arg value="any"/]
+          [/java]
+        </run>
+      </ant>
+    </build>
+  </module>
+  <module>
+    <name>asm-analysis</name>
+    <subDir>asm-analysis</subDir>
+    <dependency>asm</dependency>
+    <dependency>asm-tools-retrofitter</dependency>
+    <dependency>asm-tree</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <ant>
+        <run>
+          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
+            [arg value="${classes}"/]
+            [arg value="any"/]
+          [/java]
+        </run>
+      </ant>
+    </build>
+  </module>
+  <module>
+    <name>asm-commons</name>
+    <subDir>asm-commons</subDir>
+    <dependency>asm</dependency>
+    <dependency>asm-analysis</dependency>
+    <dependency>asm-tools-retrofitter</dependency>
+    <dependency>asm-tree</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <ant>
+        <run>
+          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
+            [arg value="${classes}"/]
+            [arg value="any"/]
+          [/java]
+        </run>
+      </ant>
+    </build>
+  </module>
+  <module>
+    <name>asm-tree</name>
+    <subDir>asm-tree</subDir>
+    <dependency>asm</dependency>
+    <dependency>asm-tools-retrofitter</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <ant>
+        <run>
+          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
+            [arg value="${classes}"/]
+            [arg value="any"/]
+          [/java]
+        </run>
+      </ant>
+    </build>
+  </module>
+  <module>
+    <name>asm-util</name>
+    <subDir>asm-util</subDir>
+    <dependency>asm</dependency>
+    <dependency>asm-analysis</dependency>
+    <dependency>asm-tools-retrofitter</dependency>
+    <dependency>asm-tree</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <ant>
+        <run>
+          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
+            [arg value="${classes}"/]
+            [arg value="any"/]
+          [/java]
+        </run>
+      </ant>
     </build>
   </module>
 </project>
