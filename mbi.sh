@@ -24,5 +24,5 @@ if [ -z "${JAVA_HOME}" ]; then
 fi
 
 mkdir -p build/mbi-launcher/classes
-$JAVA_HOME/bin/javac -d build/mbi-launcher/classes $(find mbi/core -name *.java)
+$JAVA_HOME/bin/javac -g -d build/mbi-launcher/classes $(find mbi/core -name *.java)
 exec $JAVA_HOME/bin/java -cp build/mbi-launcher/classes org.fedoraproject.mbi.Main "${@}"
