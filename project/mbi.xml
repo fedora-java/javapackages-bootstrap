@@ -148,4 +148,16 @@
       </compiler>
     </build>
   </module>
+  <module>
+    <name>mbi-retrofitter</name>
+    <subDir>retrofitter</subDir>
+    <dependency>mbi-core</dependency>
+    <dependency>asm-tools-retrofitter</dependency>
+    <build>
+      <compiler>
+        <release>11</release>
+        <addSourceRoot>src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
 </project>
