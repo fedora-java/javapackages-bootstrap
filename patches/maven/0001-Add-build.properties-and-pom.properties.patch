@@ -1,7 +1,7 @@
-From d187132a9d8cf609860496abee3a4d7db4704597 Mon Sep 17 00:00:00 2001
+From be67fb71a2ebcfda8e84d7b99cbf739a4ef8958a Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 7 Dec 2018 05:54:19 +0100
-Subject: [PATCH 1/3] Add build.properties and pom.properties
+Subject: [PATCH 1/4] Add build.properties and pom.properties
 
 Forwarded: not-needed
 ---
@@ -37,5 +37,5 @@ index 20f386ba0..3ff0e7c9a 100644
 +distributionShortName=XMvn
 +distributionName=Red Hat XMvn
 -- 
-2.35.1
+2.37.1
 
