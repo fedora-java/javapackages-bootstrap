@@ -18,14 +18,18 @@ package org.fedoraproject.mbi.build;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.fedoraproject.mbi.Util;
+import org.fedoraproject.mbi.model.ModuleDescriptor;
 import org.fedoraproject.mbi.plan.BuildPlan;
 import org.fedoraproject.mbi.plan.BuildStep;
 import org.fedoraproject.mbi.tool.ToolUtils;
@@ -161,15 +165,39 @@ class BuildExecutor
         }
     }
 
+    private void completeStamped( BuildPlan plan )
+    {
+        Map<ModuleDescriptor, List<BuildStep>> moduleSteps = new LinkedHashMap<>();
+
+        for ( BuildStep step : plan.getSteps() )
+        {
+            ModuleDescriptor module = step.getModule();
+            moduleSteps.computeIfAbsent( module, x -> new ArrayList<>() ).add( step );
+            moduleSteps.put( module, moduleSteps.remove( module ) );
+        }
+
+        moduleSteps.forEach( ( module, steps ) ->
+        {
+            Path stampPath = plan.getReactor().getTargetDir( module ).resolve( "stamp" );
+            if ( Files.isRegularFile( stampPath, LinkOption.NOFOLLOW_LINKS ) )
+            {
+                List<BuildStep> deps = steps.stream() //
+                                            .map( modStep -> modStep.getDependencies() ) //
+                                            .flatMap( List::stream ).filter( BuildStep::isFinal ) //
+                                            .collect( Collectors.toList() );
+                if ( completeSteps.containsAll( deps ) )
+                {
+                    completeSteps.addAll( steps );
+                }
+            }
+        } );
+    }
+
     public void executeBuildPlan( BuildPlan plan )
     {
-        for ( var step : plan.getSteps() )
+        if ( incremental )
         {
-            Path stampPath = step.getReactor().getTargetDir( step.getModule() ).resolve( "stamp" );
-            if ( incremental && Files.isRegularFile( stampPath, LinkOption.NOFOLLOW_LINKS ) )
-            {
-                completeSteps.add( step );
-            }
+            completeStamped( plan );
         }
 
         for ( var step : plan.getSteps() )

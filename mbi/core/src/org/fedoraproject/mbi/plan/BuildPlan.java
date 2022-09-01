@@ -97,12 +97,12 @@ public class BuildPlan
         {
             ModuleDescriptor toolModule = reactor.tryGetModule( "mbi-" + execution.getToolName() );
             BuildStep step = new BuildStep( reactor, module, toolModule, execution );
-            steps.add( step );
             if ( toolModule != null )
             {
                 generateBuildSteps( toolModule );
                 step.addDependencies( cache.get( toolModule ) );
             }
+            steps.add( step );
             step.addDependencies( depSteps );
             depSteps.clear();
             depSteps.add( step );
