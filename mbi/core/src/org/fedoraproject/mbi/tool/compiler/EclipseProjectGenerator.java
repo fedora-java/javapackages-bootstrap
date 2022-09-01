@@ -79,7 +79,7 @@ class EclipseProjectGenerator
                 "\t</linkedResources>\n" + //
                 "</projectDescription>" );
         }
-        String vm = release == 11 ? "11" : "1.8";
+        String vm = release == 8 ? "1.8" : "" + release;
         eclipseClasspath.append( "<classpathentry kind=\"con\""
             + " path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11\"/>\n" );
         eclipseClasspath.append( "<classpathentry kind=\"output\" path=\"bin\"/>\n" );
