@@ -19,14 +19,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <ant>
-        <run>
-          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
-            [arg value="${classes}"/]
-            [arg value="any"/]
-          [/java]
-        </run>
-      </ant>
+      <retrofitter/>
     </build>
   </module>
   <module>
@@ -39,14 +32,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <ant>
-        <run>
-          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
-            [arg value="${classes}"/]
-            [arg value="any"/]
-          [/java]
-        </run>
-      </ant>
+      <retrofitter/>
     </build>
   </module>
   <module>
@@ -60,14 +46,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <ant>
-        <run>
-          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
-            [arg value="${classes}"/]
-            [arg value="any"/]
-          [/java]
-        </run>
-      </ant>
+      <retrofitter/>
     </build>
   </module>
   <module>
@@ -79,14 +58,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <ant>
-        <run>
-          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
-            [arg value="${classes}"/]
-            [arg value="any"/]
-          [/java]
-        </run>
-      </ant>
+      <retrofitter/>
     </build>
   </module>
   <module>
@@ -100,14 +72,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <ant>
-        <run>
-          [java classname="org.objectweb.asm.tools.Retrofitter" failonerror="true"]
-            [arg value="${classes}"/]
-            [arg value="any"/]
-          [/java]
-        </run>
-      </ant>
+      <retrofitter/>
     </build>
   </module>
 </project>
