@@ -114,6 +114,7 @@ public class CompilerTool
         Iterable<? extends JavaFileObject> compilationUnits =
             fileManager.getJavaFileObjectsFromFiles( allIncluded.stream().map( Path::toFile ).collect( Collectors.toList() ) );
         List<String> options = new ArrayList<>();
+        options.add( "-g" );
         options.add( "-d" );
         options.add( getClassesDir().toString() );
         options.add( "--release" );
