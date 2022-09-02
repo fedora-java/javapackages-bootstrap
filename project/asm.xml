@@ -13,7 +13,6 @@
     </build>
   </module>
   <module>
-    <dependency>asm-tools-retrofitter</dependency>
     <subDir>asm</subDir>
     <build>
       <compiler>
@@ -26,7 +25,6 @@
     <name>asm-analysis</name>
     <subDir>asm-analysis</subDir>
     <dependency>asm</dependency>
-    <dependency>asm-tools-retrofitter</dependency>
     <dependency>asm-tree</dependency>
     <build>
       <compiler>
@@ -40,7 +38,6 @@
     <subDir>asm-commons</subDir>
     <dependency>asm</dependency>
     <dependency>asm-analysis</dependency>
-    <dependency>asm-tools-retrofitter</dependency>
     <dependency>asm-tree</dependency>
     <build>
       <compiler>
@@ -53,7 +50,6 @@
     <name>asm-tree</name>
     <subDir>asm-tree</subDir>
     <dependency>asm</dependency>
-    <dependency>asm-tools-retrofitter</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
@@ -66,7 +62,6 @@
     <subDir>asm-util</subDir>
     <dependency>asm</dependency>
     <dependency>asm-analysis</dependency>
-    <dependency>asm-tools-retrofitter</dependency>
     <dependency>asm-tree</dependency>
     <build>
       <compiler>
