@@ -1,0 +1,27 @@
+From b4a0366b3c17fcc0d8187cffbcdd2e1bd61ab0fb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Mari=C3=A1n=20Kon=C4=8Dek?= <marian.koncek@mailbox.org>
+Date: Fri, 2 Sep 2022 09:41:23 +0200
+Subject: [PATCH] Replace slash for dot in generated module infos
+
+Forwarded: no
+
+---
+ .../src/main/java/org/objectweb/asm/tools/Retrofitter.java      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/retrofitter/src/main/java/org/objectweb/asm/tools/Retrofitter.java b/tools/retrofitter/src/main/java/org/objectweb/asm/tools/Retrofitter.java
+index b3d51e63..43002cea 100644
+--- a/tools/retrofitter/src/main/java/org/objectweb/asm/tools/Retrofitter.java
++++ b/tools/retrofitter/src/main/java/org/objectweb/asm/tools/Retrofitter.java
+@@ -187,7 +187,7 @@ public class Retrofitter {
+       throw new IllegalArgumentException("Module name can't be infered from classes");
+     }
+     ModuleVisitor moduleVisitor =
+-        classWriter.visitModule(moduleNames.get(0), Opcodes.ACC_OPEN, version);
++        classWriter.visitModule(moduleNames.get(0).replace('/', '.'), Opcodes.ACC_OPEN, version);
+ 
+     for (String importName : imports) {
+       if (isAsmModule(importName) && !exports.contains(importName)) {
+-- 
+2.37.2
+
