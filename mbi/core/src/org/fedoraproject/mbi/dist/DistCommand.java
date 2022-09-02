@@ -17,14 +17,11 @@ package org.fedoraproject.mbi.dist;
 
 import java.net.URLClassLoader;
 import java.nio.file.Path;
-import java.util.Collections;
 
 import org.fedoraproject.mbi.Command;
 import org.fedoraproject.mbi.Reactor;
 import org.fedoraproject.mbi.Util;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
-import org.fedoraproject.mbi.plan.BuildPlan;
-import org.fedoraproject.mbi.plan.BuildStep;
 import org.fedoraproject.mbi.tool.ToolUtils;
 
 /**
@@ -41,16 +38,6 @@ public class DistCommand
     {
         reactor = Reactor.defaultReactor();
         ModuleDescriptor distModule = reactor.getModule( "mbi-dist" );
-
-        BuildPlan plan = new BuildPlan( reactor );
-        plan.computeBuildPlan( Collections.singleton( distModule ) );
-        for ( BuildStep step : plan.getSteps() )
-        {
-            if ( step.getModule() == distModule )
-            {
-                ToolUtils.runToolOnProject( step.getReactor(), step.getToolModule(), distModule, step.getExecution() );
-            }
-        }
 
         Path workDir = reactor.getTargetDir( distModule ).resolve( "dist-work" );
         Util.delete( workDir );
