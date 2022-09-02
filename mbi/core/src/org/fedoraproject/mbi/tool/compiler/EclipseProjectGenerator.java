@@ -102,6 +102,12 @@ class EclipseProjectGenerator
             bw.write( "org.eclipse.jdt.core.compiler.release=enabled\n" );
             bw.write( "org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning\n" );
         }
+        try ( BufferedWriter bw =
+            Files.newBufferedWriter( outputDir.resolve( ".settings" ).resolve( "org.eclipse.core.resources.prefs" ) ) )
+        {
+            bw.write( "eclipse.preferences.version=1\n" );
+            bw.write( "encoding/<project>=UTF-8\n" );
+        }
     }
 
     public void addSourceDir( Path sourceDir, Collection<Path> excluded )
