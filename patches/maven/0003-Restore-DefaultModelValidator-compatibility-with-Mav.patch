@@ -1,7 +1,7 @@
-From 4ed5163d86a94bcad40e9f29fd67e77731dbbcb0 Mon Sep 17 00:00:00 2001
+From eb7aa67c1795a912bc501086986ab4787cf9d241 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 22 Apr 2022 11:15:38 +0200
-Subject: [PATCH 3/4] Restore DefaultModelValidator compatibility with Maven
+Subject: [PATCH 3/3] Restore DefaultModelValidator compatibility with Maven
  3.5.4
 
 Forwarded: no
@@ -34,5 +34,5 @@ index f77321c16..4ed22f3ed 100644
      public DefaultModelValidator(  ModelVersionProcessor versionProcessor )
      {
 -- 
-2.37.1
+2.35.1
 
