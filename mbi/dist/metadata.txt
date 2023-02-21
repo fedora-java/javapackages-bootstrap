@@ -704,6 +704,12 @@ MOD mockito
     DEP net.bytebuddy byte-buddy-agent
     DEP org.objenesis objenesis
     DEP org.opentest4j opentest4j
+MOD modulemaker-maven-plugin
+  ART codes.rafael.modulemaker modulemaker-maven-plugin
+    DEP org.ow2.asm asm
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven.plugin-tools maven-plugin-annotations
 MOD modello
   ART org.codehaus.modello modello-core
     DEP org.sonatype.plexus plexus-build-api
