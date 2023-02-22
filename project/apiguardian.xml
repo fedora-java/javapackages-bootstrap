@@ -6,6 +6,7 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <automaticModuleName>org.apiguardian.api</automaticModuleName>
       </compiler>
     </build>
   </module>
