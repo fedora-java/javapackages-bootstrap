@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2020-2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package org.fedoraproject.mbi.tool.dist;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
@@ -23,9 +25,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.codehaus.plexus.archiver.jar.JarArchiver.FilesetManifestConfig;
@@ -45,6 +51,9 @@ import org.fedoraproject.xmvn.resolver.Resolver;
 import org.fedoraproject.xmvn.tools.install.InstallationRequest;
 import org.fedoraproject.xmvn.tools.install.Installer;
 import org.fedoraproject.xmvn.tools.install.impl.DefaultInstaller;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.ModuleVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * @author Mikolaj Izdebski
@@ -93,9 +102,12 @@ class UArt
 
     final List<GA> deps = new ArrayList<>();
 
-    public UArt( String gid, String aid )
+    final String mid;
+
+    public UArt( String gid, String aid, String mid )
     {
         super( gid, aid );
+        this.mid = mid;
     }
 }
 
@@ -147,6 +159,38 @@ class Director
         installer = new DefaultInstaller( configurator, resolver );
     }
 
+    private Set<String> listPackages( Path classesDir )
+        throws IOException
+    {
+        return Files.walk( classesDir ) //
+                    .filter( Files::isRegularFile ) //
+                    .filter( path -> path.getFileName().toString().endsWith( ".class" ) ) //
+                    .map( classesDir::relativize ) //
+                    .map( Path::getParent ) //
+                    .filter( Objects::nonNull ) //
+                    .map( Object::toString ) //
+                    .collect( Collectors.toUnmodifiableSet() );
+    }
+
+    private void writeModuleInfo( Path modinfoPath, String modName, String modVersion, Iterable<UArt> requires,
+                                  Iterable<String> exports )
+        throws IOException
+    {
+        try ( OutputStream os = Files.newOutputStream( modinfoPath ) )
+        {
+            ClassWriter cw = new ClassWriter( 0 );
+            cw.visit( Opcodes.V9, Opcodes.ACC_MODULE, "module-info", null, null, null );
+            ModuleVisitor mv = cw.visitModule( modName, 0, modVersion );
+            exports.forEach( pkg -> mv.visitPackage( pkg ) );
+            exports.forEach( pkg -> mv.visitExport( pkg, 0, (String[]) null ) );
+            mv.visitRequire( "java.base", Opcodes.ACC_MANDATED, null );
+            requires.forEach( depArt -> mv.visitRequire( depArt.mid, 0, null ) );
+            mv.visitEnd();
+            cw.visitEnd();
+            os.write( cw.toByteArray() );
+        }
+    }
+
     public void deployPom( ModuleDescriptor module )
         throws Exception
     {
@@ -157,32 +201,38 @@ class Director
             pomProps.load( reader );
             String gid = pomProps.getProperty( "groupId" );
             String aid = pomProps.getProperty( "artifactId" );
-            deploy( module, gid, aid, null );
+            deploy( module, gid, aid, null, null );
         }
     }
 
-    public void deployJar( ModuleDescriptor module, UArt art )
+    public void deployJar( ModuleDescriptor module, UArt art, Set<UArt> deps )
         throws Exception
     {
-        deploy( module, art.gid, art.aid, art );
+        deploy( module, art.gid, art.aid, art, deps );
     }
 
-    public void deploy( ModuleDescriptor module, String gid, String aid, UArt art )
+    public void deploy( ModuleDescriptor module, String gid, String aid, UArt art, Set<UArt> deps )
         throws Exception
     {
         Path artifactsDir = workDir.resolve( "artifacts" );
         Files.createDirectories( artifactsDir );
+        Path modinfosDir = workDir.resolve( "module-infos" );
+        Files.createDirectories( modinfosDir );
         String version = reactor.getProject( module.getProjectName() ).getMBIVersion();
 
         DeploymentRequest pomRequest = new DeploymentRequest();
 
         if ( art != null )
         {
+            Set<String> packages = listPackages( reactor.getClassesDir( module ) );
+            Path modinfoPath = modinfosDir.resolve( aid + ".class" );
+            writeModuleInfo( modinfoPath, art.mid, version, deps, packages );
             Path jarPath = artifactsDir.resolve( aid + ".jar" );
             JarArchiver archiver = new JarArchiver();
             archiver.setFilesetmanifest( FilesetManifestConfig.merge );
             archiver.setDestFile( jarPath.toFile() );
             archiver.addDirectory( reactor.getClassesDir( module ).toFile() );
+            archiver.addFile( modinfoPath.toFile(), "module-info.class" );
             archiver.createArchive();
             DeploymentRequest jarRequest = new DeploymentRequest();
             jarRequest.setPlanPath( planPath );
@@ -290,7 +340,7 @@ public class ArtifactDist
                     mods.add( mod );
                     break;
                 case "ART":
-                    uart = new UArt( line[1], line[2] );
+                    uart = new UArt( line[1], line[2], line[3] );
                     mod.artifacts.add( uart );
                     break;
                 case "ALIAS":
@@ -306,30 +356,34 @@ public class ArtifactDist
         return mods;
     }
 
-    private void resolveDeps( List<UMod> mods )
+    private Map<UArt, Set<UArt>> resolveDeps( List<UMod> mods )
     {
-        Map<String, UMod> depmap = new LinkedHashMap<>();
+        Map<UArt, Set<UArt>> depmap = new LinkedHashMap<>();
+        Map<String, UArt> aid2art = new LinkedHashMap<>();
         for ( var mod : mods )
         {
             for ( var art : mod.artifacts )
             {
-                depmap.put( art.toString(), mod );
+                aid2art.put( art.toString(), art );
             }
         }
         for ( var mod : mods )
         {
             for ( var art : mod.artifacts )
             {
+                depmap.put( art, new LinkedHashSet<>() );
                 for ( var dep : art.deps )
                 {
-                    UMod depMod = depmap.get( dep.toString() );
-                    if ( depMod == null )
+                    UArt depArt = aid2art.get( dep.toString() );
+                    if ( depArt == null )
                     {
                         throw new Error( "Unsatisfied dep: " + art + " -> " + dep );
                     }
+                    depmap.get( art ).add( depArt );
                 }
             }
         }
+        return depmap;
     }
 
     private void dumpUMD( List<UMod> mods )
@@ -341,7 +395,7 @@ public class ArtifactDist
             pw.printf( "MOD %s%n", mod.md.getName() );
             for ( var umd : mod.artifacts )
             {
-                pw.printf( "  ART %s %s%n", umd.gid, umd.aid );
+                pw.printf( "  ART %s %s %s%n", umd.gid, umd.aid, umd.mid );
                 for ( var ua : umd.aliases )
                 {
                     pw.printf( "    ALIAS %s %s%s%n", ua.gid, ua.aid,
@@ -361,7 +415,7 @@ public class ArtifactDist
     {
         Path mdTxtPath = reactor.getRootDir().resolve( "mbi/dist/metadata.txt" );
         List<UMod> mods = parseTextMetadata( mdTxtPath );
-        resolveDeps( mods );
+        Map<UArt, Set<UArt>> depmap = resolveDeps( mods );
         dumpUMD( mods );
 
         Map<String, String> mod2art = new LinkedHashMap<>();
@@ -370,7 +424,7 @@ public class ArtifactDist
         {
             for ( var art : mod.artifacts )
             {
-                director.deployJar( mod.md, art );
+                director.deployJar( mod.md, art, depmap.get( art ) );
                 mod2art.put( mod.md.getName(), art.aid );
             }
         }
