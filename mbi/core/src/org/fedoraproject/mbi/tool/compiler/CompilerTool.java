@@ -15,9 +15,11 @@
  */
 package org.fedoraproject.mbi.tool.compiler;
 
+import java.io.BufferedWriter;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -49,6 +51,8 @@ public class CompilerTool
 
     private Predicate<Path> sourceFilter = source -> true;
 
+    private String automaticModuleName;
+
     private int release = 8;
 
     @Instruction
@@ -79,6 +83,12 @@ public class CompilerTool
     public void addResource( String resource )
     {
         resources.add( resource );
+    }
+
+    @Instruction
+    public void automaticModuleName( String name )
+    {
+        automaticModuleName = name;
     }
 
     @Override
@@ -128,6 +138,16 @@ public class CompilerTool
         {
             System.err.print( compilerOutput.toString() );
             throw new Exception( "Compilation failed" );
+        }
+        if ( automaticModuleName != null )
+        {
+            Files.createDirectories( getClassesDir().resolve( "META-INF" ) );
+            try ( BufferedWriter bw =
+                Files.newBufferedWriter( getClassesDir().resolve( "META-INF" ).resolve( "MANIFEST.MF" ),
+                                         StandardOpenOption.APPEND, StandardOpenOption.CREATE ) )
+            {
+                bw.write( "Automatic-Module-Name: " + automaticModuleName + "\n" );
+            }
         }
     }
 }

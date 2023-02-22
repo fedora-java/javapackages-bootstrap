@@ -23,7 +23,9 @@
           [/replaceregexp]
         </run>
       </ant>
-      <compiler/>
+      <compiler>
+        <automaticModuleName>net.bytebuddy</automaticModuleName>
+      </compiler>
     </build>
   </module>
 </project>

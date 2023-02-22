@@ -36,6 +36,7 @@
         <addSourceRoot>../junit-jupiter-migrationsupport/src/main/java</addSourceRoot>
         <addSourceRoot>../junit-jupiter-params/src/main/java</addSourceRoot>
         <addResource>src/main/resources</addResource>
+        <automaticModuleName>org.junit.jupiter.api</automaticModuleName>
       </compiler>
     </build>
   </module>

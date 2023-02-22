@@ -6,6 +6,7 @@
     <build>
       <compiler>
         <addSourceRoot>hamcrest/src/main/java</addSourceRoot>
+        <automaticModuleName>org.hamcrest</automaticModuleName>
       </compiler>
     </build>
   </module>

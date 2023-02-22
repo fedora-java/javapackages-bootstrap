@@ -13,6 +13,7 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <automaticModuleName>org.assertj.core</automaticModuleName>
       </compiler>
     </build>
   </module>
