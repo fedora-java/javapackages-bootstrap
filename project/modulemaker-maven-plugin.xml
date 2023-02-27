@@ -13,6 +13,9 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
+      <pdc>
+        <groupId>codes.rafael.modulemaker</groupId>
+      </pdc>
     </build>
   </module>
 </project>
