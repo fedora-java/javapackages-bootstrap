@@ -3,6 +3,7 @@ From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Wed, 8 Jul 2020 09:04:57 +0200
 Subject: [PATCH 2/2] Bind to OpenJDK 17 for runtime
 
+Forwarded: not-needed
 ---
  apache-maven/src/bin/mvn | 16 +---------------
  1 file changed, 1 insertion(+), 15 deletions(-)
