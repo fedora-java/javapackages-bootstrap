@@ -930,5 +930,7 @@ MOD xmlunit
 MOD xmvn
   ART org.fedoraproject.xmvn xmvn-mojo
     DEP org.apache.maven.resolver maven-resolver-util
+MOD xmvn-generator
+  ART org.fedoraproject.xmvn xmvn-generator
 MOD xz-java
   ART org.tukaani xz
