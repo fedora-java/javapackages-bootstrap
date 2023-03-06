@@ -55,6 +55,8 @@ public class CompilerTool
 
     private int release = 8;
 
+    private final List<String> options = new ArrayList<>();
+
     @Instruction
     public void release( String release )
     {
@@ -91,6 +93,12 @@ public class CompilerTool
         automaticModuleName = name;
     }
 
+    @Instruction
+    public void option( String option )
+    {
+        options.add( option );
+    }
+
     @Override
     public void execute()
         throws Exception
@@ -123,7 +131,6 @@ public class CompilerTool
         eclipse.generate();
         Iterable<? extends JavaFileObject> compilationUnits =
             fileManager.getJavaFileObjectsFromFiles( allIncluded.stream().map( Path::toFile ).collect( Collectors.toList() ) );
-        List<String> options = new ArrayList<>();
         options.add( "-g" );
         options.add( "-d" );
         options.add( getClassesDir().toString() );

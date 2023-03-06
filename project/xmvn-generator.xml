@@ -1,0 +1,17 @@
+<project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+    <file>NOTICE</file>
+  </licensing>
+  <module>
+    <dependency>asm</dependency>
+    <dependency>commons-compress</dependency>
+    <build>
+      <compiler>
+        <release>17</release>
+        <option>--add-modules=jdk.incubator.foreign</option>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

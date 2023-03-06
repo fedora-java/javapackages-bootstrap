@@ -81,7 +81,7 @@ class EclipseProjectGenerator
         }
         String vm = release == 8 ? "1.8" : "" + release;
         eclipseClasspath.append( "<classpathentry kind=\"con\""
-            + " path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11\"/>\n" );
+            + " path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17\"/>\n" );
         eclipseClasspath.append( "<classpathentry kind=\"output\" path=\"bin\"/>\n" );
         try ( BufferedWriter bw = Files.newBufferedWriter( outputDir.resolve( ".classpath" ) ) )
         {
