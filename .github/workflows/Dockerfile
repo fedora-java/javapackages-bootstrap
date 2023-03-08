@@ -26,6 +26,7 @@ RUN dnf -y update \
                    byaccj \
                    gcc \
                    rpm-devel \
+                   jurand \
  && dnf -y clean all \
  && git config --global user.email root@localhost \
  && git config --global user.name root
