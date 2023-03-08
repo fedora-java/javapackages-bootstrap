@@ -1,10 +1,9 @@
-From c1c8c38af32487e06cbc94262234bd9fec19d001 Mon Sep 17 00:00:00 2001
+From c38be0d61a7b291cefc5ca876ad2d6f5f4190ac6 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 30 Nov 2020 12:16:22 +0100
-Subject: [PATCH 2/2] Remove use of sun.misc.Unsafe
+Subject: [PATCH 2/3] Remove use of sun.misc.Unsafe
 
 Forwarded: not-needed
-
 ---
  .../com/google/common/cache/LongAddables.java |  11 +-
  .../common/hash/LittleEndianByteArray.java    | 109 +--------------
@@ -474,5 +473,5 @@ index e61c6fff5b..9f09428105 100644
    @SuppressWarnings("rawtypes")
    private static final class SafeAtomicHelper extends AtomicHelper {
 -- 
-2.31.1
+2.39.1
 
