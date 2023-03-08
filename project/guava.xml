@@ -5,8 +5,21 @@
   <module>
     <dependency>jsr-305</dependency>
     <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/guava/src"/]
+          [/copy]
+          [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
+            [arg line="-i -a ."/]
+            [arg line="-p ^org.checkerframework."/]
+            [arg line="-p ^com.google.common.annotations."/]
+            [arg line="-p ^com.google.errorprone.annotations."/]
+            [arg line="-p ^com.google.j2objc.annotations."/]
+          [/exec]
+        </run>
+      </ant>
       <compiler>
-        <addSourceRoot>guava/src</addSourceRoot>
         <addSourceRoot>futures/failureaccess/src</addSourceRoot>
         <excludeSourceClass>com/google/common/cache/Striped64</excludeSourceClass>
         <excludeSourceClass>com/google/common/cache/LongAdder</excludeSourceClass>

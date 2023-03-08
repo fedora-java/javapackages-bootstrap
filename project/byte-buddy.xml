@@ -13,14 +13,10 @@
             [fileset dir="${basedir}/byte-buddy-dep/src/main/java"/]
             [fileset dir="${basedir}/byte-buddy-agent/src/main/java"/]
           [/copy]
-          <!-- Match single-line annnotations with parentheses. -->
-          [replaceregexp flags="g"]
-            [regexp pattern=".*SuppressFBWarnings.*"/]
-            [substitution expression=""/]
-            [fileset dir="${generatedSources}"]
-              [include name="**/*.java"/]
-            [/fileset]
-          [/replaceregexp]
+          [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
+            [arg line="-i -a ."/]
+            [arg line="-n SuppressFBWarnings"/]
+          [/exec]
         </run>
       </ant>
       <compiler>
