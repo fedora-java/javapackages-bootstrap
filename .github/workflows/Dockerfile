@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-FROM registry.access.redhat.com/ubi9
+FROM registry.fedoraproject.org/fedora:rawhide
 
 ENV LC_ALL=C.utf8 \
     JAVA_HOME=/usr/lib/jvm/java-17-openjdk
@@ -23,7 +23,9 @@ RUN dnf -y update \
  && dnf -y install git-core \
                    unzip \
                    java-17-openjdk-devel \
-                   https://kojipkgs.fedoraproject.org/packages/byaccj/1.15/25.fc34/x86_64/byaccj-1.15-25.fc34.x86_64.rpm \
+                   byaccj \
+                   gcc \
+                   rpm-devel \
  && dnf -y clean all \
  && git config --global user.email root@localhost \
  && git config --global user.name root
