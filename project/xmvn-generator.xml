@@ -9,9 +9,28 @@
     <build>
       <compiler>
         <release>17</release>
-        <option>--add-modules=jdk.incubator.foreign</option>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
+      <ant>
+        <run>
+          [property environment="env"/]
+          [property name="env.JAVA_HOME" value="/usr/lib/jvm/java"/]
+          [property name="env.CC" value="cc"/]
+          [property name="env.CFLAGS" value="-g -Wall -Wextra"/]
+          [property name="env.LDFLAGS" value=""/]
+          [exec executable="${env.CC}"]
+            [arg line="-std=c99 -shared -fPIC"/]
+            [arg value="-I${env.JAVA_HOME}/include"/]
+            [arg value="-I${env.JAVA_HOME}/include/linux"/]
+            [arg line="${env.CFLAGS}"/]
+            [arg line="-l rpmio"/]
+            [arg line="${env.LDFLAGS}"/]
+            [arg value="-o"/]
+            [arg value="${classes}/xmvn-generator-native.so"/]
+            [arg value="${basedir}/src/main/jni/xmvn-generator-native.c"/]
+          [/exec]
+        </run>
+      </ant>
     </build>
   </module>
 </project>
