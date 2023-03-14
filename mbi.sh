@@ -16,12 +16,9 @@
 #
 # Author: Mikolaj Izdebski
 
-set -e
+set -eu
 
-if [ -z "${JAVA_HOME}" ]; then
-    echo "Please set the JAVA_HOME environment variable"
-    exit 1
-fi
+JAVA_HOME=${JAVA_HOME:-/usr/lib/jvm/java-17-openjdk}
 
 mkdir -p build/mbi-launcher/classes
 $JAVA_HOME/bin/javac -g -d build/mbi-launcher/classes $(find mbi/core -name *.java)
