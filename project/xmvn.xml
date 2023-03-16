@@ -5,8 +5,9 @@
   </licensing>
   <module>
     <dependency>plexus-utils</dependency>
+    <dependency>injection-api</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>plexus-component-annotations</dependency>
+    <dependency>sisu-inject</dependency>
     <dependency>slf4j</dependency>
     <dependency>maven-resolver</dependency>
     <dependency>plexus-classworlds</dependency>
