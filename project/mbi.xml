@@ -80,18 +80,6 @@
     </build>
   </module>
   <module>
-    <name>mbi-munge</name>
-    <subDir>munge</subDir>
-    <dependency>mbi-core</dependency>
-    <dependency>munge</dependency>
-    <build>
-      <compiler>
-        <release>11</release>
-        <addSourceRoot>src</addSourceRoot>
-      </compiler>
-    </build>
-  </module>
-  <module>
     <name>mbi-pdc</name>
     <subDir>pdc</subDir>
     <dependency>mbi-core</dependency>
