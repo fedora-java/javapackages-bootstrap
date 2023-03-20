@@ -8,7 +8,6 @@
     <dependency>slf4j</dependency>
     <dependency>plexus-component-annotations</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>commons-codec</dependency>
     <dependency>maven-common-artifact-filters</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
