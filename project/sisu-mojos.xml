@@ -8,7 +8,6 @@
     <dependency>maven-plugin-tools</dependency>
     <dependency>sisu-inject</dependency>
     <dependency>plexus-utils</dependency>
-    <dependency>maven-common-artifact-filters</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-model</dependency>

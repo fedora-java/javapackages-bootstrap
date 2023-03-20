@@ -7,7 +7,6 @@
     <dependency>maven-archiver</dependency>
     <dependency>plexus-archiver</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>plexus-io</dependency>
     <dependency>maven-file-management</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-plugin-api</dependency>

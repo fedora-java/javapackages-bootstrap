@@ -6,18 +6,14 @@
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>asm</dependency>
-    <dependency>asm-commons</dependency>
     <dependency>plexus-component-annotations</dependency>
-    <dependency>plexus-classworlds</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-repository-metadata</dependency>
-    <dependency>maven-compat</dependency>
     <dependency>qdox</dependency>
     <dependency>plexus-archiver</dependency>
-    <dependency>plexus-io</dependency>
     <dependency>plexus-build-api</dependency>
     <build>
       <compiler>

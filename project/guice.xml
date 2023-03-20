@@ -5,7 +5,6 @@
   <module>
     <dependency>injection-api</dependency>
     <dependency>guava</dependency>
-    <dependency>slf4j</dependency>
     <dependency>servlet-api</dependency>
     <build>
       <munge>

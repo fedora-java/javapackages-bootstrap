@@ -37,7 +37,6 @@
     <name>asm-commons</name>
     <subDir>asm-commons</subDir>
     <dependency>asm</dependency>
-    <dependency>asm-analysis</dependency>
     <dependency>asm-tree</dependency>
     <build>
       <compiler>

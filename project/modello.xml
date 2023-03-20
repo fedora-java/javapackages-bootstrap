@@ -44,7 +44,6 @@
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-core</dependency>
-    <dependency>maven-artifact</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>plexus-build-api</dependency>
     <build>

@@ -40,7 +40,6 @@ SOFTWARE.
     <dependency>plexus-classworlds</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>junit4</dependency>
-    <dependency>guava</dependency>
     <dependency>maven-plugin-tools</dependency>
     <dependency>asm</dependency>
     <dependency>jdom2</dependency>

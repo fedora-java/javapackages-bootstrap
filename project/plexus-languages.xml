@@ -5,7 +5,6 @@
   <module>
     <name>plexus-java</name>
     <dependency>injection-api</dependency>
-    <dependency>plexus-component-annotations</dependency>
     <dependency>qdox</dependency>
     <dependency>asm</dependency>
     <build>

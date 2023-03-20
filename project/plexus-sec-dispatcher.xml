@@ -5,7 +5,6 @@
   <module>
     <dependency>injection-api</dependency>
     <dependency>plexus-utils</dependency>
-    <dependency>sisu-plexus</dependency>
     <dependency>plexus-cipher</dependency>
     <build>
       <modello>

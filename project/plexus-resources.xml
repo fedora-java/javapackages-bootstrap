@@ -24,7 +24,6 @@ SOFTWARE.
     </text>
   </licensing>
   <module>
-    <dependency>plexus-component-annotations</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>slf4j</dependency>
     <dependency>injection-api</dependency>

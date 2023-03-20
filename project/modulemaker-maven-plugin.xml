@@ -8,7 +8,6 @@
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-plugin-tools</dependency>
     <dependency>asm</dependency>
-    <dependency>asm-commons</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
