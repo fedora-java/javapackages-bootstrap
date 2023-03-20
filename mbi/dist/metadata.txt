@@ -790,10 +790,6 @@ MOD modello-maven-plugin
     DEP org.codehaus.modello modello-plugin-xpp3
     DEP org.codehaus.modello modello-plugin-xsd
     DEP org.sonatype.plexus plexus-build-api
-MOD munge-maven-plugin
-  ART org.sonatype.plugins munge-maven-plugin
-    DEP org.apache.maven maven-plugin-api
-    DEP org.apache.maven maven-core
 MOD objenesis
   ART org.objenesis objenesis
 MOD opentest4j
