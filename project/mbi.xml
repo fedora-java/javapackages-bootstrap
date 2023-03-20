@@ -104,6 +104,7 @@
     <dependency>sisu-inject</dependency>
     <dependency>guice</dependency>
     <dependency>injection-api</dependency>
+    <dependency>aopalliance</dependency>
     <dependency>guava</dependency>
     <dependency>maven-wagon</dependency>
     <dependency>plexus-interpolation</dependency>

@@ -1,0 +1,26 @@
+From 00b388afab9eaf58f1e2a00ec667d51cdd04aa8a Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 20 Mar 2023 18:57:56 +0100
+Subject: [PATCH] Fix compilation error with ECJ
+
+Forwarded: no
+---
+ core/src/com/google/inject/spi/BindingSourceRestriction.java | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/core/src/com/google/inject/spi/BindingSourceRestriction.java b/core/src/com/google/inject/spi/BindingSourceRestriction.java
+index 16dd62d6c..1d39b68f9 100644
+--- a/core/src/com/google/inject/spi/BindingSourceRestriction.java
++++ b/core/src/com/google/inject/spi/BindingSourceRestriction.java
+@@ -345,7 +345,7 @@ public final class BindingSourceRestriction {
+           Stream.concat(
+               annotations, Arrays.stream(clazz.getAnnotatedSuperclass().getAnnotations()));
+     }
+-    return annotations
++    return (Stream)annotations
+         .map(Annotation::annotationType)
+         .filter(a -> a.isAnnotationPresent(RestrictedBindingSource.Permit.class));
+   }
+-- 
+2.39.2
+
