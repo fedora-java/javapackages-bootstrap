@@ -1,0 +1,17 @@
+<project>
+  <licensing>
+    <tag>Public Domain</tag>
+  </licensing>
+  <module>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}/org/aopalliance"]
+            [fileset dir="${basedir}/aopalliance"/]
+          [/copy]
+        </run>
+      </ant>
+      <compiler/>
+    </build>
+  </module>
+</project>
