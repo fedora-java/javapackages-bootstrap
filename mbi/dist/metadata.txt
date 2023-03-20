@@ -929,7 +929,6 @@ MOD xmlunit
   ART org.xmlunit xmlunit-core
 MOD xmvn
   ART org.fedoraproject.xmvn xmvn-mojo
-    DEP org.codehaus.plexus plexus-utils
     DEP org.apache.maven.resolver maven-resolver-util
     DEP org.ow2.asm asm
 MOD xmvn-generator

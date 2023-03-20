@@ -4,13 +4,11 @@
     <file>NOTICE</file>
   </licensing>
   <module>
-    <dependency>plexus-utils</dependency>
     <dependency>injection-api</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>sisu-inject</dependency>
     <dependency>slf4j</dependency>
     <dependency>maven-resolver</dependency>
-    <dependency>plexus-classworlds</dependency>
     <dependency>maven-plugin-tools</dependency>
     <dependency>jcommander</dependency>
     <dependency>commons-compress</dependency>
