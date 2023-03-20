@@ -4,7 +4,6 @@
     <file>NOTICE</file>
   </licensing>
   <module>
-    <dependency>maven-plugin-api</dependency>
     <dependency>maven-plugin-tools</dependency>
     <dependency>jsr-305</dependency>
     <dependency>maven-plugin-api</dependency>
@@ -15,7 +14,6 @@
     <dependency>maven-model-builder</dependency>
     <dependency>maven-settings</dependency>
     <dependency>maven-artifact</dependency>
-    <dependency>maven-common-artifact-filters</dependency>
     <dependency>maven-dependency-tree</dependency>
     <dependency>maven-shared-utils</dependency>
     <dependency>plexus-utils</dependency>

@@ -3,7 +3,6 @@
     <tag>ASL 2.0</tag>
   </licensing>
   <module>
-    <dependency>byte-buddy</dependency>
     <dependency>hamcrest</dependency>
     <dependency>assertj-core</dependency>
     <build>

@@ -49,7 +49,6 @@
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-artifact</dependency>
-    <dependency>asm</dependency>
     <dependency>plexus-java</dependency>
     <dependency>commons-compress</dependency>
     <dependency>plexus-component-annotations</dependency>

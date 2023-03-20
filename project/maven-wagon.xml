@@ -3,7 +3,6 @@
     <tag>ASL 2.0</tag>
   </licensing>
   <module>
-    <dependency>commons-io</dependency>
     <dependency>commons-logging</dependency>
     <dependency>httpcomponents-client</dependency>
     <dependency>httpcomponents-core</dependency>

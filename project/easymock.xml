@@ -8,7 +8,6 @@
     <dependency>testng</dependency>
     <dependency>cglib</dependency>
     <dependency>objenesis</dependency>
-    <dependency>asm</dependency>
     <build>
       <compiler>
         <addSourceRoot>core/src/main/java</addSourceRoot>

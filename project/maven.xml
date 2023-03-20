@@ -64,7 +64,6 @@
     <dependency>plexus-utils</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-artifact</dependency>
-    <dependency>maven-settings</dependency>
     <dependency>maven-resolver</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>plexus-classworlds</dependency>
@@ -210,13 +209,11 @@
     <dependency>maven-resolver</dependency>
     <dependency>maven-model</dependency>
     <dependency>injection-api</dependency>
-    <dependency>maven-artifact</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>maven-repository-metadata</dependency>
     <dependency>maven-model-builder</dependency>
     <dependency>guice</dependency>
     <dependency>maven-builder-support</dependency>
-    <dependency>slf4j</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>

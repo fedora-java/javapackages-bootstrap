@@ -44,7 +44,6 @@
     <subDir>dist</subDir>
     <dependency>mbi-core</dependency>
     <dependency>xmvn</dependency>
-    <dependency>jcommander</dependency>
     <dependency>commons-compress</dependency>
     <dependency>slf4j</dependency>
     <dependency>asm</dependency>
@@ -76,7 +75,6 @@
     <dependency>plexus-build-api</dependency>
     <build>
       <compiler>
-        <release>11</release>
         <addSourceRoot>src</addSourceRoot>
       </compiler>
     </build>
@@ -130,7 +128,6 @@
     <dependency>plexus-cipher</dependency>
     <build>
       <compiler>
-        <release>11</release>
         <addSourceRoot>src</addSourceRoot>
       </compiler>
     </build>

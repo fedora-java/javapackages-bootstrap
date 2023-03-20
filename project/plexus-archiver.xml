@@ -9,7 +9,6 @@
     <dependency>sisu-plexus</dependency>
     <dependency>commons-compress</dependency>
     <dependency>commons-io</dependency>
-    <dependency>xz-java</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
