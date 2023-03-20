@@ -13,6 +13,8 @@ MOD ant
     ALIAS apache ant
     ALIAS ant ant
     DEP org.apache.ant ant-launcher
+MOD aopalliance
+  ART aopalliance aopalliance
 MOD apiguardian
   ART org.apiguardian apiguardian-api
 MOD asm
