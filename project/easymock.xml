@@ -8,6 +8,7 @@
     <dependency>testng</dependency>
     <dependency>cglib</dependency>
     <dependency>objenesis</dependency>
+    <dependency>asm</dependency>  <!-- required by Eclipse  -->
     <build>
       <compiler>
         <addSourceRoot>core/src/main/java</addSourceRoot>
