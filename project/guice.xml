@@ -6,18 +6,24 @@
     <dependency>injection-api</dependency>
     <dependency>guava</dependency>
     <dependency>servlet-api</dependency>
+    <dependency>asm</dependency>
+    <dependency>aopalliance</dependency>
+    <dependency>jsr-305</dependency>
     <build>
-      <munge>
-        <setSourceRoot>core/src</setSourceRoot>
-      </munge>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/core/src"/]
+          [/copy]
+          [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
+            [arg line="-s -i -a ."/]
+            [arg line="-p ^com.google.common.annotations."/]
+            [arg line="-p ^com.google.errorprone.annotations."/]
+          [/exec]
+        </run>
+      </ant>
       <compiler>
         <addSourceRoot>extensions/servlet/src</addSourceRoot>
-        <excludeSourceClass>LineNumbers</excludeSourceClass>
-        <excludeSourceClass>InterceptorBindingProcessor</excludeSourceClass>
-        <excludeSourceClass>ProxyFactory</excludeSourceClass>
-        <excludeSourceClass>InterceptorStackCallback</excludeSourceClass>
-        <excludeSourceClass>InterceptorBinding</excludeSourceClass>
-        <excludeSourceClass>MethodAspect</excludeSourceClass>
       </compiler>
     </build>
   </module>
