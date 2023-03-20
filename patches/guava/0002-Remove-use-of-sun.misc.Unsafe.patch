@@ -1,27 +1,28 @@
-From c38be0d61a7b291cefc5ca876ad2d6f5f4190ac6 Mon Sep 17 00:00:00 2001
+From c1a6d8a24353bd3e1f1867ec06ada0c233c779dc Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 30 Nov 2020 12:16:22 +0100
-Subject: [PATCH 2/3] Remove use of sun.misc.Unsafe
+Subject: [PATCH 2/2] Remove use of sun.misc.Unsafe
 
 Forwarded: not-needed
 ---
- .../com/google/common/cache/LongAddables.java |  11 +-
- .../common/hash/LittleEndianByteArray.java    | 109 +--------------
- .../com/google/common/hash/LongAddables.java  |  11 +-
- .../common/primitives/UnsignedBytes.java      | 131 +-----------------
- .../util/concurrent/AbstractFuture.java       |  92 +-----------
- 5 files changed, 5 insertions(+), 349 deletions(-)
+ .../com/google/common/cache/LongAddables.java |  12 +-
+ .../common/hash/LittleEndianByteArray.java    | 109 +---------------
+ .../com/google/common/hash/LongAddables.java  |  12 +-
+ .../common/primitives/UnsignedBytes.java      | 119 ------------------
+ .../util/concurrent/AbstractFuture.java       | 104 +--------------
+ 5 files changed, 4 insertions(+), 352 deletions(-)
 
 diff --git a/guava/src/com/google/common/cache/LongAddables.java b/guava/src/com/google/common/cache/LongAddables.java
-index b0f9e2b217..cd5d14b1af 100644
+index 249c6e149d..cd5d14b1af 100644
 --- a/guava/src/com/google/common/cache/LongAddables.java
 +++ b/guava/src/com/google/common/cache/LongAddables.java
-@@ -30,16 +30,7 @@ final class LongAddables {
+@@ -30,17 +30,7 @@ final class LongAddables {
  
    static {
      Supplier<LongAddable> supplier;
 -    try {
--      new LongAdder(); // trigger static initialization of the LongAdder class, which may fail
+-      // trigger static initialization of the LongAdder class, which may fail
+-      LongAdder unused = new LongAdder();
 -      supplier =
 -          new Supplier<LongAddable>() {
 -            @Override
@@ -35,7 +36,7 @@ index b0f9e2b217..cd5d14b1af 100644
            new Supplier<LongAddable>() {
              @Override
 diff --git a/guava/src/com/google/common/hash/LittleEndianByteArray.java b/guava/src/com/google/common/hash/LittleEndianByteArray.java
-index 15d8b2cfb4..a7389abc4a 100644
+index 625201547d..a7389abc4a 100644
 --- a/guava/src/com/google/common/hash/LittleEndianByteArray.java
 +++ b/guava/src/com/google/common/hash/LittleEndianByteArray.java
 @@ -16,7 +16,6 @@ package com.google.common.hash;
@@ -162,7 +163,7 @@ index 15d8b2cfb4..a7389abc4a 100644
 -       * which will have an efficient native implementation in JDK 9.
 -       *
 -       */
--      final String arch = System.getProperty("os.arch");
+-      String arch = System.getProperty("os.arch");
 -      if ("amd64".equals(arch)) {
 -        theGetter =
 -            ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)
@@ -176,15 +177,16 @@ index 15d8b2cfb4..a7389abc4a 100644
    }
  
 diff --git a/guava/src/com/google/common/hash/LongAddables.java b/guava/src/com/google/common/hash/LongAddables.java
-index 370030dab5..2ea1adec29 100644
+index 7c371ec88f..2ea1adec29 100644
 --- a/guava/src/com/google/common/hash/LongAddables.java
 +++ b/guava/src/com/google/common/hash/LongAddables.java
-@@ -28,16 +28,7 @@ final class LongAddables {
+@@ -28,17 +28,7 @@ final class LongAddables {
  
    static {
      Supplier<LongAddable> supplier;
 -    try {
--      new LongAdder(); // trigger static initialization of the LongAdder class, which may fail
+-      // trigger static initialization of the LongAdder class, which may fail
+-      LongAdder unused = new LongAdder();
 -      supplier =
 -          new Supplier<LongAddable>() {
 -            @Override
@@ -198,7 +200,7 @@ index 370030dab5..2ea1adec29 100644
            new Supplier<LongAddable>() {
              @Override
 diff --git a/guava/src/com/google/common/primitives/UnsignedBytes.java b/guava/src/com/google/common/primitives/UnsignedBytes.java
-index bf9a3066a1..2fc47d7a4a 100644
+index db4f489e49..c6d1833b71 100644
 --- a/guava/src/com/google/common/primitives/UnsignedBytes.java
 +++ b/guava/src/com/google/common/primitives/UnsignedBytes.java
 @@ -26,7 +26,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -286,7 +288,7 @@ index bf9a3066a1..2fc47d7a4a 100644
 -
 -      @Override
 -      public int compare(byte[] left, byte[] right) {
--        final int stride = 8;
+-        int stride = 8;
 -        int minLength = Math.min(left.length, right.length);
 -        int strideLimit = minLength & ~(stride - 1);
 -        int i;
@@ -334,27 +336,8 @@ index bf9a3066a1..2fc47d7a4a 100644
      enum PureJavaComparator implements Comparator<byte[]> {
        INSTANCE;
  
-@@ -436,17 +317,7 @@ public final class UnsignedBytes {
-      * to do so.
-      */
-     static Comparator<byte[]> getBestComparator() {
--      try {
--        Class<?> theClass = Class.forName(UNSAFE_COMPARATOR_NAME);
--
--        // requireNonNull is safe because the class is an enum.
--        Object[] constants = requireNonNull(theClass.getEnumConstants());
--
--        // yes, UnsafeComparator does implement Comparator<byte[]>
--        @SuppressWarnings("unchecked")
--        Comparator<byte[]> comparator = (Comparator<byte[]>) constants[0];
--        return comparator;
--      } catch (Throwable t) { // ensure we really catch *everything*
-+      {
-         return lexicographicalComparatorJavaImpl();
-       }
-     }
 diff --git a/guava/src/com/google/common/util/concurrent/AbstractFuture.java b/guava/src/com/google/common/util/concurrent/AbstractFuture.java
-index e61c6fff5b..9f09428105 100644
+index fc408a92d2..b610d98994 100644
 --- a/guava/src/com/google/common/util/concurrent/AbstractFuture.java
 +++ b/guava/src/com/google/common/util/concurrent/AbstractFuture.java
 @@ -154,13 +154,9 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Interna
@@ -380,7 +363,7 @@ index e61c6fff5b..9f09428105 100644
        log.log(
            Level.SEVERE, "SafeAtomicHelper is broken!", thrownAtomicReferenceFieldUpdaterFailure);
      }
-@@ -1305,91 +1300,6 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Interna
+@@ -1304,103 +1299,6 @@ public abstract class AbstractFuture<V extends @Nullable Object> extends Interna
      abstract boolean casValue(AbstractFuture<?> future, @CheckForNull Object expect, Object update);
    }
  
@@ -462,6 +445,18 @@ index e61c6fff5b..9f09428105 100644
 -      return UNSAFE.compareAndSwapObject(future, LISTENERS_OFFSET, expect, update);
 -    }
 -
+-    /** Performs a GAS operation on the {@link #listeners} field. */
+-    @Override
+-    Listener gasListeners(AbstractFuture<?> future, Listener update) {
+-      return (Listener) UNSAFE.getAndSetObject(future, LISTENERS_OFFSET, update);
+-    }
+-
+-    /** Performs a GAS operation on the {@link #waiters} field. */
+-    @Override
+-    Waiter gasWaiters(AbstractFuture<?> future, Waiter update) {
+-      return (Waiter) UNSAFE.getAndSetObject(future, WAITERS_OFFSET, update);
+-    }
+-
 -    /** Performs a CAS operation on the {@link #value} field. */
 -    @Override
 -    boolean casValue(AbstractFuture<?> future, @CheckForNull Object expect, Object update) {
@@ -473,5 +468,5 @@ index e61c6fff5b..9f09428105 100644
    @SuppressWarnings("rawtypes")
    private static final class SafeAtomicHelper extends AtomicHelper {
 -- 
-2.39.1
+2.39.2
 
