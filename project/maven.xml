@@ -126,7 +126,7 @@
     <build>
       <modello>
         <model>src/main/mdo/core-extensions.mdo</model>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
         <output>java|xpp3-reader|xpp3-writer</output>
       </modello>
       <compiler>
@@ -214,6 +214,7 @@
     <dependency>maven-model-builder</dependency>
     <dependency>guice</dependency>
     <dependency>maven-builder-support</dependency>
+    <dependency>maven-artifact</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
