@@ -144,11 +144,10 @@ MOD guice
     ALIAS org.sonatype.sisu.inject guice-servlet
     DEP com.google.inject guice
   ART com.google.inject guice
-    ALIAS com.google.inject guice no_aop
-    ALIAS org.sonatype.sisu sisu-guice
-    ALIAS org.sonatype.sisu sisu-guice no_aop
     DEP javax.inject javax.inject
+    DEP aopalliance aopalliance
     DEP com.google.guava guava
+    DEP org.ow2.asm asm
 MOD hamcrest
   ART org.hamcrest hamcrest-core
     ALIAS org.hamcrest hamcrest
