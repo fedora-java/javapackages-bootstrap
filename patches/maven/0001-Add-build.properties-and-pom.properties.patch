@@ -16,7 +16,7 @@ index 000000000..874aac228
 --- /dev/null
 +++ b/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
 @@ -0,0 +1 @@
-+version=3.6.3
++version=3.8.5
 diff --git a/maven-core/src/main/resources/org/apache/maven/messages/build.properties b/maven-core/src/main/resources/org/apache/maven/messages/build.properties
 index 20f386ba0..3ff0e7c9a 100644
 --- a/maven-core/src/main/resources/org/apache/maven/messages/build.properties
@@ -31,8 +31,8 @@ index 20f386ba0..3ff0e7c9a 100644
 -distributionShortName=${distributionShortName}
 -distributionName=${distributionName}
 \ No newline at end of file
-+buildNumber=3.6.3
-+version=3.6.3
++buildNumber=3.8.5
++version=3.8.5
 +distributionId=xmvn
 +distributionShortName=XMvn
 +distributionName=Red Hat XMvn
