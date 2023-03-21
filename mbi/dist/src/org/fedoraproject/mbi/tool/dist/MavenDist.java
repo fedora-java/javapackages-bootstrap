@@ -66,13 +66,14 @@ public class MavenDist
         }
         for ( String executable : Arrays.asList( "mvn", "mvnDebug", "mvnyjp" ) )
         {
-            Files.setPosixFilePermissions( dist.getInstallRoot().resolve( mavenHome ).resolve( "bin" ).resolve( executable ), PosixFilePermissions.fromString( "rwxr-xr-x" ) );
+            Files.setPosixFilePermissions( dist.getInstallRoot().resolve( mavenHome ).resolve( "bin" ).resolve( executable ),
+                                           PosixFilePermissions.fromString( "rwxr-xr-x" ) );
         }
-        for ( String moduleName : Arrays.asList( "asm", "common-annotations-api", "commons-cli", "commons-io",
-                                                 "commons-lang", "guava", "guice", "injection-api", "jansi", "jsr-305",
-                                                 "maven-artifact", "maven-builder-support", "maven-compat",
-                                                 "maven-core", "maven-embedder", "maven-model-builder", "maven-model",
-                                                 "maven-plugin-api", "maven-repository-metadata",
+        for ( String moduleName : Arrays.asList( "aopalliance", "asm", "common-annotations-api", "commons-cli",
+                                                 "commons-io", "commons-lang", "guava", "guice", "injection-api",
+                                                 "jansi", "jsr-305", "maven-artifact", "maven-builder-support",
+                                                 "maven-compat", "maven-core", "maven-embedder", "maven-model-builder",
+                                                 "maven-model", "maven-plugin-api", "maven-repository-metadata",
                                                  "maven-resolver-provider", "maven-settings-builder", "maven-settings",
                                                  "maven-resolver", "maven-shared-utils", "maven-wagon", "plexus-cipher",
                                                  "plexus-classworlds", "plexus-component-annotations",
