@@ -174,7 +174,7 @@ that allow you to control the shape and the location of binary
 distribution:
 
 * `-javaCmdPath` points to `java` executable, for use in launcher
-  shebangs (defaults to `/usr/lib/jvm/java-17-openjdk`).
+  shebangs (defaults to `/usr/lib/jvm/java-17`).
 
 * `-installRoot` specifies directory into which distribution will be
   installed (equivalent to `$RPM_BUILD_ROOT` in RPM build), by default

@@ -31,7 +31,7 @@ index dfa384b8e..2e9f10da0 100755
 -  fi
 -
 -fi
-+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
++export JAVA_HOME=/usr/lib/jvm/java-17
  
  # OS specific support. $var _must_ be set to either true or false.
  cygwin=false;
