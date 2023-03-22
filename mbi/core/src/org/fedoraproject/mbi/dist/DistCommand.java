@@ -42,7 +42,7 @@ public class DistCommand
         Path workDir = reactor.getTargetDir( distModule ).resolve( "dist-work" );
         Util.delete( workDir );
 
-        String javaCmdPath = getOption( "javaCmdPath", "/usr/lib/jvm/java-17-openjdk/bin/java" );
+        String javaCmdPath = getOption( "javaCmdPath", "/usr/lib/jvm/java-17/bin/java" );
         String basePackageName = getOption( "basePackageName", "mbi" );
         String installRoot = getOption( "installRoot", "/" );
         String mavenHomePath = getOption( "mavenHomePath", "/opt/mbi/maven" );
