@@ -524,20 +524,36 @@ MOD maven-resolver
     DEP org.apache.maven.resolver maven-resolver-api
   ART org.apache.maven.resolver maven-resolver-util
     ALIAS org.eclipse.aether aether-util
-    DEP org.apache.commons commons-lang3
     DEP org.apache.maven.resolver maven-resolver-api
+  ART org.apache.maven.resolver maven-resolver-named-locks
+    DEP org.slf4j slf4j-api
   ART org.apache.maven.resolver maven-resolver-impl
     ALIAS org.eclipse.aether aether-impl
-    DEP org.apache.commons commons-lang3
     DEP org.apache.maven.resolver maven-resolver-api
     DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-named-locks
     DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.commons commons-lang3
+    DEP com.google.guava guava
+    DEP com.google.guava failureaccess
     DEP org.slf4j slf4j-api
   ART org.apache.maven.resolver maven-resolver-connector-basic
     ALIAS org.eclipse.aether aether-connector-basic
     DEP org.apache.maven.resolver maven-resolver-api
     DEP org.apache.maven.resolver maven-resolver-spi
     DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.slf4j slf4j-api
+  ART org.apache.maven.resolver maven-resolver-transport-file
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.slf4j slf4j-api
+  ART org.apache.maven.resolver maven-resolver-transport-http
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.httpcomponents httpclient
+    DEP org.apache.httpcomponents httpcore
+    DEP org.slf4j jcl-over-slf4j
     DEP org.slf4j slf4j-api
   ART org.apache.maven.resolver maven-resolver-transport-wagon
     ALIAS org.eclipse.aether aether-transport-wagon
@@ -546,6 +562,9 @@ MOD maven-resolver
     DEP org.apache.maven.resolver maven-resolver-spi
     DEP org.apache.maven.resolver maven-resolver-util
     DEP org.apache.maven.wagon wagon-provider-api
+    DEP org.codehaus.plexus plexus-classworlds
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
     DEP org.slf4j slf4j-api
 MOD maven-resolver-provider
   ART org.apache.maven maven-resolver-provider
