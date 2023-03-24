@@ -119,8 +119,6 @@ MBI provides the following tools that can be used as build steps:
 
 * `modello` - invokes Modello tool to generate code from data models.
 
-* `munge` - invokes Munge, a simple Java preprocessor.
-
 * `cdc` - component descriptor creator, extracts Plexus and Sisu
   component descriptors from Javadoc comments or Java annotations,
   enabling Sisu and Plexus to discover and load components implemented
