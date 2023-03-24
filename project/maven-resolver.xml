@@ -8,12 +8,6 @@
     <dependency>guice</dependency>
     <dependency>injection-api</dependency>
     <dependency>sisu-inject</dependency>
-    <dependency>sisu-plexus</dependency>
-    <dependency>plexus-classworlds</dependency>
-    <dependency>maven-wagon</dependency>
-    <dependency>plexus-utils</dependency>
-    <dependency>httpcomponents-client</dependency>
-    <dependency>httpcomponents-core</dependency>
     <build>
       <compiler>
         <addSourceRoot>maven-resolver-api/src/main/java</addSourceRoot>
@@ -22,9 +16,39 @@
         <addSourceRoot>maven-resolver-util/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-connector-basic/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-transport-file/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-resolver-transport-http/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-resolver-transport-wagon/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-named-locks/src/main/java</addSourceRoot>
+      </compiler>
+      <cdc/>
+    </build>
+  </module>
+  <module>
+    <name>maven-resolver-transport-http</name>
+    <subDir>maven-resolver-transport-http</subDir>
+    <dependency>maven-resolver</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>httpcomponents-client</dependency>
+    <dependency>httpcomponents-core</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <cdc/>
+    </build>
+  </module>
+  <module>
+    <name>maven-resolver-transport-wagon</name>
+    <subDir>maven-resolver-transport-wagon</subDir>
+    <dependency>maven-resolver</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-classworlds</dependency>
+    <dependency>maven-wagon</dependency>
+    <dependency>plexus-utils</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
       <cdc/>
     </build>

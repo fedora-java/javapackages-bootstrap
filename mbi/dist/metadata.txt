@@ -547,6 +547,7 @@ MOD maven-resolver
     DEP org.apache.maven.resolver maven-resolver-api
     DEP org.apache.maven.resolver maven-resolver-spi
     DEP org.slf4j slf4j-api
+MOD maven-resolver-transport-http
   ART org.apache.maven.resolver maven-resolver-transport-http
     DEP org.apache.maven.resolver maven-resolver-api
     DEP org.apache.maven.resolver maven-resolver-spi
@@ -555,6 +556,7 @@ MOD maven-resolver
     DEP org.apache.httpcomponents httpcore
     DEP org.slf4j jcl-over-slf4j
     DEP org.slf4j slf4j-api
+MOD maven-resolver-transport-wagon
   ART org.apache.maven.resolver maven-resolver-transport-wagon
     ALIAS org.eclipse.aether aether-transport-wagon
     ALIAS org.eclipse.aether aether-connector-wagon
