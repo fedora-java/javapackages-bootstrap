@@ -1,0 +1,27 @@
+From bc574a50c2873fddf8588e8b614d964af5d26e93 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Mari=C3=A1n=20Kon=C4=8Dek?= <marian.koncek@mailbox.org>
+Date: Mon, 5 Jun 2023 12:09:39 +0200
+Subject: [PATCH] Change encoding to UTF-8
+
+Forwarded: yes
+PR: https://github.com/apache/commons-compress/pull/389
+---
+ .../commons/compress/archivers/tar/TarArchiveOutputStream.java  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java b/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java
+index bc98332e..f84149c5 100644
+--- a/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java
++++ b/src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java
+@@ -297,7 +297,7 @@ private void addPaxHeadersForBigNumbers(final Map<String, String> paxHeaders,
+             TarConstants.MAXID);
+         // libarchive extensions
+         addFileTimePaxHeader(paxHeaders, "LIBARCHIVE.creationtime", entry.getCreationTime());
+-        // star extensions by Jörg Schilling
++        // star extensions by JÃ¶rg Schilling
+         addPaxHeaderForBigNumber(paxHeaders, "SCHILY.devmajor",
+             entry.getDevMajor(), TarConstants.MAXID);
+         addPaxHeaderForBigNumber(paxHeaders, "SCHILY.devminor",
+-- 
+2.40.1
+
