@@ -175,6 +175,8 @@ MOD jflex
   ART de.jflex jflex
     DEP java_cup java_cup
     DEP org.apache.ant ant
+MOD jsoup
+  ART org.jsoup jsoup
 MOD jsr-305
   ART com.google.code.findbugs jsr305
     ALIAS org.jsr-305 ri
