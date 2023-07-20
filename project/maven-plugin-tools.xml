@@ -4,14 +4,24 @@
   </licensing>
   <module>
     <dependency>plexus-utils</dependency>
+    <dependency>plexus-java</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>asm</dependency>
+    <dependency>asm-util</dependency>
+    <dependency>httpcomponents-core</dependency>
+    <dependency>httpcomponents-client</dependency>
     <dependency>plexus-component-annotations</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-repository-metadata</dependency>
+    <dependency>maven-resolver</dependency>
+    <dependency>maven-settings</dependency>
+    <dependency>maven-wagon</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>jsoup</dependency>
+    <dependency>injection-api</dependency>
     <dependency>qdox</dependency>
     <dependency>plexus-archiver</dependency>
     <dependency>plexus-build-api</dependency>
@@ -25,13 +35,11 @@
         <addSourceRoot>maven-plugin-tools-java/src/main/java</addSourceRoot>
         <addSourceRoot>maven-plugin-plugin/src/main/java</addSourceRoot>
         <excludeSourceClass>PluginReport</excludeSourceClass>
-        <excludeSourceClass>PluginHelpGenerator</excludeSourceClass>
         <excludeSourceClass>PluginXdocGenerator</excludeSourceClass>
-        <addResource>maven-plugin-tools-api/src/main/resources</addResource>
         <addResource>maven-plugin-tools-generators/src/main/resources</addResource>
       </compiler>
       <cdc>
-        <gleanFromXML>maven-plugin-tools-api/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
+        <gleanFromXML>maven-script/maven-script-ant/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
         <gleanFromXML>maven-plugin-plugin/src/main/filtered-resources/META-INF/plexus/components.xml</gleanFromXML>
       </cdc>
       <pdc/>
