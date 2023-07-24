@@ -5,10 +5,12 @@
   </licensing>
   <module>
     <dependency>commons-codec</dependency>
+    <dependency>injection-api</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-enforcer</dependency>
+    <dependency>maven-resolver</dependency>
     <dependency>maven-plugin-api</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
