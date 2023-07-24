@@ -5,6 +5,7 @@
   </licensing>
   <module>
     <dependency>maven-plugin-tools</dependency>
+    <dependency>injection-api</dependency>
     <dependency>jsr-305</dependency>
     <dependency>maven-plugin-api</dependency>
     <dependency>sisu-plexus</dependency>
@@ -16,7 +17,10 @@
     <dependency>maven-artifact</dependency>
     <dependency>maven-dependency-tree</dependency>
     <dependency>maven-shared-utils</dependency>
+    <dependency>maven-resolver</dependency>
+    <dependency>slf4j</dependency>
     <dependency>plexus-utils</dependency>
+    <dependency>plexus-classworlds</dependency>
     <dependency>commons-lang</dependency>
     <dependency>commons-codec</dependency>
     <dependency>commons-io</dependency>
@@ -26,7 +30,6 @@
         <addSourceRoot>enforcer-rules/src/main/java</addSourceRoot>
         <addSourceRoot>maven-enforcer-plugin/src/main/java</addSourceRoot>
         <excludeSourceClass>EvaluateBeanshell</excludeSourceClass>
-        <addResource>maven-enforcer-plugin/src/main/resources</addResource>
       </compiler>
       <pdc>
         <artifactId>maven-enforcer-plugin</artifactId>
