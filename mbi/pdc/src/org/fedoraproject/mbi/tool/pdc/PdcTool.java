@@ -23,7 +23,7 @@ import org.apache.maven.project.artifact.ProjectArtifact;
 import org.apache.maven.tools.plugin.DefaultPluginToolsRequest;
 import org.apache.maven.tools.plugin.PluginToolsRequest;
 import org.apache.maven.tools.plugin.extractor.MojoDescriptorExtractor;
-import org.apache.maven.tools.plugin.generator.PluginDescriptorGenerator;
+import org.apache.maven.tools.plugin.generator.PluginDescriptorFilesGenerator;
 import org.codehaus.plexus.ContainerConfiguration;
 import org.codehaus.plexus.DefaultContainerConfiguration;
 import org.codehaus.plexus.DefaultPlexusContainer;
@@ -52,6 +52,7 @@ public class PdcTool
         pluginDescriptor.setVersion( getProject().getMBIVersion() );
 
         mavenProject.setArtifact( new ProjectArtifact( mavenProject ) );
+        mavenProject.getBuild().setDirectory( getClassesDir().toString() );
         mavenProject.getBuild().setOutputDirectory( getClassesDir().toString() );
     }
 
@@ -101,7 +102,7 @@ public class PdcTool
             container.dispose();
         }
 
-        PluginDescriptorGenerator generator = new PluginDescriptorGenerator( new SystemStreamLog() );
+        PluginDescriptorFilesGenerator generator = new PluginDescriptorFilesGenerator();
         generator.execute( getClassesDir().resolve( "META-INF/maven" ).toFile(), request );
     }
 }
