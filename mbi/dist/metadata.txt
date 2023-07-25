@@ -222,6 +222,13 @@ MOD junit5-vintage
   ART org.junit.vintage junit-vintage-engine
     DEP org.junit.platform junit-platform-engine
     DEP junit junit
+MOD log4j
+  ART org.apache.logging.log4j log4j-1.2-api
+    ALIAS log4j log4j
+    DEP org.apache.logging.log4j log4j-api
+  ART org.apache.logging.log4j log4j-api
+  ART org.apache.logging.log4j log4j-core
+    DEP org.apache.logging.log4j log4j-api
 MOD maven-antrun-plugin
   ART org.apache.maven.plugins maven-antrun-plugin
     DEP org.apache.maven maven-plugin-api
