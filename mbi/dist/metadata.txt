@@ -168,6 +168,8 @@ MOD jansi
   ART org.fusesource.jansi jansi
 MOD jcommander
   ART com.beust jcommander
+MOD jctools
+  ART org.jctools jctools-core
 MOD jdom
   ART org.jdom jdom
     ALIAS jdom jdom
