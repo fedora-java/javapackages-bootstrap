@@ -119,6 +119,8 @@ MOD commons-logging
 MOD cup
   ART java_cup java_cup
   ART java_cup java_cup-runtime
+MOD disruptor
+  ART com.lmax disruptor
 MOD easymock
   ART org.easymock easymock
     DEP cglib cglib
