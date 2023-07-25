@@ -55,12 +55,20 @@ public class CompilerTool
 
     private int release = 8;
 
+    private boolean accessInternalJavaAPI;
+
     private final List<String> options = new ArrayList<>();
 
     @Instruction
     public void release( String release )
     {
         this.release = Integer.parseInt( release );
+    }
+
+    @Instruction
+    public void accessInternalJavaAPI( String dummy )
+    {
+        this.accessInternalJavaAPI = true;
     }
 
     @Instruction
@@ -119,7 +127,7 @@ public class CompilerTool
         }
         List<Path> allIncluded = new ArrayList<>();
         EclipseProjectGenerator eclipse =
-            new EclipseProjectGenerator( getReactor(), getProject(), getModule(), release );
+            new EclipseProjectGenerator( getReactor(), getProject(), getModule(), release, accessInternalJavaAPI );
         for ( Path sourceDir : sourceDirs )
         {
             List<Path> included = new ArrayList<>();
@@ -134,8 +142,20 @@ public class CompilerTool
         options.add( "-g" );
         options.add( "-d" );
         options.add( getClassesDir().toString() );
-        options.add( "--release" );
-        options.add( release + "" );
+        // If internal Java APIs need to be visible then --release can't be used
+        // https://bugs.openjdk.org/browse/JDK-8206937
+        if ( accessInternalJavaAPI )
+        {
+            options.add( "-source" );
+            options.add( release + "" );
+            options.add( "-target" );
+            options.add( release + "" );
+        }
+        else
+        {
+            options.add( "--release" );
+            options.add( release + "" );
+        }
         options.add( "-cp" );
         options.add( getClassPath().stream().map( Path::toString ).collect( Collectors.joining( ":" ) ) );
         StringWriter compilerOutput = new StringWriter();

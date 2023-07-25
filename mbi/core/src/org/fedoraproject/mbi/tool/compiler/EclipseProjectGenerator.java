@@ -39,12 +39,16 @@ class EclipseProjectGenerator
 
     private final int release;
 
-    public EclipseProjectGenerator( Reactor reactor, ProjectDescriptor project, ModuleDescriptor module, int release )
+    private boolean accessInternalJavaAPI;
+
+    public EclipseProjectGenerator( Reactor reactor, ProjectDescriptor project, ModuleDescriptor module, int release,
+                                    boolean accessInternalJavaAPI )
     {
         this.reactor = reactor;
         this.project = project;
         this.module = module;
         this.release = release;
+        this.accessInternalJavaAPI = accessInternalJavaAPI;
     }
 
     private StringBuilder eclipseClasspath = new StringBuilder( "<classpath>" );
@@ -99,7 +103,10 @@ class EclipseProjectGenerator
             bw.write( "org.eclipse.jdt.core.compiler.compliance=" + vm + "\n" );
             bw.write( "org.eclipse.jdt.core.compiler.source=" + vm + "\n" );
             bw.write( "org.eclipse.jdt.core.compiler.codegen.targetPlatform=" + vm + "\n" );
-            bw.write( "org.eclipse.jdt.core.compiler.release=enabled\n" );
+            if ( !accessInternalJavaAPI )
+            {
+                bw.write( "org.eclipse.jdt.core.compiler.release=enabled\n" );
+            }
             bw.write( "org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning\n" );
         }
         try ( BufferedWriter bw =
