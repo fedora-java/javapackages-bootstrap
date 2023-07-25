@@ -1,7 +1,7 @@
-From 1a0ac6091264a4f90eb288f472278020fe8dd3fa Mon Sep 17 00:00:00 2001
+From b4da14be930d93f867284b154a9e220cfb5004e3 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 6 Jul 2020 15:00:26 +0200
-Subject: [PATCH 1/2] Fix compilation error with ECJ
+Subject: [PATCH] Fix compilation error with ECJ
 
 Forwarded: no
 ---
@@ -36,5 +36,5 @@ index 83fbe94472..0990a49f09 100644
      super.putAll(copy);
    }
 -- 
-2.39.2
+2.41.0
 
