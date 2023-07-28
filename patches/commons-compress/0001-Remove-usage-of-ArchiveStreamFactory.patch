@@ -1,4 +1,4 @@
-From dee4e66dd7f13ebfb870dadafb43750efeb9f7c3 Mon Sep 17 00:00:00 2001
+From ae3ef10eefe711c550fbe5a5b98ac0590e4037ad Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
 Date: Mon, 17 Aug 2020 13:39:11 +0200
 Subject: [PATCH 1/4] Remove usage of ArchiveStreamFactory

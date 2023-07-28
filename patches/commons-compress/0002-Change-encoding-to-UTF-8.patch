@@ -1,10 +1,9 @@
-From aa26e3188f12d9992d3b5a376c2a934287d41095 Mon Sep 17 00:00:00 2001
+From 4daa90ce2032490fedc66ac02c9352db5cd3f6e0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Mari=C3=A1n=20Kon=C4=8Dek?= <marian.koncek@mailbox.org>
 Date: Mon, 5 Jun 2023 12:09:39 +0200
 Subject: [PATCH 2/4] Change encoding to UTF-8
 
-Forwarded: yes
-PR: https://github.com/apache/commons-compress/pull/389
+Forwarded: https://github.com/apache/commons-compress/pull/389
 ---
  .../commons/compress/archivers/tar/TarArchiveOutputStream.java  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
