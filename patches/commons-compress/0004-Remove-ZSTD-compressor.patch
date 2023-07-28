@@ -1,8 +1,9 @@
-From 736279865865316bc2209154929e669e5aef1d9d Mon Sep 17 00:00:00 2001
+From e0ff84fd26512baeef99b101595872c67f7df43e Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Mon, 12 Feb 2018 10:59:55 +0100
 Subject: [PATCH 4/4] Remove ZSTD compressor
 
+Forwarded: not-needed
 ---
  .../compressors/CompressorStreamFactory.java       | 14 ++------------
  1 file changed, 2 insertions(+), 12 deletions(-)

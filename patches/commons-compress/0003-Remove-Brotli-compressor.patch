@@ -1,8 +1,9 @@
-From 1c5250fe47219b20d72e668ed17dd86f5618575e Mon Sep 17 00:00:00 2001
+From e34b787419c08841e3bef5daba7c9501d529ceab Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Mon, 12 Feb 2018 10:53:48 +0100
 Subject: [PATCH 3/4] Remove Brotli compressor
 
+Forwarded: not-needed
 ---
  .../compress/compressors/CompressorStreamFactory.java      | 7 +------
  1 file changed, 1 insertion(+), 6 deletions(-)
