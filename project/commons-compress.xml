@@ -5,14 +5,11 @@
   </licensing>
   <module>
     <dependency>xz-java</dependency>
+    <dependency>asm</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
-        <excludeSourceMatching>/org/apache/commons/compress/(compressors|archivers)/(brotli|sevenz|lzma|zstandard|examples)/.*</excludeSourceMatching>
-        <excludeSourceMatching>/org/apache/commons/compress/harmony/(pack200|unpack200)/.*</excludeSourceMatching>
-        <excludeSourceClass>ArchiveStreamFactory</excludeSourceClass>
-        <excludeSourceClass>CompressorStreamFactory</excludeSourceClass>
-        <excludeSourceClass>Lister</excludeSourceClass>
+        <excludeSourceMatching>/org/apache/commons/compress/compressors/(brotli|zstandard)/.*</excludeSourceMatching>
       </compiler>
     </build>
   </module>

@@ -1,7 +1,7 @@
-From ebb8f31b84299d5564e26ecb22845133819c9aae Mon Sep 17 00:00:00 2001
+From dee4e66dd7f13ebfb870dadafb43750efeb9f7c3 Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
 Date: Mon, 17 Aug 2020 13:39:11 +0200
-Subject: [PATCH] Remove usage of ArchiveStreamFactory
+Subject: [PATCH 1/4] Remove usage of ArchiveStreamFactory
 
 Forwarded: not-needed
 ---
@@ -30,5 +30,5 @@ index 956887d6..76462ab7 100644
          }
  
 -- 
-2.40.1
+2.41.0
 
