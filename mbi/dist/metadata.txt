@@ -466,14 +466,19 @@ MOD maven-plugin-tools
     DEP org.apache.maven maven-model
     DEP org.apache.maven.plugin-tools maven-plugin-tools-api
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-component-annotations
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
     DEP com.thoughtworks.qdox qdox
   ART org.apache.maven.plugin-tools maven-plugin-tools-api
     DEP org.apache.maven maven-core
     DEP org.apache.maven maven-model
     DEP org.apache.maven maven-plugin-api
     DEP org.apache.maven maven-artifact
+    DEP org.slf4j slf4j-api
     DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.httpcomponents httpclient
+    DEP org.apache.httpcomponents httpcore
+    DEP org.apache.maven.wagon wagon-provider-api
+    DEP org.codehaus.plexus plexus-java
   ART org.apache.maven.plugins maven-plugin-plugin
     DEP org.apache.maven.plugin-tools maven-plugin-tools-api
     DEP org.apache.maven.plugin-tools maven-plugin-tools-generators
@@ -483,22 +488,28 @@ MOD maven-plugin-tools
     DEP org.codehaus.plexus plexus-utils
     DEP org.sonatype.plexus plexus-build-api
   ART org.apache.maven.plugin-tools maven-plugin-tools-annotations
-    DEP org.apache.maven maven-compat
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-artifact
     DEP org.apache.maven.plugin-tools maven-plugin-tools-api
     DEP org.apache.maven.plugin-tools maven-plugin-annotations
+    DEP org.slf4j slf4j-api
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-component-annotations
-    DEP org.ow2.asm asm
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
     DEP org.codehaus.plexus plexus-archiver
+    DEP org.ow2.asm asm
+    DEP org.ow2.asm asm-util
+    DEP org.jsoup jsoup
     DEP com.thoughtworks.qdox qdox
   ART org.apache.maven.plugin-tools maven-plugin-annotations
-    DEP org.apache.maven maven-artifact
   ART org.apache.maven.plugin-tools maven-plugin-tools-generators
     DEP org.apache.maven.plugin-tools maven-plugin-tools-api
     DEP org.apache.maven maven-model
     DEP org.codehaus.plexus plexus-utils
     DEP org.ow2.asm asm
     DEP org.ow2.asm asm-commons
+    DEP org.jsoup jsoup
 MOD maven-remote-resources-plugin
   ART org.apache.maven.plugins maven-remote-resources-plugin
     DEP org.apache.maven maven-artifact
