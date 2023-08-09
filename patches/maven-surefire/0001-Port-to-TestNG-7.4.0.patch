@@ -1,7 +1,7 @@
-From 219edb700ee76f167a329e5bab64feceee5b6b8f Mon Sep 17 00:00:00 2001
+From c7fcd8c7d8777dc9240e600735c3833d4473019f Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 10 Jul 2017 10:37:50 +0200
-Subject: [PATCH 1/4] Port to TestNG 7.4.0
+Subject: [PATCH 1/3] Port to TestNG 7.4.0
 
 Forwarded: no
 ---
@@ -11,45 +11,45 @@ Forwarded: no
  3 files changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/surefire-providers/surefire-testng/pom.xml b/surefire-providers/surefire-testng/pom.xml
-index ece647d6a..682f296e6 100644
+index 55db21017..d52bab68e 100644
 --- a/surefire-providers/surefire-testng/pom.xml
 +++ b/surefire-providers/surefire-testng/pom.xml
-@@ -51,8 +51,7 @@
-         <dependency>
-             <groupId>org.testng</groupId>
-             <artifactId>testng</artifactId>
--            <version>5.10</version>
--            <classifier>jdk15</classifier>
-+            <version>7.4.0</version>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
+@@ -55,8 +55,7 @@
+     <dependency>
+       <groupId>org.testng</groupId>
+       <artifactId>testng</artifactId>
+-      <version>5.10</version>
+-      <classifier>jdk15</classifier>
++      <version>7.4.0</version>
+       <scope>provided</scope>
+     </dependency>
+     <dependency>
 diff --git a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java
-index ed918f538..c4a0cd19d 100644
+index b73b9bacd..ab187b6d5 100644
 --- a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java
 +++ b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/AbstractDirectConfigurator.java
-@@ -63,7 +63,7 @@ public void configure( TestNG testng, Map<String, String> options )
-         testng.setUseDefaultListeners( false );
-         configureInstance( testng, options );
+@@ -57,7 +57,7 @@ public void configure(TestNG testng, Map<String, String> options) throws TestSet
+         testng.setUseDefaultListeners(false);
+         configureInstance(testng, options);
          // TODO: we should have the Profile so that we can decide if this is needed or not
--        testng.setListenerClasses( loadListenerClasses( listeners ) );
-+        testng.setListenerClasses( ( List ) loadListenerClasses( listeners ) );
+-        testng.setListenerClasses(loadListenerClasses(listeners));
++        testng.setListenerClasses((List)loadListenerClasses(listeners));
      }
  
      @Override
 diff --git a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java
-index 6caf82459..2d988381f 100755
+index d91e76afc..06dbd2316 100755
 --- a/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java
 +++ b/surefire-providers/surefire-testng/src/main/java/org/apache/maven/surefire/testng/conf/TestNGMapConfigurator.java
-@@ -68,7 +68,7 @@ public void configure( XmlSuite suite, Map<String, String> options )
-         String parallel = options.get( PARALLEL_PROP );
-         if ( parallel != null )
-         {
--            suite.setParallel( parallel );
-+            suite.setParallel( XmlSuite.ParallelMode.getValidParallel( parallel ) );
+@@ -71,7 +71,7 @@ protected void configureThreadCount(XmlSuite suite, Map<String, String> options)
+     protected void configureParallel(XmlSuite suite, Map<String, String> options) throws TestSetFailedException {
+         String parallel = options.get(PARALLEL_PROP);
+         if (parallel != null) {
+-            suite.setParallel(parallel);
++            suite.setParallel(XmlSuite.ParallelMode.getValidParallel(parallel));
          }
      }
  
 -- 
-2.35.1
+2.41.0
 

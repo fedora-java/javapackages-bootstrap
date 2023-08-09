@@ -52,6 +52,8 @@
     <dependency>plexus-java</dependency>
     <dependency>commons-compress</dependency>
     <dependency>plexus-component-annotations</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>maven-resolver</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>

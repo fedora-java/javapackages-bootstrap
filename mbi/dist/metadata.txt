@@ -717,6 +717,8 @@ MOD maven-surefire
 MOD maven-surefire-plugin
   ART org.apache.maven.plugins maven-surefire-plugin
     DEP org.apache.maven.surefire maven-surefire-common
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP javax.inject javax.inject
   ART org.apache.maven.plugins maven-failsafe-plugin
     DEP org.apache.maven.surefire maven-surefire-common
   ART org.apache.maven.surefire maven-surefire-common
