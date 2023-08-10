@@ -231,6 +231,8 @@ MOD log4j
   ART org.apache.logging.log4j log4j-api
   ART org.apache.logging.log4j log4j-core
     DEP org.apache.logging.log4j log4j-api
+MOD mail-api
+  ART com.sun.mail javax.mail
 MOD maven-antrun-plugin
   ART org.apache.maven.plugins maven-antrun-plugin
     DEP org.apache.maven maven-plugin-api
