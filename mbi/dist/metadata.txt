@@ -164,6 +164,8 @@ MOD httpcomponents-core
 MOD injection-api
   ART javax.inject javax.inject
     ALIAS jakarta.inject jakarta.inject-api
+MOD jaf-api
+  ART com.sun.activation jakarta.activation
 MOD jansi
   ART org.fusesource.jansi jansi
 MOD jcommander

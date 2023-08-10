@@ -1,0 +1,13 @@
+<project>
+  <licensing>
+    <tag>BSD</tag>
+  </licensing>
+  <module>
+    <build>
+      <compiler>
+        <excludeSourceClass>module-info</excludeSourceClass>
+        <addSourceRoot>activation/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
