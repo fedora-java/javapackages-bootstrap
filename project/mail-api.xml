@@ -1,0 +1,14 @@
+<project>
+  <licensing>
+    <tag>EPL-2.0 or GPLv2 with exceptions</tag>
+  </licensing>
+  <module>
+    <build>
+      <compiler>
+        <excludeSourceClass>module-info</excludeSourceClass>
+        <addSourceRoot>mail/src/main/java</addSourceRoot>
+        <addSourceRoot>mail/src/main/resources</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
