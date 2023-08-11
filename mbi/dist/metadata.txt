@@ -302,6 +302,7 @@ MOD maven-common-artifact-filters
     DEP org.apache.maven maven-core
     DEP org.apache.maven maven-plugin-api
     DEP org.apache.maven.shared maven-shared-utils
+    DEP org.slf4j slf4j-api
 MOD maven-compat
   ART org.apache.maven maven-compat
     DEP org.apache.maven maven-model
