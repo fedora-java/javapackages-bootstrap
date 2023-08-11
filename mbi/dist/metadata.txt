@@ -281,6 +281,9 @@ MOD maven-assembly-plugin
     DEP org.apache.maven maven-archiver
     DEP org.codehaus.plexus plexus-utils
     DEP commons-codec commons-codec
+    DEP org.slf4j slf4j-api
+    DEP javax.inject javax.inject
+    DEP org.apache.maven.resolver maven-resolver-api
 MOD maven-builder-support
   ART org.apache.maven maven-builder-support
 MOD maven-bundle-plugin
