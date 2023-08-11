@@ -18,7 +18,6 @@
         <removeProfile>japicmp</removeProfile>
         <removeProfile>jacoco</removeProfile>
         <removeProfile>cobertura</removeProfile>
-        <removeProfile>clirr</removeProfile>
       </pom>
     </build>
   </module>
