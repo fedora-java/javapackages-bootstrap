@@ -1,57 +1,56 @@
-From b9a95a75b6ae83230866787d5b659382457c8ce0 Mon Sep 17 00:00:00 2001
+From b69df21577ded31859da039434bab79cb7c5b5e6 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sat, 23 Sep 2017 11:43:45 +0200
 Subject: [PATCH] Remove support for snappy
 
 Forwarded: not-needed
-
 ---
  .../java/org/codehaus/plexus/archiver/tar/TarArchiver.java     | 3 +--
  .../java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java   | 3 +--
  2 files changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java b/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java
-index 46978ab9..3d8ffcc8 100644
+index cae07804..7fc30ba1 100644
 --- a/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java
 +++ b/src/main/java/org/codehaus/plexus/archiver/tar/TarArchiver.java
-@@ -41,7 +41,6 @@
+@@ -42,7 +42,6 @@
  import org.codehaus.plexus.components.io.resources.PlexusIoResource;
  import org.codehaus.plexus.util.IOUtil;
  import org.codehaus.plexus.util.StringUtils;
 -import org.iq80.snappy.SnappyOutputStream;
  
- /**
-  * @author <a href="mailto:evenisse@codehaus.org">Emmanuel Venisse</a>
-@@ -498,7 +497,7 @@ else if ( TarCompressionMethod.bzip2.equals( tarCompressionMethod ) )
-         }
-         else if ( TarCompressionMethod.snappy.equals( tarCompressionMethod ) )
-         {
--            return new SnappyOutputStream( bufferedOutputStream( ostream ) );
-+            throw new UnsupportedOperationException( "This version of plexus-archiver does not upport snappy compression" );
-         }
-         else if ( TarCompressionMethod.xz.equals( tarCompressionMethod ) )
-         {
+ import static org.codehaus.plexus.archiver.util.Streams.bufferedOutputStream;
+ 
+@@ -426,7 +425,7 @@ private OutputStream compress(TarCompressionMethod tarCompressionMethod, final O
+         } else if (TarCompressionMethod.bzip2.equals(tarCompressionMethod)) {
+             return new BZip2CompressorOutputStream(bufferedOutputStream(ostream));
+         } else if (TarCompressionMethod.snappy.equals(tarCompressionMethod)) {
+-            return new SnappyOutputStream(bufferedOutputStream(ostream));
++            throw new UnsupportedOperationException("This version of plexus-archiver does not upport snappy compression");
+         } else if (TarCompressionMethod.xz.equals(tarCompressionMethod)) {
+             return new XZCompressorOutputStream(bufferedOutputStream(ostream));
+         } else if (TarCompressionMethod.zstd.equals(tarCompressionMethod)) {
 diff --git a/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java b/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java
-index 6a5b43c6..a46c3007 100644
+index 1b0b7950..52cae0c9 100644
 --- a/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java
 +++ b/src/main/java/org/codehaus/plexus/archiver/tar/TarUnArchiver.java
 @@ -32,7 +32,6 @@
  import org.codehaus.plexus.archiver.ArchiverException;
  import org.codehaus.plexus.archiver.util.Streams;
  import org.codehaus.plexus.components.io.filemappers.FileMapper;
--import org.iq80.snappy.SnappyInputStream;
+-import org.iq80.snappy.SnappyFramedInputStream;
  
- /**
-  * @author <a href="mailto:evenisse@codehaus.org">Emmanuel Venisse</a>
-@@ -150,7 +149,7 @@ else if ( compression == UntarCompressionMethod.BZIP2 )
-         }
-         else if ( compression == UntarCompressionMethod.SNAPPY )
-         {
--            return new SnappyInputStream( istream, true );
-+            throw new UnsupportedOperationException( "This version of plexus-archiver does not upport snappy compression" );
-         }
-         else if ( compression == UntarCompressionMethod.XZ )
-         {
+ import static org.codehaus.plexus.archiver.util.Streams.bufferedInputStream;
+ import static org.codehaus.plexus.archiver.util.Streams.fileInputStream;
+@@ -137,7 +136,7 @@ private InputStream decompress(UntarCompressionMethod compression, final File fi
+         } else if (compression == UntarCompressionMethod.BZIP2) {
+             return new BZip2CompressorInputStream(istream);
+         } else if (compression == UntarCompressionMethod.SNAPPY) {
+-            return new SnappyFramedInputStream(istream, true);
++            throw new UnsupportedOperationException("This version of plexus-archiver does not upport snappy compression");
+         } else if (compression == UntarCompressionMethod.XZ) {
+             return new XZCompressorInputStream(istream);
+         } else if (compression == UntarCompressionMethod.ZSTD) {
 -- 
-2.35.1
+2.41.0
 

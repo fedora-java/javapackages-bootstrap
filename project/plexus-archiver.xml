@@ -9,16 +9,20 @@
     <dependency>sisu-plexus</dependency>
     <dependency>commons-compress</dependency>
     <dependency>commons-io</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>slf4j</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
         <excludeSourceMatching>/org/codehaus/plexus/archiver/snappy/.*</excludeSourceMatching>
         <excludeSourceClass>org/codehaus/plexus/archiver/tar/SnappyTarFile</excludeSourceClass>
         <excludeSourceClass>org/codehaus/plexus/archiver/tar/PlexusIoTarSnappyFileResourceCollection</excludeSourceClass>
+        <excludeSourceMatching>/org/codehaus/plexus/archiver/zstd/.*</excludeSourceMatching>
+        <excludeSourceClass>org/codehaus/plexus/archiver/tar/ZstdTarFile</excludeSourceClass>
+        <excludeSourceClass>org/codehaus/plexus/archiver/tar/PlexusIoTarZstdFileResourceCollection</excludeSourceClass>
+        <excludeSourceClass>org/codehaus/plexus/archiver/tar/PlexusIoTZstdFileResourceCollection</excludeSourceClass>
       </compiler>
-      <cdc>
-        <gleanFromXML>src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-      </cdc>
+      <cdc/>
     </build>
   </module>
 </project>
