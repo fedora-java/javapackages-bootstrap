@@ -5,6 +5,7 @@
   <module>
     <dependency>plexus-archiver</dependency>
     <dependency>plexus-interpolation</dependency>
+    <dependency>plexus-utils</dependency>
     <dependency>maven-shared-utils</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>maven-artifact</dependency>
