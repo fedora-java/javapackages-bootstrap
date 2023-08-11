@@ -24,6 +24,9 @@
     <dependency>jsr-305</dependency>
     <dependency>maven-artifact-transfer</dependency>
     <dependency>plexus-component-annotations</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>maven-resolver</dependency>
     <build>
       <modello>
         <model>src/main/mdo/assembly.mdo</model>
