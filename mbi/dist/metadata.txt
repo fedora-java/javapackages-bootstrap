@@ -841,10 +841,12 @@ MOD osgi-core
     ALIAS org.osgi org.osgi.core
 MOD plexus-archiver
   ART org.codehaus.plexus plexus-archiver
+    DEP javax.inject javax.inject
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-io
     DEP org.apache.commons commons-compress
     DEP org.tukaani xz
+    DEP org.slf4j slf4j-api
 MOD plexus-cipher
   ART org.codehaus.plexus plexus-cipher
     ALIAS org.sonatype.plexus plexus-cipher
