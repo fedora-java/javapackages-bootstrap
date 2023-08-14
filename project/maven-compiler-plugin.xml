@@ -13,6 +13,7 @@
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-model</dependency>
     <dependency>plexus-java</dependency>
+    <dependency>maven-resolver</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
