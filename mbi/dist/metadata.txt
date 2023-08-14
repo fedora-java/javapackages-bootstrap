@@ -337,6 +337,7 @@ MOD maven-compiler-plugin
     DEP org.codehaus.plexus plexus-compiler-api
     DEP org.codehaus.plexus plexus-compiler-manager
     DEP org.codehaus.plexus plexus-compiler-javac
+    DEP org.apache.maven.resolver maven-resolver-api
 MOD maven-core
   ART org.apache.maven maven-core
     DEP org.apache.maven maven-model
