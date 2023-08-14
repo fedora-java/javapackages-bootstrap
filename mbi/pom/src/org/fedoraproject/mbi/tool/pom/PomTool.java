@@ -28,6 +28,8 @@ import java.util.function.Function;
 
 import org.apache.maven.model.Build;
 import org.apache.maven.model.BuildBase;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.DependencyManagement;
 import org.apache.maven.model.Extension;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Plugin;
@@ -88,12 +90,21 @@ class ModelProcessor<X>
     {
         processSingle( model.getBuild(), this::processBuild );
         processEach( model.getProfiles(), this::processProfile );
+        processSingle( model.getDependencyManagement(), this::processDependencyManagement );
+        processEach( model.getDependencies(), null );
         return matched;
     }
 
     private void processProfile( Profile profile )
     {
+        processSingle( profile.getDependencyManagement(), this::processDependencyManagement );
+        processEach( profile.getDependencies(), null );
         processSingle( profile.getBuild(), this::processBuildBase );
+    }
+
+    private void processDependencyManagement( DependencyManagement dependencyManagement )
+    {
+        processEach( dependencyManagement.getDependencies(), null );
     }
 
     private void processBuildBase( BuildBase build )
@@ -169,6 +180,13 @@ public class PomTool
         throws Exception
     {
         process( Profile.class, Profile::getId, id );
+    }
+
+    @Instruction
+    public void removeDep( String artifactId )
+        throws Exception
+    {
+        process( Dependency.class, Dependency::getArtifactId, artifactId );
     }
 
     @Instruction
