@@ -3,7 +3,7 @@ From: =?UTF-8?q?Mari=C3=A1n=20Kon=C4=8Dek?= <marian.koncek@mailbox.org>
 Date: Mon, 14 Aug 2023 11:59:25 +0200
 Subject: [PATCH] Remove dependency on junit-bom
 
-Forwarded: no
+Forwarded: not-needed
 ---
  pom.xml | 7 -------
  1 file changed, 7 deletions(-)
