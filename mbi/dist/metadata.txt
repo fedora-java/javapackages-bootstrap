@@ -392,6 +392,8 @@ MOD maven-dependency-tree
   ART org.apache.maven.shared maven-dependency-tree
     DEP org.codehaus.plexus plexus-component-annotations
     DEP org.apache.maven.resolver maven-resolver-util
+    DEP javax.inject javax.inject
+    DEP org.slf4j slf4j-api
 MOD maven-embedder
   ART org.apache.maven maven-embedder
     DEP org.apache.maven maven-settings
