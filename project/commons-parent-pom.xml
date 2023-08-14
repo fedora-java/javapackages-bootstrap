@@ -6,6 +6,7 @@
   <module>
     <build>
       <pom>
+        <removeDep>junit-bom</removeDep>
         <removePlugin>commons-build-plugin</removePlugin>
         <removePlugin>maven-scm-publish-plugin</removePlugin>
         <removePlugin>apache-rat-plugin</removePlugin>
