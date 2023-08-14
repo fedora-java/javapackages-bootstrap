@@ -386,6 +386,8 @@ MOD maven-dependency-plugin
     DEP org.apache.commons commons-lang3
     DEP commons-collections commons-collections
     DEP commons-beanutils commons-beanutils
+    DEP javax.inject javax.inject
+    DEP org.sonatype.plexus plexus-build-api
 MOD maven-dependency-tree
   ART org.apache.maven.shared maven-dependency-tree
     DEP org.codehaus.plexus plexus-component-annotations

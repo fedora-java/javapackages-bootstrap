@@ -22,6 +22,8 @@
     <dependency>sisu-plexus</dependency>
     <dependency>commons-lang</dependency>
     <dependency>commons-collections</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>plexus-build-api</dependency>
     <build>
       <ant>
         <run>
@@ -40,6 +42,7 @@
       <compiler>
         <excludeSourceClass>AnalyzeReportMojo</excludeSourceClass>
         <excludeSourceClass>AnalyzeReportView</excludeSourceClass>
+        <excludeSourceClass>AnalyzeReportRenderer</excludeSourceClass>
         <addResource>src/main/resources</addResource>
       </compiler>
       <pdc/>
