@@ -1,0 +1,31 @@
+<project>
+  <licensing>
+    <tag>ASL 2.0</tag>
+  </licensing>
+  <module>
+    <name>apache-jar-resource-bundle</name>
+    <subDir>jar</subDir>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${classes}"]
+            [fileset dir="${basedir}/src/main/resources"/]
+          [/copy]
+        </run>
+      </ant>
+    </build>
+  </module>
+  <module>
+    <name>apache-source-release-assembly-descriptor</name>
+    <subDir>source-release</subDir>
+    <build>
+      <ant>
+        <run>
+          [copy todir="${classes}"]
+            [fileset dir="${basedir}/src/main/resources"/]
+          [/copy]
+        </run>
+      </ant>
+    </build>
+  </module>
+</project>
