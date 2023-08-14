@@ -1,30 +1,29 @@
-From 8ca380dfab1fbeb44ee650db4a368b20a6b41755 Mon Sep 17 00:00:00 2001
+From 9df2fb610f118a4efc1dae4bf07e0d585f8a1789 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Thu, 24 Sep 2020 20:17:56 +0200
 Subject: [PATCH] Avoid setting POSIX attributes for symbolic links
 
 Forwarded: no
-
 ---
  src/main/java/org/apache/maven/shared/utils/io/FileUtils.java | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/main/java/org/apache/maven/shared/utils/io/FileUtils.java b/src/main/java/org/apache/maven/shared/utils/io/FileUtils.java
-index a3be324..a396d99 100644
+index 1ce26eb..2a5b561 100644
 --- a/src/main/java/org/apache/maven/shared/utils/io/FileUtils.java
 +++ b/src/main/java/org/apache/maven/shared/utils/io/FileUtils.java
-@@ -1973,9 +1973,9 @@ public class FileUtils
+@@ -1774,9 +1774,9 @@ public class FileUtils {
                      }
                  }
              }
 -        }
  
--        copyFilePermissions( from, to );
-+            copyFilePermissions( from, to );
+-        copyFilePermissions(from, to);
++            copyFilePermissions(from, to);
 +        }
      }
  
      /**
 -- 
-2.26.2
+2.41.0
 

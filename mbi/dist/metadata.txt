@@ -657,6 +657,7 @@ MOD maven-shared-io
 MOD maven-shared-utils
   ART org.apache.maven.shared maven-shared-utils
     DEP commons-io commons-io
+    DEP org.slf4j slf4j-api
 MOD maven-source-plugin
   ART org.apache.maven.plugins maven-source-plugin
     DEP org.apache.maven maven-model
