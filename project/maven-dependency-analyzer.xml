@@ -10,6 +10,8 @@
     <dependency>maven-core</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-artifact</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>slf4j</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
