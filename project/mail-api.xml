@@ -3,6 +3,7 @@
     <tag>EPL-2.0 or GPLv2 with exceptions</tag>
   </licensing>
   <module>
+    <dependency>jaf-api</dependency>  <!-- required by Eclipse  -->
     <build>
       <compiler>
         <excludeSourceClass>module-info</excludeSourceClass>
