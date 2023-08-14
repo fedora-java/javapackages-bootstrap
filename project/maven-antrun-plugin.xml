@@ -12,6 +12,12 @@
     <dependency>ant</dependency>
     <dependency>sisu-plexus</dependency>
     <build>
+      <modello>
+        <model>src/main/mdo/antrun.mdo</model>
+        <version>1.0.0</version>
+        <output>java</output>
+        <xpp3dom>false</xpp3dom>
+      </modello>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
         <addResource>src/main/resources</addResource>
