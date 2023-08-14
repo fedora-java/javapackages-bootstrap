@@ -443,6 +443,8 @@ MOD maven-filtering
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-interpolation
     DEP org.sonatype.plexus plexus-build-api
+    DEP javax.inject javax.inject
+    DEP org.slf4j slf4j-api
 MOD maven-jar-plugin
   ART org.apache.maven.plugins maven-jar-plugin
     DEP org.apache.maven.plugin-testing maven-plugin-testing-harness
