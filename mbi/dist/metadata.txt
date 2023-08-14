@@ -371,6 +371,8 @@ MOD maven-dependency-analyzer
     DEP org.apache.maven maven-core
     DEP org.apache.maven maven-model
     DEP org.apache.maven maven-artifact
+    DEP javax.inject javax.inject
+    DEP org.slf4j slf4j-api
 MOD maven-dependency-plugin
   ART org.apache.maven.plugins maven-dependency-plugin
     DEP org.codehaus.plexus plexus-archiver
