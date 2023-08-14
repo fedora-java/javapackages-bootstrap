@@ -907,6 +907,7 @@ MOD plexus-io
   ART org.codehaus.plexus plexus-io
     DEP org.codehaus.plexus plexus-utils
     DEP commons-io commons-io
+    DEP javax.inject javax.inject
 MOD plexus-java
   ART org.codehaus.plexus plexus-java
     DEP org.ow2.asm asm

@@ -7,6 +7,7 @@
     <dependency>jsr-305</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>commons-io</dependency>
+    <dependency>injection-api</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
