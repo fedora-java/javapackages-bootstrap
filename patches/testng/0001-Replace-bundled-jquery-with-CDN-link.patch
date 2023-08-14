@@ -1,39 +1,39 @@
-From da53b94030bcda82dc9409a36364c53dcfacf275 Mon Sep 17 00:00:00 2001
+From 56b0d44188ae88906ba48e20418fb9968f746bf6 Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Wed, 18 Jul 2018 15:57:49 +0200
 Subject: [PATCH] Replace bundled jquery with CDN link
 
 Forwarded: not-needed
 ---
- src/main/java/org/testng/reporters/jq/Main.java | 1 -
- src/main/resources/org/testng/header            | 2 +-
+ testng-core/src/main/java/org/testng/reporters/jq/Main.java | 1 -
+ testng-core/src/main/resources/org/testng/header            | 2 +-
  2 files changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/src/main/java/org/testng/reporters/jq/Main.java b/src/main/java/org/testng/reporters/jq/Main.java
-index efd6799a..2d8b74e1 100644
---- a/src/main/java/org/testng/reporters/jq/Main.java
-+++ b/src/main/java/org/testng/reporters/jq/Main.java
-@@ -21,7 +21,6 @@ public class Main implements IReporter {
+diff --git a/testng-core/src/main/java/org/testng/reporters/jq/Main.java b/testng-core/src/main/java/org/testng/reporters/jq/Main.java
+index 7c6a959bd..82ef710e7 100644
+--- a/testng-core/src/main/java/org/testng/reporters/jq/Main.java
++++ b/testng-core/src/main/java/org/testng/reporters/jq/Main.java
+@@ -20,7 +20,6 @@ public class Main implements IReporter {
    private static final String TESTNG_RESOURCE_PREFIX = "/org/testng/";
    private static final String[] RESOURCES =
        new String[] {
--        "jquery.min.js",
+-        "jquery-3.6.0.min.js",
          "testng-reports.css",
          "testng-reports.js",
          "testng-reports1.css",
-diff --git a/src/main/resources/org/testng/header b/src/main/resources/org/testng/header
-index f5abbc3e..817badce 100644
---- a/src/main/resources/org/testng/header
-+++ b/src/main/resources/org/testng/header
+diff --git a/testng-core/src/main/resources/org/testng/header b/testng-core/src/main/resources/org/testng/header
+index d1573f93e..29ed3e169 100644
+--- a/testng-core/src/main/resources/org/testng/header
++++ b/testng-core/src/main/resources/org/testng/header
 @@ -7,7 +7,7 @@
  
      <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
      <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
--    <script type="text/javascript" src="jquery.min.js"></script>
-+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+-    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
++    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <script type="text/javascript" src="testng-reports.js"></script>
      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
      <script type='text/javascript'>
 -- 
-2.35.3
+2.41.0
 
