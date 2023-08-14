@@ -16,6 +16,8 @@
     <dependency>velocity-engine</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>plexus-resources</dependency>
+    <dependency>maven-model-builder</dependency>
+    <dependency>maven-resolver</dependency>
     <build>
       <modello>
         <model>src/main/mdo/remote-resources.mdo</model>
