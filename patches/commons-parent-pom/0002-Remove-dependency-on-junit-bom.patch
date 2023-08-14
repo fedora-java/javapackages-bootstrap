@@ -1,0 +1,31 @@
+From b680509ed7815e0418e86dd6740445c31bc203dc Mon Sep 17 00:00:00 2001
+From: Marian Koncek <marian.koncek@mailbox.org>
+Date: Mon, 14 Aug 2023 12:25:59 +0200
+Subject: [PATCH] Remove dependency on junit-bom
+
+Forwarded: not-needed
+---
+ pom.xml | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index 13d5fde..daff190 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -431,13 +431,6 @@
+ 
+   <dependencyManagement>
+     <dependencies>
+-      <dependency>
+-        <groupId>org.junit</groupId>
+-        <artifactId>junit-bom</artifactId>
+-        <version>${commons.junit.version}</version>
+-        <type>pom</type>
+-        <scope>import</scope>
+-      </dependency>
+     </dependencies>
+   </dependencyManagement>
+ 
+-- 
+2.41.0
+

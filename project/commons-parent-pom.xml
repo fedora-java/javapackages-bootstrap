@@ -14,6 +14,8 @@
         <removePlugin>maven-site-plugin</removePlugin>
         <removePlugin>maven-source-plugin</removePlugin>
         <removePlugin>versions-maven-plugin</removePlugin>
+        <removePlugin>cyclonedx-maven-plugin</removePlugin>
+        <removePlugin>spdx-maven-plugin</removePlugin>
         <removeProfile>animal-sniffer</removeProfile>
         <removeProfile>japicmp</removeProfile>
         <removeProfile>jacoco</removeProfile>
