@@ -15,6 +15,11 @@ MOD ant
     DEP org.apache.ant ant-launcher
 MOD aopalliance
   ART aopalliance aopalliance
+MOD apache-jar-resource-bundle
+  ART org.apache.apache.resources apache-jar-resource-bundle
+    ALIAS org.apache apache-jar-resource-bundle
+MOD apache-source-release-assembly-descriptor
+  ART org.apache.apache.resources apache-source-release-assembly-descriptor
 MOD apiguardian
   ART org.apiguardian apiguardian-api
 MOD asm
@@ -602,8 +607,6 @@ MOD maven-resolver-provider
     DEP org.codehaus.plexus plexus-utils
     DEP javax.inject javax.inject
     DEP org.slf4j slf4j-api
-MOD maven-resources
-  ART org.apache apache-jar-resource-bundle
 MOD maven-resources-plugin
   ART org.apache.maven.plugins maven-resources-plugin
     DEP commons-io commons-io
