@@ -968,6 +968,7 @@ MOD testng
   ART org.testng testng
     ALIAS org.testng testng jdk15
     DEP com.beust jcommander
+    DEP org.slf4j slf4j-api
 MOD univocity-parsers
   ART com.univocity univocity-parsers
 MOD velocity-engine
