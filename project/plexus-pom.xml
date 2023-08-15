@@ -5,9 +5,12 @@
   <module>
     <build>
       <pom>
+        <removeDep>junit-bom</removeDep>
         <removePlugin>maven-site-plugin</removePlugin>
         <removePlugin>maven-enforcer-plugin</removePlugin>
         <removePlugin>taglist-maven-plugin</removePlugin>
+        <removePlugin>spotless-maven-plugin</removePlugin>
+        <removePlugin>maven-checkstyle-plugin</removePlugin>
       </pom>
     </build>
   </module>
