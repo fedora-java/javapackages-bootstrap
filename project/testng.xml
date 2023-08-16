@@ -17,6 +17,7 @@
         <addSourceRoot>testng-collections/src/main/java</addSourceRoot>
         <addSourceRoot>testng-reflection-utils/src/main/java</addSourceRoot>
         <addSourceRoot>testng-runner-api/src/main/java</addSourceRoot>
+        <addSourceRoot>testng-asserts/src/main/java</addSourceRoot>
         <excludeSourceClass>org/testng/Converter</excludeSourceClass>
         <excludeSourceClass>org/testng/internal/Yaml</excludeSourceClass>
         <excludeSourceClass>org/testng/internal/YamlParser</excludeSourceClass>
