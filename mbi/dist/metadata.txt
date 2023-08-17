@@ -432,10 +432,9 @@ MOD maven-enforcer
   ART org.apache.maven.enforcer enforcer-api
 MOD maven-file-management
   ART org.apache.maven.shared file-management
-    DEP org.apache.maven maven-plugin-api
-    DEP org.apache.maven.shared maven-shared-io
-    DEP org.apache.maven.shared maven-shared-utils
+    DEP org.slf4j slf4j-api
     DEP org.codehaus.plexus plexus-utils
+    DEP commons-io commons-io
 MOD maven-filtering
   ART org.apache.maven.shared maven-filtering
     DEP org.apache.maven maven-core

@@ -3,10 +3,9 @@
     <tag>ASL 2.0</tag>
   </licensing>
   <module>
-    <dependency>maven-shared-utils</dependency>
-    <dependency>maven-shared-io</dependency>
-    <dependency>sisu-plexus</dependency>
-    <dependency>maven-plugin-api</dependency>
+    <dependency>commons-io</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>slf4j</dependency>
     <build>
       <modello>
         <model>src/main/mdo/fileset.mdo</model>
