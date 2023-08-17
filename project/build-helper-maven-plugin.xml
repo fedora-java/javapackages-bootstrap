@@ -9,11 +9,11 @@
     <dependency>plexus-utils</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
-    <dependency>maven-compat</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-model-builder</dependency>
     <dependency>maven-file-management</dependency>
-    <dependency>sisu-plexus</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>maven-resolver</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
