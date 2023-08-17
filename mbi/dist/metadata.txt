@@ -17,7 +17,6 @@ MOD aopalliance
   ART aopalliance aopalliance
 MOD apache-jar-resource-bundle
   ART org.apache.apache.resources apache-jar-resource-bundle
-    ALIAS org.apache apache-jar-resource-bundle
 MOD apache-source-release-assembly-descriptor
   ART org.apache.apache.resources apache-source-release-assembly-descriptor
 MOD apiguardian
