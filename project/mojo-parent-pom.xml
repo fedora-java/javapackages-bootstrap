@@ -9,6 +9,7 @@
         <removePlugin>maven-enforcer-plugin</removePlugin>
         <removePlugin>maven-site-plugin</removePlugin>
         <removePlugin>maven-checkstyle-plugin</removePlugin>
+        <removePlugin>spotless-maven-plugin</removePlugin>
       </pom>
     </build>
   </module>
