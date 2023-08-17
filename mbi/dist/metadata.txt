@@ -63,10 +63,9 @@ MOD bnd
     DEP org.slf4j slf4j-api
 MOD build-helper-maven-plugin
   ART org.codehaus.mojo build-helper-maven-plugin
-    DEP org.apache.maven maven-core
-    DEP org.apache.maven maven-plugin-api
     DEP org.codehaus.plexus plexus-utils
     DEP org.apache.maven.shared file-management
+    DEP org.slf4j slf4j-api
 MOD byte-buddy
   ART net.bytebuddy byte-buddy-agent
   ART net.bytebuddy byte-buddy
