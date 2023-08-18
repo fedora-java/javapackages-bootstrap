@@ -68,7 +68,7 @@ function prep()
 {
     rm -rf "downstream/$p"
     if [[ "$type" = git ]]; then
-        $git clone "upstream/$p.git" "downstream/$p"
+        $git clone -n "upstream/$p.git" "downstream/$p"
         $git -C "downstream/$p" checkout -b upstream-base "$ref"
     elif [[ "$type" = zip ]]; then
         $git init "downstream/$p"
