@@ -4,7 +4,6 @@
   </licensing>
   <module>
     <dependency>jsr-305</dependency>
-    <dependency>sisu-plexus</dependency>
     <dependency>commons-io</dependency>
     <dependency>jansi</dependency>
     <dependency>slf4j</dependency>

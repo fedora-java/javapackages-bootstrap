@@ -10,13 +10,10 @@
     <dependency>maven-plugin-api</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>maven-core</dependency>
-    <dependency>maven-compat</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-model-builder</dependency>
     <dependency>maven-settings</dependency>
     <dependency>maven-artifact</dependency>
-    <dependency>maven-dependency-tree</dependency>
-    <dependency>maven-shared-utils</dependency>
     <dependency>maven-resolver</dependency>
     <dependency>slf4j</dependency>
     <dependency>plexus-utils</dependency>

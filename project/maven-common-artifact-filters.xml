@@ -4,8 +4,6 @@
   </licensing>
   <module>
     <dependency>maven-resolver</dependency>
-    <dependency>maven-shared-utils</dependency>
-    <dependency>sisu-plexus</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-model</dependency>

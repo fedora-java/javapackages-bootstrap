@@ -10,7 +10,6 @@
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-plugin-tools</dependency>
     <dependency>maven-core</dependency>
-    <dependency>maven-compat</dependency>
     <dependency>maven-filtering</dependency>
     <dependency>maven-common-artifact-filters</dependency>
     <dependency>velocity-engine</dependency>

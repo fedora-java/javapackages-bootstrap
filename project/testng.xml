@@ -5,7 +5,6 @@
   <module>
     <dependency>junit4</dependency>
     <dependency>guice</dependency>
-    <dependency>ant</dependency>
     <dependency>jsr-305</dependency>
     <dependency>jcommander</dependency>
     <dependency>slf4j</dependency>
