@@ -4,8 +4,6 @@
   </licensing>
   <module>
     <dependency>commons-io</dependency>
-    <dependency>plexus-component-annotations</dependency>
-    <dependency>plexus-utils</dependency>
     <dependency>asm</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-model</dependency>

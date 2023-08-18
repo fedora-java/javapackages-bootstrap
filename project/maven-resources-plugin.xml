@@ -9,7 +9,6 @@
     <dependency>maven-model</dependency>
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-plugin-tools</dependency>
-    <dependency>sisu-plexus</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>

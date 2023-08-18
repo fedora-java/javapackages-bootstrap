@@ -6,7 +6,6 @@
     <dependency>plexus-utils</dependency>
     <dependency>jsr-305</dependency>
     <dependency>plexus-io</dependency>
-    <dependency>sisu-plexus</dependency>
     <dependency>commons-compress</dependency>
     <dependency>commons-io</dependency>
     <dependency>injection-api</dependency>

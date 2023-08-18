@@ -10,7 +10,6 @@
     <dependency>asm-util</dependency>
     <dependency>httpcomponents-core</dependency>
     <dependency>httpcomponents-client</dependency>
-    <dependency>plexus-component-annotations</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-plugin-api</dependency>

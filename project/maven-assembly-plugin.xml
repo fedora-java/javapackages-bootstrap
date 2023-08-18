@@ -12,18 +12,12 @@
     <dependency>maven-core</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-model-builder</dependency>
-    <dependency>maven-settings</dependency>
     <dependency>maven-artifact</dependency>
-    <dependency>maven-shared-utils</dependency>
-    <dependency>maven-shared-io</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>plexus-interpolation</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>maven-filtering</dependency>
     <dependency>maven-common-artifact-filters</dependency>
-    <dependency>jsr-305</dependency>
-    <dependency>maven-artifact-transfer</dependency>
-    <dependency>plexus-component-annotations</dependency>
     <dependency>injection-api</dependency>
     <dependency>slf4j</dependency>
     <dependency>maven-resolver</dependency>

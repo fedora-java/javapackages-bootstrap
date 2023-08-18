@@ -7,8 +7,6 @@
     <dependency>maven-artifact</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-resolver</dependency>
-    <dependency>sisu-plexus</dependency>
-    <dependency>plexus-component-annotations</dependency>
     <dependency>injection-api</dependency>
     <dependency>slf4j</dependency>
     <build>

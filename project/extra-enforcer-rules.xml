@@ -11,10 +11,8 @@
     <dependency>maven-core</dependency>
     <dependency>maven-enforcer</dependency>
     <dependency>maven-resolver</dependency>
-    <dependency>maven-plugin-api</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>maven-compat</dependency>
     <dependency>maven-dependency-tree</dependency>
     <dependency>maven-common-artifact-filters</dependency>
     <build>
