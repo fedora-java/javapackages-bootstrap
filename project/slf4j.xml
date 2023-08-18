@@ -21,4 +21,14 @@
       </ant>
     </build>
   </module>
+  <module>
+    <name>jcl-over-slf4j</name>
+    <subDir>jcl-over-slf4j</subDir>
+    <dependency>slf4j</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
 </project>
