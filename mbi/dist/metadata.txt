@@ -568,9 +568,6 @@ MOD maven-resolver
     DEP org.apache.maven.resolver maven-resolver-spi
     DEP org.apache.maven.resolver maven-resolver-named-locks
     DEP org.apache.maven.resolver maven-resolver-util
-    DEP org.apache.commons commons-lang3
-    DEP com.google.guava guava
-    DEP com.google.guava failureaccess
     DEP org.slf4j slf4j-api
   ART org.apache.maven.resolver maven-resolver-connector-basic
     ALIAS org.eclipse.aether aether-connector-basic
@@ -589,6 +586,7 @@ MOD maven-resolver-transport-http
     DEP org.apache.maven.resolver maven-resolver-util
     DEP org.apache.httpcomponents httpclient
     DEP org.apache.httpcomponents httpcore
+    DEP commons-codec commons-codec
     DEP org.slf4j jcl-over-slf4j
     DEP org.slf4j slf4j-api
 MOD maven-resolver-transport-wagon
