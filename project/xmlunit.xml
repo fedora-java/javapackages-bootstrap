@@ -9,7 +9,7 @@
       <ant>
         <!-- Port to hamcrest 2.1 -->
         <run>
-          [copy todir="${generatedSources}/xmlunit-matchers/src/main/java"]
+          [copy todir="${generatedSources}"]
             [fileset dir="${basedir}/xmlunit-matchers/src/main/java"/]
           [/copy]
           [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
