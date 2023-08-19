@@ -123,10 +123,10 @@ class BuildExecutor
 
     private synchronized void markStepFailed( BuildStep step, Throwable throwable )
     {
-        throwable.printStackTrace();
         completingSteps--;
         failedSteps.put( step, throwable );
         notifyAll();
+        throwable.printStackTrace();
     }
 
     private synchronized void markStepComplete( BuildStep step )
