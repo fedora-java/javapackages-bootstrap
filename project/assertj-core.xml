@@ -11,7 +11,7 @@
     <dependency>byte-buddy</dependency>
     <build>
       <compiler>
-        <addSourceRoot>src/main/java</addSourceRoot>
+        <addSourceRoot>assertj-core/src/main/java</addSourceRoot>
         <automaticModuleName>org.assertj.core</automaticModuleName>
       </compiler>
     </build>
