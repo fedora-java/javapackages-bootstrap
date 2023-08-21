@@ -13,6 +13,8 @@ MOD ant
     ALIAS apache ant
     ALIAS ant ant
     DEP org.apache.ant ant-launcher
+    DEP jakarta.activation jakarta.activation-api
+    DEP jakarta.mail jakarta.mail-api
 MOD aopalliance
   ART aopalliance aopalliance
 MOD apache-jar-resource-bundle
