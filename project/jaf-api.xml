@@ -6,7 +6,8 @@
     <build>
       <compiler>
         <excludeSourceClass>module-info</excludeSourceClass>
-        <addSourceRoot>activation/src/main/java</addSourceRoot>
+        <addSourceRoot>api/src/main/java</addSourceRoot>
+        <automaticModuleName>jakarta.activation</automaticModuleName>
       </compiler>
     </build>
   </module>
