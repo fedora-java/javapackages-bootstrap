@@ -5,6 +5,8 @@
   </licensing>
   <module>
     <dependency>junit4</dependency>
+    <dependency>jaf-api</dependency>
+    <dependency>mail-api</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main</addSourceRoot>
