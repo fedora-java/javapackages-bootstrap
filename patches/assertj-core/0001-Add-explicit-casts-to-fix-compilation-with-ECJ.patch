@@ -1,19 +1,18 @@
-From a5d3861537e4caebcbef3301ec377572d7fee7fc Mon Sep 17 00:00:00 2001
+From 5c0319d4b302c5099aaf45e8d1f57e099067b554 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sun, 22 Nov 2020 17:59:12 +0100
 Subject: [PATCH] Add explicit casts to fix compilation with ECJ
 
 Forwarded: no
-
 ---
  .../java/org/assertj/core/api/AbstractObjectAssert.java   | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/src/main/java/org/assertj/core/api/AbstractObjectAssert.java b/src/main/java/org/assertj/core/api/AbstractObjectAssert.java
-index 6b7abbb27..c00671ec0 100644
---- a/src/main/java/org/assertj/core/api/AbstractObjectAssert.java
-+++ b/src/main/java/org/assertj/core/api/AbstractObjectAssert.java
-@@ -788,7 +788,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
+diff --git a/assertj-core/src/main/java/org/assertj/core/api/AbstractObjectAssert.java b/assertj-core/src/main/java/org/assertj/core/api/AbstractObjectAssert.java
+index a1aa1ed8a..f318772a7 100644
+--- a/assertj-core/src/main/java/org/assertj/core/api/AbstractObjectAssert.java
++++ b/assertj-core/src/main/java/org/assertj/core/api/AbstractObjectAssert.java
+@@ -840,7 +840,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
     */
    @CheckReturnValue
    public AbstractObjectAssert<?, ?> extracting(String propertyOrField) {
@@ -22,7 +21,7 @@ index 6b7abbb27..c00671ec0 100644
    }
  
    /**
-@@ -834,7 +834,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
+@@ -886,7 +886,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
    @CheckReturnValue
    public <ASSERT extends AbstractAssert<?, ?>> ASSERT extracting(String propertyOrField,
                                                                   InstanceOfAssertFactory<?, ASSERT> assertFactory) {
@@ -31,7 +30,7 @@ index 6b7abbb27..c00671ec0 100644
    }
  
    /**
-@@ -900,7 +900,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
+@@ -959,7 +959,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
     */
    @CheckReturnValue
    public <T> AbstractObjectAssert<?, T> extracting(Function<? super ACTUAL, T> extractor) {
@@ -40,7 +39,7 @@ index 6b7abbb27..c00671ec0 100644
    }
  
    /**
-@@ -938,7 +938,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
+@@ -997,7 +997,7 @@ public abstract class AbstractObjectAssert<SELF extends AbstractObjectAssert<SEL
    @CheckReturnValue
    public <T, ASSERT extends AbstractAssert<?, ?>> ASSERT extracting(Function<? super ACTUAL, T> extractor,
                                                                      InstanceOfAssertFactory<?, ASSERT> assertFactory) {
@@ -50,5 +49,5 @@ index 6b7abbb27..c00671ec0 100644
  
    /**
 -- 
-2.26.2
+2.41.0
 
