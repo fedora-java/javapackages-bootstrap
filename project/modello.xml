@@ -7,6 +7,8 @@
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>plexus-build-api</dependency>
+    <dependency>plexus-component-annotations</dependency>
+    <dependency>jsoup</dependency>
     <build>
       <compiler>
         <addSourceRoot>modello-core/src/main/java</addSourceRoot>
@@ -21,19 +23,7 @@
         <addSourceRoot>modello-plugins/modello-plugin-xpp3/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xsd/src/main/java</addSourceRoot>
       </compiler>
-      <plexus>
-        <gleanFromXML>modello-core/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-converters/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-dom4j/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-java/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-jdom/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-sax/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-stax/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-xdoc/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-xml/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-xpp3/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-        <gleanFromXML>modello-plugins/modello-plugin-xsd/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-      </plexus>
+      <plexus/>
     </build>
   </module>
   <module>
@@ -50,6 +40,7 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceClass>org/codehaus/modello/maven/ModelloVelocityMojo</excludeSourceClass>
       </compiler>
       <pdc>
         <groupId>org.codehaus.modello</groupId>
