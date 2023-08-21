@@ -6,8 +6,6 @@
   <module>
     <build>
       <pom>
-        <removePlugin>clirr-maven-plugin</removePlugin>
-        <removePlugin>docbkx-maven-plugin</removePlugin>
         <removePlugin>maven-site-plugin</removePlugin>
         <removePlugin>animal-sniffer-maven-plugin</removePlugin>
         <removePlugin>apache-rat-plugin</removePlugin>
