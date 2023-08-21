@@ -101,6 +101,11 @@ public class PdcTool
             container.dispose();
         }
 
+        if ( pluginDescriptor.getMojos().isEmpty() )
+        {
+            throw new RuntimeException( "No MOJOs were discovered by PDC for module " + getModule().getName() );
+        }
+
         PluginDescriptorFilesGenerator generator = new PluginDescriptorFilesGenerator();
         generator.execute( getClassesDir().resolve( "META-INF/maven" ).toFile(), request );
     }
