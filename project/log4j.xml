@@ -8,11 +8,14 @@
     <dependency>commons-compress</dependency>
     <dependency>disruptor</dependency>
     <dependency>jctools</dependency>
+    <dependency>jaf-api</dependency>
+    <dependency>mail-api</dependency>
     <build>
       <compiler>
         <addSourceRoot>log4j-1.2-api/src/main/java</addSourceRoot>
         <addSourceRoot>log4j-api/src/main/java</addSourceRoot>
         <addSourceRoot>log4j-core/src/main/java</addSourceRoot>
+        <addSourceRoot>log4j-jakarta-smtp/src/main/java</addSourceRoot>
         <excludeSourceMatching>/org/apache/log4j/or/jms/.*</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/(jackson|layout/jackson|config/yaml|config/json|parser)/.*</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/appender/(db|mom|nosql)/.*</excludeSourceMatching>
@@ -22,6 +25,7 @@
         <excludeSourceMatching>/org/apache/logging/log4j/core/net/SmtpManager.java</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/appender/SmtpAppender.java</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/async/DisruptorBlockingQueueFactory.java</excludeSourceMatching>
+        <excludeSourceMatching>/org/apache/logging/log4j/core/filter/MutableThreadContextMapFilter.java</excludeSourceMatching>
       </compiler>
     </build>
   </module>
