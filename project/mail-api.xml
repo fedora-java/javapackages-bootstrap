@@ -7,8 +7,9 @@
     <build>
       <compiler>
         <excludeSourceClass>module-info</excludeSourceClass>
-        <addSourceRoot>mail/src/main/java</addSourceRoot>
-        <addSourceRoot>mail/src/main/resources</addSourceRoot>
+        <addSourceRoot>api/src/main/java</addSourceRoot>
+        <addSourceRoot>api/src/main/resources</addSourceRoot>
+        <automaticModuleName>jakarta.mail</automaticModuleName>
       </compiler>
     </build>
   </module>

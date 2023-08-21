@@ -239,7 +239,7 @@ MOD log4j
   ART org.apache.logging.log4j log4j-core
     DEP org.apache.logging.log4j log4j-api
 MOD mail-api
-  ART com.sun.mail javax.mail
+  ART jakarta.mail jakarta.mail-api
 MOD maven-antrun-plugin
   ART org.apache.maven.plugins maven-antrun-plugin
     DEP org.apache.maven maven-plugin-api
