@@ -17,9 +17,9 @@
       <compiler>
         <addSourceRoot>org.eclipse.sisu.plexus/src</addSourceRoot>
       </compiler>
-      <cdc>
+      <plexus>
         <gleanFromXML>org.eclipse.sisu.plexus/META-INF/plexus/components.xml</gleanFromXML>
-      </cdc>
+      </plexus>
     </build>
   </module>
 </project>

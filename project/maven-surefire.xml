@@ -60,10 +60,11 @@
         <addSourceRoot>../maven-failsafe-plugin/src/main/java</addSourceRoot>
         <addSourceRoot>../maven-surefire-common/src/main/java</addSourceRoot>
       </compiler>
+      <sisu/>
+      <plexus/>
       <pdc>
         <artifactId>maven-surefire-plugin</artifactId>
       </pdc>
-      <cdc/>
     </build>
   </module>
 </project>

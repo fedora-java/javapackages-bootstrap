@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.tool.cdc;
+package org.fedoraproject.mbi.tool.plexus;
 
-import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.inject.Named;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -47,12 +43,10 @@ import org.w3c.dom.NodeList;
 /**
  * @author Mikolaj Izdebski
  */
-public class CdcTool
+public class PlexusTool
     extends Tool
 {
     private static final String PLEXUS_DESCRIPTOR_PATH = "META-INF/plexus/components.xml";
-
-    private static final String SISU_DESCRIPTOR_PATH = "META-INF/sisu/javax.inject.Named";
 
     private DocumentBuilder documentBuilder;
 
@@ -61,8 +55,6 @@ public class CdcTool
     private Document plexusDescriptor;
 
     private Element plexusComponents;
-
-    private List<String> sisuComponents = new ArrayList<>();
 
     @Override
     public void initialize()
@@ -145,10 +137,6 @@ public class CdcTool
             String className =
                 getClassesDir().relativize( classFile ).toString().replaceAll( ".class$", "" ).replace( '/', '.' );
             Class<?> cls = getClass().getClassLoader().loadClass( className );
-            if ( cls.isAnnotationPresent( Named.class ) )
-            {
-                sisuComponents.add( cls.getName() );
-            }
             if ( cls.isAnnotationPresent( Component.class ) )
             {
                 Annotation plexus = cls.getAnnotationsByType( Component.class )[0];
@@ -183,7 +171,7 @@ public class CdcTool
     {
         gleanFromClasses();
 
-        if ( sisuComponents.isEmpty() && !plexusComponents.hasChildNodes() )
+        if ( !plexusComponents.hasChildNodes() )
         {
             throw new RuntimeException( "No Plexus components were discovered by CDC for module "
                 + getModule().getName() );
@@ -194,15 +182,5 @@ public class CdcTool
         Source source = new DOMSource( plexusDescriptor );
         Result result = new StreamResult( plexusPath.toFile() );
         transformer.transform( source, result );
-
-        Path sisuPath = getClassesDir().resolve( SISU_DESCRIPTOR_PATH );
-        Files.createDirectories( sisuPath.getParent() );
-        try ( PrintWriter pw = new PrintWriter( Files.newBufferedWriter( sisuPath ) ) )
-        {
-            for ( String sisuComponent : sisuComponents )
-            {
-                pw.println( sisuComponent );
-            }
-        }
     }
 }

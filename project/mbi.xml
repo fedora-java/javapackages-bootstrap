@@ -27,11 +27,22 @@
     </build>
   </module>
   <module>
-    <name>mbi-cdc</name>
-    <subDir>cdc</subDir>
+    <name>mbi-sisu</name>
+    <subDir>sisu</subDir>
+    <dependency>mbi-core</dependency>
+    <dependency>injection-api</dependency>
+    <build>
+      <compiler>
+        <release>11</release>
+        <addSourceRoot>src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>mbi-plexus</name>
+    <subDir>plexus</subDir>
     <dependency>mbi-core</dependency>
     <dependency>plexus-component-annotations</dependency>
-    <dependency>injection-api</dependency>
     <build>
       <compiler>
         <release>11</release>

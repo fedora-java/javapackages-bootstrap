@@ -17,7 +17,7 @@
         <addSourceRoot>maven-resolver-transport-file/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-named-locks/src/main/java</addSourceRoot>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
   <module>
@@ -32,7 +32,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
   <module>
@@ -49,7 +49,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
 </project>

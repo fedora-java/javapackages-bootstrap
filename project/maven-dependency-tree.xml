@@ -16,7 +16,7 @@
         <excludeSourceClass>Maven3DependencyGraphBuilder</excludeSourceClass>
         <excludeSourceClass>Maven3DependencyCollectorBuilder</excludeSourceClass>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
 </project>

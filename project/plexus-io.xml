@@ -12,9 +12,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <!-- <cdc> -->
-      <!--   <gleanFromXML>src/main/resources/META-INF/plexus/components.xml</gleanFromXML> -->
-      <!-- </cdc> -->
+      <sisu/>
     </build>
   </module>
 </project>

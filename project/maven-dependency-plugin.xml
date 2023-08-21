@@ -45,7 +45,7 @@
         <excludeSourceClass>AnalyzeReportRenderer</excludeSourceClass>
         <addResource>src/main/resources</addResource>
       </compiler>
-      <cdc/>
+      <sisu/>
       <pdc/>
     </build>
   </module>

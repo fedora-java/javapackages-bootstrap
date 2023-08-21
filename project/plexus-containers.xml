@@ -53,7 +53,7 @@ SOFTWARE.
         <addSourceRoot>plexus-component-metadata/src/main/java</addSourceRoot>
         <excludeSourceMatching>/plexus-component-metadata/src/main/java/org/codehaus/plexus/component/repository/.*</excludeSourceMatching>
       </compiler>
-      <cdc/>
+      <plexus/>
       <pdc>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-component-metadata</artifactId>

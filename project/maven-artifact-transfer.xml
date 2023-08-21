@@ -17,7 +17,7 @@
         <addSourceRoot>src/main/java</addSourceRoot>
         <excludeSourceMatching>/Maven30.*</excludeSourceMatching>
       </compiler>
-      <cdc/>
+      <plexus/>
     </build>
   </module>
 </project>

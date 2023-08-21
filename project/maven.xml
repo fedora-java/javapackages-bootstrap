@@ -55,7 +55,7 @@
         <addSourceRoot>src/main/java</addSourceRoot>
         <addResource>src/main/resources</addResource>
       </compiler>
-      <cdc/>
+      <plexus/>
     </build>
   </module>
   <module>
@@ -92,11 +92,12 @@
         <addSourceRoot>src/main/java</addSourceRoot>
         <addResource>src/main/resources</addResource>
       </compiler>
-      <cdc>
+      <sisu/>
+      <plexus>
         <gleanFromXML>src/main/resources/META-INF/plexus/default-bindings.xml</gleanFromXML>
         <gleanFromXML>src/main/resources/META-INF/plexus/artifact-handlers.xml</gleanFromXML>
         <gleanFromXML>src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-      </cdc>
+      </plexus>
     </build>
   </module>
   <module>
@@ -135,7 +136,7 @@
         <excludeSourceClass>MavenSimpleLogger</excludeSourceClass>
         <addResource>src/main/resources</addResource>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
   <module>
@@ -153,7 +154,7 @@
         <addSourceRoot>src/main/java</addSourceRoot>
         <addResource>src/main/resources</addResource>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
   <module>
@@ -219,7 +220,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
   <module>
@@ -235,7 +236,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
   <module>

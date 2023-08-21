@@ -44,7 +44,7 @@
         <addResource>xmvn-mojo/src/main/resources</addResource>
         <addResource>xmvn-tools/xmvn-install/src/main/resources</addResource>
       </compiler>
-      <cdc/>
+      <sisu/>
       <pdc>
         <groupId>org.fedoraproject.xmvn</groupId>
         <artifactId>xmvn-mojo</artifactId>

@@ -37,10 +37,11 @@
         <excludeSourceClass>PluginXdocGenerator</excludeSourceClass>
         <addResource>maven-plugin-tools-generators/src/main/resources</addResource>
       </compiler>
-      <cdc>
+      <sisu/>
+      <plexus>
         <gleanFromXML>maven-script/maven-script-ant/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
         <gleanFromXML>maven-plugin-plugin/src/main/filtered-resources/META-INF/plexus/components.xml</gleanFromXML>
-      </cdc>
+      </plexus>
       <pdc/>
     </build>
   </module>

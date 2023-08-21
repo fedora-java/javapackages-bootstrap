@@ -36,7 +36,7 @@
         <addSourceRoot>src/main/java</addSourceRoot>
         <addResource>src/main/resources</addResource>
       </compiler>
-      <cdc/>
+      <sisu/>
       <pdc/>
     </build>
   </module>
