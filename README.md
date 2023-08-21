@@ -119,10 +119,15 @@ MBI provides the following tools that can be used as build steps:
 
 * `modello` - invokes Modello tool to generate code from data models.
 
-* `cdc` - component descriptor creator, extracts Plexus and Sisu
+* `sisu` - JSR-330 indexer, searches compiled classes for JSR-330
+  components annotated with `javax.inject.Named` and generates Sisu
+  index for them, allowing Sisu to use these components for dependency
+  injection.
+
+* `plexus` - Plexus component descriptor creator, extracts Plexus
   component descriptors from Javadoc comments or Java annotations,
-  enabling Sisu and Plexus to discover and load components implemented
-  by the module.
+  enabling Plexus to discover and load components implemented by the
+  module.
 
 * `pdc` - plugin descriptor creator, invokes Maven Plugin Tools to
   generate plugin descriptors, allowing module to be used as a Maven

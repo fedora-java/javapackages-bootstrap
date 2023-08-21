@@ -21,7 +21,7 @@
         <addSourceRoot>modello-plugins/modello-plugin-xpp3/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xsd/src/main/java</addSourceRoot>
       </compiler>
-      <cdc>
+      <plexus>
         <gleanFromXML>modello-core/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
         <gleanFromXML>modello-plugins/modello-plugin-converters/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
         <gleanFromXML>modello-plugins/modello-plugin-dom4j/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
@@ -33,7 +33,7 @@
         <gleanFromXML>modello-plugins/modello-plugin-xml/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
         <gleanFromXML>modello-plugins/modello-plugin-xpp3/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
         <gleanFromXML>modello-plugins/modello-plugin-xsd/src/main/resources/META-INF/plexus/components.xml</gleanFromXML>
-      </cdc>
+      </plexus>
     </build>
   </module>
   <module>

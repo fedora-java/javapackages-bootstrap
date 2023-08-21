@@ -21,7 +21,7 @@
         <excludeSourceClass>org/codehaus/plexus/archiver/tar/PlexusIoTarZstdFileResourceCollection</excludeSourceClass>
         <excludeSourceClass>org/codehaus/plexus/archiver/tar/PlexusIoTZstdFileResourceCollection</excludeSourceClass>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
 </project>

@@ -16,7 +16,7 @@
         <excludeSourceMatching>/java/org/codehaus/plexus/languages/java/jpms/CmdModuleNameExtractor\.java</excludeSourceMatching>
         <excludeSourceMatching>/module-info\.java</excludeSourceMatching>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
 </project>

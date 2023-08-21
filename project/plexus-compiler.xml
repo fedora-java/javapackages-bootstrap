@@ -34,7 +34,7 @@ SOFTWARE.
         <addSourceRoot>plexus-compiler-manager/src/main/java</addSourceRoot>
         <addSourceRoot>plexus-compilers/plexus-compiler-javac/src/main/java</addSourceRoot>
       </compiler>
-      <cdc/>
+      <plexus/>
     </build>
   </module>
 </project>

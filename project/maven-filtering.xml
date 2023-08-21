@@ -16,7 +16,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <cdc/>
+      <sisu/>
     </build>
   </module>
 </project>

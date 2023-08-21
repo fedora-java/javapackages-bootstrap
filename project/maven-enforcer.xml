@@ -28,7 +28,7 @@
         <addSourceRoot>maven-enforcer-plugin/src/main/java</addSourceRoot>
         <excludeSourceClass>EvaluateBeanshell</excludeSourceClass>
       </compiler>
-      <cdc/>
+      <sisu/>
       <pdc>
         <artifactId>maven-enforcer-plugin</artifactId>
       </pdc>
