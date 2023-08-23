@@ -44,6 +44,7 @@
         <addSourceRoot>src/main/java</addSourceRoot>
         <addSourceRoot>src/main/java-templates</addSourceRoot>
         <addResource>src/main/java-templates</addResource>
+        <addResource>src/main/resources</addResource>
       </compiler>
     </build>
   </module>
