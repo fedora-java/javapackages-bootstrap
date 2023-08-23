@@ -552,7 +552,7 @@ MOD maven-remote-resources-plugin
     DEP org.codehaus.plexus plexus-interpolation
     DEP org.codehaus.plexus plexus-utils
     DEP commons-io commons-io
-    DEP org.apache.velocity velocity
+    DEP org.apache.velocity velocity-engine-core
     DEP org.apache.maven maven-model-builder
     DEP org.apache.maven.resolver maven-resolver-api
 MOD maven-repository-metadata
@@ -973,10 +973,11 @@ MOD testng
 MOD univocity-parsers
   ART com.univocity univocity-parsers
 MOD velocity-engine
-  ART org.apache.velocity velocity
-    ALIAS velocity velocity
+  ART org.apache.velocity velocity-engine-core
+    ALIAS org.apache.velocity velocity
     DEP org.apache.commons commons-lang3
-    DEP commons-collections commons-collections
+    DEP org.slf4j slf4j-api
+    DEP commons-io commons-io
 MOD xbean
   ART org.apache.xbean xbean-reflect
 MOD xmlunit
