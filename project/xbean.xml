@@ -5,12 +5,12 @@
   </licensing>
   <module>
     <dependency>asm</dependency>
+    <dependency>log4j</dependency>
+    <dependency>commons-logging</dependency>
     <build>
       <compiler>
         <addSourceRoot>xbean-asm-util/src/main/java</addSourceRoot>
         <addSourceRoot>xbean-reflect/src/main/java</addSourceRoot>
-        <excludeSourceClass>CommonsLoggingConverter</excludeSourceClass>
-        <excludeSourceClass>Log4jConverter</excludeSourceClass>
       </compiler>
     </build>
   </module>
