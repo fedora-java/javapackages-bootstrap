@@ -1,8 +1,9 @@
-From 53dcd845cac2e8d20caab5d3d4eb872dd0520832 Mon Sep 17 00:00:00 2001
+From 4275860ed4a69047f783f0c06004ba4f1256a994 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Wed, 23 Aug 2023 08:49:53 +0200
 Subject: [PATCH] Template is a reserved keyword in javacc
 
+Forwarded: no
 ---
  velocity-engine-core/src/main/parser/Parser.jjt | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
