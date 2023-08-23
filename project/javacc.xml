@@ -1,0 +1,15 @@
+<project>
+  <licensing>
+    <tag>BSD</tag>
+    <file>LICENSE</file>
+  </licensing>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <addSourceRoot>generated</addSourceRoot>
+        <addResource>src/main/resources</addResource>
+      </compiler>
+    </build>
+  </module>
+</project>
