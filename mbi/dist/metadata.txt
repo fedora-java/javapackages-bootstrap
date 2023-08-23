@@ -810,6 +810,12 @@ MOD modello
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
+  ART org.codehaus.modello modello-plugin-velocity
+    DEP org.codehaus.modello modello-plugin-xml
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.apache.velocity velocity-engine-core
+    DEP org.codehaus.plexus plexus-container-default
+    DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-xsd
     DEP org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.plexus plexus-utils
