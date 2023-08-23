@@ -9,6 +9,7 @@
     <dependency>plexus-build-api</dependency>
     <dependency>plexus-component-annotations</dependency>
     <dependency>jsoup</dependency>
+    <dependency>velocity-engine</dependency>
     <build>
       <compiler>
         <addSourceRoot>modello-core/src/main/java</addSourceRoot>
@@ -18,6 +19,7 @@
         <addSourceRoot>modello-plugins/modello-plugin-jdom/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-sax/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-stax/src/main/java</addSourceRoot>
+        <addSourceRoot>modello-plugins/modello-plugin-velocity/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xdoc/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xml/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xpp3/src/main/java</addSourceRoot>
@@ -40,7 +42,6 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
-        <excludeSourceClass>org/codehaus/modello/maven/ModelloVelocityMojo</excludeSourceClass>
       </compiler>
       <pdc>
         <groupId>org.codehaus.modello</groupId>
