@@ -22,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -362,6 +363,7 @@ public class ArtifactDist
         Path mdTxtPath = reactor.getRootDir().resolve( "mbi/dist/metadata.txt" );
         List<UMod> mods = parseTextMetadata( mdTxtPath );
         resolveDeps( mods );
+        Collections.sort( mods, ( a, b ) -> a.md.getName().compareTo( b.md.getName() ) );
         dumpUMD( mods );
 
         Map<String, String> mod2art = new LinkedHashMap<>();
