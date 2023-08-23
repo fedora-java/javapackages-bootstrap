@@ -4,26 +4,59 @@
     <file>NOTICE</file>
   </licensing>
   <module>
+    <subDir>velocity-engine-core</subDir>
+    <dependency>javacc</dependency>
+    <dependency>commons-io</dependency>
     <dependency>commons-lang</dependency>
-    <dependency>commons-collections</dependency>
+    <dependency>slf4j</dependency>
     <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/src/main/parser"/]
+          [/copy]
+          [replace file="${generatedSources}/Parser.jjt" token="$${parser.debug}" value="false"/]
+          [replace file="${generatedSources}/Parser.jjt" token="$${parser.package}" value="org.apache.velocity.runtime.parser"/]
+          [replace file="${generatedSources}/Parser.jjt" token="$${parser.basename}" value="Standard"/]
+          [replace file="${generatedSources}/Parser.jjt" token="$${parser.char.asterisk}" value="*"/]
+          [replace file="${generatedSources}/Parser.jjt" token="$${parser.char.at}" value="@"/]
+          [replace file="${generatedSources}/Parser.jjt" token="$${parser.char.dollar}" value="$"/]
+          [replace file="${generatedSources}/Parser.jjt" token="$${parser.char.hash}" value="#"/]
+          [java classname="org.javacc.jjtree.Main" failonerror="true"]
+            [arg value="-OUTPUT_DIRECTORY=${generatedSources}/org/apache/velocity/runtime/parser/node"/]
+            [arg value="-NOSTATIC"/]
+            [arg value="-BUILD_PARSER"/]
+            [arg value="-NOBUILD_NODE_FILES"/]
+            [arg value="-MULTI"/]
+            [arg value="-NOVISITOR"/]
+            [arg value="-JDK_VERSION=1.5"/]
+            [arg value="-NODE_USES_PARSER"/]
+            [arg value="-NODE_PACKAGE=org.apache.velocity.runtime.parser.node"/]
+            [arg value="-TOKEN_MANAGER_USES_PARSER"/]
+            [arg value="${generatedSources}/Parser.jjt"/]
+          [/java]
+          [java classname="org.javacc.parser.Main" failonerror="true"]
+            [arg value="-OUTPUT_DIRECTORY=${generatedSources}/org/apache/velocity/runtime/parser"/]
+            [arg value="-NOSTATIC"/]
+            [arg value="-BUILD_PARSER"/]
+            [arg value="-NOBUILD_NODE_FILES"/]
+            [arg value="-MULTI"/]
+            [arg value="-NOVISITOR"/]
+            [arg value="-JDK_VERSION=1.5"/]
+            [arg value="-NODE_USES_PARSER"/]
+            [arg value="-NODE_PACKAGE=org.apache.velocity.runtime.parser.node"/]
+            [arg value="-TOKEN_MANAGER_USES_PARSER"/]
+            [arg value="${generatedSources}/org/apache/velocity/runtime/parser/node/Parser.jj"/]
+          [/java]
+          [delete file="${generatedSources}/org/apache/velocity/runtime/parser/node/Node.java"/]
+          [delete file="${generatedSources}/org/apache/velocity/runtime/parser/ParseException.java"/]
+          [delete file="${generatedSources}/org/apache/velocity/runtime/parser/CharStream.java"/]
+        </run>
+      </ant>
       <compiler>
-        <addSourceRoot>src/java</addSourceRoot>
-        <excludeSourceMatching>/org/apache/velocity/(anakia|texen|servlet|convert)/.*</excludeSourceMatching>
-        <excludeSourceClass>org/apache/velocity/runtime/log/AvalonLogChute</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/runtime/log/AvalonLogSystem</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/runtime/log/CommonsLogLogChute</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/runtime/log/Log4JLogChute</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/runtime/log/Log4JLogSystem</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/runtime/log/ServletLogChute</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/runtime/log/SimpleLog4JLogSystem</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/runtime/log/VelocityFormatter</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeReference</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeHtmlReference</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeJavaScriptReference</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeSqlReference</excludeSourceClass>
-        <excludeSourceClass>org/apache/velocity/app/event/implement/EscapeXmlReference</excludeSourceClass>
-        <addResource>src/java</addResource>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <addSourceRoot>src/main/java-templates</addSourceRoot>
+        <addResource>src/main/java-templates</addResource>
       </compiler>
     </build>
   </module>
