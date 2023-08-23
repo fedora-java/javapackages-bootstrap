@@ -42,9 +42,12 @@ public class AntTool
     public void run( String arg )
         throws IOException
     {
-        this.execution = arg.replaceAll( "\\[\\[", "\u0001" ).replaceAll( "\\]\\]", "\u0002" )
-                .replace( '[', '<' ).replace( ']', '>' )
-                .replace('\u0001', '[').replace('\u0002', ']');
+        this.execution = arg.replaceAll( "\\[\\[", "\u0001" ) //
+                            .replaceAll( "\\]\\]", "\u0002" ) //
+                            .replace( '[', '<' ) //
+                            .replace( ']', '>' ) //
+                            .replace( '\u0001', '[' ) //
+                            .replace( '\u0002', ']' );
     }
 
     @Instruction
