@@ -174,11 +174,11 @@ MOD jaf-api
   ART jakarta.activation jakarta.activation-api
 MOD jansi
   ART org.fusesource.jansi jansi
-MOD jcommander
-  ART com.beust jcommander
 MOD jcl-over-slf4j
   ART org.slf4j jcl-over-slf4j
     DEP org.slf4j slf4j-api
+MOD jcommander
+  ART com.beust jcommander
 MOD jctools
   ART org.jctools jctools-core
 MOD jdom
@@ -584,6 +584,19 @@ MOD maven-resolver
     DEP org.apache.maven.resolver maven-resolver-api
     DEP org.apache.maven.resolver maven-resolver-spi
     DEP org.slf4j slf4j-api
+MOD maven-resolver-provider
+  ART org.apache.maven maven-resolver-provider
+    ALIAS org.apache.maven maven-aether-provider
+    DEP org.apache.maven maven-model
+    DEP org.apache.maven maven-model-builder
+    DEP org.apache.maven maven-repository-metadata
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.apache.maven.resolver maven-resolver-impl
+    DEP org.codehaus.plexus plexus-utils
+    DEP javax.inject javax.inject
+    DEP org.slf4j slf4j-api
 MOD maven-resolver-transport-http
   ART org.apache.maven.resolver maven-resolver-transport-http
     DEP org.apache.maven.resolver maven-resolver-api
@@ -605,19 +618,6 @@ MOD maven-resolver-transport-wagon
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.codehaus.plexus plexus-utils
     DEP org.eclipse.sisu org.eclipse.sisu.plexus
-    DEP org.slf4j slf4j-api
-MOD maven-resolver-provider
-  ART org.apache.maven maven-resolver-provider
-    ALIAS org.apache.maven maven-aether-provider
-    DEP org.apache.maven maven-model
-    DEP org.apache.maven maven-model-builder
-    DEP org.apache.maven maven-repository-metadata
-    DEP org.apache.maven.resolver maven-resolver-api
-    DEP org.apache.maven.resolver maven-resolver-spi
-    DEP org.apache.maven.resolver maven-resolver-util
-    DEP org.apache.maven.resolver maven-resolver-impl
-    DEP org.codehaus.plexus plexus-utils
-    DEP javax.inject javax.inject
     DEP org.slf4j slf4j-api
 MOD maven-resources-plugin
   ART org.apache.maven.plugins maven-resources-plugin
@@ -765,12 +765,6 @@ MOD mockito
     DEP net.bytebuddy byte-buddy-agent
     DEP org.objenesis objenesis
     DEP org.opentest4j opentest4j
-MOD modulemaker-maven-plugin
-  ART codes.rafael.modulemaker modulemaker-maven-plugin
-    DEP org.ow2.asm asm
-    DEP org.apache.maven maven-plugin-api
-    DEP org.apache.maven maven-core
-    DEP org.apache.maven.plugin-tools maven-plugin-annotations
 MOD modello
   ART org.codehaus.modello modello-core
     DEP org.sonatype.plexus plexus-build-api
@@ -849,6 +843,12 @@ MOD modello-maven-plugin
     DEP org.codehaus.modello modello-plugin-xpp3
     DEP org.codehaus.modello modello-plugin-xsd
     DEP org.sonatype.plexus plexus-build-api
+MOD modulemaker-maven-plugin
+  ART codes.rafael.modulemaker modulemaker-maven-plugin
+    DEP org.ow2.asm asm
+    DEP org.apache.maven maven-plugin-api
+    DEP org.apache.maven maven-core
+    DEP org.apache.maven.plugin-tools maven-plugin-annotations
 MOD objenesis
   ART org.objenesis objenesis
 MOD opentest4j
@@ -869,6 +869,10 @@ MOD plexus-archiver
     DEP org.apache.commons commons-compress
     DEP org.tukaani xz
     DEP org.slf4j slf4j-api
+MOD plexus-build-api
+  ART org.sonatype.plexus plexus-build-api
+    ALIAS org.sonatype.plexus plexus-build-api tests
+    DEP org.codehaus.plexus plexus-utils
 MOD plexus-cipher
   ART org.codehaus.plexus plexus-cipher
     ALIAS org.sonatype.plexus plexus-cipher
@@ -934,10 +938,6 @@ MOD servlet-api
     ALIAS javax.servlet servlet-api
     ALIAS org.apache.geronimo.specs geronimo-servlet_3.0_spec
     ALIAS org.eclipse.jetty.orbit javax.servlet
-MOD plexus-build-api
-  ART org.sonatype.plexus plexus-build-api
-    ALIAS org.sonatype.plexus plexus-build-api tests
-    DEP org.codehaus.plexus plexus-utils
 MOD sisu-inject
   ART org.eclipse.sisu org.eclipse.sisu.inject
     DEP javax.enterprise cdi-api
