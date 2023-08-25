@@ -13,7 +13,6 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
-        <excludeSourceClass>JJDoc</excludeSourceClass>
         <excludeSourceClass>JJDocMojo</excludeSourceClass>
         <addResource>src/main/resources</addResource>
       </compiler>
