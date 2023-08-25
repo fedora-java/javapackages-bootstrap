@@ -1,0 +1,26 @@
+<project>
+  <licensing>
+    <tag>MIT</tag>
+    <file>src/main/resources/NOTICE</file>
+  </licensing>
+  <module>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>javacc</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceClass>JJDoc</excludeSourceClass>
+        <excludeSourceClass>JJDocMojo</excludeSourceClass>
+        <addResource>src/main/resources</addResource>
+      </compiler>
+      <pdc>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>javacc-maven-plugin</artifactId>
+      </pdc>
+    </build>
+  </module>
+</project>
