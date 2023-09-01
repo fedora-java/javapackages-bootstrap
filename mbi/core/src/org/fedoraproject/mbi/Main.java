@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.fedoraproject.mbi.build.BuildCommand;
 import org.fedoraproject.mbi.dist.DistCommand;
+import org.fedoraproject.mbi.licensing.LicensingCommand;
 
 /**
  * @author Mikolaj Izdebski
@@ -32,6 +33,7 @@ public class Main
         COMMANDS.put( "build", BuildCommand.class );
         COMMANDS.put( "dist", DistCommand.class );
         COMMANDS.put( "graph", GraphCommand.class );
+        COMMANDS.put( "licensing", LicensingCommand.class );
     }
 
     public static void main( String[] args )
@@ -44,6 +46,7 @@ public class Main
             System.err.println( "  - build - build and assemble stage 3" );
             System.err.println( "  - dist - create stage 3 distribution" );
             System.err.println( "  - graph - output project dependency graph" );
+            System.err.println( "  - licensing - print licensing information" );
             System.exit( 1 );
         }
 
