@@ -53,6 +53,19 @@ public class XMLDumper
         cursor.writeCharacters( "\n" );
     }
 
+    public void dumpStartDocument()
+        throws XMLStreamException
+    {
+        cursor.writeStartDocument();
+        newLine();
+    }
+
+    public void dumpEndDocument()
+        throws XMLStreamException
+    {
+        cursor.writeEndDocument();
+    }
+
     public void dumpStartElement( String tag )
         throws XMLStreamException
     {
@@ -93,9 +106,8 @@ public class XMLDumper
     public <Type, Bean extends Builder<Type>> void dumpDocument( Entity<Type, Bean> rootEntity, Type value )
         throws XMLStreamException
     {
-        cursor.writeStartDocument();
-        newLine();
+        dumpStartDocument();
         dumpEntity( rootEntity, value );
-        cursor.writeEndDocument();
+        dumpEndDocument();
     }
 }
