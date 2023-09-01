@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>ASL 2.0</tag>
+    <tag>Apache-2.0</tag>
   </licensing>
   <module>
     <dependency>httpcomponents-client</dependency>

@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>ASL 2.0 and (EPL-2.0 or GPLv2 with exceptions)</tag>
+    <tag>(EPL-2.0 OR GPL-2.0-only WITH Classpath-exception-2.0) AND Apache-2.0</tag>
     <file>LICENSE.md</file>
     <file>NOTICE.md</file>
   </licensing>

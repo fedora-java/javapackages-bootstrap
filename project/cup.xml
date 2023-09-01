@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>MIT</tag>
+    <tag>SMLNJ</tag>
     <file>licence.txt</file>
   </licensing>
   <module>

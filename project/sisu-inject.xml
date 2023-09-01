@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>EPL-1.0 and BSD</tag>
+    <tag>EPL-1.0 AND BSD-3-Clause</tag>
     <file>LICENSE.txt</file>
   </licensing>
   <module>
