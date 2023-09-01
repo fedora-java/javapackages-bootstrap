@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>BSD</tag>
+    <tag>BSD-3-Clause</tag>
   </licensing>
   <module>
     <name>asm-tools-retrofitter</name>

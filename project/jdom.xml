@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>BSD with advertising</tag>
+    <tag>Saxpath</tag>
   </licensing>
   <module>
     <build>

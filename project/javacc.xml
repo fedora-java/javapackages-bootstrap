@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>BSD</tag>
+    <tag>BSD-3-Clause AND BSD-2-Clause</tag>
     <file>LICENSE</file>
   </licensing>
   <module>

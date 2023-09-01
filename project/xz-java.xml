@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>Public Domain</tag>
+    <tag>LicenseRef-Fedora-Public-Domain</tag>
   </licensing>
   <module>
     <build>

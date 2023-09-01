@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>ASL 2.0 or EPL-2.0</tag>
+    <tag>Apache-2.0 OR EPL-2.0</tag>
     <file>LICENSE</file>
   </licensing>
   <module>

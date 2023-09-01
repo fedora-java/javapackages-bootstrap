@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>MIT</tag>
+    <tag>Apache-2.0</tag>
     <file>src/main/resources/NOTICE</file>
   </licensing>
   <module>

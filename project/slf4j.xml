@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>MIT</tag>
+    <tag>MIT AND Apache-2.0</tag>
     <file>LICENSE.txt</file>
   </licensing>
   <module>
