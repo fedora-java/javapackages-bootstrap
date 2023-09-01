@@ -121,13 +121,19 @@ public class Entity<Type, Bean extends Builder<Type>>
         elements.add( element );
     }
 
+    public Type readFromXML( Reader reader )
+        throws IOException, XMLStreamException
+    {
+        XMLParser parser = new XMLParser( reader );
+        return parser.parseDocument( this );
+    }
+
     public Type readFromXML( Path path )
         throws IOException, XMLStreamException
     {
         try ( Reader reader = Files.newBufferedReader( path ) )
         {
-            XMLParser parser = new XMLParser( reader );
-            return parser.parseDocument( this );
+            return readFromXML( reader );
         }
     }
 
