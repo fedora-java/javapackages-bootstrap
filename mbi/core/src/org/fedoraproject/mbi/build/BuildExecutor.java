@@ -15,6 +15,7 @@
  */
 package org.fedoraproject.mbi.build;
 
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -124,6 +125,10 @@ class BuildExecutor
     private synchronized void markStepFailed( BuildStep step, Throwable throwable )
     {
         completingSteps--;
+        if ( throwable instanceof InvocationTargetException && throwable.getCause() != null )
+        {
+            throwable = throwable.getCause();
+        }
         failedSteps.put( step, throwable );
         notifyAll();
         throwable.printStackTrace();
