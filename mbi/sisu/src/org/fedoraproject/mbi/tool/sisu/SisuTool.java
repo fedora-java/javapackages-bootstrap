@@ -18,8 +18,8 @@ package org.fedoraproject.mbi.tool.sisu;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import javax.inject.Named;
@@ -34,7 +34,7 @@ public class SisuTool
 {
     private static final String SISU_INDEX_PATH = "META-INF/sisu/javax.inject.Named";
 
-    private List<String> namedComponents = new ArrayList<>();
+    private Set<String> namedComponents = new TreeSet<>();
 
     private void gleanFromClasses()
         throws Exception
