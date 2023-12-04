@@ -1,0 +1,25 @@
+<project>
+  <licensing>
+    <tag>LGPL-2.0-or-later OR Apache-2.0</tag>
+  </licensing>
+  <module>
+    <subDir>javaparser-core</subDir>
+    <dependency>javacc</dependency>
+    <dependency>guava</dependency>
+    <build>
+      <ant>
+        <run>
+          [java classname="javacc" failonerror="true"]
+            [arg value="-OUTPUT_DIRECTORY=${generatedSources}/com/github/javaparser"/]
+            [arg value="${basedir}/src/main/javacc/java.jj"/]
+          [/java]
+        </run>
+      </ant>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <addSourceRoot>src/main/java-templates</addSourceRoot>
+        <addSourceRoot>src/main/javacc-support</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

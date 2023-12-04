@@ -183,6 +183,9 @@ MOD javacc-maven-plugin
     DEP org.apache.maven.plugin-tools maven-plugin-annotations
     DEP net.java.dev.javacc javacc
     DEP org.codehaus.plexus plexus-utils
+MOD javaparser
+  ART com.github.javaparser javaparser-core
+    DEP com.google.guava guava
 MOD jcl-over-slf4j
   ART org.slf4j jcl-over-slf4j
     DEP org.slf4j slf4j-api
