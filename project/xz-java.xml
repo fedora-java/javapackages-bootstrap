@@ -5,7 +5,9 @@
   <module>
     <build>
       <compiler>
-        <addSourceRoot>src</addSourceRoot>
+        <release>9</release>
+        <addSourceRoot>src/org</addSourceRoot>
+        <addSourceRoot>src9</addSourceRoot>
       </compiler>
     </build>
   </module>
