@@ -11,13 +11,11 @@
         <removePlugin>maven-scm-publish-plugin</removePlugin>
         <removePlugin>apache-rat-plugin</removePlugin>
         <removePlugin>buildnumber-maven-plugin</removePlugin>
-        <removePlugin>maven-enforcer-plugin</removePlugin>
         <removePlugin>maven-site-plugin</removePlugin>
         <removePlugin>maven-source-plugin</removePlugin>
         <removePlugin>versions-maven-plugin</removePlugin>
         <removePlugin>spdx-maven-plugin</removePlugin>
         <removePlugin>cyclonedx-maven-plugin</removePlugin>
-        <removePlugin>moditect-maven-plugin</removePlugin>
         <removeProfile>animal-sniffer</removeProfile>
         <removeProfile>japicmp</removeProfile>
         <removeProfile>jacoco</removeProfile>
