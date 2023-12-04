@@ -861,6 +861,11 @@ MOD modello-maven-plugin
     DEP org.codehaus.modello modello-plugin-xpp3
     DEP org.codehaus.modello modello-plugin-xsd
     DEP org.sonatype.plexus plexus-build-api
+MOD moditect
+  ART org.moditect moditect-maven-plugin
+    DEP org.apache.maven.resolver maven-resolver-util
+    DEP com.github.javaparser javaparser-core
+    DEP org.ow2.asm asm
 MOD modulemaker-maven-plugin
   ART codes.rafael.modulemaker modulemaker-maven-plugin
     DEP org.ow2.asm asm

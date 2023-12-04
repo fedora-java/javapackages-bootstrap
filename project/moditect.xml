@@ -1,0 +1,28 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <dependency>javaparser</dependency>
+    <dependency>asm</dependency>
+    <dependency>jcommander</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>maven-artifact</dependency>
+    <dependency>maven-plugin-api</dependency>
+    <dependency>maven-core</dependency>
+    <dependency>maven-plugin-tools</dependency>
+    <dependency>maven-resolver</dependency>
+    <dependency>maven-resolver-provider</dependency>
+    <build>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>core/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-plugin/src/main/java</addSourceRoot>
+      </compiler>
+      <pdc>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+      </pdc>
+    </build>
+  </module>
+</project>
