@@ -11,6 +11,7 @@
         <excludeSourceClass>org/apache/commons/logging/impl/Log4JLogger</excludeSourceClass>
         <excludeSourceClass>org/apache/commons/logging/impl/LogKitLogger</excludeSourceClass>
         <excludeSourceClass>org/apache/commons/logging/impl/ServletContextCleaner</excludeSourceClass>
+        <automaticModuleName>org.apache.commons.logging</automaticModuleName>
       </compiler>
     </build>
   </module>

@@ -10,6 +10,7 @@
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
         <excludeSourceMatching>/org/apache/commons/compress/compressors/(brotli|zstandard)/.*</excludeSourceMatching>
+        <automaticModuleName>org.apache.commons.compress</automaticModuleName>
       </compiler>
     </build>
   </module>

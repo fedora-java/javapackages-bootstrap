@@ -7,6 +7,7 @@
     <build>
       <compiler>
         <addSourceRoot>src/java</addSourceRoot>
+        <automaticModuleName>org.apache.commons.collections</automaticModuleName>
       </compiler>
     </build>
   </module>

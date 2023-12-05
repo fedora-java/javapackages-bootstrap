@@ -7,6 +7,7 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <automaticModuleName>org.apache.commons.codec</automaticModuleName>
       </compiler>
     </build>
   </module>

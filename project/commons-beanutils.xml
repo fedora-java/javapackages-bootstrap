@@ -9,6 +9,7 @@
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <automaticModuleName>org.apache.commons.beanutils</automaticModuleName>
       </compiler>
     </build>
   </module>
