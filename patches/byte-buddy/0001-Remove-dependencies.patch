@@ -1,19 +1,19 @@
-From c54cc280a38d05ffe93a1af6922afcefe4d0cf71 Mon Sep 17 00:00:00 2001
+From 02ef96257479c9ada07ec4f6fe13447b63a2c489 Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
-Date: Mon, 1 Nov 2021 12:51:02 +0100
+Date: Mon, 11 Dec 2023 13:02:33 +0100
 Subject: [PATCH] Remove dependencies
 
 Forwarded: not-needed
 ---
- .../net/bytebuddy/agent/VirtualMachine.java   | 1978 +----------------
- .../dynamic/loading/ClassInjector.java        |  104 +-
- 2 files changed, 2 insertions(+), 2080 deletions(-)
+ .../net/bytebuddy/agent/VirtualMachine.java   | 2006 +----------------
+ .../dynamic/loading/ClassInjector.java        |   95 +-
+ 2 files changed, 2 insertions(+), 2099 deletions(-)
 
 diff --git a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java
-index 32fe7d1fad..795d648512 100644
+index 7a748ade01..d15d47d3c4 100644
 --- a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java
 +++ b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/VirtualMachine.java
-@@ -15,13 +15,6 @@
+@@ -15,11 +15,6 @@
   */
  package net.bytebuddy.agent;
  
@@ -22,12 +22,10 @@ index 32fe7d1fad..795d648512 100644
 -import com.sun.jna.ptr.IntByReference;
 -import com.sun.jna.win32.StdCallLibrary;
 -import com.sun.jna.win32.W32APIOptions;
--import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
--
- import java.io.*;
- import java.net.ServerSocket;
- import java.net.Socket;
-@@ -149,15 +142,7 @@ public interface VirtualMachine {
+ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+ import net.bytebuddy.agent.utility.nullability.MaybeNull;
+ import net.bytebuddy.agent.utility.nullability.UnknownNull;
+@@ -151,15 +146,7 @@ public interface VirtualMachine {
           * {@inheritDoc}
           */
          public Class<? extends VirtualMachine> run() {
@@ -44,7 +42,7 @@ index 32fe7d1fad..795d648512 100644
          }
      }
  
-@@ -227,23 +212,6 @@ public interface VirtualMachine {
+@@ -229,23 +216,6 @@ public interface VirtualMachine {
              this.connection = connection;
          }
  
@@ -68,15 +66,7 @@ index 32fe7d1fad..795d648512 100644
          /**
           * Attaches to the supplied process id using the supplied connection factory.
           *
-@@ -515,7 +483,6 @@ public interface VirtualMachine {
-                     /**
-                      * {@inheritDoc}
-                      */
--                    @SuppressFBWarnings(value = "DMI_HARDCODED_ABSOLUTE_FILENAME", justification = "File name convention is specified.")
-                     public Connection connect(String processId) throws IOException {
-                         File socket = new File(temporaryDirectory, SOCKET_FILE_PREFIX + processId);
-                         if (!socket.exists()) {
-@@ -679,1949 +646,6 @@ public interface VirtualMachine {
+@@ -681,1980 +651,6 @@ public interface VirtualMachine {
                   */
                  protected abstract int read(T connection, byte[] buffer) throws IOException;
              }
@@ -332,7 +322,7 @@ index 32fe7d1fad..795d648512 100644
 -                        /**
 -                         * Reads a configuration dependant variable into a memory segment.
 -                         *
--                         * @param name The name of the variable.
+-                         * @param name   The name of the variable.
 -                         * @param buffer The buffer to read the variable into.
 -                         * @param length The length of the buffer.
 -                         * @return The amount of bytes written to the buffer.
@@ -530,14 +520,15 @@ index 32fe7d1fad..795d648512 100644
 -                     * @param threadId           A pointer to the thread id or {@code null} if no thread reference is set.
 -                     * @return A handle to the created remote thread or {@code null} if the creation failed.
 -                     */
+-                    @MaybeNull
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinNT.HANDLE CreateRemoteThread(WinNT.HANDLE process,
--                                                    WinBase.SECURITY_ATTRIBUTES securityAttributes,
+-                                                    @MaybeNull WinBase.SECURITY_ATTRIBUTES securityAttributes,
 -                                                    int stackSize,
 -                                                    Pointer code,
 -                                                    Pointer argument,
--                                                    WinDef.DWORD creationFlags,
--                                                    Pointer threadId);
+-                                                    @MaybeNull WinDef.DWORD creationFlags,
+-                                                    @MaybeNull Pointer threadId);
 -
 -                    /**
 -                     * Receives the exit code of a given thread.
@@ -561,6 +552,7 @@ index 32fe7d1fad..795d648512 100644
 -                     * @param process A handle to the target process.
 -                     * @return A pointer to the allocated code or {@code null} if the code could not be allocated.
 -                     */
+-                    @MaybeNull
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinDef.LPVOID allocate_remote_code(WinNT.HANDLE process);
 -
@@ -575,13 +567,14 @@ index 32fe7d1fad..795d648512 100644
 -                     * @param argument3 The forth  argument or {@code null} if no such argument is provided.
 -                     * @return A pointer to the allocated argument or {@code null} if the argument could not be allocated.
 -                     */
+-                    @MaybeNull
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinDef.LPVOID allocate_remote_argument(WinNT.HANDLE process,
 -                                                           String pipe,
--                                                           String argument0,
--                                                           String argument1,
--                                                           String argument2,
--                                                           String argument3);
+-                                                           @MaybeNull String argument0,
+-                                                           @MaybeNull String argument1,
+-                                                           @MaybeNull String argument2,
+-                                                           @MaybeNull String argument3);
 -                }
 -
 -                /**
@@ -839,6 +832,7 @@ index 32fe7d1fad..795d648512 100644
 -                        /**
 -                         * A pointer to the operation argument.
 -                         */
+-                        @MaybeNull
 -                        public Pointer dataPointer;
 -
 -                        /**
@@ -849,6 +843,7 @@ index 32fe7d1fad..795d648512 100644
 -                        /**
 -                         * A pointer to the operation descriptor.
 -                         */
+-                        @MaybeNull
 -                        public Pointer descriptorPointer;
 -
 -                        /**
@@ -859,6 +854,7 @@ index 32fe7d1fad..795d648512 100644
 -                        /**
 -                         * A pointer to the operation result.
 -                         */
+-                        @UnknownNull
 -                        public Pointer resultPointer;
 -
 -                        /**
@@ -967,6 +963,11 @@ index 32fe7d1fad..795d648512 100644
 -        private static final String IBM_TEMPORARY_FOLDER = "com.ibm.tools.attach.directory";
 -
 -        /**
+-         * A secure random for generating randomized ids.
+-         */
+-        private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+-
+-        /**
 -         * The socket on which this VM and the target VM communicate.
 -         */
 -        private final Socket socket;
@@ -1003,7 +1004,7 @@ index 32fe7d1fad..795d648512 100644
 -         * @throws IOException If an IO exception occurs during establishing the connection.
 -         */
 -        public static VirtualMachine attach(String processId, int timeout, Dispatcher dispatcher) throws IOException {
--            File directory = new File(System.getProperty(IBM_TEMPORARY_FOLDER, dispatcher.getTemporaryFolder()), ".com_ibm_tools_attach");
+-            File directory = new File(System.getProperty(IBM_TEMPORARY_FOLDER, dispatcher.getTemporaryFolder(processId)), ".com_ibm_tools_attach");
 -            RandomAccessFile attachLock = new RandomAccessFile(new File(directory, "_attachlock"), "rw");
 -            try {
 -                FileLock attachLockLock = attachLock.getChannel().lock();
@@ -1078,7 +1079,10 @@ index 32fe7d1fad..795d648512 100644
 -                    try {
 -                        serverSocket.setSoTimeout(timeout);
 -                        File receiver = new File(directory, target.getProperty("vmId"));
--                        String key = Long.toHexString(new SecureRandom().nextLong());
+-                        String key;
+-                        synchronized (SECURE_RANDOM) {
+-                            key = Long.toHexString(SECURE_RANDOM.nextLong());
+-                        }
 -                        File reply = new File(receiver, "replyInfo");
 -                        try {
 -                            if (reply.createNewFile()) {
@@ -1188,7 +1192,7 @@ index 32fe7d1fad..795d648512 100644
 -        /**
 -         * {@inheritDoc}
 -         */
--        public void loadAgent(String jarFile, String argument) throws IOException {
+-        public void loadAgent(String jarFile, @MaybeNull String argument) throws IOException {
 -            write(socket, ("ATTACH_LOADAGENT(instrument," + jarFile + '=' + (argument == null ? "" : argument) + ')').getBytes("UTF-8"));
 -            String answer = new String(read(socket), "UTF-8");
 -            if (answer.startsWith("ATTACH_ERR")) {
@@ -1201,7 +1205,7 @@ index 32fe7d1fad..795d648512 100644
 -        /**
 -         * {@inheritDoc}
 -         */
--        public void loadAgentPath(String path, String argument) throws IOException {
+-        public void loadAgentPath(String path, @MaybeNull String argument) throws IOException {
 -            write(socket, ("ATTACH_LOADAGENTPATH(" + path + (argument == null ? "" : (',' + argument)) + ')').getBytes("UTF-8"));
 -            String answer = new String(read(socket), "UTF-8");
 -            if (answer.startsWith("ATTACH_ERR")) {
@@ -1214,7 +1218,7 @@ index 32fe7d1fad..795d648512 100644
 -        /**
 -         * {@inheritDoc}
 -         */
--        public void loadAgentLibrary(String library, String argument) throws IOException {
+-        public void loadAgentLibrary(String library, @MaybeNull String argument) throws IOException {
 -            write(socket, ("ATTACH_LOADAGENTLIBRARY(" + library + (argument == null ? "" : (',' + argument)) + ')').getBytes("UTF-8"));
 -            String answer = new String(read(socket), "UTF-8");
 -            if (answer.startsWith("ATTACH_ERR")) {
@@ -1312,9 +1316,10 @@ index 32fe7d1fad..795d648512 100644
 -            /**
 -             * Returns this machine's temporary folder.
 -             *
+-             * @param processId The target process's id.
 -             * @return The temporary folder.
 -             */
--            String getTemporaryFolder();
+-            String getTemporaryFolder(String processId);
 -
 -            /**
 -             * Returns the process id of this process.
@@ -1417,7 +1422,13 @@ index 32fe7d1fad..795d648512 100644
 -                /**
 -                 * {@inheritDoc}
 -                 */
--                public String getTemporaryFolder() {
+-                public String getTemporaryFolder(String processId) {
+-                    if (Platform.isLinux()) {
+-                        File file = new File("/proc/" + processId + "/root/tmp");
+-                        if (file.isDirectory() && file.canRead()) {
+-                            return file.getAbsolutePath();
+-                        }
+-                    }
 -                    String temporaryFolder = System.getenv("TMPDIR");
 -                    return temporaryFolder == null ? "/tmp" : temporaryFolder;
 -                }
@@ -1451,8 +1462,10 @@ index 32fe7d1fad..795d648512 100644
 -                    try {
 -                        // The binding for 'stat' is very platform dependant. To avoid the complexity of binding the correct method,
 -                        // stat is called as a separate command. This is less efficient but more portable.
--                        String statUserSwitch = Platform.isMac() ? "-f" : "-c";
--                        Process process = Runtime.getRuntime().exec("stat " + statUserSwitch + " %u " + file.getAbsolutePath());
+-                        Process process = Runtime.getRuntime().exec(new String[]{"stat",
+-                                Platform.isMac() ? "-f" : "-c",
+-                                "%u",
+-                                file.getAbsolutePath()});
 -                        int attempts = this.attempts;
 -                        boolean exited = false;
 -                        String line = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8")).readLine();
@@ -1525,7 +1538,7 @@ index 32fe7d1fad..795d648512 100644
 -                                library.semop(semaphore, target, 1);
 -                            } catch (LastErrorException exception) {
 -                                if (acceptUnavailable && (Native.getLastError() == PosixLibrary.EAGAIN
--                                    || Native.getLastError() == PosixLibrary.EDEADLK)) {
+-                                        || Native.getLastError() == PosixLibrary.EDEADLK)) {
 -                                    break;
 -                                } else {
 -                                    throw exception;
@@ -1700,7 +1713,7 @@ index 32fe7d1fad..795d648512 100644
 -                /**
 -                 * {@inheritDoc}
 -                 */
--                public String getTemporaryFolder() {
+-                public String getTemporaryFolder(String processId) {
 -                    WinDef.DWORD length = new WinDef.DWORD(WinDef.MAX_PATH);
 -                    char[] path = new char[length.intValue()];
 -                    if (Kernel32.INSTANCE.GetTempPath(length, path).intValue() == 0) {
@@ -1884,6 +1897,7 @@ index 32fe7d1fad..795d648512 100644
 -                     * @param name          The semaphore's name.
 -                     * @return The handle or {@code null} if the handle could not be created.
 -                     */
+-                    @MaybeNull
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinNT.HANDLE OpenSemaphoreW(int access, boolean inheritHandle, String name);
 -
@@ -1896,8 +1910,12 @@ index 32fe7d1fad..795d648512 100644
 -                     * @param name               The semaphore's name.
 -                     * @return The handle or {@code null} if the handle could not be created.
 -                     */
+-                    @MaybeNull
 -                    @SuppressWarnings("checkstyle:methodname")
--                    WinNT.HANDLE CreateSemaphoreW(WinBase.SECURITY_ATTRIBUTES securityAttributes, long count, long maximumCount, String name);
+-                    WinNT.HANDLE CreateSemaphoreW(@MaybeNull WinBase.SECURITY_ATTRIBUTES securityAttributes,
+-                                                  long count,
+-                                                  long maximumCount,
+-                                                  String name);
 -
 -                    /**
 -                     * Releases the semaphore.
@@ -1908,7 +1926,7 @@ index 32fe7d1fad..795d648512 100644
 -                     * @return {@code true} if the semaphore was successfully released.
 -                     */
 -                    @SuppressWarnings("checkstyle:methodname")
--                    boolean ReleaseSemaphore(WinNT.HANDLE handle, long count, Long previousCount);
+-                    boolean ReleaseSemaphore(WinNT.HANDLE handle, long count, @MaybeNull Long previousCount);
 -
 -                    /**
 -                     * Create or opens a mutex.
@@ -1918,6 +1936,7 @@ index 32fe7d1fad..795d648512 100644
 -                     * @param name       The mutex name.
 -                     * @return The handle to the mutex or {@code null} if the mutex could not be created.
 -                     */
+-                    @MaybeNull
 -                    @SuppressWarnings("checkstyle:methodname")
 -                    WinNT.HANDLE CreateMutex(SecurityAttributes attributes, boolean owner, String name);
 -
@@ -1950,11 +1969,13 @@ index 32fe7d1fad..795d648512 100644
 -                        /**
 -                         * The descriptor's length.
 -                         */
+-                        @MaybeNull
 -                        public WinDef.DWORD length;
 -
 -                        /**
 -                         * A pointer to the descriptor.
 -                         */
+-                        @MaybeNull
 -                        public Pointer securityDescriptor;
 -
 -                        /**
@@ -2027,81 +2048,18 @@ index 32fe7d1fad..795d648512 100644
      }
  }
 diff --git a/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java b/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java
-index 279b6497d2..a63ce63d5c 100644
+index 89b238d07c..4db5cff999 100644
 --- a/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java
 +++ b/byte-buddy-dep/src/main/java/net/bytebuddy/dynamic/loading/ClassInjector.java
-@@ -15,8 +15,6 @@
+@@ -15,7 +15,6 @@
   */
  package net.bytebuddy.dynamic.loading;
  
 -import com.sun.jna.*;
--import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  import net.bytebuddy.ByteBuddy;
  import net.bytebuddy.ClassFileVersion;
- import net.bytebuddy.asm.MemberRemoval;
-@@ -507,7 +505,6 @@ public interface ClassInjector {
-                 /**
-                  * {@inheritDoc}
-                  */
--                @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception should not be rethrown but trigger a fallback")
-                 public Initializable run() {
-                     try {
-                         if (JavaModule.isSupported()) {
-@@ -583,7 +580,6 @@ public interface ClassInjector {
-                  * @return A direct dispatcher for class injection.
-                  * @throws Exception If the creation is impossible.
-                  */
--                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit caller responsibility")
-                 protected static Initializable make() throws Exception {
-                     Method getDefinedPackage;
-                     if (JavaModule.isSupported()) { // Avoid accidental lookup of method with same name in Java 8 J9 VM.
-@@ -888,7 +884,6 @@ public interface ClassInjector {
-                  * @return An indirect dispatcher for class creation.
-                  * @throws Exception If the dispatcher cannot be created.
-                  */
--                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit caller responsibility")
-                 protected static Initializable make() throws Exception {
-                     if (Boolean.getBoolean(UsingUnsafe.SAFE_PROPERTY)) {
-                         return new Initializable.Unavailable("Use of Unsafe was disabled by system property");
-@@ -1150,7 +1145,6 @@ public interface ClassInjector {
-                  * @return An appropriate initializable.
-                  * @throws Exception If the injector cannot be created.
-                  */
--                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit caller responsibility")
-                 protected static Initializable make() throws Exception {
-                     if (Boolean.getBoolean(UsingUnsafe.SAFE_PROPERTY)) {
-                         return new Initializable.Unavailable("Use of Unsafe was disabled by system property");
-@@ -1888,7 +1882,6 @@ public interface ClassInjector {
-                 /**
-                  * {@inheritDoc}
-                  */
--                @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception should not be rethrown but trigger a fallback")
-                 public Initializable run() {
-                     if (Boolean.getBoolean(SAFE_PROPERTY)) {
-                         return new Unavailable("Use of Unsafe was disabled by system property");
-@@ -2093,7 +2086,6 @@ public interface ClassInjector {
-              *
-              * @param accessResolver The access resolver to use.
-              */
--            @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception is captured to trigger lazy error upon use.")
-             public Factory(AccessResolver accessResolver) {
-                 Dispatcher.Initializable dispatcher;
-                 if (DISPATCHER.isAvailable()) {
-@@ -2151,7 +2143,6 @@ public interface ClassInjector {
-              *                        other classes within this class's module.
-              * @return An appropriate injection strategy.
-              */
--            @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception intends to trigger disabled injection strategy.")
-             public static Factory resolve(Instrumentation instrumentation, boolean local) {
-                 if (ClassInjector.UsingUnsafe.isAvailable() || !JavaModule.isSupported()) {
-                     return new Factory();
-@@ -2733,85 +2724,18 @@ public interface ClassInjector {
-                 /**
-                  * {@inheritDoc}
-                  */
--                @SuppressWarnings("deprecation")
-                 public Dispatcher run() {
-                     if (System.getProperty("java.vm.name", "").toUpperCase(Locale.US).contains("J9")) {
+@@ -2791,79 +2790,13 @@ public interface ClassInjector {
                          return new Unavailable("J9 does not support JNA-based class definition");
                      }
                      try {
@@ -2169,7 +2127,7 @@ index 279b6497d2..a63ce63d5c 100644
 -                /**
 -                 * {@inheritDoc}
 -                 */
--                public Class<?> defineClass(ClassLoader classLoader, String name, byte[] binaryRepresentation, ProtectionDomain protectionDomain) {
+-                public Class<?> defineClass(@MaybeNull ClassLoader classLoader, String name, byte[] binaryRepresentation, @MaybeNull ProtectionDomain protectionDomain) {
 -                    return jvm.JVM_DefineClass(JNIEnv.CURRENT,
 -                            name.replace('.', '/'),
 -                            classLoader,
@@ -2182,7 +2140,7 @@ index 279b6497d2..a63ce63d5c 100644
              /**
               * An unavailable dispatcher for JNA-based class injection.
               */
-@@ -2846,32 +2770,6 @@ public interface ClassInjector {
+@@ -2898,32 +2831,6 @@ public interface ClassInjector {
                      throw new UnsupportedOperationException("JNA is not available and JNA-based injection cannot be used: " + error);
                  }
              }
@@ -2207,14 +2165,14 @@ index 279b6497d2..a63ce63d5c 100644
 -                @SuppressWarnings("checkstyle:methodname")
 -                Class<?> JVM_DefineClass(JNIEnv env,
 -                                         String name,
--                                         ClassLoader classLoader,
+-                                         @MaybeNull ClassLoader classLoader,
 -                                         byte[] binaryRepresentation,
 -                                         int length,
--                                         ProtectionDomain protectionDomain) throws LastErrorException;
+-                                         @MaybeNull ProtectionDomain protectionDomain) throws LastErrorException;
 -            }
          }
      }
  }
 -- 
-2.31.1
+2.43.0
 

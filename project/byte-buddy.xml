@@ -15,7 +15,7 @@
           [/copy]
           [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
             [arg line="-i -a ."/]
-            [arg line="-n SuppressFBWarnings"/]
+            [arg line="-n SuppressFBWarnings -p javax\.annotation\."/]
           [/exec]
         </run>
       </ant>
