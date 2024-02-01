@@ -6,8 +6,10 @@
     <build>
       <compiler>
         <release>9</release>
-        <addSourceRoot>src/org</addSourceRoot>
+        <addSourceRoot>src</addSourceRoot>
         <addSourceRoot>src9</addSourceRoot>
+        <excludeSourceMatching>.*Demo.java</excludeSourceMatching>
+        <excludeSourceMatching>TestAllocSpeed.java</excludeSourceMatching>
       </compiler>
     </build>
   </module>
