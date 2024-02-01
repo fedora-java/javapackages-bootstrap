@@ -1,0 +1,142 @@
+From d336464997764283a5f12774aa754ebba6b9625e Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Thu, 1 Feb 2024 14:49:14 +0100
+Subject: [PATCH 2/2] Allow nullability annotations on local variables
+
+Forwarded: not-needed
+---
+ .../net/bytebuddy/agent/utility/nullability/AlwaysNull.java   | 2 +-
+ .../net/bytebuddy/agent/utility/nullability/MaybeNull.java    | 2 +-
+ .../net/bytebuddy/agent/utility/nullability/NeverNull.java    | 4 ++--
+ .../net/bytebuddy/agent/utility/nullability/UnknownNull.java  | 2 +-
+ .../java/net/bytebuddy/utility/nullability/AlwaysNull.java    | 2 +-
+ .../java/net/bytebuddy/utility/nullability/MaybeNull.java     | 2 +-
+ .../java/net/bytebuddy/utility/nullability/NeverNull.java     | 4 ++--
+ .../java/net/bytebuddy/utility/nullability/UnknownNull.java   | 2 +-
+ 8 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/AlwaysNull.java b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/AlwaysNull.java
+index e82b0496e8..028b1090bb 100644
+--- a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/AlwaysNull.java
++++ b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/AlwaysNull.java
+@@ -24,7 +24,7 @@ import java.lang.annotation.*;
+  * Indicates that a field, method or parameter can only be {@code null}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull(when = When.NEVER)
+ @TypeQualifierNickname
+diff --git a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/MaybeNull.java b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/MaybeNull.java
+index 8f1866af65..49aa224067 100644
+--- a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/MaybeNull.java
++++ b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/MaybeNull.java
+@@ -24,7 +24,7 @@ import java.lang.annotation.*;
+  * Indicates that a field, method or parameter can sometimes be {@code null}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull(when = When.MAYBE)
+ @TypeQualifierNickname
+diff --git a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/NeverNull.java b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/NeverNull.java
+index 26bc38184b..23d581329f 100644
+--- a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/NeverNull.java
++++ b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/NeverNull.java
+@@ -25,7 +25,7 @@ import java.lang.annotation.*;
+  * be declared explicitly but is guaranteed by {@link ByDefault}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull
+ @TypeQualifierNickname
+@@ -38,7 +38,7 @@ public @interface NeverNull {
+     @Target(ElementType.PACKAGE)
+     @Retention(RetentionPolicy.RUNTIME)
+     @Nonnull
+-    @TypeQualifierDefault({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++    @TypeQualifierDefault({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+     @interface ByDefault {
+         /* empty */
+     }
+diff --git a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/UnknownNull.java b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/UnknownNull.java
+index f2d19b2a62..98efe1fa61 100644
+--- a/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/UnknownNull.java
++++ b/byte-buddy-agent/src/main/java/net/bytebuddy/agent/utility/nullability/UnknownNull.java
+@@ -24,7 +24,7 @@ import java.lang.annotation.*;
+  * Indicates that a field, method or parameter is undefined for its usage {@code null}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull(when = When.UNKNOWN)
+ @TypeQualifierNickname
+diff --git a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/AlwaysNull.java b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/AlwaysNull.java
+index fdaf3eb999..03672c4282 100644
+--- a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/AlwaysNull.java
++++ b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/AlwaysNull.java
+@@ -24,7 +24,7 @@ import java.lang.annotation.*;
+  * Indicates that a field, method or parameter can only be {@code null}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull(when = When.NEVER)
+ @TypeQualifierNickname
+diff --git a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/MaybeNull.java b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/MaybeNull.java
+index e3f87b605c..40b320df81 100644
+--- a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/MaybeNull.java
++++ b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/MaybeNull.java
+@@ -24,7 +24,7 @@ import java.lang.annotation.*;
+  * Indicates that a field, method or parameter can sometimes be {@code null}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull(when = When.MAYBE)
+ @TypeQualifierNickname
+diff --git a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/NeverNull.java b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/NeverNull.java
+index 960ca91c88..94790e02f5 100644
+--- a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/NeverNull.java
++++ b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/NeverNull.java
+@@ -25,7 +25,7 @@ import java.lang.annotation.*;
+  * be declared explicitly but is guaranteed by {@link ByDefault}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull
+ @TypeQualifierNickname
+@@ -38,7 +38,7 @@ public @interface NeverNull {
+     @Target(ElementType.PACKAGE)
+     @Retention(RetentionPolicy.RUNTIME)
+     @Nonnull
+-    @TypeQualifierDefault({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++    @TypeQualifierDefault({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+     @interface ByDefault {
+         /* empty */
+     }
+diff --git a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/UnknownNull.java b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/UnknownNull.java
+index 4f9ecf365f..9325e8e636 100644
+--- a/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/UnknownNull.java
++++ b/byte-buddy-dep/src/main/java/net/bytebuddy/utility/nullability/UnknownNull.java
+@@ -24,7 +24,7 @@ import java.lang.annotation.*;
+  * Indicates that a field, method or parameter is undefined for its usage {@code null}.
+  */
+ @Documented
+-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
++@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+ @Retention(RetentionPolicy.RUNTIME)
+ @Nonnull(when = When.UNKNOWN)
+ @TypeQualifierNickname
+-- 
+2.41.0
+
