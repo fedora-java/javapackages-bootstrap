@@ -953,6 +953,8 @@ MOD plexus-sec-dispatcher
 MOD plexus-utils
   ART org.codehaus.plexus plexus-utils
     ALIAS plexus plexus-utils
+MOD plexus-xml
+  ART org.codehaus.plexus plexus-xml
 MOD qdox
   ART com.thoughtworks.qdox qdox
     ALIAS qdox qdox
