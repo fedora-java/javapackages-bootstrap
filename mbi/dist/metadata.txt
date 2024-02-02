@@ -950,6 +950,12 @@ MOD plexus-sec-dispatcher
     ALIAS org.sonatype.plexus plexus-sec-dispatcher
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-cipher
+MOD plexus-testing
+  ART org.codehaus.plexus plexus-testing
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
+    DEP org.eclipse.sisu org.eclipse.sisu.inject
+    DEP com.google.inject guice
+    DEP org.junit.jupiter junit-jupiter-api
 MOD plexus-utils
   ART org.codehaus.plexus plexus-utils
     ALIAS plexus plexus-utils

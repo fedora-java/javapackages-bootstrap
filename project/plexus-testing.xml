@@ -1,0 +1,15 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <dependency>junit5-jupiter</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>guice</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
