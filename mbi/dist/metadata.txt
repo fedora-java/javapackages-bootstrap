@@ -985,8 +985,6 @@ MOD velocity-engine
     DEP org.apache.commons commons-lang3
     DEP org.slf4j slf4j-api
     DEP commons-io commons-io
-MOD xbean
-  ART org.apache.xbean xbean-reflect
 MOD xmlunit
   ART org.xmlunit xmlunit-assertj3
     ALIAS org.xmlunit xmlunit-assertj
