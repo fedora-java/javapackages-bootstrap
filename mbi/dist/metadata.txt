@@ -780,68 +780,56 @@ MOD mockito
 MOD modello
   ART org.codehaus.modello modello-core
     DEP org.sonatype.plexus plexus-build-api
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.plexus plexus-utils
   ART org.codehaus.modello modello-plugin-java
     DEP org.codehaus.plexus plexus-utils
     DEP org.sonatype.plexus plexus-build-api
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-converters
     DEP org.codehaus.modello modello-plugin-java
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-dom4j
     DEP org.codehaus.modello modello-plugin-java
     DEP org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-jdom
     DEP org.codehaus.modello modello-plugin-java
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.modello modello-plugin-xml
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-sax
     DEP org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.modello modello-plugin-java
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-stax
     DEP org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.modello modello-plugin-java
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-velocity
     DEP org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.plexus plexus-utils
     DEP org.apache.velocity velocity-engine-core
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-xsd
     DEP org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-xdoc
     DEP org.codehaus.modello modello-plugin-xml
     DEP org.codehaus.modello modello-plugin-xsd
     DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
   ART org.codehaus.modello modello-plugin-xpp3
     DEP org.codehaus.modello modello-plugin-java
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.modello modello-plugin-xml
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.modello modello-core
 MOD modello-maven-plugin
   ART org.codehaus.modello modello-maven-plugin
@@ -849,7 +837,6 @@ MOD modello-maven-plugin
     DEP org.codehaus.modello modello-core
     DEP org.apache.maven maven-model
     DEP org.apache.maven maven-core
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.modello modello-plugin-converters
     DEP org.codehaus.modello modello-plugin-dom4j
@@ -912,23 +899,13 @@ MOD plexus-compiler
     DEP org.codehaus.plexus plexus-compiler-api
 MOD plexus-component-annotations
   ART org.codehaus.plexus plexus-component-annotations
-MOD plexus-containers
+MOD plexus-component-metadata
   ART org.codehaus.plexus plexus-component-metadata
-    DEP org.codehaus.plexus plexus-container-default
     DEP org.codehaus.plexus plexus-component-annotations
     DEP org.codehaus.plexus plexus-utils
     DEP com.thoughtworks.qdox qdox
     DEP org.jdom jdom2
-    DEP org.apache.maven maven-plugin-api
-    DEP org.apache.maven maven-model
-    DEP org.apache.maven maven-core
     DEP org.ow2.asm asm
-  ART org.codehaus.plexus plexus-container-default
-    ALIAS org.codehaus.plexus containers-component-api
-    DEP org.codehaus.plexus plexus-utils
-    DEP org.codehaus.plexus plexus-classworlds
-    DEP org.apache.xbean xbean-reflect
-    DEP com.google.guava guava
 MOD plexus-interpolation
   ART org.codehaus.plexus plexus-interpolation
 MOD plexus-io
@@ -983,6 +960,7 @@ MOD sisu-mojos
 MOD sisu-plexus
   ART org.eclipse.sisu org.eclipse.sisu.plexus
     ALIAS org.sonatype.sisu sisu-inject-plexus
+    ALIAS org.codehaus.plexus plexus-container-default
     DEP org.eclipse.sisu org.eclipse.sisu.inject
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.codehaus.plexus plexus-component-annotations

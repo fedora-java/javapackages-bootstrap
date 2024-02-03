@@ -35,11 +35,10 @@ SOFTWARE.
     </build>
   </module>
   <module>
+    <name>plexus-component-metadata</name>
+    <subDir>plexus-component-metadata</subDir>
     <dependency>plexus-component-annotations</dependency>
-    <dependency>xbean</dependency>
-    <dependency>plexus-classworlds</dependency>
     <dependency>plexus-utils</dependency>
-    <dependency>junit4</dependency>
     <dependency>maven-plugin-tools</dependency>
     <dependency>asm</dependency>
     <dependency>jdom2</dependency>
@@ -47,10 +46,10 @@ SOFTWARE.
     <dependency>maven-plugin-api</dependency>
     <dependency>maven-model</dependency>
     <dependency>qdox</dependency>
+    <dependency>sisu-plexus</dependency>
     <build>
       <compiler>
-        <addSourceRoot>plexus-container-default/src/main/java</addSourceRoot>
-        <addSourceRoot>plexus-component-metadata/src/main/java</addSourceRoot>
+        <addSourceRoot>src/main/java</addSourceRoot>
         <excludeSourceMatching>/plexus-component-metadata/src/main/java/org/codehaus/plexus/component/repository/.*</excludeSourceMatching>
       </compiler>
       <plexus/>
