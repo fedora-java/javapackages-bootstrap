@@ -8,11 +8,10 @@
       <pom>
         <removePlugin>maven-enforcer-plugin</removePlugin>
         <removePlugin>maven-javadoc-plugin</removePlugin>
-        <removePlugin>maven-site-plugin</removePlugin>
         <removePlugin>maven-release-plugin</removePlugin>
-        <removePlugin>ianal-maven-plugin</removePlugin>
         <removePlugin>apache-rat-plugin</removePlugin>
         <removePlugin>animal-sniffer-maven-plugin</removePlugin>
+        <removePlugin>tools-maven-plugin</removePlugin>
         <removeBuildExtensions/>
       </pom>
     </build>
