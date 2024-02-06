@@ -47,6 +47,7 @@ SOFTWARE.
     <dependency>maven-model</dependency>
     <dependency>qdox</dependency>
     <dependency>sisu-plexus</dependency>
+    <dependency>plexus-classworlds</dependency>  <!-- required by Eclipse  -->
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
