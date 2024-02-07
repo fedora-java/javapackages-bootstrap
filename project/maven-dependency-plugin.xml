@@ -21,7 +21,6 @@
     <dependency>plexus-io</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>commons-lang</dependency>
-    <dependency>commons-collections</dependency>
     <dependency>injection-api</dependency>
     <dependency>plexus-build-api</dependency>
     <build>
