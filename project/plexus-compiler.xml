@@ -26,15 +26,16 @@ SOFTWARE.
   </licensing>
   <module>
     <dependency>sisu-plexus</dependency>
+    <dependency>slf4j</dependency>
     <dependency>plexus-utils</dependency>
-    <dependency>plexus-component-annotations</dependency>
+    <dependency>injection-api</dependency>
     <build>
       <compiler>
         <addSourceRoot>plexus-compiler-api/src/main/java</addSourceRoot>
         <addSourceRoot>plexus-compiler-manager/src/main/java</addSourceRoot>
         <addSourceRoot>plexus-compilers/plexus-compiler-javac/src/main/java</addSourceRoot>
       </compiler>
-      <plexus/>
+      <sisu/>
     </build>
   </module>
 </project>
