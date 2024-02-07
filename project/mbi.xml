@@ -117,7 +117,6 @@
     <dependency>maven-builder-support</dependency>
     <dependency>maven-repository-metadata</dependency>
     <dependency>maven-artifact</dependency>
-    <dependency>maven-settings</dependency>
     <dependency>qdox</dependency>
     <dependency>plexus-archiver</dependency>
     <dependency>plexus-io</dependency>
