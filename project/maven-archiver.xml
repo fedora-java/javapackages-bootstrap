@@ -5,7 +5,6 @@
   <module>
     <dependency>plexus-archiver</dependency>
     <dependency>plexus-interpolation</dependency>
-    <dependency>plexus-utils</dependency>
     <dependency>maven-artifact</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-model</dependency>
