@@ -3,6 +3,7 @@
     <tag>Apache-2.0</tag>
   </licensing>
   <module>
+    <dependency>osgi-annotation</dependency>
     <build>
       <compiler>
         <accessInternalJavaAPI/>
