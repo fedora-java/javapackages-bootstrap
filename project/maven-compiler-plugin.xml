@@ -14,6 +14,7 @@
     <dependency>maven-model</dependency>
     <dependency>plexus-java</dependency>
     <dependency>maven-resolver</dependency>
+    <dependency>plexus-utils</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
