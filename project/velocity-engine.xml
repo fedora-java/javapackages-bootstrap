@@ -5,7 +5,6 @@
   </licensing>
   <module>
     <subDir>velocity-engine-core</subDir>
-    <dependency>javacc</dependency>
     <dependency>commons-io</dependency>
     <dependency>commons-lang</dependency>
     <dependency>slf4j</dependency>
@@ -22,21 +21,22 @@
           [replace file="${generatedSources}/Parser.jjt" token="$${parser.char.at}" value="@"/]
           [replace file="${generatedSources}/Parser.jjt" token="$${parser.char.dollar}" value="$"/]
           [replace file="${generatedSources}/Parser.jjt" token="$${parser.char.hash}" value="#"/]
-          [java classname="jjtree" failonerror="true"]
-            [arg value="-OUTPUT_DIRECTORY=${generatedSources}/org/apache/velocity/runtime/parser/node"/]
-            [arg value="-NOBUILD_NODE_FILES"/]
-            [arg value="-NOVISITOR"/]
-            [arg value="-NODE_USES_PARSER"/]
-            [arg value="-NODE_PACKAGE=org.apache.velocity.runtime.parser.node"/]
-            [arg value="${generatedSources}/Parser.jjt"/]
-          [/java]
-          [java classname="javacc" failonerror="true"]
-            [arg value="-OUTPUT_DIRECTORY=${generatedSources}/org/apache/velocity/runtime/parser"/]
-            [arg value="-TOKEN_MANAGER_USES_PARSER"/]
-            [arg value="${generatedSources}/org/apache/velocity/runtime/parser/node/Parser.jj"/]
-          [/java]
         </run>
       </ant>
+      <javacc>
+        <arg>-OUTPUT_DIRECTORY=${generatedSources}/org/apache/velocity/runtime/parser/node</arg>
+        <arg>-NOBUILD_NODE_FILES</arg>
+        <arg>-NOVISITOR</arg>
+        <arg>-NODE_USES_PARSER</arg>
+        <arg>-NODE_PACKAGE=org.apache.velocity.runtime.parser.node</arg>
+        <arg>${generatedSources}/Parser.jjt</arg>
+        <jjtree/>
+      </javacc>
+      <javacc>
+        <arg>-OUTPUT_DIRECTORY=${generatedSources}/org/apache/velocity/runtime/parser</arg>
+        <arg>-TOKEN_MANAGER_USES_PARSER</arg>
+        <arg>${generatedSources}/org/apache/velocity/runtime/parser/node/Parser.jj</arg>
+      </javacc>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
         <addSourceRoot>src/main/java-templates</addSourceRoot>

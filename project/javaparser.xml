@@ -4,17 +4,12 @@
   </licensing>
   <module>
     <subDir>javaparser-core</subDir>
-    <dependency>javacc</dependency>
     <dependency>guava</dependency>
     <build>
-      <ant>
-        <run>
-          [java classname="javacc" failonerror="true"]
-            [arg value="-OUTPUT_DIRECTORY=${generatedSources}/com/github/javaparser"/]
-            [arg value="${basedir}/src/main/javacc/java.jj"/]
-          [/java]
-        </run>
-      </ant>
+      <javacc>
+        <arg>-OUTPUT_DIRECTORY=${generatedSources}/com/github/javaparser</arg>
+        <arg>${basedir}/src/main/javacc/java.jj</arg>
+      </javacc>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
         <addSourceRoot>src/main/java-templates</addSourceRoot>
