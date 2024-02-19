@@ -18,7 +18,7 @@
 
 set -eu
 
-JAVA_HOME=${JAVA_HOME:-/usr/lib/jvm/java-17}
+JAVA_HOME=${JAVA_HOME:-/usr/lib/jvm/java-21}
 
 mkdir -p build/mbi-launcher/classes
 $JAVA_HOME/bin/javac -g -d build/mbi-launcher/classes $(find mbi/core -name \*.java)
