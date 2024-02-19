@@ -15,10 +15,13 @@
  */
 package org.fedoraproject.mbi.tool;
 
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -36,6 +39,10 @@ import org.fedoraproject.mbi.model.ModuleDescriptor;
 public class ToolUtils
 {
     private static final ReadWriteLock UNSAFE_TOOL_LOCK = new ReentrantReadWriteLock();
+
+    private static final Lock SHARED_LOCK = UNSAFE_TOOL_LOCK.readLock();
+
+    private static final Lock EXCLUSIVE_LOCK = UNSAFE_TOOL_LOCK.writeLock();
 
     public static URLClassLoader newClassLoader( Reactor reactor, ModuleDescriptor... modules )
     {
@@ -73,10 +80,26 @@ public class ToolUtils
                 + exec.getToolName().substring( 0, 1 ).toUpperCase() + exec.getToolName().substring( 1 ) + "Tool";
             Class<?> toolClass = cl.loadClass( entryClassName );
             boolean threadUnsafe = toolClass.isAnnotationPresent( ThreadUnsafe.class );
-            Lock lock = threadUnsafe ? UNSAFE_TOOL_LOCK.writeLock() : UNSAFE_TOOL_LOCK.readLock();
-            try
+            Path logFile = reactor.getTargetDir( module ).resolve( exec.getToolName() + ".log" );
+            Files.createDirectories( logFile.getParent() );
+            Lock lock = threadUnsafe ? EXCLUSIVE_LOCK : SHARED_LOCK;
+            PrintStream out = null;
+            PrintStream err = null;
+            try ( PrintStream log = threadUnsafe ? //
+                            new PrintStream( Files.newOutputStream( logFile, //
+                                                                    StandardOpenOption.CREATE,
+                                                                    StandardOpenOption.APPEND ) )
+                            : null )
             {
                 lock.lock();
+                System.err.println( module.getName() + ": " + exec.getToolName() );
+                if ( threadUnsafe )
+                {
+                    out = System.out;
+                    err = System.err;
+                    System.setOut( log );
+                    System.setErr( log );
+                }
                 Tool tool = (Tool) toolClass.getConstructor().newInstance();
                 tool.setReactor( reactor );
                 tool.setModule( module );
@@ -87,8 +110,21 @@ public class ToolUtils
                 }
                 tool.execute();
             }
+            catch ( Exception e )
+            {
+                if ( threadUnsafe )
+                {
+                    System.err.print( Files.readString( logFile ) );
+                }
+                throw e;
+            }
             finally
             {
+                if ( threadUnsafe )
+                {
+                    System.setOut( out );
+                    System.setErr( err );
+                }
                 lock.unlock();
             }
         }
