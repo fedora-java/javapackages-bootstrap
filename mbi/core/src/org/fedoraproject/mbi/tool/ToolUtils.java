@@ -21,7 +21,9 @@ import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.fedoraproject.mbi.Reactor;
 import org.fedoraproject.mbi.model.Execution;
@@ -33,8 +35,7 @@ import org.fedoraproject.mbi.model.ModuleDescriptor;
  */
 public class ToolUtils
 {
-    // Binary semaphore to ensure there is at most one run of Ant per JVM process.
-    private static final Semaphore ANT_SEMAPHORE = new Semaphore( 1 );
+    private static final ReadWriteLock UNSAFE_TOOL_LOCK = new ReentrantReadWriteLock();
 
     public static URLClassLoader newClassLoader( Reactor reactor, ModuleDescriptor... modules )
     {
@@ -64,27 +65,35 @@ public class ToolUtils
                                          Execution exec )
         throws Exception
     {
-        Semaphore semaphore = exec.getToolName().equals( "ant" ) ? ANT_SEMAPHORE : new Semaphore( 1 );
         ClassLoader oldCl = Thread.currentThread().getContextClassLoader();
         try ( URLClassLoader cl = ToolUtils.newClassLoader( reactor, toolModule, module ) )
         {
             Thread.currentThread().setContextClassLoader( cl );
             var entryClassName = Tool.class.getPackage().getName() + "." + exec.getToolName() + "."
                 + exec.getToolName().substring( 0, 1 ).toUpperCase() + exec.getToolName().substring( 1 ) + "Tool";
-            Tool tool = (Tool) cl.loadClass( entryClassName ).getConstructor().newInstance();
-            tool.setReactor( reactor );
-            tool.setModule( module );
-            tool.initialize();
-            for ( Instruction instruction : exec.getInstructions() )
+            Class<?> toolClass = cl.loadClass( entryClassName );
+            boolean threadUnsafe = toolClass.isAnnotationPresent( ThreadUnsafe.class );
+            Lock lock = threadUnsafe ? UNSAFE_TOOL_LOCK.writeLock() : UNSAFE_TOOL_LOCK.readLock();
+            try
             {
-                tool.executeInstruction( instruction );
+                lock.lock();
+                Tool tool = (Tool) toolClass.getConstructor().newInstance();
+                tool.setReactor( reactor );
+                tool.setModule( module );
+                tool.initialize();
+                for ( Instruction instruction : exec.getInstructions() )
+                {
+                    tool.executeInstruction( instruction );
+                }
+                tool.execute();
             }
-            semaphore.acquireUninterruptibly();
-            tool.execute();
+            finally
+            {
+                lock.unlock();
+            }
         }
         finally
         {
-            semaphore.release();
             Thread.currentThread().setContextClassLoader( oldCl );
         }
     }
