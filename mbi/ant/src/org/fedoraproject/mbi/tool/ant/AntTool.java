@@ -26,11 +26,13 @@ import java.util.Map;
 import org.apache.tools.ant.ExitException;
 import org.apache.tools.ant.Main;
 import org.fedoraproject.mbi.tool.Instruction;
+import org.fedoraproject.mbi.tool.ThreadUnsafe;
 import org.fedoraproject.mbi.tool.Tool;
 
 /**
  * @author Mikolaj Izdebski
  */
+@ThreadUnsafe
 public class AntTool
     extends Tool
 {
