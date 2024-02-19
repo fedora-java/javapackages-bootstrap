@@ -86,7 +86,6 @@ class BuildExecutor
             {
                 var step = completableSteps.remove();
                 completingSteps++;
-                System.err.println( step.getModule().getName() + ": " + step.getToolName() );
                 return step;
             }
             try

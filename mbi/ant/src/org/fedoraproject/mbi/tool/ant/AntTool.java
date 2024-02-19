@@ -68,7 +68,6 @@ public class AntTool
         Path classesDir = getReactor().getClassesDir( getModule() );
         Path generatedSourcesDir = getReactor().getGeneratedSourcesDir( getModule() );
         Path buildFile = getReactor().getTargetDir( getModule() ).resolve( "ant-run.xml" );
-        Path logFile = getReactor().getTargetDir( getModule() ).resolve( "ant-run.log" );
         Files.createDirectories( buildFile.getParent() );
 
         try ( OutputStream os = Files.newOutputStream( buildFile ); PrintStream ps = new PrintStream( os ) )
@@ -87,12 +86,8 @@ public class AntTool
         }
 
         Exception exception = null;
-        PrintStream out = System.out;
-        PrintStream err = System.err;
-        try ( PrintStream log = new PrintStream( Files.newOutputStream( logFile ) ) )
+        try
         {
-            System.setOut( log );
-            System.setErr( log );
             new Main()
             {
                 protected void exit( int exitCode )
@@ -108,15 +103,9 @@ public class AntTool
                 exception = e;
             }
         }
-        finally
-        {
-            System.setOut( out );
-            System.setErr( err );
-        }
 
         if ( exception != null )
         {
-            System.err.print( Files.readString( logFile ) );
             throw exception;
         }
     }
