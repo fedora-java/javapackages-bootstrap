@@ -152,4 +152,16 @@
       </compiler>
     </build>
   </module>
+  <module>
+    <name>mbi-javacc</name>
+    <subDir>javacc</subDir>
+    <dependency>mbi-core</dependency>
+    <dependency>javacc</dependency>
+    <build>
+      <compiler>
+        <release>11</release>
+        <addSourceRoot>src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
 </project>
