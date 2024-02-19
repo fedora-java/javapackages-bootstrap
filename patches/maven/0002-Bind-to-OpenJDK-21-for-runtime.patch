@@ -1,7 +1,7 @@
-From ad65f62443f23076dfc520d3f0589282da9530fa Mon Sep 17 00:00:00 2001
+From 7d4e44b4f4aac8ee4691a4a390ab5a6c4430ba27 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Wed, 8 Jul 2020 09:04:57 +0200
-Subject: [PATCH 2/2] Bind to OpenJDK 17 for runtime
+Subject: [PATCH 2/2] Bind to OpenJDK 21 for runtime
 
 Forwarded: not-needed
 ---
@@ -9,10 +9,10 @@ Forwarded: not-needed
  1 file changed, 1 insertion(+), 15 deletions(-)
 
 diff --git a/apache-maven/src/bin/mvn b/apache-maven/src/bin/mvn
-index dfa384b8e..2e9f10da0 100755
+index a3004f9179..176c16a3f0 100755
 --- a/apache-maven/src/bin/mvn
 +++ b/apache-maven/src/bin/mvn
-@@ -27,21 +27,7 @@
+@@ -28,21 +28,7 @@
  #   MAVEN_SKIP_RC   (Optional) Flag to disable loading of mavenrc files.
  # -----------------------------------------------------------------------------
  
@@ -31,10 +31,10 @@ index dfa384b8e..2e9f10da0 100755
 -  fi
 -
 -fi
-+export JAVA_HOME=/usr/lib/jvm/java-17
++export JAVA_HOME=/usr/lib/jvm/java-21
  
  # OS specific support. $var _must_ be set to either true or false.
  cygwin=false;
 -- 
-2.39.1
+2.41.0
 
