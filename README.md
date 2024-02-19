@@ -156,7 +156,7 @@ directory with patched upstream sources that are ready to be built.
 
 Modules are built by executing `./mbi.sh build` command. It allows the
 environment variable `JAVA_HOME` to be set and pointed to JDK installation
-which will be used (e. g. `/usr/lib/jvm/java-17`). The minimal required
+which will be used (e. g. `/usr/lib/jvm/java-21`). The minimal required
 version of JDK is 17.
 
 The `build` command accepts a few options:
@@ -177,7 +177,7 @@ that allow you to control the shape and the location of binary
 distribution:
 
 * `-javaCmdPath` points to `java` executable, for use in launcher
-  shebangs (defaults to `/usr/lib/jvm/java-17`).
+  shebangs (defaults to `/usr/lib/jvm/java-21`).
 
 * `-installRoot` specifies directory into which distribution will be
   installed (equivalent to `$RPM_BUILD_ROOT` in RPM build), by default
