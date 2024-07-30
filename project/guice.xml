@@ -19,6 +19,7 @@
             [arg line="-s -i -a ."/]
             [arg line="-p ^com.google.common.annotations."/]
             [arg line="-p ^com.google.errorprone.annotations."/]
+            [arg line="-p ^javax.annotation.concurrent."/]
           [/exec]
         </run>
       </ant>

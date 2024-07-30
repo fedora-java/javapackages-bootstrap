@@ -1,11 +1,12 @@
 <project>
   <licensing>
-    <tag>BSD-3-Clause AND CC-BY-2.5</tag>
+    <tag>BSD-3-Clause</tag>
   </licensing>
   <module>
     <build>
       <compiler>
         <addSourceRoot>ri/src/main/java</addSourceRoot>
+        <excludeSourceMatching>/concurrent/</excludeSourceMatching>
       </compiler>
     </build>
   </module>
