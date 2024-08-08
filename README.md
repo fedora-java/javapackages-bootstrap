@@ -157,7 +157,7 @@ directory with patched upstream sources that are ready to be built.
 Modules are built by executing `./mbi.sh build` command. It allows the
 environment variable `JAVA_HOME` to be set and pointed to JDK installation
 which will be used (e. g. `/usr/lib/jvm/java-21`). The minimal required
-version of JDK is 17.
+version of JDK is 21.
 
 The `build` command accepts a few options:
 
