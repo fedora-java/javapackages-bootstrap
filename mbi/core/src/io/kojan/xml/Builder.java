@@ -13,26 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.xml;
-
-import java.util.Collections;
+package io.kojan.xml;
 
 /**
  * @author Mikolaj Izdebski
  */
-public class GetterAdapter<OuterType, NestedType>
-    implements Getter<OuterType, Iterable<NestedType>>
-{
-    private final Getter<OuterType, NestedType> delegate;
-
-    public GetterAdapter( Getter<OuterType, NestedType> delegate )
-    {
-        this.delegate = delegate;
-    }
-
-    @Override
-    public Iterable<NestedType> get( OuterType object )
-    {
-        return Collections.singleton( delegate.get( object ) );
-    }
+public interface Builder<Type> {
+    Type build();
 }

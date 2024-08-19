@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.xml;
+package io.kojan.xml;
 
 /**
  * @author Mikolaj Izdebski
  */
-public interface Builder<Type>
-{
-    Type build();
+@FunctionalInterface
+public interface Getter<OuterType, NestedType> {
+    NestedType get(OuterType object);
 }

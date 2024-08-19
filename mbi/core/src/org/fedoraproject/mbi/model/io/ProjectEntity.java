@@ -18,7 +18,8 @@ package org.fedoraproject.mbi.model.io;
 import java.util.Properties;
 
 import org.fedoraproject.mbi.model.ProjectDescriptor;
-import org.fedoraproject.mbi.xml.Entity;
+
+import io.kojan.xml.Entity;
 
 /**
  * @author Mikolaj Izdebski

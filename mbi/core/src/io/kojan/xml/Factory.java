@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.xml;
+package io.kojan.xml;
 
 /**
  * @author Mikolaj Izdebski
  */
 @FunctionalInterface
-public interface Factory<Type>
-{
+public interface Factory<Type> {
     Type newInstance();
 }

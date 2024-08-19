@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fedoraproject.mbi.xml;
+package io.kojan.xml;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -21,31 +21,26 @@ import javax.xml.stream.XMLStreamException;
  * @author Mikolaj Izdebski
  */
 class Relationship<EnclosingType, EnclosingBean, RelatedType, RelatedBean extends Builder<RelatedType>>
-    extends Constituent<EnclosingType, EnclosingBean, RelatedType, RelatedBean>
-{
+        extends
+            Constituent<EnclosingType, EnclosingBean, RelatedType, RelatedBean> {
     private final Entity<RelatedType, RelatedBean> relatedEntity;
 
-    public Relationship( Entity<RelatedType, RelatedBean> relatedEntity,
-                         Getter<EnclosingType, Iterable<RelatedType>> getter, Setter<EnclosingBean, RelatedType> setter,
-                         boolean mandatory, boolean unique )
-    {
-        super( relatedEntity.getTag(), getter, setter, mandatory, unique );
+    public Relationship(Entity<RelatedType, RelatedBean> relatedEntity,
+            Getter<EnclosingType, Iterable<RelatedType>> getter, Setter<EnclosingBean, RelatedType> setter,
+            boolean mandatory, boolean unique) {
+        super(relatedEntity.getTag(), getter, setter, mandatory, unique);
         this.relatedEntity = relatedEntity;
     }
 
     @Override
-    protected void dump( XMLDumper dumper, RelatedType value )
-        throws XMLStreamException
-    {
-        dumper.dumpEntity( relatedEntity, value );
+    protected void dump(XMLDumper dumper, RelatedType value) throws XMLStreamException {
+        dumper.dumpEntity(relatedEntity, value);
     }
 
     @Override
-    protected RelatedType parse( XMLParser parser )
-        throws XMLStreamException
-    {
+    protected RelatedType parse(XMLParser parser) throws XMLStreamException {
         RelatedBean relatedBean = relatedEntity.newBean();
-        parser.parseEntity( relatedEntity, relatedBean );
+        parser.parseEntity(relatedEntity, relatedBean);
         return relatedBean.build();
     }
 }

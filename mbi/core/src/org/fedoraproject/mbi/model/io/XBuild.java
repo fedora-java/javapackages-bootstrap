@@ -23,12 +23,13 @@ import javax.xml.stream.XMLStreamException;
 import org.fedoraproject.mbi.model.Execution;
 import org.fedoraproject.mbi.model.Instruction;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
-import org.fedoraproject.mbi.xml.Constituent;
-import org.fedoraproject.mbi.xml.Getter;
-import org.fedoraproject.mbi.xml.GetterAdapter;
-import org.fedoraproject.mbi.xml.Setter;
-import org.fedoraproject.mbi.xml.XMLDumper;
-import org.fedoraproject.mbi.xml.XMLParser;
+
+import io.kojan.xml.Constituent;
+import io.kojan.xml.Getter;
+import io.kojan.xml.GetterAdapter;
+import io.kojan.xml.Setter;
+import io.kojan.xml.XMLDumper;
+import io.kojan.xml.XMLParser;
 
 /**
  * @author Mikolaj Izdebski
