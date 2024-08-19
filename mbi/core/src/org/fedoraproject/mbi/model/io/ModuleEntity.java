@@ -19,7 +19,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.fedoraproject.mbi.model.ModuleDescriptor;
-import org.fedoraproject.mbi.xml.Entity;
+
+import io.kojan.xml.Entity;
 
 /**
  * @author Mikolaj Izdebski

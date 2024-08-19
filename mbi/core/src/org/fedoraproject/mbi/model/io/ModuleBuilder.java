@@ -22,7 +22,8 @@ import java.util.Set;
 
 import org.fedoraproject.mbi.model.Execution;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
-import org.fedoraproject.mbi.xml.Builder;
+
+import io.kojan.xml.Builder;
 
 /**
  * @author Mikolaj Izdebski

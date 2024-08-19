@@ -19,7 +19,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.fedoraproject.mbi.model.LicensingDescriptor;
-import org.fedoraproject.mbi.xml.Builder;
+
+import io.kojan.xml.Builder;
 
 /**
  * @author Mikolaj Izdebski

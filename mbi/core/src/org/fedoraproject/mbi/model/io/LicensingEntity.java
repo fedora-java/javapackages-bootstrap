@@ -16,7 +16,8 @@
 package org.fedoraproject.mbi.model.io;
 
 import org.fedoraproject.mbi.model.LicensingDescriptor;
-import org.fedoraproject.mbi.xml.Entity;
+
+import io.kojan.xml.Entity;
 
 /**
  * @author Mikolaj Izdebski
