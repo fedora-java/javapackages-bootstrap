@@ -63,8 +63,10 @@ public abstract class Tool
     {
         Method method = getClass().getMethod( instruction.getMethodName(), String.class );
         if ( !method.isAnnotationPresent( org.fedoraproject.mbi.tool.Instruction.class ) )
+        {
             throw new RuntimeException( "Method " + method.getName() + " class " + getClass().getName()
                 + " is not instruction" );
+        }
         method.invoke( this, instruction.getArgument() );
     }
 
