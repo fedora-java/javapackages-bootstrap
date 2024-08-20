@@ -31,9 +31,9 @@ public abstract class Command
 {
     private Queue<String> arguments;
 
-    private Set<String> flags = new LinkedHashSet<>();
+    private final Set<String> flags = new LinkedHashSet<>();
 
-    private Map<String, String> options = new LinkedHashMap<>();
+    private final Map<String, String> options = new LinkedHashMap<>();
 
     public Collection<String> getArgs()
     {

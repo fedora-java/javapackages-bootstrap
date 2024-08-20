@@ -34,7 +34,7 @@ public class SisuTool
 {
     private static final String SISU_INDEX_PATH = "META-INF/sisu/javax.inject.Named";
 
-    private Set<String> namedComponents = new TreeSet<>();
+    private final Set<String> namedComponents = new TreeSet<>();
 
     private void gleanFromClasses()
         throws Exception
