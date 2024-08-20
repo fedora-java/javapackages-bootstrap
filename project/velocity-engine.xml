@@ -37,14 +37,18 @@
         <arg>-TOKEN_MANAGER_USES_PARSER</arg>
         <arg>${generatedSources}/org/apache/velocity/runtime/parser/node/Parser.jj</arg>
       </javacc>
+      <ant>
+        <run>
+          [delete file="${generatedSources}/org/apache/velocity/runtime/parser/node/Node.java"/]
+          [delete file="${generatedSources}/org/apache/velocity/runtime/parser/ParseException.java"/]
+          [delete file="${generatedSources}/org/apache/velocity/runtime/parser/CharStream.java"/]
+        </run>
+      </ant>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
         <addSourceRoot>src/main/java-templates</addSourceRoot>
         <addResource>src/main/java-templates</addResource>
         <addResource>src/main/resources</addResource>
-        <excludeSourceClass>generated-sources/org/apache/velocity/runtime/parser/node/Node</excludeSourceClass>
-        <excludeSourceClass>generated-sources/org/apache/velocity/runtime/parser/ParseException</excludeSourceClass>
-        <excludeSourceClass>generated-sources/org/apache/velocity/runtime/parser/CharStream</excludeSourceClass>
       </compiler>
     </build>
   </module>
