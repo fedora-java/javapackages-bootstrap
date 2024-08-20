@@ -16,7 +16,6 @@
 package org.fedoraproject.mbi.dist;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.fedoraproject.mbi.Reactor;
 
@@ -47,7 +46,7 @@ public class DistRequest
 
     private static Path relativePath( String pathStr )
     {
-        Path absolutePath = Paths.get( pathStr );
+        Path absolutePath = Path.of( pathStr );
         return absolutePath.getRoot().relativize( absolutePath );
     }
 
@@ -57,9 +56,9 @@ public class DistRequest
     {
         this.reactor = reactor;
         this.workDir = workDir;
-        this.javaCmdPath = Paths.get( javaCmdPath );
+        this.javaCmdPath = Path.of( javaCmdPath );
         this.basePackageName = basePackageName;
-        this.installRoot = Paths.get( installRoot );
+        this.installRoot = Path.of( installRoot );
         this.mavenHomePath = relativePath( mavenHomePath );
         this.metadataPath = relativePath( metadataPath );
         this.artifactsPath = relativePath( artifactsPath );
