@@ -63,6 +63,10 @@ public class ProjectDescriptor
 
     public String getMBIVersion()
     {
+        if ( name.equals( "mbi" ) )
+        {
+            return "MBI";
+        }
         return getProperties().getProperty( "version" ).replaceAll( "[^0-9A-Za-z.]", "." ) + ".MBI";
     }
 }

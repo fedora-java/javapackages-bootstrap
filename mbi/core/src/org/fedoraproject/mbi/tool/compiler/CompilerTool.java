@@ -111,8 +111,11 @@ public class CompilerTool
     public void execute()
         throws Exception
     {
+        MavenProjectGenerator maven =
+            new MavenProjectGenerator( getReactor(), getModule(), release, accessInternalJavaAPI );
         for ( String resource : resources )
         {
+            maven.addResourceDir( getSourceRootDir().resolve( resource ) );
             Util.copy( getSourceRootDir().resolve( resource ), getClassesDir(),
                        path -> !path.getFileName().toString().endsWith( ".java" ) );
         }
@@ -134,8 +137,10 @@ public class CompilerTool
             List<Path> excluded = new ArrayList<>();
             Util.filterJavaSources( included, excluded, sourceDir, sourceFilter );
             allIncluded.addAll( included );
+            maven.addSourceDir( sourceDir, excluded );
             eclipse.addSourceDir( sourceDir, excluded );
         }
+        maven.generate();
         eclipse.generate();
         Iterable<? extends JavaFileObject> compilationUnits =
             fileManager.getJavaFileObjectsFromFiles( allIncluded.stream().map( Path::toFile ).collect( Collectors.toList() ) );
