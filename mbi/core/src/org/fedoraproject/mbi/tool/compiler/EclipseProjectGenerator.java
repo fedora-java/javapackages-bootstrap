@@ -18,7 +18,6 @@ package org.fedoraproject.mbi.tool.compiler;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -137,7 +136,7 @@ class EclipseProjectGenerator
             throw new IllegalStateException();
         }
         int parentCount = 0;
-        while ( relSrcDir.startsWith( Paths.get( ".." ) ) )
+        while ( relSrcDir.startsWith( Path.of( ".." ) ) )
         {
             parentCount++;
             relSrcDir = relSrcDir.subpath( 1, relSrcDir.getNameCount() );
