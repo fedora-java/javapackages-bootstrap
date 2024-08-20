@@ -5,9 +5,8 @@
   <module>
     <build>
       <compiler>
-        <excludeSourceClass>module-info</excludeSourceClass>
+        <release>9</release>
         <addSourceRoot>api/src/main/java</addSourceRoot>
-        <automaticModuleName>jakarta.activation</automaticModuleName>
       </compiler>
     </build>
   </module>
