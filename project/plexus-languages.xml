@@ -8,13 +8,20 @@
     <dependency>qdox</dependency>
     <dependency>asm</dependency>
     <build>
+      <ant>
+        <run>
+          [copy todir="${generatedSources}"]
+            [fileset dir="${basedir}/plexus-java/src/main/java9"]
+              [exclude name="module-info.java"/]
+            [/fileset]
+          [/copy]
+        </run>
+      </ant>
       <compiler>
         <release>9</release>
         <addSourceRoot>plexus-java/src/main/java</addSourceRoot>
-        <addSourceRoot>plexus-java/src/main/java9</addSourceRoot>
         <excludeSourceMatching>/java/org/codehaus/plexus/languages/java/jpms/BinaryModuleInfoParser\.java</excludeSourceMatching>
         <excludeSourceMatching>/java/org/codehaus/plexus/languages/java/jpms/CmdModuleNameExtractor\.java</excludeSourceMatching>
-        <excludeSourceMatching>/module-info\.java</excludeSourceMatching>
       </compiler>
       <sisu/>
     </build>
