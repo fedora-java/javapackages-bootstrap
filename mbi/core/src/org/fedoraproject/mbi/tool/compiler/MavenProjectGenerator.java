@@ -43,8 +43,6 @@ class MavenProjectGenerator
 
     private final List<String> sources = new ArrayList<>();
 
-    private final List<String> resources = new ArrayList<>();
-
     private final List<String> excludes = new ArrayList<>();
 
     private static final Set<String> mbiModules = new TreeSet<>();
@@ -132,17 +130,6 @@ class MavenProjectGenerator
                 }
                 bw.write( "          </sources>\n" );
             }
-            if ( !resources.isEmpty() )
-            {
-                bw.write( "          <resources>\n" );
-                for ( String resource : resources )
-                {
-                    bw.write( "            <resource>\n" );
-                    bw.write( "              <directory>" + resource + "</directory>\n" );
-                    bw.write( "            </resource>\n" );
-                }
-                bw.write( "          </resources>\n" );
-            }
             bw.write( "        </configuration>\n" );
             bw.write( "      </plugin>\n" );
             bw.write( "    </plugins>\n" );
@@ -201,10 +188,5 @@ class MavenProjectGenerator
     {
         sources.add( outputDir.relativize( sourceDir ).toString() );
         excludes.addAll( excluded.stream().map( sourceDir::relativize ).map( Path::toString ).collect( Collectors.toList() ) );
-    }
-
-    public void addResourceDir( Path resourceDir )
-    {
-        resources.add( outputDir.relativize( resourceDir ).toString() );
     }
 }
