@@ -111,11 +111,8 @@ public class CompilerTool
     public void execute()
         throws Exception
     {
-        MavenProjectGenerator maven =
-            new MavenProjectGenerator( getReactor(), getModule(), release, accessInternalJavaAPI );
         for ( String resource : resources )
         {
-            maven.addResourceDir( getSourceRootDir().resolve( resource ) );
             Util.copy( getSourceRootDir().resolve( resource ), getClassesDir(),
                        path -> !path.getFileName().toString().endsWith( ".java" ) );
         }
@@ -129,6 +126,8 @@ public class CompilerTool
             sourceDirs.add( getSourceRootDir().resolve( sourceRoot ) );
         }
         List<Path> allIncluded = new ArrayList<>();
+        MavenProjectGenerator maven =
+            new MavenProjectGenerator( getReactor(), getModule(), release, accessInternalJavaAPI );
         EclipseProjectGenerator eclipse =
             new EclipseProjectGenerator( getReactor(), getProject(), getModule(), release, accessInternalJavaAPI );
         for ( Path sourceDir : sourceDirs )
