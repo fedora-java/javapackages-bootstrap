@@ -38,7 +38,7 @@ class EclipseProjectGenerator
 
     private final int release;
 
-    private boolean accessInternalJavaAPI;
+    private final boolean accessInternalJavaAPI;
 
     public EclipseProjectGenerator( Reactor reactor, ProjectDescriptor project, ModuleDescriptor module, int release,
                                     boolean accessInternalJavaAPI )
@@ -50,9 +50,9 @@ class EclipseProjectGenerator
         this.accessInternalJavaAPI = accessInternalJavaAPI;
     }
 
-    private StringBuilder eclipseClasspath = new StringBuilder( "<classpath>" );
+    private final StringBuilder eclipseClasspath = new StringBuilder( "<classpath>" );
 
-    private StringBuilder links = new StringBuilder();
+    private final StringBuilder links = new StringBuilder();
 
     public void generate()
         throws Exception
