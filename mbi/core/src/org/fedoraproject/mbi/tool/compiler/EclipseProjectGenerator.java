@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020 Red Hat, Inc.
+ * Copyright (c) 2020-2024 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.fedoraproject.mbi.Reactor;
@@ -40,6 +42,12 @@ class EclipseProjectGenerator
 
     private final boolean accessInternalJavaAPI;
 
+    private final Map<String, String> eclipseClasspath = new LinkedHashMap<>();
+
+    private final Map<String, String> links = new LinkedHashMap<>();
+
+    private final Path outputDir;
+
     public EclipseProjectGenerator( Reactor reactor, ProjectDescriptor project, ModuleDescriptor module, int release,
                                     boolean accessInternalJavaAPI )
     {
@@ -48,52 +56,67 @@ class EclipseProjectGenerator
         this.module = module;
         this.release = release;
         this.accessInternalJavaAPI = accessInternalJavaAPI;
+        outputDir = reactor.getRootDir().resolve( "eclipse" ).resolve( module.getName() );
     }
-
-    private final StringBuilder eclipseClasspath = new StringBuilder( "<classpath>" );
-
-    private final StringBuilder links = new StringBuilder();
 
     public void generate()
         throws Exception
     {
-        Path outputDir = reactor.getRootDir().resolve( "eclipse" ).resolve( module.getName() );
         Files.createDirectories( outputDir.resolve( ".settings" ) );
         try ( BufferedWriter bw = Files.newBufferedWriter( outputDir.resolve( ".project" ) ) )
         {
-            bw.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + //
-                "<projectDescription>\n" + //
-                "\t<name>" + module.getName() + "</name>\n" + //
-                "\t<comment></comment>\n" + //
-                "\t<projects>\n" + //
-                "\t</projects>\n" + //
-                "\t<buildSpec>\n" + //
-                "\t\t<buildCommand>\n" + //
-                "\t\t\t<name>org.eclipse.jdt.core.javabuilder</name>\n" + //
-                "\t\t\t<arguments>\n" + //
-                "\t\t\t</arguments>\n" + //
-                "\t\t</buildCommand>\n" + //
-                "\t</buildSpec>\n" + //
-                "\t<natures>\n" + //
-                "\t\t<nature>org.eclipse.jdt.core.javanature</nature>\n" + //
-                "\t</natures>\n" + //
-                "\t<linkedResources>\n" + //
-                links.toString() + //
-                "\t</linkedResources>\n" + //
-                "</projectDescription>" );
+            bw.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
+            bw.write( "<projectDescription>\n" );
+            bw.write( "  <name>" + module.getName() + "</name>\n" );
+            bw.write( "  <buildSpec>\n" );
+            bw.write( "    <buildCommand>\n" );
+            bw.write( "      <name>org.eclipse.jdt.core.javabuilder</name>\n" );
+            bw.write( "    </buildCommand>\n" );
+            bw.write( "  </buildSpec>\n" );
+            bw.write( "  <natures>\n" );
+            bw.write( "    <nature>org.eclipse.jdt.core.javanature</nature>\n" );
+            bw.write( "  </natures>\n" );
+            bw.write( "  <linkedResources>\n" );
+            for ( var link : links.entrySet() )
+            {
+                bw.write( "    <link>\n" );
+                bw.write( "      <type>2</type>\n" );
+                bw.write( "      <name>" + link.getKey() + "</name>\n" );
+                bw.write( "      <locationURI>" + link.getValue() + "</locationURI>\n" );
+                bw.write( "    </link>\n" );
+            }
+            bw.write( "  </linkedResources>\n" );
+            bw.write( "</projectDescription>" );
         }
         String vm = release == 8 ? "1.8" : "" + release;
-        eclipseClasspath.append( "<classpathentry kind=\"con\""
-            + " path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17\"/>\n" );
-        eclipseClasspath.append( "<classpathentry kind=\"output\" path=\"bin\"/>\n" );
         try ( BufferedWriter bw = Files.newBufferedWriter( outputDir.resolve( ".classpath" ) ) )
         {
-            StringBuilder sb = new StringBuilder( eclipseClasspath.toString() );
+            bw.write( "<classpath>\n" );
+            for ( var src : eclipseClasspath.entrySet() )
+            {
+                bw.write( "  <classpathentry\n");
+                bw.write( "      kind=\"src\"\n" );
+                bw.write( "      path=\"" + src.getKey() + "\"\n" );
+                bw.write( "      excluding=\"" + src.getValue() + "\"\n" );
+                bw.write( "  />\n" );
+            }
+            bw.write( "  <classpathentry\n");
+            bw.write( "      kind=\"con\"\n" );
+            bw.write( "      path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21\"\n" );
+            bw.write( "  />\n" );
+            bw.write( "  <classpathentry\n");
+            bw.write( "      kind=\"output\"\n" );
+            bw.write( "      path=\"bin\"\n" );
+            bw.write( "  />\n" );
             for ( String dep : module.getDependencies() )
             {
-                sb.append( "<classpathentry combineaccessrules=\"false\" kind=\"src\" path=\"/" + dep + "\"/>\n" );
+                bw.write( "  <classpathentry\n");
+                bw.write( "      kind=\"src\"\n");
+                bw.write( "      path=\"/" + dep + "\"\n" );
+                bw.write( "      combineaccessrules=\"false\"\n" );
+                bw.write( "  />\n" );
             }
-            bw.write( sb.toString() + "</classpath>" );
+            bw.write( "</classpath>\n" );
         }
         try ( BufferedWriter bw =
             Files.newBufferedWriter( outputDir.resolve( ".settings" ).resolve( "org.eclipse.jdt.core.prefs" ) ) )
@@ -146,16 +169,10 @@ class EclipseProjectGenerator
             throw new IllegalStateException();
         }
         String uri = "$%7BPARENT-" + parentCount + "-PROJECT_LOC%7D/" + relSrcDir;
-        links.append( "" + //
-            "\t\t<link>\n" + //
-            "\t\t\t<name>" + linkName + "</name>\n" + //
-            "\t\t\t<type>2</type>\n" + //
-            "\t\t\t<locationURI>" + uri + "</locationURI>\n" + //
-            "\t\t</link>\n" );
+        links.put( linkName.toString(), uri );
 
         String excl =
             excluded.stream().map( sourceDir::relativize ).map( Path::toString ).collect( Collectors.joining( "|" ) );
-        eclipseClasspath.append( "<classpathentry kind=\"src\" path=\"" + linkName + "\" excluding=\"" + excl
-            + "\"/>\n" );
+        eclipseClasspath.put( linkName.toString(), excl );
     }
 }
