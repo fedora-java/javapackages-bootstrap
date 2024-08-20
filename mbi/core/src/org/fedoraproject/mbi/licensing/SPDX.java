@@ -43,9 +43,9 @@ class SPDX
     private void parseError( String msg )
     {
         StringBuilder sb = new StringBuilder();
-        sb.append( "Syntax error - " + msg + "\n" );
-        sb.append( "  SPDX expression: \"" + rawExpression + "\"\n" );
-        sb.append( "  Location: here ---" + new String( "-" ).repeat( parserPos ) + "^" );
+        sb.append( "Syntax error - " ).append( msg ).append( "\n" );
+        sb.append( "  SPDX expression: \"" ).append( rawExpression ).append( "\"\n" );
+        sb.append( "  Location: here ---" ).append( new String( "-" ).repeat( parserPos ) ).append( "^" );
         throw new RuntimeException( sb.toString() );
     }
 
