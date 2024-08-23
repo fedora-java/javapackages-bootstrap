@@ -112,6 +112,7 @@
     <dependency>guice</dependency>
     <dependency>commons-cli</dependency>
     <dependency>injection-api</dependency>
+    <dependency>sisu-inject</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>maven-resolver</dependency>
     <dependency>maven-settings</dependency>
@@ -216,6 +217,8 @@
     <dependency>guice</dependency>
     <dependency>maven-builder-support</dependency>
     <dependency>maven-artifact</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>sisu-inject</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
