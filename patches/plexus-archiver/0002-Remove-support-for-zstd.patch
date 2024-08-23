@@ -1,7 +1,7 @@
-From 01dc5709a908158ca5f59e4312df772f81d2fef8 Mon Sep 17 00:00:00 2001
+From ff7178ca8f0728a2bc6d5d12d74e9c47de2c37a8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Mari=C3=A1n=20Kon=C4=8Dek?= <marian.koncek@mailbox.org>
 Date: Fri, 11 Aug 2023 14:04:26 +0200
-Subject: [PATCH] Remove support for zstd
+Subject: [PATCH 2/2] Remove support for zstd
 
 Forwarded: not-needed
 ---
@@ -52,5 +52,5 @@ index 52cae0c9..4c0e70c1 100644
          return istream;
      }
 -- 
-2.41.0
+2.46.0
 
