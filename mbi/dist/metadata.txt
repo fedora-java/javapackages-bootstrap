@@ -952,7 +952,7 @@ MOD servlet-api
 MOD sisu-inject
   ART org.eclipse.sisu org.eclipse.sisu.inject
     DEP javax.enterprise cdi-api
-MOD sisu-mojos
+MOD sisu-maven-plugin
   ART org.eclipse.sisu sisu-maven-plugin
     ALIAS org.sonatype.plugins sisu-maven-plugin
     DEP org.eclipse.sisu org.eclipse.sisu.inject
@@ -960,6 +960,7 @@ MOD sisu-mojos
     DEP org.apache.maven maven-plugin-api
     DEP org.apache.maven.shared maven-common-artifact-filters
     DEP org.codehaus.plexus plexus-utils
+    DEP org.sonatype.plexus plexus-build-api
 MOD sisu-plexus
   ART org.eclipse.sisu org.eclipse.sisu.plexus
     ALIAS org.sonatype.sisu sisu-inject-plexus
