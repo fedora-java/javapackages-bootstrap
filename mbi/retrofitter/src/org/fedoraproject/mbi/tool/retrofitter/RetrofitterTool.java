@@ -28,6 +28,6 @@ public class RetrofitterTool
     public void execute()
         throws Exception
     {
-        new Retrofitter().retrofit( getClassesDir().toFile(), "dummy" );
+        new Retrofitter().retrofit( getClassesDir(), "dummy" );
     }
 }
