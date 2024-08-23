@@ -107,6 +107,9 @@ MOD commons-collections
 MOD commons-compress
   ART org.apache.commons commons-compress
     ALIAS commons commons-compress
+    DEP commons-codec commons-codec
+    DEP commons-io commons-io
+    DEP org.apache.commons commons-lang3
 MOD commons-io
   ART commons-io commons-io
     ALIAS org.apache.commons commons-io

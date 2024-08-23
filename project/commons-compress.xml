@@ -6,6 +6,9 @@
   <module>
     <dependency>xz-java</dependency>
     <dependency>asm</dependency>
+    <dependency>commons-io</dependency>
+    <dependency>commons-lang</dependency>
+    <dependency>commons-codec</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
