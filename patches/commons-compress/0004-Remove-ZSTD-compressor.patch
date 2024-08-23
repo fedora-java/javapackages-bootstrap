@@ -1,4 +1,4 @@
-From e0ff84fd26512baeef99b101595872c67f7df43e Mon Sep 17 00:00:00 2001
+From 4abeced17f989ce8a01ae30bad007c3e7ea816f0 Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Mon, 12 Feb 2018 10:59:55 +0100
 Subject: [PATCH 4/4] Remove ZSTD compressor
@@ -9,7 +9,7 @@ Forwarded: not-needed
  1 file changed, 2 insertions(+), 12 deletions(-)
 
 diff --git a/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java b/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
-index 41c72428..3c598f6a 100644
+index b3e2d9d8b..c8aaf18b7 100644
 --- a/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
 +++ b/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
 @@ -53,9 +53,6 @@
@@ -22,18 +22,18 @@ index 41c72428..3c598f6a 100644
  import org.apache.commons.compress.utils.IOUtils;
  import org.apache.commons.compress.utils.Sets;
  
-@@ -278,10 +275,6 @@ public static String detect(final InputStream inputStream) throws CompressorExce
+@@ -280,10 +277,6 @@ static String detect(final InputStream inputStream, final Set<String> compressor
              return LZ4_FRAMED;
          }
  
--        if (ZstdUtils.matches(signature, signatureLength)) {
+-        if (compressorNames.contains(ZSTANDARD) && ZstdUtils.matches(signature, signatureLength)) {
 -            return ZSTANDARD;
 -        }
 -
          throw new CompressorException("No Compressor found for the stream signature.");
      }
  
-@@ -575,10 +568,7 @@ public CompressorInputStream createCompressorInputStream(final String name, fina
+@@ -554,10 +547,7 @@ public CompressorInputStream createCompressorInputStream(final String name, fina
              }
  
              if (ZSTANDARD.equalsIgnoreCase(name)) {
@@ -45,7 +45,7 @@ index 41c72428..3c598f6a 100644
              }
  
              if (LZMA.equalsIgnoreCase(name)) {
-@@ -694,7 +684,7 @@ public CompressorOutputStream createCompressorOutputStream(final String name, fi
+@@ -665,7 +655,7 @@ public CompressorOutputStream<?> createCompressorOutputStream(final String name,
              }
  
              if (ZSTANDARD.equalsIgnoreCase(name)) {
@@ -55,5 +55,5 @@ index 41c72428..3c598f6a 100644
          } catch (final IOException e) {
              throw new CompressorException("Could not create CompressorOutputStream", e);
 -- 
-2.41.0
+2.46.0
 

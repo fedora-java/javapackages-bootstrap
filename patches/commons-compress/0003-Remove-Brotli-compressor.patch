@@ -1,4 +1,4 @@
-From e34b787419c08841e3bef5daba7c9501d529ceab Mon Sep 17 00:00:00 2001
+From 8b4e4c32acdbf10ed5872a21515adfa4cccc717a Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Mon, 12 Feb 2018 10:53:48 +0100
 Subject: [PATCH 3/4] Remove Brotli compressor
@@ -9,7 +9,7 @@ Forwarded: not-needed
  1 file changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java b/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
-index 84fee104..41c72428 100644
+index 376253cf2..b3e2d9d8b 100644
 --- a/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
 +++ b/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
 @@ -30,8 +30,6 @@
@@ -21,7 +21,7 @@ index 84fee104..41c72428 100644
  import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
  import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
  import org.apache.commons.compress.compressors.deflate.DeflateCompressorInputStream;
-@@ -566,10 +564,7 @@ public CompressorInputStream createCompressorInputStream(final String name, fina
+@@ -545,10 +543,7 @@ public CompressorInputStream createCompressorInputStream(final String name, fina
              }
  
              if (BROTLI.equalsIgnoreCase(name)) {
@@ -34,5 +34,5 @@ index 84fee104..41c72428 100644
  
              if (XZ.equalsIgnoreCase(name)) {
 -- 
-2.41.0
+2.46.0
 

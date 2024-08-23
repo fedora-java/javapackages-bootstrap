@@ -94,7 +94,8 @@ public class MavenDist
         symlink( binDir.resolve( "xmvn" ), dist.getLaunchersPath().resolve( "mvn" ) );
 
         launcher( "xmvn-install", "org.fedoraproject.xmvn.tools.install.cli.InstallerCli", //
-                  "xmvn", "jcommander", "slf4j", "commons-compress", "asm" );
+                  "xmvn", "jcommander", "slf4j", "commons-compress", "commons-io", "commons-codec", "commons-lang",
+                  "asm" );
         launcher( "xmvn-resolve", "org.fedoraproject.xmvn.tools.resolve.ResolverCli", //
                   "xmvn", "jcommander" );
         launcher( "xmvn-subst", "org.fedoraproject.xmvn.tools.subst.SubstCli", //

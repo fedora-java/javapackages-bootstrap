@@ -10,6 +10,7 @@
     <dependency>commons-io</dependency>
     <dependency>injection-api</dependency>
     <dependency>slf4j</dependency>
+    <dependency>xz-java</dependency>  <!-- required by Eclipse  -->
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
