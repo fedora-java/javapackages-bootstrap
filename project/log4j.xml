@@ -3,29 +3,47 @@
     <tag>Apache-2.0</tag>
   </licensing>
   <module>
+    <name>log4j-api</name>
+    <subDir>log4j-api</subDir>
+    <dependency>osgi-core</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>log4j-core</name>
+    <dependency>log4j-api</dependency>
     <dependency>osgi-core</dependency>
     <dependency>jansi</dependency>
     <dependency>commons-compress</dependency>
     <dependency>disruptor</dependency>
     <dependency>jctools</dependency>
-    <dependency>jaf-api</dependency>
-    <dependency>mail-api</dependency>
     <build>
       <compiler>
-        <addSourceRoot>log4j-1.2-api/src/main/java</addSourceRoot>
-        <addSourceRoot>log4j-api/src/main/java</addSourceRoot>
         <addSourceRoot>log4j-core/src/main/java</addSourceRoot>
-        <addSourceRoot>log4j-jakarta-smtp/src/main/java</addSourceRoot>
-        <excludeSourceMatching>/org/apache/log4j/or/jms/.*</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/(jackson|layout/jackson|config/yaml|config/json|parser)/.*</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/appender/(db|mom|nosql)/.*</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/layout/.*(Csv|Jackson|Xml|Yaml|Json|Gelf).*</excludeSourceMatching>
-        <excludeSourceMatching>/org/apache/log4j/builders/layout/.*Xml.*</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/net/MimeMessageBuilder.java</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/net/SmtpManager.java</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/appender/SmtpAppender.java</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/async/DisruptorBlockingQueueFactory.java</excludeSourceMatching>
         <excludeSourceMatching>/org/apache/logging/log4j/core/filter/MutableThreadContextMapFilter.java</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>log4j-1.2-api</name>
+    <subDir>log4j-1.2-api</subDir>
+    <dependency>log4j-api</dependency>
+    <dependency>log4j-core</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <excludeSourceMatching>/org/apache/log4j/or/jms/.*</excludeSourceMatching>
+        <excludeSourceMatching>/org/apache/log4j/builders/layout/.*Xml.*</excludeSourceMatching>
       </compiler>
     </build>
   </module>
