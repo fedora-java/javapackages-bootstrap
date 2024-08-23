@@ -9,6 +9,7 @@
         <removePlugin>maven-checkstyle-plugin</removePlugin>
         <removePlugin>apache-rat-plugin</removePlugin>
         <removePlugin>spotless-maven-plugin</removePlugin>
+        <removeDep>junit-bom</removeDep>
       </pom>
     </build>
   </module>
