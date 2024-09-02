@@ -132,6 +132,11 @@ function source_list()
     echo "Source:         $p.tar.zst"
 }
 
+function source_manifest()
+{
+    (cd ./archive && sha512sum --tag $p.tar.zst)
+}
+
 for p; do
     if [[ ! -f project/$p.properties ]]; then
         echo "$0: $p: upstream descriptor not found" >&2
@@ -164,6 +169,8 @@ for p; do
         bundled_provides
     elif [[ "$cmd" = source-list ]]; then
         source_list
+    elif [[ "$cmd" = source-manifest ]]; then
+        source_manifest
     else
         echo "$0: unknown command: $cmd" >&2
         exit 1
