@@ -122,6 +122,14 @@ function archive()
     zstd --rm -T8 -12 archive/$p.tar
 }
 
+function save_patches()
+{
+    rm -rf patches/$p
+    mkdir patches/$p
+    git -C downstream/$p format-patch -o ../../patches/$p upstream-base
+    rmdir patches/$p 2>/dev/null || :
+}
+
 function bundled_provides()
 {
     echo "bundled(${rpm_name:-$p}) = $version"
@@ -165,6 +173,8 @@ for p; do
         prep
     elif [[ "$cmd" = archive ]]; then
         archive
+    elif [[ "$cmd" = save-patches ]]; then
+        save_patches
     elif [[ "$cmd" = bundled-provides ]]; then
         bundled_provides
     elif [[ "$cmd" = source-list ]]; then
