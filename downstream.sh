@@ -136,17 +136,14 @@ for p; do
         prep
     elif [[ "$cmd" = archive ]]; then
         mkdir -p archive
-        rm -f archive/$p.tar archive/$p.tar.xz
+        rm -f archive/$p.tar archive/$p.tar.zst
         commit=$($git -C "downstream/$p" rev-parse upstream-base)
         date=$($git -C "downstream/$p" cat-file commit $commit | sed -n '/^author /s/.* \([0-9][0-9]* [+-][0-9][0-9]*$\)/\1/;T;p;q')
         tree=$($git -C "downstream/$p" cat-file commit $commit | sed -n 's/^tree //;T;p;q')
         $git -C "downstream/$p" archive --prefix downstream/$p/ --mtime "$date" "$tree" >archive/$p.tar
+        zstd --rm -T8 -12 archive/$p.tar
     else
         echo "$0: unknown command: $cmd" >&2
         exit 1
     fi
 done
-
-if [[ $cmd = archive ]]; then
-    echo archive/*.tar | xargs -n1 -P20 xz -9evT8
-fi
