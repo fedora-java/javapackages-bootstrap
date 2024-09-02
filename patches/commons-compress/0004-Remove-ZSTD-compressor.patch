@@ -1,4 +1,4 @@
-From 4abeced17f989ce8a01ae30bad007c3e7ea816f0 Mon Sep 17 00:00:00 2001
+From d2d4cbba7dbdf8a1cca6c461d8470db0a91001b5 Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Mon, 12 Feb 2018 10:59:55 +0100
 Subject: [PATCH 4/4] Remove ZSTD compressor

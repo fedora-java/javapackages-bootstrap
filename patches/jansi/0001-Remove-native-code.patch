@@ -1,4 +1,4 @@
-From 4bd6761af7790c9975be717c2df9e72f78104f0b Mon Sep 17 00:00:00 2001
+From af8866d07fe3381a2a9eaed6909049c187771d45 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 28 Jun 2021 15:53:32 +0200
 Subject: [PATCH] Remove native code
@@ -149,5 +149,5 @@ index 497a924..3161554 100644
          AnsiMode mode;
  
 -- 
-2.35.1
+2.46.0
 

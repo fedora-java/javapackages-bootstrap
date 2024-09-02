@@ -1,7 +1,7 @@
-From 4dc38f384dab2d825e1ab6f7df018650b6aeded1 Mon Sep 17 00:00:00 2001
+From 6a7e0c96b18d3783d3b8f3577f5ff5bb8196d880 Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
 Date: Fri, 17 Dec 2021 13:42:11 +0100
-Subject: [PATCH] Port to maven 3.8.1
+Subject: [PATCH 3/3] Port to maven 3.8.1
 
 Forwarded: no
 ---
@@ -30,5 +30,5 @@ index 9a435b7..c13c3a8 100644
 +    }
  }
 -- 
-2.31.1
+2.46.0
 

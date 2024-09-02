@@ -1,13 +1,12 @@
-From c36cd3c3eaad3ce9486d7c49c50b9d309a0d5fe1 Mon Sep 17 00:00:00 2001
+From 4a4d441b9f0b6b886957af3d822923232a1fd034 Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Tue, 24 Nov 2015 12:59:13 +0100
-Subject: [PATCH 2/2] Port to current maven-artifact
+Subject: [PATCH 2/3] Port to current maven-artifact
 
 Forwarded: no
-
 ---
- .../apache/maven/plugin/testing/stubs/StubArtifactCollector.java    | 6 +++---
- .../org/apache/maven/plugin/testing/stubs/StubArtifactResolver.java | 6 +++---
+ .../maven/plugin/testing/stubs/StubArtifactCollector.java   | 6 +++---
+ .../maven/plugin/testing/stubs/StubArtifactResolver.java    | 6 +++---
  2 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/maven-plugin-testing-harness/src/main/java/org/apache/maven/plugin/testing/stubs/StubArtifactCollector.java b/maven-plugin-testing-harness/src/main/java/org/apache/maven/plugin/testing/stubs/StubArtifactCollector.java
@@ -73,5 +72,5 @@ index cc02ec0..2d90152 100644
                                                          ArtifactFilter filter, List<ResolutionListener> listeners )
          throws ArtifactResolutionException, ArtifactNotFoundException
 -- 
-2.5.0
+2.46.0
 

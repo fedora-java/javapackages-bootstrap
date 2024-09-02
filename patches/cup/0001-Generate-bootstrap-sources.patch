@@ -1,4 +1,4 @@
-From ebdcf9964ea26588f0090a04bb1f982f654ce293 Mon Sep 17 00:00:00 2001
+From 03e89508a101473d65091bbc434582f067958b87 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sun, 5 Apr 2020 16:07:29 +0200
 Subject: [PATCH] Generate bootstrap sources
@@ -9,7 +9,6 @@ Generated with:
     java -cp java_cup.jar java_cup.Main -interface -destdir bootstrap/java_cup cup/parser.cup
 
 Forwarded: not-needed
-
 ---
  bootstrap/java_cup/Lexer.java  | 1111 +++++++++++++++++
  bootstrap/java_cup/parser.java | 2043 ++++++++++++++++++++++++++++++++
@@ -3278,5 +3277,5 @@ index 0000000..f818ecf
 +}
 +
 -- 
-2.25.1
+2.46.0
 

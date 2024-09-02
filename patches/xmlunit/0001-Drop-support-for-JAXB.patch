@@ -1,4 +1,4 @@
-From f6b135929eec772a55568dc0946117c831949d64 Mon Sep 17 00:00:00 2001
+From 90eb5fabd6477a5ec3ca285f60c8c01465932cd0 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Tue, 5 Nov 2019 12:14:08 +0100
 Subject: [PATCH] Drop support for JAXB
@@ -49,5 +49,5 @@ index e767f38..ad646de 100644
          try (FileInputStream is = new FileInputStream(TestResources.ANIMAL_FILE)) {
              allIsWellFor(Input.from(is).build());
 -- 
-2.41.0
+2.46.0
 

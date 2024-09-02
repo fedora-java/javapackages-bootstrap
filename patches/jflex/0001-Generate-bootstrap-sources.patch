@@ -1,4 +1,4 @@
-From 9225a8b93ff05f7f1d84ef162580bb0f499f7eaf Mon Sep 17 00:00:00 2001
+From 71b04190b4252e1d7bede84923eb42eb4ed7bf5d Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sun, 5 Apr 2020 16:05:53 +0200
 Subject: [PATCH] Generate bootstrap sources
@@ -9,7 +9,6 @@ Generated with:
     java -cp jflex.jar:java_cup-runtime.jar jflex.Main -d bootstrap/jflex --skel jflex/src/main/jflex/skeleton.nested LexScan.flex
 
 Forwarded: not-needed
-
 ---
  bootstrap/jflex/LexScan.java | 3661 ++++++++++++++++++++++++++++++++++
  1 file changed, 3661 insertions(+)
@@ -17,7 +16,7 @@ Forwarded: not-needed
 
 diff --git a/bootstrap/jflex/LexScan.java b/bootstrap/jflex/LexScan.java
 new file mode 100644
-index 00000000..9c95c2cd
+index 000000000..9c95c2cd0
 --- /dev/null
 +++ b/bootstrap/jflex/LexScan.java
 @@ -0,0 +1,3661 @@
@@ -3683,5 +3682,5 @@ index 00000000..9c95c2cd
 +
 +}
 -- 
-2.25.1
+2.46.0
 

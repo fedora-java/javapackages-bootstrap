@@ -1,10 +1,9 @@
-From 3eeaf5c2131d6a13dc15e116a8d08de57298289e Mon Sep 17 00:00:00 2001
+From 5844e422a89ff3028e56283e39968cea99a98668 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 12:57:13 +0200
 Subject: [PATCH 3/3] Disable reporting
 
 Forwarded: not-needed
-
 ---
  .../plugin/generator/GeneratorUtils.java      | 47 -------------------
  1 file changed, 47 deletions(-)
@@ -73,5 +72,5 @@ index f05fb876..c4664769 100644
 -    }
  }
 -- 
-2.41.0
+2.46.0
 

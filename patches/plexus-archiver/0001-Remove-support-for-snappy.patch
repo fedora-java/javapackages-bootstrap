@@ -1,4 +1,4 @@
-From 5f3ef9f786db6adc09b491ff049880744076a203 Mon Sep 17 00:00:00 2001
+From cdae8893d2e20e8bbb26e1dc9f92b51e2389b2fd Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sat, 23 Sep 2017 11:43:45 +0200
 Subject: [PATCH 1/2] Remove support for snappy

@@ -1,4 +1,4 @@
-From ff7178ca8f0728a2bc6d5d12d74e9c47de2c37a8 Mon Sep 17 00:00:00 2001
+From 47d964ed4f3934db65412ab6d57e683ce07bcefa Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Mari=C3=A1n=20Kon=C4=8Dek?= <marian.koncek@mailbox.org>
 Date: Fri, 11 Aug 2023 14:04:26 +0200
 Subject: [PATCH 2/2] Remove support for zstd

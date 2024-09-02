@@ -1,4 +1,4 @@
-From 8b4e4c32acdbf10ed5872a21515adfa4cccc717a Mon Sep 17 00:00:00 2001
+From 5c306dd138cab7be825b3aa2be24e75286d9bc0d Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Mon, 12 Feb 2018 10:53:48 +0100
 Subject: [PATCH 3/4] Remove Brotli compressor

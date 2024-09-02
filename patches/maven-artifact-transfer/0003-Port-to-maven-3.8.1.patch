@@ -1,7 +1,7 @@
-From 801cdd23a9dd9e8948f516537b0f5f09a252c5b7 Mon Sep 17 00:00:00 2001
+From f80196d67af3393ea92cfcbb4cf84134204bafc7 Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
 Date: Fri, 17 Dec 2021 13:33:49 +0100
-Subject: [PATCH] Port to maven 3.8.1
+Subject: [PATCH 3/3] Port to maven 3.8.1
 
 Forwarded: no
 ---
@@ -33,7 +33,7 @@ index 9d93f31..8297fdb 100644
      public String toString()
      {
 diff --git a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java
-index d5716bb..4669353 100644
+index 40078ab..1bcd068 100644
 --- a/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java
 +++ b/src/main/java/org/apache/maven/shared/transfer/dependencies/collect/internal/Maven31ArtifactRepositoryAdapter.java
 @@ -207,6 +207,18 @@ class Maven31ArtifactRepositoryAdapter implements ArtifactRepository
@@ -56,5 +56,5 @@ index d5716bb..4669353 100644
      public String toString()
      {
 -- 
-2.31.1
+2.46.0
 

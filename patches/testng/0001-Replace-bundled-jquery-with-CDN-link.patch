@@ -1,4 +1,4 @@
-From 56b0d44188ae88906ba48e20418fb9968f746bf6 Mon Sep 17 00:00:00 2001
+From 8b8a9a2f039cc17a5e1362c7c1ed2b30931adc1f Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Wed, 18 Jul 2018 15:57:49 +0200
 Subject: [PATCH] Replace bundled jquery with CDN link
@@ -35,5 +35,5 @@ index d1573f93e..29ed3e169 100644
      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
      <script type='text/javascript'>
 -- 
-2.41.0
+2.46.0
 

@@ -1,4 +1,4 @@
-From 4ca53c4a2c324d06ec7d98b71bed2f86c8cb99bc Mon Sep 17 00:00:00 2001
+From b7376c6b20dffc9abb23f7e153074dc680057f40 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 7 Jun 2019 10:39:34 +0200
 Subject: [PATCH] Port to JFlex 1.7.0
@@ -6,18 +6,17 @@ Subject: [PATCH] Port to JFlex 1.7.0
 This is somewhat Fedora-specific, the upstream uses maven-jflex-plugin
 
 Forwarded: no
-
 ---
  src/grammar/lexer.flex                                          | 2 +-
  .../java/com/thoughtworks/qdox/library/ClassLoaderLibrary.java  | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/grammar/lexer.flex b/src/grammar/lexer.flex
-index ec46dc92..16c33084 100644
+index a17a69eb..7a86e060 100644
 --- a/src/grammar/lexer.flex
 +++ b/src/grammar/lexer.flex
-@@ -168,7 +168,7 @@ import java.util.*;
-   	}
+@@ -173,7 +173,7 @@ import java.util.*;
+ 	}
  
      public JFlexLexer( java.io.InputStream stream, java.io.Writer writer ) {
 -       this( stream );
@@ -39,5 +38,5 @@ index 7c1eda5c..6f6ce0ff 100644
                  parser.setDebugLexer( debugLexer );
                  parser.setDebugParser( debugParser );
 -- 
-2.25.4
+2.46.0
 

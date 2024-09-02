@@ -1,4 +1,4 @@
-From 4275860ed4a69047f783f0c06004ba4f1256a994 Mon Sep 17 00:00:00 2001
+From 5bf499b2c92e638b159160bdd7eaf105f61caa9b Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Wed, 23 Aug 2023 08:49:53 +0200
 Subject: [PATCH] Template is a reserved keyword in javacc
@@ -46,5 +46,5 @@ index 593d044b..f3bed948 100644
              throw new VelocityException(msg, e, getRuntimeServices().getLogContext().getStackTrace());
          }
 -- 
-2.41.0
+2.46.0
 

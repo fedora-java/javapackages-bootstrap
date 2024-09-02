@@ -1,10 +1,9 @@
-From abcaf4599ec13f10562cb8ab5abd7c48275c9232 Mon Sep 17 00:00:00 2001
+From 3ee6ffcb9ede579c4d3311c011464578fac564bb Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Wed, 25 Mar 2020 05:22:42 +0100
 Subject: [PATCH] Port to Plexus Utils 3.3.0
 
 Forwarded: no
-
 ---
  .../org/sonatype/plexus/build/incremental/EmptyScanner.java   | 4 ++++
  .../build/incremental/test/TestIncrementalBuildContext.java   | 4 ++++
@@ -53,5 +52,5 @@ index 14c1e26..ca6f960 100644
  
    private final Set changedFiles;
 -- 
-2.26.2
+2.46.0
 

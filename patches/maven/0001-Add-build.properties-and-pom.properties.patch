@@ -1,4 +1,4 @@
-From 9f4ea930607f2bd2e83eb85ef8557f6cc1b1e4ba Mon Sep 17 00:00:00 2001
+From 188c3568dd48ffc8ddace10741eeb250d4eced81 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 7 Dec 2018 05:54:19 +0100
 Subject: [PATCH 1/2] Add build.properties and pom.properties
@@ -37,5 +37,5 @@ index 20f386ba0e..dd70c6b0ac 100644
 +distributionShortName=XMvn
 +distributionName=Red Hat XMvn
 -- 
-2.41.0
+2.46.0
 

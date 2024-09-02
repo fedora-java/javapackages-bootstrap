@@ -1,4 +1,4 @@
-From 8977691d5ff2842b06c5cfa5b8a2b14b3e7d684a Mon Sep 17 00:00:00 2001
+From a4164e8680ac87a6276fd837489c5d039817a4dc Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Thu, 12 May 2022 06:57:19 +0200
 Subject: [PATCH 3/3] Unshade dependencies
@@ -134,10 +134,10 @@ index ccd826c20..500972abc 100644
  /**
   * @author <a href="mailto:tibordigana@apache.org">Tibor Digana (tibor17)</a>
 diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java
-index 4286b90ba..1dadc74fd 100644
+index 7cbe8bbb2..6b364c0f7 100644
 --- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java
 +++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/AbstractSurefireMojo.java
-@@ -106,7 +106,7 @@
+@@ -110,7 +110,7 @@
  import org.apache.maven.surefire.providerapi.ProviderDetector;
  import org.apache.maven.surefire.providerapi.ProviderInfo;
  import org.apache.maven.surefire.providerapi.ProviderRequirements;
@@ -146,7 +146,7 @@ index 4286b90ba..1dadc74fd 100644
  import org.apache.maven.toolchain.DefaultToolchain;
  import org.apache.maven.toolchain.Toolchain;
  import org.apache.maven.toolchain.ToolchainManager;
-@@ -143,16 +143,16 @@
+@@ -147,16 +147,16 @@
  import static org.apache.maven.surefire.booter.SystemUtils.isJava9AtLeast;
  import static org.apache.maven.surefire.booter.SystemUtils.toJdkHomeFromJvmExec;
  import static org.apache.maven.surefire.booter.SystemUtils.toJdkVersionFromReleaseFile;
@@ -213,7 +213,7 @@ index 96e3cdaef..af239f665 100644
  import static java.util.Arrays.asList;
  import static java.util.Map.Entry;
 diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java
-index f3379564f..58f81fdc0 100644
+index d86910342..feb2b6025 100644
 --- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java
 +++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/TestClassPath.java
 @@ -28,7 +28,7 @@
@@ -239,7 +239,7 @@ index 16b4800da..3fff286d2 100644
  /**
   * @author <a href="mailto:tibordigana@apache.org">Tibor Digana (tibor17)</a>
 diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java
-index d469c15d0..c4d5a7e17 100644
+index d78f6807d..8f4ee7aa5 100644
 --- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java
 +++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/DefaultForkConfiguration.java
 @@ -37,7 +37,7 @@
@@ -293,7 +293,7 @@ index 5e29d1ed3..f3c9f549f 100644
  /**
   * @author <a href="mailto:tibordigana@apache.org">Tibor Digana (tibor17)</a>
 diff --git a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java
-index 747334920..e984bc220 100644
+index 5a2576117..97a0c2e58 100644
 --- a/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java
 +++ b/maven-surefire-common/src/main/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfiguration.java
 @@ -46,7 +46,7 @@
@@ -516,7 +516,7 @@ index 0bfc1e26b..061c3a586 100644
  /**
   *
 diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java
-index 0fc3ccded..88eaefad4 100644
+index dee5e3926..6fb91c126 100644
 --- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java
 +++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/AbstractSurefireMojoTest.java
 @@ -90,9 +90,9 @@
@@ -585,7 +585,7 @@ index 68f97be62..f7ce947ab 100644
  import org.junit.Before;
  
 diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java
-index 752a64ef9..6728b2b5f 100644
+index 2209a808d..41a0903bb 100644
 --- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java
 +++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ForkConfigurationTest.java
 @@ -43,7 +43,7 @@
@@ -615,7 +615,7 @@ index 752a64ef9..6728b2b5f 100644
                  config.createCommandLine(startup, 1, getTempDirectory());
  
          assertThat(cli.getEnvironmentVariables())
-@@ -179,7 +179,7 @@ public void testCliArgs() throws Exception {
+@@ -241,7 +241,7 @@ public void testCliArgs() throws Exception {
          ClassLoaderConfiguration clc = new ClassLoaderConfiguration(true, true);
          StartupConfiguration startup = new StartupConfiguration("cls", cpConfig, clc, ALL, providerJpmsArgs);
  
@@ -624,7 +624,7 @@ index 752a64ef9..6728b2b5f 100644
                  config.createCommandLine(startup, 1, getTempDirectory());
          String cliAsString = cli.toString();
  
-@@ -254,7 +254,7 @@ protected void resolveClasspath(
+@@ -316,7 +316,7 @@ protected void resolveClasspath(
  
          assertThat(startup.isShadefire()).isFalse();
  
@@ -633,7 +633,7 @@ index 752a64ef9..6728b2b5f 100644
                  config.createCommandLine(startup, 1, getTempDirectory());
  
          assertThat(cli.toString()).contains("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005");
-@@ -274,7 +274,7 @@ public void testCreateCommandLine_UseSystemClassLoaderForkOnce_ShouldConstructMa
+@@ -336,7 +336,7 @@ public void testCreateCommandLine_UseSystemClassLoaderForkOnce_ShouldConstructMa
          StartupConfiguration startup =
                  new StartupConfiguration("", cpConfig, clc, ALL, Collections.<String[]>emptyList());
  
@@ -642,7 +642,7 @@ index 752a64ef9..6728b2b5f 100644
                  config.createCommandLine(startup, 1, getTempDirectory());
  
          String line = join(" ", cli.getCommandline());
-@@ -294,7 +294,7 @@ public void testArglineWithNewline() throws IOException, SurefireBooterForkExcep
+@@ -356,7 +356,7 @@ public void testArglineWithNewline() throws IOException, SurefireBooterForkExcep
          StartupConfiguration startup =
                  new StartupConfiguration("", cpConfig, clc, ALL, Collections.<String[]>emptyList());
  
@@ -651,7 +651,7 @@ index 752a64ef9..6728b2b5f 100644
                  config.createCommandLine(startup, 1, getTempDirectory());
          assertThat(commandLine.toString()).contains(IS_OS_WINDOWS ? "abc def" : "'abc' 'def'");
      }
-@@ -310,7 +310,7 @@ public void testCurrentWorkingDirectoryPropagationIncludingForkNumberExpansion()
+@@ -372,7 +372,7 @@ public void testCurrentWorkingDirectoryPropagationIncludingForkNumberExpansion()
          StartupConfiguration startup =
                  new StartupConfiguration("", cpConfig, clc, ALL, Collections.<String[]>emptyList());
          ForkConfiguration config = getForkConfiguration(cwd.getCanonicalFile());
@@ -678,7 +678,7 @@ index 7419ff3f7..810879786 100644
  import org.junit.BeforeClass;
  import org.junit.Rule;
 diff --git a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java
-index d049efc09..b6ccbe2c7 100644
+index fbf3e54fd..358436ec7 100644
 --- a/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java
 +++ b/maven-surefire-common/src/test/java/org/apache/maven/plugin/surefire/booterclient/ModularClasspathForkConfigurationTest.java
 @@ -44,7 +44,7 @@
@@ -1111,10 +1111,10 @@ index 0c5dff743..907144981 100644
  import org.junit.Rule;
  import org.junit.Test;
 diff --git a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java
-index 515bee6b5..c4ffab7f8 100644
+index 2f047faf2..25bec1b14 100644
 --- a/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java
 +++ b/surefire-booter/src/test/java/org/apache/maven/surefire/booter/ForkedBooterTest.java
-@@ -32,7 +32,7 @@
+@@ -33,7 +33,7 @@
  import java.util.concurrent.Semaphore;
  
  import org.apache.maven.surefire.api.util.SureFireFileManager;
@@ -1383,5 +1383,5 @@ index 531fe50a5..299b6bf49 100644
  import org.apache.maven.surefire.testng.utils.FailFastEventsSingleton;
  import org.apache.maven.surefire.testng.utils.FailFastListener;
 -- 
-2.41.0
+2.46.0
 

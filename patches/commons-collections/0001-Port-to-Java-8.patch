@@ -1,10 +1,9 @@
-From 93a0da9fde8676714db9d79ac003749940a76044 Mon Sep 17 00:00:00 2001
+From 05e3e7efc9a95ca8edce8fab055c30ca6183e2b6 Mon Sep 17 00:00:00 2001
 From: Michael Simacek <msimacek@redhat.com>
 Date: Tue, 17 Nov 2015 01:02:55 +0100
 Subject: [PATCH] Port to Java 8
 
 Forwarded: not-needed
-
 ---
  .../org/apache/commons/collections/MultiHashMap.java   |  8 ++++----
  src/java/org/apache/commons/collections/MultiMap.java  |  4 ++--
@@ -16,7 +15,7 @@ Forwarded: not-needed
  7 files changed, 27 insertions(+), 25 deletions(-)
 
 diff --git a/src/java/org/apache/commons/collections/MultiHashMap.java b/src/java/org/apache/commons/collections/MultiHashMap.java
-index 7fec9af..bcb4a11 100644
+index 25158b4c1..ab0ca714e 100644
 --- a/src/java/org/apache/commons/collections/MultiHashMap.java
 +++ b/src/java/org/apache/commons/collections/MultiHashMap.java
 @@ -331,21 +331,21 @@ public class MultiHashMap extends HashMap implements MultiMap {
@@ -46,7 +45,7 @@ index 7fec9af..bcb4a11 100644
  
      /**
 diff --git a/src/java/org/apache/commons/collections/MultiMap.java b/src/java/org/apache/commons/collections/MultiMap.java
-index be9455b..4d9cc7d 100644
+index 8cd72124c..60f22ae23 100644
 --- a/src/java/org/apache/commons/collections/MultiMap.java
 +++ b/src/java/org/apache/commons/collections/MultiMap.java
 @@ -66,7 +66,7 @@ public interface MultiMap extends Map {
@@ -68,7 +67,7 @@ index be9455b..4d9cc7d 100644
      /**
       * Gets a collection containing all the values in the map.
 diff --git a/src/java/org/apache/commons/collections/map/MultiKeyMap.java b/src/java/org/apache/commons/collections/map/MultiKeyMap.java
-index 9e3e02d..969d11e 100644
+index 1ba1ceaf8..3523b5cb9 100644
 --- a/src/java/org/apache/commons/collections/map/MultiKeyMap.java
 +++ b/src/java/org/apache/commons/collections/map/MultiKeyMap.java
 @@ -197,7 +197,7 @@ public class MultiKeyMap
@@ -98,7 +97,7 @@ index 9e3e02d..969d11e 100644
  
      /**
 diff --git a/src/java/org/apache/commons/collections/map/MultiValueMap.java b/src/java/org/apache/commons/collections/map/MultiValueMap.java
-index f44999b..79938dc 100644
+index 7b7afb55a..00d58e5ca 100644
 --- a/src/java/org/apache/commons/collections/map/MultiValueMap.java
 +++ b/src/java/org/apache/commons/collections/map/MultiValueMap.java
 @@ -153,19 +153,19 @@ public class MultiValueMap extends AbstractMapDecorator implements MultiMap {
@@ -126,7 +125,7 @@ index f44999b..79938dc 100644
  
      /**
 diff --git a/src/test/org/apache/commons/collections/TestMultiHashMap.java b/src/test/org/apache/commons/collections/TestMultiHashMap.java
-index eca833a..f47c6f9 100644
+index 722bec059..2268d855e 100644
 --- a/src/test/org/apache/commons/collections/TestMultiHashMap.java
 +++ b/src/test/org/apache/commons/collections/TestMultiHashMap.java
 @@ -464,11 +464,11 @@ public class TestMultiHashMap extends AbstractTestMap {
@@ -147,7 +146,7 @@ index eca833a..f47c6f9 100644
      }
  
 diff --git a/src/test/org/apache/commons/collections/map/TestMultiKeyMap.java b/src/test/org/apache/commons/collections/map/TestMultiKeyMap.java
-index b1ee3d0..66fcade 100644
+index 6e528fba2..9faabf7f0 100644
 --- a/src/test/org/apache/commons/collections/map/TestMultiKeyMap.java
 +++ b/src/test/org/apache/commons/collections/map/TestMultiKeyMap.java
 @@ -315,10 +315,10 @@ public class TestMultiKeyMap extends AbstractTestIterableMap {
@@ -164,7 +163,7 @@ index b1ee3d0..66fcade 100644
                  break;
                  case 3:
 diff --git a/src/test/org/apache/commons/collections/map/TestMultiValueMap.java b/src/test/org/apache/commons/collections/map/TestMultiValueMap.java
-index b9a5ac8..b37dc0c 100644
+index b9a5ac850..61e322ba3 100644
 --- a/src/test/org/apache/commons/collections/map/TestMultiValueMap.java
 +++ b/src/test/org/apache/commons/collections/map/TestMultiValueMap.java
 @@ -338,11 +338,11 @@ public class TestMultiValueMap extends TestCase {
@@ -185,5 +184,5 @@ index b9a5ac8..b37dc0c 100644
      }
  
 -- 
-2.21.0
+2.46.0
 

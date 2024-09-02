@@ -1,4 +1,4 @@
-From 5c0319d4b302c5099aaf45e8d1f57e099067b554 Mon Sep 17 00:00:00 2001
+From 3f3a57a7747c3cca0367799065d3086ff11ebd26 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Sun, 22 Nov 2020 17:59:12 +0100
 Subject: [PATCH] Add explicit casts to fix compilation with ECJ
@@ -49,5 +49,5 @@ index a1aa1ed8a..f318772a7 100644
  
    /**
 -- 
-2.41.0
+2.46.0
 

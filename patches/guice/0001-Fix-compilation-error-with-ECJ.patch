@@ -1,4 +1,4 @@
-From 00b388afab9eaf58f1e2a00ec667d51cdd04aa8a Mon Sep 17 00:00:00 2001
+From 5602f4bbfea560fa7ac1bfad4f53c3c60b23827d Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 20 Mar 2023 18:57:56 +0100
 Subject: [PATCH] Fix compilation error with ECJ
@@ -22,5 +22,5 @@ index 16dd62d6c..1d39b68f9 100644
          .filter(a -> a.isAnnotationPresent(RestrictedBindingSource.Permit.class));
    }
 -- 
-2.39.2
+2.46.0
 

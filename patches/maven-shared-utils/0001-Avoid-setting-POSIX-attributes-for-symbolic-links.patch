@@ -1,4 +1,4 @@
-From 9df2fb610f118a4efc1dae4bf07e0d585f8a1789 Mon Sep 17 00:00:00 2001
+From aa8de886332466a4142ca2764d51304575a20a91 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Thu, 24 Sep 2020 20:17:56 +0200
 Subject: [PATCH] Avoid setting POSIX attributes for symbolic links
@@ -25,5 +25,5 @@ index 1ce26eb..2a5b561 100644
  
      /**
 -- 
-2.41.0
+2.46.0
 

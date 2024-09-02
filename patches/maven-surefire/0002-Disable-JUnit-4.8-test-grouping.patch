@@ -1,4 +1,4 @@
-From 67a2c1b13483cabf86897db32b8fcbc98ee56f84 Mon Sep 17 00:00:00 2001
+From d4fb9f11c99b09d30c7b4e30e2c19e45ba89d0f1 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 10:45:30 +0200
 Subject: [PATCH 2/3] Disable JUnit 4.8 test grouping
@@ -108,5 +108,5 @@ index 96e7170b9..531fe50a5 100644
  
      static void run(
 -- 
-2.41.0
+2.46.0
 

@@ -1,4 +1,4 @@
-From c2f45000eec3b89afbdb7fe9a3021ca2ed9e8a57 Mon Sep 17 00:00:00 2001
+From b7b6d258b93130ab4787ed37a50fc641e1b58198 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Mari=C3=A1n=20Kon=C4=8Dek?= <marian.koncek@mailbox.org>
 Date: Mon, 5 Jun 2023 12:09:39 +0200
 Subject: [PATCH 2/4] Change encoding to UTF-8

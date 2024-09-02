@@ -1,10 +1,9 @@
-From 6953b37ee5a7c0566d2e11e7141768f8a4c03fa2 Mon Sep 17 00:00:00 2001
+From 85136fcdd887f9b68c2b225f2e57b68424c62941 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 27 Apr 2020 12:56:04 +0200
 Subject: [PATCH 2/3] Remove dependency on jtidy
 
 Forwarded: not-needed
-
 ---
  .../plugin/generator/GeneratorUtils.java      | 49 +------------------
  .../PluginDescriptorFilesGenerator.java       |  7 +--
@@ -85,10 +84,10 @@ index 99aa7965..f05fb876 100644
              throw new RuntimeException(e);
          }
 diff --git a/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/PluginDescriptorFilesGenerator.java b/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/PluginDescriptorFilesGenerator.java
-index cf5c5c48..9f435f0e 100644
+index f0c485b8..25aa7131 100644
 --- a/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/PluginDescriptorFilesGenerator.java
 +++ b/maven-plugin-tools-generators/src/main/java/org/apache/maven/tools/plugin/generator/PluginDescriptorFilesGenerator.java
-@@ -201,12 +201,7 @@ public class PluginDescriptorFilesGenerator implements Generator {
+@@ -203,12 +203,7 @@ public class PluginDescriptorFilesGenerator implements Generator {
       */
      private static String getTextValue(DescriptorType type, boolean containsXhtmlValue, String text) {
          final String xhtmlText;
@@ -103,5 +102,5 @@ index cf5c5c48..9f435f0e 100644
              return new HtmlToPlainTextConverter().convert(text);
          } else {
 -- 
-2.41.0
+2.46.0
 

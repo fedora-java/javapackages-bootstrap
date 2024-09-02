@@ -1,10 +1,9 @@
-From a52504a9b3b2cb6a8a9f7e356bebc9bd1533cb3e Mon Sep 17 00:00:00 2001
+From 2919aa03c466ea1f304a925477cca5cde8a50320 Mon Sep 17 00:00:00 2001
 From: Marian Koncek <mkoncek@redhat.com>
 Date: Thu, 11 Jul 2019 14:29:26 +0200
 Subject: [PATCH] Port to OSGI 7.0.0
 
 Forwarded: not-needed
-
 ---
  .../src/aQute/bnd/junit/ConsoleLogger.java    | 62 +++++++++++++++++++
  1 file changed, 62 insertions(+)
@@ -100,5 +99,5 @@ index 9c2591f36..569b20ed3 100644
  
  	public ConsoleLogger(BundleContext context) {
 -- 
-2.25.2
+2.46.0
 
