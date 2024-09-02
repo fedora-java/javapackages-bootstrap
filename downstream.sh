@@ -127,6 +127,11 @@ function bundled_provides()
     echo "bundled(${rpm_name:-$p}) = $version"
 }
 
+function source_list()
+{
+    echo "Source:         $p.tar.zst"
+}
+
 for p; do
     if [[ ! -f project/$p.properties ]]; then
         echo "$0: $p: upstream descriptor not found" >&2
@@ -157,6 +162,8 @@ for p; do
         archive
     elif [[ "$cmd" = bundled-provides ]]; then
         bundled_provides
+    elif [[ "$cmd" = source-list ]]; then
+        source_list
     else
         echo "$0: unknown command: $cmd" >&2
         exit 1
