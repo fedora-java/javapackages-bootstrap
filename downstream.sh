@@ -134,13 +134,13 @@ for p; do
     . project/$p.properties
     sub_version ref
     sub_version url
-    echo
-    echo =============================================
-    echo project: $p
-    echo version: $version
-    echo url:     $url
-    echo ref:     $ref
-    echo =============================================
+    echo >&2
+    echo "=============================================" >&2
+    echo "project: $p" >&2
+    echo "version: $version" >&2
+    echo "url:     $url" >&2
+    echo "ref:     $ref" >&2
+    echo "=============================================" >&2
     if [[ "$cmd" = clone ]]; then
         clone
     elif [[ "$cmd" = prep ]]; then
