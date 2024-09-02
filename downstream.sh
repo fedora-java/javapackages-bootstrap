@@ -145,6 +145,19 @@ function source_manifest()
     (cd ./archive && sha512sum --tag $p.tar.zst)
 }
 
+function prep_from_archive()
+{
+    echo === $p >&2
+    rm -rf downstream/$p
+    tar -xf archive/$p.tar.zst
+
+    if [[ -d patches/$p ]]; then
+        for patch in patches/$p/*; do
+            (cd ./downstream/$p && patch -l -p1) <$patch
+        done
+    fi
+}
+
 for p; do
     if [[ ! -f project/$p.properties ]]; then
         echo "$0: $p: upstream descriptor not found" >&2
@@ -181,6 +194,8 @@ for p; do
         source_list
     elif [[ "$cmd" = source-manifest ]]; then
         source_manifest
+    elif [[ "$cmd" = prep-from-archive ]]; then
+        prep_from_archive
     else
         echo "$0: unknown command: $cmd" >&2
         exit 1
