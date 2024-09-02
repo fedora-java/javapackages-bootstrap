@@ -953,7 +953,6 @@ MOD servlet-api
     ALIAS org.eclipse.jetty.orbit javax.servlet
 MOD sisu-inject
   ART org.eclipse.sisu org.eclipse.sisu.inject
-    DEP javax.enterprise cdi-api
 MOD sisu-maven-plugin
   ART org.eclipse.sisu sisu-maven-plugin
     ALIAS org.sonatype.plugins sisu-maven-plugin
