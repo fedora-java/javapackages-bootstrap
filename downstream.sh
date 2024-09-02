@@ -70,7 +70,10 @@ function prep()
     if [[ "$type" = git ]]; then
         $git clone -n "upstream/$p.git" "downstream/$p"
         $git -C "downstream/$p" checkout -b upstream-base "$ref"
+        commit=$($git -C "downstream/$p" rev-parse upstream-base)
+        date=$($git -C "downstream/$p" cat-file commit $commit | sed -n '/^author /s/.* \([0-9][0-9]* [+-][0-9][0-9]*$\)/\1/;T;p;q')
     elif [[ "$type" = zip ]]; then
+        date="100000000 +0000"
         $git init "downstream/$p"
         unzip "upstream/$p-$version.zip" -d "downstream/$p"
         dir="downstream/$p"/$(ls "downstream/$p")
@@ -79,7 +82,7 @@ function prep()
             rmdir "$dir"
         fi
         $git -C "downstream/$p" add .
-        $git -C "downstream/$p" commit -m "Import version $version"
+        $git -C "downstream/$p" commit --date "$date" -m "Import version $version"
         $git -C "downstream/$p" checkout -b upstream-base
     else
         echo "$0: $p: unsupported upstream type: $type" >&2
@@ -99,7 +102,7 @@ function prep()
     elif [[ "$p" == jflex ]]; then
         rm -r downstream/jflex/jflex/examples/
     fi
-    $git -C "downstream/$p" commit --allow-empty -a -m 'Remove binary files'
+    $git -C "downstream/$p" commit --date "$date" --allow-empty -a -m 'Remove binary files'
     $git -C "downstream/$p" checkout -b downstream upstream-base
     if [[ -d patches/$p ]]; then
         set patches/$p/*.patch
@@ -134,7 +137,10 @@ for p; do
     elif [[ "$cmd" = archive ]]; then
         mkdir -p archive
         rm -f archive/$p.tar archive/$p.tar.xz
-        $git -C "downstream/$p" archive --prefix downstream/$p/ upstream-base >archive/$p.tar
+        commit=$($git -C "downstream/$p" rev-parse upstream-base)
+        date=$($git -C "downstream/$p" cat-file commit $commit | sed -n '/^author /s/.* \([0-9][0-9]* [+-][0-9][0-9]*$\)/\1/;T;p;q')
+        tree=$($git -C "downstream/$p" cat-file commit $commit | sed -n 's/^tree //;T;p;q')
+        $git -C "downstream/$p" archive --prefix downstream/$p/ --mtime "$date" "$tree" >archive/$p.tar
     else
         echo "$0: unknown command: $cmd" >&2
         exit 1
