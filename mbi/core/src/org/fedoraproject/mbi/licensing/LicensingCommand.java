@@ -47,7 +47,7 @@ public class LicensingCommand
         {
             print( "#    " + entry.getKey() + " has license: " + new SPDX( entry.getValue() ) );
         }
-        print( "# Therefore combined license is: " );
+        print( "# Therefore combined license is:" );
         print( "License:        " + new SPDX( combined ) );
     }
 }
