@@ -28,7 +28,7 @@ License:        [...]
 URL:            https://github.com/fedora-java/javapackages-bootstrap
 ExclusiveArch:  %{java_arches}
 
-Source:         https://github.com/fedora-java/javapackages-bootstrap/releases/download/%{version}/javapackages-bootstrap-%{version}.tar.zst#
+Source:         https://github.com/fedora-java/javapackages-bootstrap/releases/download/%{version}/javapackages-bootstrap-%{version}.tar.zst
 
 # License breakdown
 Source:         javapackages-bootstrap-PACKAGE-LICENSING

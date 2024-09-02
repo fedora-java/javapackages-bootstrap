@@ -18,9 +18,9 @@ rm -rf archive/
 ./downstream.sh archive
 
 (
-    sed -n '/^Source:.*tar.zst$/q;p' javapackages-bootstrap.spec
+    sed -n '/^Source:[^:]*tar.zst$/q;p' javapackages-bootstrap.spec
     ./downstream.sh source-list
-    sed -n '/^Source:.*tar.zst$/{:x;n;/^Source:.*tar.zst$/bx;:y;p;n;by;}' javapackages-bootstrap.spec
+    sed -n '/^Source:[^:]*tar.zst$/{:x;n;/^Source:[^:]*tar.zst$/bx;:y;p;n;by;}' javapackages-bootstrap.spec
 ) >$out/javapackages-bootstrap.spec
 
 ./mbi.sh licensing >$out/javapackages-bootstrap-PACKAGE-LICENSING
