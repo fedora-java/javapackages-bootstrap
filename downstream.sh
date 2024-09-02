@@ -122,6 +122,11 @@ function archive()
     zstd --rm -T8 -12 archive/$p.tar
 }
 
+function bundled_provides()
+{
+    echo "bundled(${rpm_name:-$p}) = $version"
+}
+
 for p; do
     if [[ ! -f project/$p.properties ]]; then
         echo "$0: $p: upstream descriptor not found" >&2
@@ -130,6 +135,7 @@ for p; do
     unset url
     unset ref
     unset version
+    unset rpm_name
     type=git
     . project/$p.properties
     sub_version ref
@@ -149,6 +155,8 @@ for p; do
         prep
     elif [[ "$cmd" = archive ]]; then
         archive
+    elif [[ "$cmd" = bundled-provides ]]; then
+        bundled_provides
     else
         echo "$0: unknown command: $cmd" >&2
         exit 1
