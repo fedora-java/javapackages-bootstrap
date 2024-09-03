@@ -96,6 +96,7 @@
         <excludeSourceClass>org/apache/tools/ant/taskdefs/optional/depend/constantpool/ConstantPool</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/taskdefs/optional/depend/constantpool/ConstantPoolEntry</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/taskdefs/optional/depend/constantpool/DoubleCPInfo</excludeSourceClass>
+        <excludeSourceClass>org/apache/tools/ant/taskdefs/optional/depend/constantpool/DynamicCPInfo</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/taskdefs/optional/depend/constantpool/FieldRefCPInfo</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/taskdefs/optional/depend/constantpool/FloatCPInfo</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/taskdefs/optional/depend/constantpool/IntegerCPInfo</excludeSourceClass>
