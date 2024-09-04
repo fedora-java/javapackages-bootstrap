@@ -122,12 +122,18 @@ public class ToolUtils
             }
             finally
             {
-                if ( threadUnsafe )
+                try
                 {
-                    System.setOut( out );
-                    System.setErr( err );
+                    if ( threadUnsafe )
+                    {
+                        System.setOut( out );
+                        System.setErr( err );
+                    }
                 }
-                lock.unlock();
+                finally
+                {
+                    lock.unlock();
+                }
             }
         }
         finally
