@@ -19,6 +19,7 @@ import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -88,7 +89,8 @@ public class ToolUtils
             try ( PrintStream log = threadUnsafe ? //
                             new PrintStream( Files.newOutputStream( logFile, //
                                                                     StandardOpenOption.CREATE,
-                                                                    StandardOpenOption.APPEND ) )
+                                                                    StandardOpenOption.APPEND ),
+                                             false, StandardCharsets.UTF_8 )
                             : null )
             {
                 lock.lock();

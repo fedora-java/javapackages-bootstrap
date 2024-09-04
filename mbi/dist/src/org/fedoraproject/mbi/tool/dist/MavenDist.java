@@ -22,6 +22,7 @@ import static java.util.jar.Attributes.Name.MANIFEST_VERSION;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermissions;
@@ -137,7 +138,7 @@ public class MavenDist
         try ( OutputStream os = Files.newOutputStream( launcherPath ) )
         {
             Files.setPosixFilePermissions( launcherPath, PosixFilePermissions.fromString( "rwxr-xr-x" ) );
-            os.write( ( "#!" + dist.getJavaCmdPath() + " -jar\n" ).getBytes() );
+            os.write( ( "#!" + dist.getJavaCmdPath() + " -jar\n" ).getBytes( StandardCharsets.UTF_8 ) );
             try ( Closeable jos = new JarOutputStream( os, mf ) )
             {
                 // Empty JAR

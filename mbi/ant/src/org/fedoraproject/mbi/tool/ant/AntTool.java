@@ -18,6 +18,7 @@ package org.fedoraproject.mbi.tool.ant;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
@@ -70,7 +71,7 @@ public class AntTool
         Path buildFile = getReactor().getTargetDir( getModule() ).resolve( "ant-run.xml" );
         Files.createDirectories( buildFile.getParent() );
 
-        try ( OutputStream os = Files.newOutputStream( buildFile ); PrintStream ps = new PrintStream( os ) )
+        try ( OutputStream os = Files.newOutputStream( buildFile ); PrintStream ps = new PrintStream( os, false, StandardCharsets.UTF_8 ) )
         {
             ps.println( "<project default=\"antrun\" basedir=\"" + baseDir + "\">" );
             ps.println( "<property name=\"classes\" location=\"" + classesDir + "\"/>" );
