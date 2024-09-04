@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 /**
  * SPDX expression parser.
- * 
+ *
  * @author Mikolaj Izdebski
  */
 class SPDX
@@ -45,7 +45,7 @@ class SPDX
         StringBuilder sb = new StringBuilder();
         sb.append( "Syntax error - " ).append( msg ).append( "\n" );
         sb.append( "  SPDX expression: \"" ).append( rawExpression ).append( "\"\n" );
-        sb.append( "  Location: here ---" ).append( new String( "-" ).repeat( parserPos ) ).append( "^" );
+        sb.append( "  Location: here ---" ).append( "-".repeat( parserPos ) ).append( "^" );
         throw new RuntimeException( sb.toString() );
     }
 
