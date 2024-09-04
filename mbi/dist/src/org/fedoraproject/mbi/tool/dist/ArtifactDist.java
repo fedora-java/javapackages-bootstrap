@@ -336,7 +336,7 @@ public class ArtifactDist
     private void dumpUMD( List<UMod> mods )
         throws Exception
     {
-        PrintWriter pw = new PrintWriter( "/tmp/dump.txt" );
+        PrintWriter pw = new PrintWriter( "/tmp/dump.txt", StandardCharsets.UTF_8 );
         for ( var mod : mods )
         {
             pw.printf( "MOD %s%n", mod.md.getName() );
