@@ -4,17 +4,10 @@
   </licensing>
   <module>
     <build>
-      <ant>
-        <run>
-          [copy todir="${generatedSources}"]
-            [fileset dir="${basedir}/src/main/java"/]
-          [/copy]
-          [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
-            [arg line="-i -a ."/]
-            [arg line="-p ^javax\.annotation\."/]
-          [/exec]
-        </run>
-      </ant>
+      <jurand>
+        <source>src/main/java</source>
+        <pattern>^javax\.annotation\.</pattern>
+      </jurand>
       <compiler/>
     </build>
   </module>

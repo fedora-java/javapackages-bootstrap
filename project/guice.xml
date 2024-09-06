@@ -10,19 +10,12 @@
     <dependency>aopalliance</dependency>
     <dependency>jsr-305</dependency>
     <build>
-      <ant>
-        <run>
-          [copy todir="${generatedSources}"]
-            [fileset dir="${basedir}/core/src"/]
-          [/copy]
-          [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
-            [arg line="-s -i -a ."/]
-            [arg line="-p ^com.google.common.annotations."/]
-            [arg line="-p ^com.google.errorprone.annotations."/]
-            [arg line="-p ^javax.annotation.concurrent."/]
-          [/exec]
-        </run>
-      </ant>
+      <jurand>
+        <source>core/src</source>
+        <pattern>^com.google.common.annotations.</pattern>
+        <pattern>^com.google.errorprone.annotations.</pattern>
+        <pattern>^javax.annotation.concurrent.</pattern>
+      </jurand>
       <compiler>
         <addSourceRoot>extensions/servlet/src</addSourceRoot>
       </compiler>

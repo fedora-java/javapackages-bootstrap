@@ -164,4 +164,16 @@
       </compiler>
     </build>
   </module>
+  <module>
+    <name>mbi-jurand</name>
+    <subDir>jurand</subDir>
+    <dependency>mbi-core</dependency>
+    <dependency>commons-io</dependency>
+    <build>
+      <compiler>
+        <release>11</release>
+        <addSourceRoot>src</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
 </project>
