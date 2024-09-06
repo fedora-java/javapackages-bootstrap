@@ -7,18 +7,12 @@
     <dependency>asm</dependency>
     <dependency>asm-commons</dependency>
     <build>
-      <ant>
-        <run>
-          [copy todir="${generatedSources}"]
-            [fileset dir="${basedir}/byte-buddy-dep/src/main/java"/]
-            [fileset dir="${basedir}/byte-buddy-agent/src/main/java"/]
-          [/copy]
-          [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
-            [arg line="-i -a ."/]
-            [arg line="-n SuppressFBWarnings -p javax\.annotation\."/]
-          [/exec]
-        </run>
-      </ant>
+      <jurand>
+        <source>byte-buddy-dep/src/main/java</source>
+        <source>byte-buddy-agent/src/main/java</source>
+        <name>SuppressFBWarnings</name>
+        <pattern>javax\.annotation\.</pattern>
+      </jurand>
       <compiler>
         <automaticModuleName>net.bytebuddy</automaticModuleName>
       </compiler>

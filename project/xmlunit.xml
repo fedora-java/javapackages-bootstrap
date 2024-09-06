@@ -6,18 +6,11 @@
     <dependency>hamcrest</dependency>
     <dependency>assertj-core</dependency>
     <build>
-      <ant>
+      <jurand>
         <!-- Port to hamcrest 2.1 -->
-        <run>
-          [copy todir="${generatedSources}"]
-            [fileset dir="${basedir}/xmlunit-matchers/src/main/java"/]
-          [/copy]
-          [exec executable="jurand" dir="${generatedSources}" failonerror="true" logerror="true"]
-            [arg line="-i -a -s ."/]
-            [arg line="-p ^org.hamcrest.Factory"/]
-          [/exec]
-        </run>
-      </ant>
+        <source>xmlunit-matchers/src/main/java</source>
+        <pattern>^org.hamcrest.Factory</pattern>
+      </jurand>
       <compiler>
         <addSourceRoot>xmlunit-core/src/main/java</addSourceRoot>
         <addSourceRoot>xmlunit-assertj3/src/main/java</addSourceRoot>
