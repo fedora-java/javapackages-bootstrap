@@ -40,7 +40,7 @@ Source:         javapackages-bootstrap-PACKAGE-LICENSING
 # ./downstream.sh prep
 # ./downstream.sh archive
 # The results are in the archive directory
-Source:         [...].tar.zst
+Source:         [...]
 
 BuildRequires:  byaccj
 BuildRequires:  gcc
