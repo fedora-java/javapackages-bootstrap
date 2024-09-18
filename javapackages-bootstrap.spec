@@ -106,6 +106,7 @@ echo '
 %%__xmvngen_requires_generators %%{nil}
 %%__xmvngen_post_install_hooks org.fedoraproject.xmvn.generator.transformer.TransformerHookFactory
 %%jpb_env PATH=/usr/libexec/javapackages-bootstrap:$PATH
+%%java_home %{javaHomePath}
 ' >%{buildroot}%{_rpmmacrodir}/macros.jpbgen
 
 sed -i s/xmvn-generator/%{name}-generator/ %{buildroot}%{_sysconfdir}/rpm/macros.jpbgenhook
