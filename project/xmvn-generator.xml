@@ -6,9 +6,12 @@
   <module>
     <dependency>asm</dependency>
     <dependency>commons-compress</dependency>
+    <dependency>xmvn</dependency>
+    <dependency>maven-model</dependency>
+    <dependency>plexus-utils</dependency>
     <build>
       <compiler>
-        <release>17</release>
+        <release>21</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
       <ant>
