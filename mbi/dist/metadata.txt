@@ -1003,6 +1003,9 @@ MOD xmvn
   ART org.fedoraproject.xmvn xmvn-mojo
     DEP org.apache.maven.resolver maven-resolver-util
     DEP org.ow2.asm asm
+  ART org.fedoraproject.xmvn xmvn-api
+  ART org.fedoraproject.xmvn xmvn-core
+    DEP org.fedoraproject.xmvn xmvn-api
 MOD xmvn-generator
   ART org.fedoraproject.xmvn xmvn-generator
 MOD xz-java

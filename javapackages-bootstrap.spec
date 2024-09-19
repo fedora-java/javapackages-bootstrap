@@ -1,10 +1,6 @@
 # Exclude automatically generated requires on java interpreter which is not
 # owned by any package
-%global         __requires_exclude ^%{_jvmdir}/java
-
-# Don't run OSGi dependency generators on private (bundled) JARs
-%global         __requires_exclude_from \\.jar$
-%global         __provides_exclude_from \\.jar$
+%global         __requires_exclude ^%{_jvmdir}/jre
 
 # Generated list of bundled packages
 %global         _local_file_attrs local_generator
@@ -13,7 +9,7 @@
 
 %global         debug_package %{nil}
 
-%global         javaHomePath %{_jvmdir}/java-21-openjdk
+%global         javaHomePath %{_jvmdir}/jre-21-openjdk
 %global         mavenHomePath %{_datadir}/%{name}
 %global         metadataPath %{mavenHomePath}/maven-metadata
 %global         artifactsPath %{_prefix}/lib
@@ -101,9 +97,9 @@ install -D -p -m 644 downstream/xmvn-generator/src/main/rpm/xmvngen.attr %{build
 echo '
 %%__xmvngen_debug 1
 %%__xmvngen_libjvm %{javaHomePath}/lib/server/libjvm.so
-%%__xmvngen_classpath %{artifactsPath}/%{name}/xmvn-generator.jar:%{artifactsPath}/%{name}/asm.jar:%{artifactsPath}/%{name}/commons-compress.jar
-%%__xmvngen_provides_generators org.fedoraproject.xmvn.generator.jpms.JPMSGeneratorFactory
-%%__xmvngen_requires_generators %%{nil}
+%%__xmvngen_classpath %{artifactsPath}/%{name}/xmvn-generator.jar:%{artifactsPath}/%{name}/asm.jar:%{artifactsPath}/%{name}/commons-compress.jar:%{artifactsPath}/%{name}/commons-io.jar:%{artifactsPath}/%{name}/xmvn-mojo.jar:%{artifactsPath}/%{name}/maven-model.jar:%{artifactsPath}/%{name}/plexus-utils.jar
+%%__xmvngen_provides_generators org.fedoraproject.xmvn.generator.filesystem.FilesystemGeneratorFactory org.fedoraproject.xmvn.generator.jpscript.JPackageScriptGeneratorFactory org.fedoraproject.xmvn.generator.jpms.JPMSGeneratorFactory org.fedoraproject.xmvn.generator.maven.MavenGeneratorFactory
+%%__xmvngen_requires_generators org.fedoraproject.xmvn.generator.filesystem.FilesystemGeneratorFactory org.fedoraproject.xmvn.generator.jpscript.JPackageScriptGeneratorFactory org.fedoraproject.xmvn.generator.maven.MavenGeneratorFactory
 %%__xmvngen_post_install_hooks org.fedoraproject.xmvn.generator.transformer.TransformerHookFactory
 %%jpb_env PATH=/usr/libexec/javapackages-bootstrap:$PATH
 %%java_home %{javaHomePath}
