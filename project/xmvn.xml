@@ -12,6 +12,7 @@
     <dependency>maven-plugin-tools</dependency>
     <dependency>jcommander</dependency>
     <dependency>commons-compress</dependency>
+    <dependency>commons-io</dependency>
     <dependency>asm</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-artifact</dependency>
