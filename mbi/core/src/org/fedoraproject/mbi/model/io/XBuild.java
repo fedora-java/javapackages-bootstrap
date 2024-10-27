@@ -18,33 +18,31 @@ package org.fedoraproject.mbi.model.io;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.stream.XMLStreamException;
-
 import org.fedoraproject.mbi.model.Execution;
 import org.fedoraproject.mbi.model.Instruction;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
 
-import io.kojan.xml.Constituent;
 import io.kojan.xml.Getter;
-import io.kojan.xml.GetterAdapter;
+import io.kojan.xml.Property;
 import io.kojan.xml.Setter;
 import io.kojan.xml.XMLDumper;
+import io.kojan.xml.XMLException;
 import io.kojan.xml.XMLParser;
 
 /**
  * @author Mikolaj Izdebski
  */
 class XBuild
-    extends Constituent<ModuleDescriptor, ModuleBuilder, List<Execution>, List<Execution>>
+    extends Property<ModuleDescriptor, ModuleBuilder, List<Execution>>
 {
     public XBuild( Getter<ModuleDescriptor, List<Execution>> getter, Setter<ModuleBuilder, List<Execution>> setter )
     {
-        super( "build", new GetterAdapter<>( getter ), setter, false, true );
+        super( "build", x -> List.of(getter.get(x)), setter, false, true );
     }
 
     @Override
     protected List<Execution> parse( XMLParser parser )
-        throws XMLStreamException
+        throws XMLException
     {
         List<Execution> executions = new ArrayList<>();
         parser.parseStartElement( getTag() );
@@ -57,7 +55,7 @@ class XBuild
     }
 
     private Execution parseExecution( XMLParser parser )
-        throws XMLStreamException
+        throws XMLException
     {
         List<Instruction> instructions = new ArrayList<>();
         String toolName = parser.parseStartElement();
@@ -74,7 +72,6 @@ class XBuild
 
     @Override
     protected void dump( XMLDumper dumper, List<Execution> value )
-        throws XMLStreamException
     {
         throw new IllegalStateException( "Dumping is not implemented" );
     }

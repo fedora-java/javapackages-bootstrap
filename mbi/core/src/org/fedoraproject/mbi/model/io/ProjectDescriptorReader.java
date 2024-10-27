@@ -17,11 +17,17 @@ package org.fedoraproject.mbi.model.io;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
-import javax.xml.stream.XMLStreamException;
-
+import org.fedoraproject.mbi.model.LicensingDescriptor;
+import org.fedoraproject.mbi.model.ModuleDescriptor;
 import org.fedoraproject.mbi.model.ProjectDescriptor;
+
+import io.kojan.xml.Attribute;
+import io.kojan.xml.Entity;
+import io.kojan.xml.Relationship;
+import io.kojan.xml.XMLException;
 
 /**
  * @author Mikolaj Izdebski
@@ -29,8 +35,29 @@ import org.fedoraproject.mbi.model.ProjectDescriptor;
 public class ProjectDescriptorReader
 {
     public ProjectDescriptor read( String name, Properties properties, Path path )
-        throws IOException, XMLStreamException
+        throws IOException, XMLException
     {
-        return new ProjectEntity( name, properties ).readFromXML( path );
+        var licensingEntity =
+            Entity.of( "licensing", LicensingBuilder::new,
+                       Attribute.of( "tag", LicensingDescriptor::getTag, LicensingBuilder::setTag ),
+                       Attribute.ofMulti( "file", LicensingDescriptor::getFiles, LicensingBuilder::addFile ),
+                       Attribute.ofOptional( "text", LicensingDescriptor::getText, LicensingBuilder::setText ) );
+
+        var moduleEntity =
+            Entity.of( "module", () -> new ModuleBuilder( name ),
+                       Attribute.ofOptional( "name", ModuleDescriptor::getName, ModuleBuilder::setName ),
+                       Attribute.ofOptional( "subDir", ModuleDescriptor::getProjectSubDir,
+                                             ModuleBuilder::setProjectSubDir, Path::toString, Paths::get ),
+                       Attribute.ofMulti( "dependency", ModuleDescriptor::getDependencies,
+                                          ModuleBuilder::addDependency ),
+                       new XBuild( ModuleDescriptor::getExecutions, ModuleBuilder::setExecutions ) );
+
+        var projectEntity =
+            Entity.of( "project", () -> new ProjectBuilder( name, properties ),
+                       Relationship.ofSingular( licensingEntity, ProjectDescriptor::getLicensing,
+                                                ProjectBuilder::setLicensing ),
+                       Relationship.of( moduleEntity, ProjectDescriptor::getModules, ProjectBuilder::addModule ) );
+
+        return projectEntity.readFromXML( path );
     }
 }
