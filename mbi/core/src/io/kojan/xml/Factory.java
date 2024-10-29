@@ -16,9 +16,17 @@
 package io.kojan.xml;
 
 /**
+ * A factory of beans of given type.
+ *
+ * @param <Type> type of created objects
  * @author Mikolaj Izdebski
  */
 @FunctionalInterface
 public interface Factory<Type> {
+    /**
+     * Creates a bean instance.
+     *
+     * @return newly-created bean instance
+     */
     Type newInstance();
 }

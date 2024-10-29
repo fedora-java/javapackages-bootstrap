@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2021 Red Hat, Inc.
+ * Copyright (c) 2021-2024 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,77 +15,44 @@
  */
 package io.kojan.xml;
 
-import java.io.Writer;
-
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
-
 /**
+ * A facility to serialize data in in XML format. Allows serialization of entities and writing of
+ * any other data.
+ *
  * @author Mikolaj Izdebski
  */
-public class XMLDumper {
-    private static final XMLOutputFactory XML_OUTPUT_FACTORY = XMLOutputFactory.newInstance();
+public interface XMLDumper {
+    /**
+     * Writes a sequence that starts an XML element with given tag.
+     *
+     * @param tag element tag name
+     * @throws XMLException in case exception occurs during XML serialization
+     */
+    void dumpStartElement(String tag) throws XMLException;
 
-    private final XMLStreamWriter cursor;
-    private int indent;
+    /**
+     * Writes a sequence that ends previously started XML element.
+     *
+     * @throws XMLException in case exception occurs during XML serialization
+     */
+    void dumpEndElement() throws XMLException;
 
-    public XMLDumper(Writer writer) throws XMLStreamException {
-        cursor = XML_OUTPUT_FACTORY.createXMLStreamWriter(writer);
-    }
+    /**
+     * Writes XML text content.
+     *
+     * @param text text content to write
+     * @throws XMLException in case exception occurs during XML serialization
+     */
+    void dumpText(String text) throws XMLException;
 
-    private void indent() throws XMLStreamException {
-        for (int i = indent; i-- > 0;) {
-            cursor.writeCharacters("  ");
-        }
-    }
-
-    private void newLine() throws XMLStreamException {
-        cursor.writeCharacters("\n");
-    }
-
-    public void dumpStartDocument() throws XMLStreamException {
-        cursor.writeStartDocument();
-        newLine();
-    }
-
-    public void dumpEndDocument() throws XMLStreamException {
-        cursor.writeEndDocument();
-    }
-
-    public void dumpStartElement(String tag) throws XMLStreamException {
-        indent();
-        cursor.writeStartElement(tag);
-    }
-
-    public void dumpEndElement() throws XMLStreamException {
-        cursor.writeEndElement();
-        newLine();
-    }
-
-    public void dumpText(String text) throws XMLStreamException {
-        cursor.writeCharacters(text);
-    }
-
-    public <Type, Bean extends Builder<Type>> void dumpEntity(Entity<Type, Bean> entity, Type value)
-            throws XMLStreamException {
-        dumpStartElement(entity.getTag());
-        newLine();
-        indent++;
-
-        for (Constituent<Type, Bean, ?, ?> constituent : entity.getElements()) {
-            constituent.doDump(this, value);
-        }
-
-        --indent;
-        indent();
-        dumpEndElement();
-    }
-
-    public <Type, Bean extends Builder<Type>> void dumpDocument(Entity<Type, Bean> rootEntity, Type value)
-            throws XMLStreamException {
-        dumpStartDocument();
-        dumpEntity(rootEntity, value);
-        dumpEndDocument();
-    }
+    /**
+     * Serializes given {@link Entity} into XML form.
+     *
+     * @param <Type> data type of entity
+     * @param <Bean> type of bean associated with the entity
+     * @param entity the entity type to serialize
+     * @param value the object to serialize
+     * @throws XMLException in case exception occurs during XML serialization
+     */
+    <Type, Bean> void dumpEntity(Entity<Type, Bean> entity, Type value) throws XMLException;
 }
