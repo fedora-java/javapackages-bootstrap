@@ -16,9 +16,19 @@
 package io.kojan.xml;
 
 /**
+ * Bean property setter.
+ *
+ * @param <OuterType> bean class
+ * @param <NestedType> type of property value
  * @author Mikolaj Izdebski
  */
 @FunctionalInterface
 public interface Setter<OuterType, NestedType> {
+    /**
+     * Updates value of bean property.
+     *
+     * @param object the bean whose property should be updated
+     * @param value the value to set
+     */
     void set(OuterType object, NestedType value);
 }

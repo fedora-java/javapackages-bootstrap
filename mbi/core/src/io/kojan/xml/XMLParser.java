@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2020-2021 Red Hat, Inc.
+ * Copyright (c) 2020-2024 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,139 +15,97 @@
  */
 package io.kojan.xml;
 
-import static javax.xml.stream.XMLStreamConstants.CHARACTERS;
-import static javax.xml.stream.XMLStreamConstants.COMMENT;
-import static javax.xml.stream.XMLStreamConstants.END_DOCUMENT;
-import static javax.xml.stream.XMLStreamConstants.END_ELEMENT;
-import static javax.xml.stream.XMLStreamConstants.START_DOCUMENT;
-import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
-
-import java.io.Reader;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-
 /**
+ * A facility to deserialize data in in XML format. Allows deserialization of entities and reading
+ * of any other data.
+ *
  * @author Mikolaj Izdebski
  */
-public class XMLParser {
-    private static final XMLInputFactory XML_INPUT_FACTORY = XMLInputFactory.newInstance();
-    private final XMLStreamReader cursor;
+public interface XMLParser {
+    /**
+     * Reads XML text content.
+     *
+     * <p>If there is no XML text content at given parser position, then empty String is returned.
+     *
+     * <p>Comments within the text are skipped.
+     *
+     * @return text content that was read
+     * @throws XMLException in case exception occurs during XML deserialization
+     */
+    String parseText() throws XMLException;
 
-    public XMLParser(Reader reader) throws XMLStreamException {
-        cursor = XML_INPUT_FACTORY.createXMLStreamReader(reader);
-    }
+    /**
+     * Determines whether at the current parser position there is an XML element opening tag.
+     *
+     * <p>Comments and whitespace text preceding the XML tag are skipped.
+     *
+     * @return true iff at the current parser position there is an XML element
+     * @throws XMLException in case exception occurs during XML deserialization
+     */
+    boolean hasStartElement() throws XMLException;
 
-    private void error(String message) throws XMLStreamException {
-        throw new XMLStreamException(message + ", line: " + cursor.getLocation().getLineNumber() + ", columnn:"
-                + cursor.getLocation().getColumnNumber());
-    }
+    /**
+     * Determines whether at the current parser position there is an XML element opening tag with
+     * specified tag name.
+     *
+     * <p>Comments and whitespace text preceding the XML tag are skipped.
+     *
+     * @param tag XML element tag name
+     * @return true iff at the current parser position there is an XML element with specified tag
+     *     name
+     * @throws XMLException in case exception occurs during XML deserialization
+     */
+    boolean hasStartElement(String tag) throws XMLException;
 
-    public String parseText() throws XMLStreamException {
-        for (StringBuilder sb = new StringBuilder();; cursor.next()) {
-            if (cursor.getEventType() == CHARACTERS) {
-                sb.append(cursor.getText());
-            } else if (cursor.getEventType() != COMMENT) {
-                return sb.toString();
-            }
-        }
-    }
+    /**
+     * Reads XML element opening tag.
+     *
+     * <p>Comments and whitespace text preceding the XML tag are skipped.
+     *
+     * <p>{@link XMLException} is thrown if at the current position there is no XML element (but,
+     * for example, text data or element closing tag).
+     *
+     * @return XML element tag name
+     * @throws XMLException in case exception occurs during XML deserialization
+     */
+    String parseStartElement() throws XMLException;
 
-    private void skipWhiteSpace() throws XMLStreamException {
-        if (!parseText().chars().allMatch(Character::isWhitespace)) {
-            error("Expected white space");
-        }
-    }
+    /**
+     * Reads XML element opening tag with specified tag name.
+     *
+     * <p>Comments and whitespace text preceding the XML tag are skipped.
+     *
+     * <p>{@link XMLException} is thrown if at the current position there is no XML element opening
+     * tag with specified tag (but, for example, text data, element closing tag or element opening
+     * tag with a different tag name).
+     *
+     * @param tag XML element tag name
+     * @throws XMLException in case exception occurs during XML deserialization
+     */
+    void parseStartElement(String tag) throws XMLException;
 
-    public boolean hasStartElement() throws XMLStreamException {
-        skipWhiteSpace();
+    /**
+     * Reads XML element closing tag with specified tag name.
+     *
+     * <p>Comments and whitespace text preceding the XML tag are skipped.
+     *
+     * <p>{@link XMLException} is thrown if at the current position there is no XML element closing
+     * tag with specified tag (but, for example, text data, element opening tag or XML element
+     * closing tag with a different tag name).
+     *
+     * @param tag XML element tag name
+     * @throws XMLException in case exception occurs during XML deserialization
+     */
+    void parseEndElement(String tag) throws XMLException;
 
-        return cursor.getEventType() == START_ELEMENT;
-    }
-
-    public boolean hasStartElement(String tag) throws XMLStreamException {
-        return hasStartElement() && cursor.getLocalName().equals(tag);
-    }
-
-    public String parseStartElement() throws XMLStreamException {
-        if (!hasStartElement()) {
-            error("Expected a start element");
-        }
-
-        String tag = cursor.getLocalName();
-
-        cursor.next();
-
-        return tag;
-    }
-
-    public void parseStartElement(String tag) throws XMLStreamException {
-        if (!hasStartElement(tag)) {
-            error("Expected <" + tag + "> start element");
-        }
-
-        cursor.next();
-    }
-
-    private void expectToken(int token, String description) throws XMLStreamException {
-        skipWhiteSpace();
-
-        if (cursor.getEventType() != token) {
-            error("Expected " + description);
-        }
-    }
-
-    public void parseEndElement(String tag) throws XMLStreamException {
-        expectToken(END_ELEMENT, "</" + tag + "> end element");
-        cursor.next();
-    }
-
-    public void parseStartDocument() throws XMLStreamException {
-        expectToken(START_DOCUMENT, "start of document");
-        cursor.next();
-    }
-
-    public void parseEndDocument() throws XMLStreamException {
-        expectToken(END_DOCUMENT, "end of document");
-    }
-
-    public <Type, Bean extends Builder<Type>> void parseEntity(Entity<Type, Bean> entity, Bean bean)
-            throws XMLStreamException {
-        parseStartElement(entity.getTag());
-
-        Set<Constituent<Type, Bean, ?, ?>> allowedElements = new LinkedHashSet<>(entity.getElements());
-
-        for (Iterator<Constituent<Type, Bean, ?, ?>> iterator = allowedElements.iterator(); iterator.hasNext();) {
-            Constituent<Type, Bean, ?, ?> constituent = iterator.next();
-
-            if (constituent.tryParse(this, bean)) {
-                if (constituent.isUnique()) {
-                    iterator.remove();
-                }
-
-                iterator = allowedElements.iterator();
-            }
-        }
-
-        parseEndElement(entity.getTag());
-
-        for (Constituent<Type, Bean, ?, ?> constituent : allowedElements) {
-            if (!constituent.isOptional()) {
-                error("Mandatory <" + constituent.getTag() + "> of <" + entity.getTag() + "> has not been set");
-            }
-        }
-    }
-
-    public <Type, Bean extends Builder<Type>> Type parseDocument(Entity<Type, Bean> rootEntity)
-            throws XMLStreamException {
-        Bean rootBean = rootEntity.newBean();
-        parseStartDocument();
-        parseEntity(rootEntity, rootBean);
-        parseEndDocument();
-        return rootBean.build();
-    }
+    /**
+     * Deserializes given {@link Entity} from XML form.
+     *
+     * @param <Type> data type of entity
+     * @param <Bean> type of bean associated with the entity
+     * @param entity the entity type to deserialize
+     * @param bean the entity bean to deserialize data into
+     * @throws XMLException in case exception occurs during XML deserialization
+     */
+    <Type, Bean> void parseEntity(Entity<Type, Bean> entity, Bean bean) throws XMLException;
 }
