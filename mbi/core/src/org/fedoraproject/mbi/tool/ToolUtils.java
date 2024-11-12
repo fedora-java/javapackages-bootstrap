@@ -73,6 +73,8 @@ public class ToolUtils
                                          Execution exec )
         throws Exception
     {
+        boolean threadUnsafe = false;
+        Path logFile = reactor.getTargetDir( module ).resolve( exec.getToolName() + ".log" );
         ClassLoader oldCl = Thread.currentThread().getContextClassLoader();
         try ( URLClassLoader cl = ToolUtils.newClassLoader( reactor, toolModule, module ) )
         {
@@ -80,8 +82,7 @@ public class ToolUtils
             var entryClassName = Tool.class.getPackage().getName() + "." + exec.getToolName() + "."
                 + exec.getToolName().substring( 0, 1 ).toUpperCase() + exec.getToolName().substring( 1 ) + "Tool";
             Class<?> toolClass = cl.loadClass( entryClassName );
-            boolean threadUnsafe = toolClass.isAnnotationPresent( ThreadUnsafe.class );
-            Path logFile = reactor.getTargetDir( module ).resolve( exec.getToolName() + ".log" );
+            threadUnsafe = toolClass.isAnnotationPresent( ThreadUnsafe.class );
             Files.createDirectories( logFile.getParent() );
             Lock lock = threadUnsafe ? EXCLUSIVE_LOCK : SHARED_LOCK;
             PrintStream out = null;
@@ -112,14 +113,6 @@ public class ToolUtils
                 }
                 tool.execute();
             }
-            catch ( Exception e )
-            {
-                if ( threadUnsafe )
-                {
-                    System.err.print( Files.readString( logFile ) );
-                }
-                throw e;
-            }
             finally
             {
                 try
@@ -135,6 +128,14 @@ public class ToolUtils
                     lock.unlock();
                 }
             }
+        }
+        catch ( Exception e )
+        {
+            if ( threadUnsafe )
+            {
+                System.err.print( Files.readString( logFile ) );
+            }
+            throw e;
         }
         finally
         {
