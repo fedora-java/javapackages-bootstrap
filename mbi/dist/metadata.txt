@@ -941,7 +941,7 @@ MOD plexus-testing
 MOD plexus-utils
   ART org.codehaus.plexus plexus-utils
     ALIAS plexus plexus-utils
-MOD plexus-xml
+MOD plexus-xml3
   ART org.codehaus.plexus plexus-xml
 MOD qdox
   ART com.thoughtworks.qdox qdox

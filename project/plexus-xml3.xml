@@ -1,0 +1,13 @@
+<project>
+  <licensing>
+    <tag>Apache-1.1 AND Apache-2.0 AND xpp</tag>
+    <file>NOTICE.txt</file>
+  </licensing>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
