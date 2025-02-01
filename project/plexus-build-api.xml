@@ -1,0 +1,18 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <dependency>plexus-build-api0</dependency>
+    <dependency>injection-api</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <sisu/>
+    </build>
+  </module>
+</project>
