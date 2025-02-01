@@ -1,0 +1,45 @@
+<project>
+  <licensing>
+    <tag>BSD-3-Clause</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
+  <module>
+    <dependency>jsr-305</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>builtins/src/main/java</addSourceRoot>
+        <addSourceRoot>console-ui/src/main/java</addSourceRoot>
+        <addSourceRoot>jansi-core/src/main/java</addSourceRoot>
+        <addSourceRoot>native/src/main/java</addSourceRoot>
+        <addSourceRoot>reader/src/main/java</addSourceRoot>
+        <addSourceRoot>style/src/main/java</addSourceRoot>
+        <addSourceRoot>terminal-jni/src/main/java</addSourceRoot>
+        <addSourceRoot>terminal/src/main/java</addSourceRoot>
+        <excludeSourceClass>org/jline/builtins/Commands</excludeSourceClass>
+        <excludeSourceClass>org/jline/builtins/Less</excludeSourceClass>
+        <excludeSourceClass>org/jline/builtins/Nano</excludeSourceClass>
+      </compiler>
+      <!--
+      <ant>
+        <run>
+          [property environment="env"/]
+          [property name="env.JAVA_HOME" value="/usr/lib/jvm/java"/]
+          [property name="env.CC" value="cc"/]
+          [property name="env.CFLAGS" value="-g -Wall -Wextra"/]
+          [property name="env.LDFLAGS" value=""/]
+          [exec executable="${env.CC}" failonerror="true"]
+            [arg line="-std=c99 -shared -fPIC"/]
+            [arg value="-I${env.JAVA_HOME}/include"/]
+            [arg value="-I${env.JAVA_HOME}/include/linux"/]
+            [arg line="${env.CFLAGS}"/]
+            [arg line="${env.LDFLAGS}"/]
+            [arg value="-o"/]
+            [arg value="${classes}/jline.so"/]
+            [arg value="${basedir}/native/src/main/native/jlinenative.c"/]
+          [/exec]
+        </run>
+      </ant>
+      -->
+    </build>
+  </module>
+</project>
