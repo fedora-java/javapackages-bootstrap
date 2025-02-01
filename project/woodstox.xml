@@ -1,0 +1,18 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <dependency>stax2-api</dependency>
+    <build>
+      <jurand>
+        <source>src/main/java</source>
+        <pattern>^aQute.bnd.annotation.spi.</pattern>
+      </jurand>
+      <compiler>
+        <excludeSourceMatching>/com/ctc/wstx/msv/.*</excludeSourceMatching>
+        <excludeSourceMatching>/com/ctc/wstx/osgi/.*</excludeSourceMatching>
+      </compiler>
+    </build>
+  </module>
+</project>
