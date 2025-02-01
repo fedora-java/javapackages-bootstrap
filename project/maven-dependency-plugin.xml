@@ -22,7 +22,7 @@
     <dependency>sisu-plexus</dependency>
     <dependency>commons-lang</dependency>
     <dependency>injection-api</dependency>
-    <dependency>plexus-build-api</dependency>
+    <dependency>plexus-build-api0</dependency>
     <build>
       <ant>
         <run>

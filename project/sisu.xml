@@ -52,7 +52,7 @@
     <dependency>maven-artifact</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-common-artifact-filters</dependency>
-    <dependency>plexus-build-api</dependency>
+    <dependency>plexus-build-api0</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>

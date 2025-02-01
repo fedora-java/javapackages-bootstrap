@@ -884,7 +884,7 @@ MOD plexus-archiver
     DEP org.apache.commons commons-compress
     DEP org.tukaani xz
     DEP org.slf4j slf4j-api
-MOD plexus-build-api
+MOD plexus-build-api0
   ART org.sonatype.plexus plexus-build-api
     ALIAS org.sonatype.plexus plexus-build-api tests
     DEP org.codehaus.plexus plexus-utils
