@@ -1,0 +1,15 @@
+<project>
+  <licensing>
+    <tag>BSD-2-Clause</tag>
+    <file>src/main/resources/META-INF/LICENSE</file>
+  </licensing>
+  <module>
+    <build>
+      <compiler>
+        <release>9</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <addSourceRoot>src/moditect</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
