@@ -18,11 +18,15 @@ package org.fedoraproject.mbi.tool.modello;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.codehaus.modello.core.ModelloCore;
 import org.codehaus.modello.model.Model;
+import org.codehaus.modello.plugin.velocity.VelocityGenerator;
 import org.codehaus.plexus.ContainerConfiguration;
 import org.codehaus.plexus.DefaultContainerConfiguration;
 import org.codehaus.plexus.DefaultPlexusContainer;
@@ -42,6 +46,10 @@ public class ModelloTool
     private String model;
 
     private String output;
+
+    private List<String> templates = new ArrayList<>();
+
+    private Map<String, String> velocityParams = new LinkedHashMap<>();
 
     public ModelloTool()
         throws Exception
@@ -76,6 +84,24 @@ public class ModelloTool
         params.put( "modello.dom.xpp3", xpp3dom );
     }
 
+    @Instruction
+    public void velocityBasedir( String dir )
+    {
+        params.put( VelocityGenerator.VELOCITY_BASEDIR, getSourceRootDir().resolve( dir ).toString() );
+    }
+
+    @Instruction
+    public void template( String template )
+    {
+        templates.add( template );
+    }
+
+    @Instruction
+    public void param( String s )
+    {
+        velocityParams.put( s.substring( 0, s.indexOf( '=' ) ), s.substring( s.indexOf( '=' ) + 1 ) );
+    }
+
     @Override
     public void execute()
         throws Exception
@@ -83,6 +109,8 @@ public class ModelloTool
         Files.createDirectories( getGeneratedSourcesDir() );
         Path modelPath = getSourceRootDir().resolve( model );
         params.put( "modello.output.directory", getGeneratedSourcesDir().toString() );
+        params.put( VelocityGenerator.VELOCITY_TEMPLATES, templates.stream().collect( Collectors.joining( "," ) ) );
+        params.put( VelocityGenerator.VELOCITY_PARAMETERS, velocityParams );
 
         ContainerConfiguration conf = new DefaultContainerConfiguration();
         conf.setClassPathScanning( PlexusConstants.SCANNING_INDEX );
