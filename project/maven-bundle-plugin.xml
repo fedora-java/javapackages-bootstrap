@@ -16,7 +16,7 @@
     <dependency>maven-archiver</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>plexus-archiver</dependency>
-    <dependency>plexus-build-api</dependency>
+    <dependency>plexus-build-api0</dependency>
     <dependency>osgi-core</dependency>
     <dependency>osgi-cmpn</dependency>
     <dependency>bnd</dependency>

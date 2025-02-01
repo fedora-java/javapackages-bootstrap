@@ -82,7 +82,7 @@
     <dependency>plexus-component-annotations</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>guava</dependency>
-    <dependency>plexus-build-api</dependency>
+    <dependency>plexus-build-api0</dependency>
     <build>
       <compiler>
         <addSourceRoot>src</addSourceRoot>

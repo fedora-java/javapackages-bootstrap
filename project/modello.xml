@@ -6,7 +6,7 @@
   <module>
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>plexus-build-api</dependency>
+    <dependency>plexus-build-api0</dependency>
     <dependency>plexus-component-annotations</dependency>
     <dependency>jsoup</dependency>
     <dependency>velocity-engine</dependency>
@@ -37,7 +37,7 @@
     <dependency>maven-model</dependency>
     <dependency>maven-core</dependency>
     <dependency>plexus-utils</dependency>
-    <dependency>plexus-build-api</dependency>
+    <dependency>plexus-build-api0</dependency>
     <dependency>maven-artifact</dependency>  <!-- required by Eclipse  -->
     <build>
       <compiler>

@@ -5,7 +5,7 @@
   <module>
     <dependency>commons-io</dependency>
     <dependency>plexus-interpolation</dependency>
-    <dependency>plexus-build-api</dependency>
+    <dependency>plexus-build-api0</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>maven-core</dependency>
     <dependency>maven-settings</dependency>
