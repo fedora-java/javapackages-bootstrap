@@ -40,6 +40,7 @@
     <dependency>maven-model-builder</dependency>
     <dependency>plexus-interpolation</dependency>
     <dependency>maven-builder-support</dependency>
+    <dependency>maven-plugin-api</dependency>
     <build>
       <modello>
         <model>src/main/mdo/paramdoc.mdo</model>

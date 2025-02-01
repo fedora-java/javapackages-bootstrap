@@ -4,10 +4,11 @@
     <file>LICENSE.txt</file>
   </licensing>
   <module>
+    <dependency>slf4j</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>sisu-plexus</dependency>
-    <dependency>plexus-build-api0</dependency>
-    <dependency>plexus-component-annotations</dependency>
+    <dependency>plexus-build-api</dependency>
+    <dependency>injection-api</dependency>
     <dependency>jsoup</dependency>
     <dependency>velocity-engine</dependency>
     <build>
@@ -20,12 +21,11 @@
         <addSourceRoot>modello-plugins/modello-plugin-sax/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-stax/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-velocity/src/main/java</addSourceRoot>
-        <addSourceRoot>modello-plugins/modello-plugin-xdoc/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xml/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xpp3/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xsd/src/main/java</addSourceRoot>
       </compiler>
-      <plexus/>
+      <sisu/>
     </build>
   </module>
   <module>
@@ -37,7 +37,7 @@
     <dependency>maven-model</dependency>
     <dependency>maven-core</dependency>
     <dependency>plexus-utils</dependency>
-    <dependency>plexus-build-api0</dependency>
+    <dependency>plexus-build-api</dependency>
     <dependency>maven-artifact</dependency>  <!-- required by Eclipse  -->
     <build>
       <compiler>

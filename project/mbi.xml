@@ -78,11 +78,16 @@
     <dependency>sisu-inject</dependency>
     <dependency>plexus-classworlds</dependency>
     <dependency>guice</dependency>
+    <dependency>guava</dependency>
+    <dependency>aopalliance</dependency>
     <dependency>injection-api</dependency>
     <dependency>plexus-component-annotations</dependency>
     <dependency>plexus-utils</dependency>
     <dependency>guava</dependency>
+    <dependency>plexus-build-api</dependency>
     <dependency>plexus-build-api0</dependency>
+    <dependency>slf4j</dependency>
+    <dependency>velocity-engine</dependency>
     <build>
       <compiler>
         <addSourceRoot>src</addSourceRoot>
