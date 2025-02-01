@@ -18,9 +18,16 @@ package org.fedoraproject.mbi.tool.modello;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Properties;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import org.codehaus.modello.Modello;
+import org.codehaus.modello.core.ModelloCore;
+import org.codehaus.modello.model.Model;
+import org.codehaus.plexus.ContainerConfiguration;
+import org.codehaus.plexus.DefaultContainerConfiguration;
+import org.codehaus.plexus.DefaultPlexusContainer;
+import org.codehaus.plexus.PlexusConstants;
+import org.codehaus.plexus.PlexusContainer;
 import org.fedoraproject.mbi.tool.Instruction;
 import org.fedoraproject.mbi.tool.Tool;
 
@@ -30,7 +37,7 @@ import org.fedoraproject.mbi.tool.Tool;
 public class ModelloTool
     extends Tool
 {
-    private final Properties params = new Properties();
+    private final Map<String, Object> params = new LinkedHashMap<>();
 
     private String model;
 
@@ -39,10 +46,10 @@ public class ModelloTool
     public ModelloTool()
         throws Exception
     {
-        params.setProperty( "modello.dom.xpp3", "true" );
-        params.setProperty( "modello.package.with.version", "false" );
-        params.setProperty( "modello.output.java.source", "8" );
-        params.setProperty( "modello.output.encoding", "UTF-8" );
+        params.put( "modello.dom.xpp3", "true" );
+        params.put( "modello.package.with.version", "false" );
+        params.put( "modello.output.java.source", "8" );
+        params.put( "modello.output.encoding", "UTF-8" );
     }
 
     @Instruction
@@ -54,7 +61,7 @@ public class ModelloTool
     @Instruction
     public void version( String version )
     {
-        params.setProperty( "modello.version", version );
+        params.put( "modello.version", version );
     }
 
     @Instruction
@@ -66,7 +73,7 @@ public class ModelloTool
     @Instruction
     public void xpp3dom( String xpp3dom )
     {
-        params.setProperty( "modello.dom.xpp3", xpp3dom );
+        params.put( "modello.dom.xpp3", xpp3dom );
     }
 
     @Override
@@ -75,14 +82,19 @@ public class ModelloTool
     {
         Files.createDirectories( getGeneratedSourcesDir() );
         Path modelPath = getSourceRootDir().resolve( model );
-        params.setProperty( "modello.output.directory", getGeneratedSourcesDir().toString() );
+        params.put( "modello.output.directory", getGeneratedSourcesDir().toString() );
 
-        Modello modello = new Modello();
-        for ( String generator : output.split( "\\|" ) )
+        ContainerConfiguration conf = new DefaultContainerConfiguration();
+        conf.setClassPathScanning( PlexusConstants.SCANNING_INDEX );
+        conf.setAutoWiring( true );
+        PlexusContainer container = new DefaultPlexusContainer( conf );
+        ModelloCore modello = container.lookup( ModelloCore.class );
+        try ( Reader modelReader = Files.newBufferedReader( modelPath ) )
         {
-            try ( Reader modelReader = Files.newBufferedReader( modelPath ) )
+            Model model = modello.loadModel( modelReader );
+            for ( String generator : output.split( "\\|" ) )
             {
-                modello.generate( modelReader, generator, params );
+                modello.generate( model, generator, params );
             }
         }
     }
