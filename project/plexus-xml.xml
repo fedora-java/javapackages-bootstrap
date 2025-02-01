@@ -4,6 +4,8 @@
     <file>NOTICE.txt</file>
   </licensing>
   <module>
+    <dependency>maven4-api-xml</dependency>
+    <dependency>maven4-xml</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
