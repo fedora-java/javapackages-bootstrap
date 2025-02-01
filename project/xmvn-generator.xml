@@ -21,7 +21,7 @@
           [property name="env.CC" value="cc"/]
           [property name="env.CFLAGS" value="-g -Wall -Wextra"/]
           [property name="env.LDFLAGS" value=""/]
-          [exec executable="${env.CC}"]
+          [exec executable="${env.CC}" failonerror="true"]
             [arg line="-std=c99 -shared -fPIC"/]
             [arg value="-I${env.JAVA_HOME}/include"/]
             [arg value="-I${env.JAVA_HOME}/include/linux"/]
