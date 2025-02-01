@@ -1,0 +1,92 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <name>maven4-api</name>
+    <subDir>api</subDir>
+    <build>
+      <!-- cli API -->
+      <modello>
+        <model>maven-api-cli/src/main/mdo/core-extensions.mdo</model>
+        <version>1.2.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../src/mdo</velocityBasedir>
+        <template>model.vm</template>
+        <param>packageModelV4=org.apache.maven.api.cli.extensions</param>
+        <param>packageToolV4=org.apache.maven.cli.internal.extension.io</param>
+      </modello>
+      <!-- metadata API -->
+      <modello>
+        <model>maven-api-metadata/src/main/mdo/metadata.mdo</model>
+        <version>1.2.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../src/mdo</velocityBasedir>
+        <template>model.vm</template>
+        <param>packageModelV4=org.apache.maven.api.metadata</param>
+      </modello>
+      <!-- model API -->
+      <modello>
+        <model>maven-api-model/src/main/mdo/maven.mdo</model>
+        <version>4.1.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../src/mdo</velocityBasedir>
+        <template>model.vm</template>
+        <param>packageModelV4=org.apache.maven.api.model</param>
+        <param>isMavenModel=true</param>
+      </modello>
+      <!-- plugin descriptor API -->
+      <modello>
+        <model>maven-api-plugin/src/main/mdo/plugin.mdo</model>
+        <version>2.0.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../src/mdo</velocityBasedir>
+        <template>model.vm</template>
+        <param>packageModelV4=org.apache.maven.api.plugin.descriptor</param>
+      </modello>
+      <!-- plugin lifecycle API -->
+      <modello>
+        <model>maven-api-plugin/src/main/mdo/lifecycle.mdo</model>
+        <version>2.0.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../src/mdo</velocityBasedir>
+        <template>model.vm</template>
+        <param>packageModelV4=org.apache.maven.api.plugin.descriptor.lifecycle</param>
+      </modello>
+      <!-- settings API -->
+      <modello>
+        <model>maven-api-settings/src/main/mdo/settings.mdo</model>
+        <version>2.0.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../src/mdo</velocityBasedir>
+        <template>model.vm</template>
+        <param>packageModelV4=org.apache.maven.api.settings</param>
+        <param>locationTracking=true</param>
+        <param>generateLocationClasses=true</param>
+      </modello>
+      <!-- toolchain API -->
+      <modello>
+        <model>maven-api-toolchain/src/main/mdo/toolchains.mdo</model>
+        <version>1.2.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../src/mdo</velocityBasedir>
+        <template>model.vm</template>
+        <param>packageModelV4=org.apache.maven.api.toolchain</param>
+        <param>locationTracking=true</param>
+        <param>generateLocationClasses=true</param>
+      </modello>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>maven-api-model/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-annotations/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-xml/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-di/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-plugin/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-metadata/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-cli/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-core/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-api-spi/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
