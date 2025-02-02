@@ -15,7 +15,6 @@
  */
 package org.fedoraproject.mbi.dist;
 
-import java.net.URLClassLoader;
 import java.nio.file.Path;
 
 import org.fedoraproject.mbi.Command;
@@ -54,11 +53,9 @@ public class DistCommand
                                                installRoot, mavenHomePath, metadataPath, artifactsPath, launchersPath,
                                                licensesPath );
 
-        try ( URLClassLoader cl = ToolUtils.newClassLoader( reactor, distModule ) )
-        {
-            Thread.currentThread().setContextClassLoader( cl );
-            Class<?> distMainClass = cl.loadClass( "org.fedoraproject.mbi.tool.dist.DistMain" );
-            distMainClass.getMethod( "main", DistRequest.class ).invoke( null, request );
-        }
+        ClassLoader cl = ToolUtils.newClassLoader( null, reactor, distModule );
+        Thread.currentThread().setContextClassLoader( cl );
+        Class<?> distMainClass = cl.loadClass( "org.fedoraproject.mbi.tool.dist.DistMain" );
+        distMainClass.getMethod( "main", DistRequest.class ).invoke( null, request );
     }
 }

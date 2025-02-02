@@ -24,11 +24,13 @@ import java.util.stream.Collectors;
 
 import javax.inject.Named;
 
+import org.fedoraproject.mbi.tool.ProjectClassScope;
 import org.fedoraproject.mbi.tool.Tool;
 
 /**
  * @author Mikolaj Izdebski
  */
+@ProjectClassScope
 public class SisuTool
     extends Tool
 {
@@ -43,7 +45,7 @@ public class SisuTool
         {
             String className =
                 getClassesDir().relativize( classFile ).toString().replaceAll( ".class$", "" ).replace( '/', '.' );
-            Class<?> cls = getClass().getClassLoader().loadClass( className );
+            Class<?> cls = Thread.currentThread().getContextClassLoader().loadClass( className );
             if ( cls.isAnnotationPresent( Named.class ) )
             {
                 namedComponents.add( cls.getName() );
