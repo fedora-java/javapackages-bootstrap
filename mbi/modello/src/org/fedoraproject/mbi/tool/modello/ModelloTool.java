@@ -32,8 +32,12 @@ import org.codehaus.plexus.DefaultContainerConfiguration;
 import org.codehaus.plexus.DefaultPlexusContainer;
 import org.codehaus.plexus.PlexusConstants;
 import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.PlexusContainerException;
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.fedoraproject.mbi.tool.Instruction;
 import org.fedoraproject.mbi.tool.Tool;
+
+import com.google.inject.CreationException;
 
 /**
  * @author Mikolaj Izdebski
@@ -102,21 +106,37 @@ public class ModelloTool
         velocityParams.put( s.substring( 0, s.indexOf( '=' ) ), s.substring( s.indexOf( '=' ) + 1 ) );
     }
 
+    private ModelloCore instantiateModello()
+        throws ComponentLookupException, PlexusContainerException
+    {
+        try
+        {
+            ContainerConfiguration conf = new DefaultContainerConfiguration();
+            conf.setClassPathScanning( PlexusConstants.SCANNING_INDEX );
+            conf.setAutoWiring( true );
+            PlexusContainer container = new DefaultPlexusContainer( conf );
+            ModelloCore modello = container.lookup( ModelloCore.class );
+            return modello;
+        }
+        catch ( CreationException e )
+        {
+            throw new RuntimeException( "Unable to instantiane Modello: " + e.getMessage() );
+        }
+
+    }
+
     @Override
     public void execute()
         throws Exception
     {
+        ModelloCore modello = instantiateModello();
+
         Files.createDirectories( getGeneratedSourcesDir() );
         Path modelPath = getSourceRootDir().resolve( model );
         params.put( "modello.output.directory", getGeneratedSourcesDir().toString() );
         params.put( VelocityGenerator.VELOCITY_TEMPLATES, templates.stream().collect( Collectors.joining( "," ) ) );
         params.put( VelocityGenerator.VELOCITY_PARAMETERS, velocityParams );
 
-        ContainerConfiguration conf = new DefaultContainerConfiguration();
-        conf.setClassPathScanning( PlexusConstants.SCANNING_INDEX );
-        conf.setAutoWiring( true );
-        PlexusContainer container = new DefaultPlexusContainer( conf );
-        ModelloCore modello = container.lookup( ModelloCore.class );
         try ( Reader modelReader = Files.newBufferedReader( modelPath ) )
         {
             Model model = modello.loadModel( modelReader );
