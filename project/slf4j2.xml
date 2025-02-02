@@ -1,0 +1,24 @@
+<project>
+  <licensing>
+    <tag>MIT AND Apache-2.0</tag>
+    <file>LICENSE.txt</file>
+  </licensing>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>slf4j-api/src/main/java</addSourceRoot>
+        <addSourceRoot>slf4j-simple/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>jcl-over-slf4j2</name>
+    <subDir>jcl-over-slf4j</subDir>
+    <dependency>slf4j</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
