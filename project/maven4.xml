@@ -3,73 +3,178 @@
     <tag>Apache-2.0</tag>
   </licensing>
   <module>
-    <name>maven4-api</name>
-    <subDir>api</subDir>
+    <name>maven4-api-annotations</name>
+    <subDir>api/maven-api-annotations</subDir>
     <build>
-      <!-- cli API -->
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-cli</name>
+    <subDir>api/maven-api-cli</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-core</dependency>
+    <dependency>maven4-api-xml</dependency>
+    <build>
       <modello>
-        <model>maven-api-cli/src/main/mdo/core-extensions.mdo</model>
+        <model>src/main/mdo/core-extensions.mdo</model>
         <version>1.2.0</version>
         <output>velocity</output>
-        <velocityBasedir>../src/mdo</velocityBasedir>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
         <param>packageModelV4=org.apache.maven.api.cli.extensions</param>
         <param>packageToolV4=org.apache.maven.cli.internal.extension.io</param>
       </modello>
-      <!-- metadata API -->
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-core</name>
+    <subDir>api/maven-api-core</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-di</dependency>
+    <dependency>maven4-api-model</dependency>
+    <dependency>maven4-api-plugin</dependency>
+    <dependency>maven4-api-settings</dependency>
+    <dependency>maven4-api-toolchain</dependency>
+    <dependency>maven4-api-xml</dependency>
+    <build>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-di</name>
+    <subDir>api/maven-api-di</subDir>
+    <build>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-metadata</name>
+    <subDir>api/maven-api-metadata</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <build>
       <modello>
-        <model>maven-api-metadata/src/main/mdo/metadata.mdo</model>
+        <model>src/main/mdo/metadata.mdo</model>
         <version>1.2.0</version>
         <output>velocity</output>
-        <velocityBasedir>../src/mdo</velocityBasedir>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
         <param>packageModelV4=org.apache.maven.api.metadata</param>
       </modello>
-      <!-- model API -->
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-model</name>
+    <subDir>api/maven-api-model</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-xml</dependency>
+    <build>
       <modello>
-        <model>maven-api-model/src/main/mdo/maven.mdo</model>
+        <model>src/main/mdo/maven.mdo</model>
         <version>4.1.0</version>
         <output>velocity</output>
-        <velocityBasedir>../src/mdo</velocityBasedir>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
         <param>packageModelV4=org.apache.maven.api.model</param>
         <param>isMavenModel=true</param>
       </modello>
-      <!-- plugin descriptor API -->
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-plugin</name>
+    <subDir>api/maven-api-plugin</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-xml</dependency>
+    <build>
       <modello>
-        <model>maven-api-plugin/src/main/mdo/plugin.mdo</model>
+        <model>src/main/mdo/plugin.mdo</model>
         <version>2.0.0</version>
         <output>velocity</output>
-        <velocityBasedir>../src/mdo</velocityBasedir>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
         <param>packageModelV4=org.apache.maven.api.plugin.descriptor</param>
       </modello>
-      <!-- plugin lifecycle API -->
       <modello>
-        <model>maven-api-plugin/src/main/mdo/lifecycle.mdo</model>
+        <model>src/main/mdo/lifecycle.mdo</model>
         <version>2.0.0</version>
         <output>velocity</output>
-        <velocityBasedir>../src/mdo</velocityBasedir>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
         <param>packageModelV4=org.apache.maven.api.plugin.descriptor.lifecycle</param>
       </modello>
-      <!-- settings API -->
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-settings</name>
+    <subDir>api/maven-api-settings</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-xml</dependency>
+    <build>
       <modello>
-        <model>maven-api-settings/src/main/mdo/settings.mdo</model>
+        <model>src/main/mdo/settings.mdo</model>
         <version>2.0.0</version>
         <output>velocity</output>
-        <velocityBasedir>../src/mdo</velocityBasedir>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
         <param>packageModelV4=org.apache.maven.api.settings</param>
         <param>locationTracking=true</param>
         <param>generateLocationClasses=true</param>
       </modello>
-      <!-- toolchain API -->
+      <compiler>
+        <release>17</release>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-spi</name>
+    <subDir>api/maven-api-spi</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-core</dependency>
+    <dependency>maven4-api-di</dependency>
+    <dependency>maven4-api-model</dependency>
+    <build>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-toolchain</name>
+    <subDir>api/maven-api-toolchain</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-xml</dependency>
+    <build>
       <modello>
-        <model>maven-api-toolchain/src/main/mdo/toolchains.mdo</model>
+        <model>src/main/mdo/toolchains.mdo</model>
         <version>1.2.0</version>
         <output>velocity</output>
-        <velocityBasedir>../src/mdo</velocityBasedir>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
         <param>packageModelV4=org.apache.maven.api.toolchain</param>
         <param>locationTracking=true</param>
@@ -77,15 +182,17 @@
       </modello>
       <compiler>
         <release>17</release>
-        <addSourceRoot>maven-api-model/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-annotations/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-xml/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-di/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-plugin/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-metadata/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-cli/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-core/src/main/java</addSourceRoot>
-        <addSourceRoot>maven-api-spi/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-api-xml</name>
+    <subDir>api/maven-api-xml</subDir>
+    <dependency>maven4-api-annotations</dependency>
+    <build>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
     </build>
   </module>
