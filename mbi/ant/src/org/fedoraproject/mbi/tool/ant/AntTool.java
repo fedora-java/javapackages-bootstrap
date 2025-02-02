@@ -27,6 +27,7 @@ import java.util.Map;
 import org.apache.tools.ant.ExitException;
 import org.apache.tools.ant.Main;
 import org.fedoraproject.mbi.tool.Instruction;
+import org.fedoraproject.mbi.tool.ProjectClassScope;
 import org.fedoraproject.mbi.tool.ThreadUnsafe;
 import org.fedoraproject.mbi.tool.Tool;
 
@@ -34,6 +35,7 @@ import org.fedoraproject.mbi.tool.Tool;
  * @author Mikolaj Izdebski
  */
 @ThreadUnsafe
+@ProjectClassScope
 public class AntTool
     extends Tool
 {
@@ -71,7 +73,8 @@ public class AntTool
         Path buildFile = getReactor().getTargetDir( getModule() ).resolve( "ant-run.xml" );
         Files.createDirectories( buildFile.getParent() );
 
-        try ( OutputStream os = Files.newOutputStream( buildFile ); PrintStream ps = new PrintStream( os, false, StandardCharsets.UTF_8 ) )
+        try ( OutputStream os = Files.newOutputStream( buildFile );
+                        PrintStream ps = new PrintStream( os, false, StandardCharsets.UTF_8 ) )
         {
             ps.println( "<project default=\"antrun\" basedir=\"" + baseDir + "\">" );
             ps.println( "<property name=\"classes\" location=\"" + classesDir + "\"/>" );
@@ -95,7 +98,8 @@ public class AntTool
                 {
                     throw new ExitException( exitCode );
                 }
-            }.startAnt( new String[] { "-f", buildFile.toString() }, null, null );
+            }.startAnt( new String[] { "-f", buildFile.toString() }, null,
+                        Thread.currentThread().getContextClassLoader() );
         }
         catch ( ExitException e )
         {

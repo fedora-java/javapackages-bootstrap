@@ -34,6 +34,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.fedoraproject.mbi.tool.Instruction;
+import org.fedoraproject.mbi.tool.ProjectClassScope;
 import org.fedoraproject.mbi.tool.Tool;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -43,6 +44,7 @@ import org.w3c.dom.NodeList;
 /**
  * @author Mikolaj Izdebski
  */
+@ProjectClassScope
 public class PlexusTool
     extends Tool
 {
@@ -136,7 +138,7 @@ public class PlexusTool
         {
             String className =
                 getClassesDir().relativize( classFile ).toString().replaceAll( ".class$", "" ).replace( '/', '.' );
-            Class<?> cls = getClass().getClassLoader().loadClass( className );
+            Class<?> cls = Thread.currentThread().getContextClassLoader().loadClass( className );
             if ( cls.isAnnotationPresent( Component.class ) )
             {
                 Annotation plexus = cls.getAnnotationsByType( Component.class )[0];
