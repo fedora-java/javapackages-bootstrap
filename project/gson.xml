@@ -1,0 +1,17 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <build>
+      <jurand>
+        <source>gson/src/main/java</source>
+        <pattern>^com.google.errorprone.annotations.</pattern>
+      </jurand>
+      <compiler>
+	<release>17</release>
+        <addSourceRoot>gson/src/main/java-templates</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>
