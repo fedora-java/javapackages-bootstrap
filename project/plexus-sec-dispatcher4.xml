@@ -1,0 +1,23 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <dependency>injection-api</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>plexus-cipher</dependency>
+    <dependency>slf4j</dependency>
+    <build>
+      <modello>
+        <model>src/main/mdo/settings-security.mdo</model>
+        <version>4.0.0</version>
+        <output>java|stax-reader|stax-writer</output>
+      </modello>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+      <sisu/>
+    </build>
+  </module>
+</project>
