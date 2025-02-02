@@ -196,4 +196,19 @@
       </compiler>
     </build>
   </module>
+  <module>
+    <name>maven4-xml</name>
+    <subDir>impl/maven-xml</subDir>
+    <dependency>maven4-api-xml</dependency>
+    <dependency>plexus-utils</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>stax2-api</dependency>
+    <dependency>woodstox</dependency>
+    <build>
+      <compiler>
+        <release>17</release>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
 </project>
