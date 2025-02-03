@@ -425,7 +425,8 @@ public class ArtifactDist
             for ( var art : mod.artifacts )
             {
                 director.deployJar( mod.md, art );
-                mod2art.put( mod.md.getName(), art.aid );
+                mod2art.put( mod.md.getName(),
+                             art.aid + ( art.versions.isEmpty() ? "" : "-" + art.versions.get( 0 ) ) );
             }
         }
         for ( var mod : reactor.getModules() )
