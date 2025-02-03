@@ -248,14 +248,14 @@ MOD junit5-vintage
   ART org.junit.vintage junit-vintage-engine
     DEP org.junit.platform junit-platform-engine
     DEP junit junit
+MOD log4j-1.2-api
+  ART org.apache.logging.log4j log4j-1.2-api
+    ALIAS log4j log4j
+    DEP org.apache.logging.log4j log4j-api
 MOD log4j-api
   ART org.apache.logging.log4j log4j-api
 MOD log4j-core
   ART org.apache.logging.log4j log4j-core
-    DEP org.apache.logging.log4j log4j-api
-MOD log4j-1.2-api
-  ART org.apache.logging.log4j log4j-1.2-api
-    ALIAS log4j log4j
     DEP org.apache.logging.log4j log4j-api
 MOD mail-api
   ART jakarta.mail jakarta.mail-api
