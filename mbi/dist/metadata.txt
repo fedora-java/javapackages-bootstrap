@@ -1228,6 +1228,8 @@ MOD osgi-cmpn
 MOD osgi-core
   ART org.osgi osgi.core
     ALIAS org.osgi org.osgi.core
+MOD picocli
+  ART info.picocli picocli
 MOD plexus-archiver
   ART org.codehaus.plexus plexus-archiver
     DEP javax.inject javax.inject
