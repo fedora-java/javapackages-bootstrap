@@ -459,7 +459,6 @@
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <sisu/>
     </build>
   </module>
   <module>
