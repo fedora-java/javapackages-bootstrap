@@ -27,9 +27,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.spi.ToolProvider;
 
-import org.codehaus.plexus.archiver.jar.JarArchiver;
-import org.codehaus.plexus.archiver.jar.JarArchiver.FilesetManifestConfig;
 import org.fedoraproject.mbi.Reactor;
 import org.fedoraproject.mbi.dist.DistRequest;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
@@ -180,11 +179,14 @@ class Director
         if ( art != null )
         {
             Path jarPath = artifactsDir.resolve( aid + ".jar" );
-            JarArchiver archiver = new JarArchiver();
-            archiver.setFilesetmanifest( FilesetManifestConfig.merge );
-            archiver.setDestFile( jarPath.toFile() );
-            archiver.addDirectory( reactor.getClassesDir( module ).toFile() );
-            archiver.createArchive();
+            ToolProvider jarTool = ToolProvider.findFirst( "jar" ).get();
+            System.err.println( "Creating jar file " + jarPath.getFileName() );
+            int ret = jarTool.run( System.out, System.err, "cf", jarPath.toString(), "-C",
+                                   reactor.getClassesDir( module ).toString(), "." );
+            if ( ret != 0 )
+            {
+                throw new Exception( "jar tool failed with exit code " + ret );
+            }
             DeploymentRequest jarRequest = new DeploymentRequest();
             jarRequest.setPlanPath( planPath );
             jarRequest.setArtifact( new DefaultArtifact( gid, aid, version ).setPath( jarPath ) );
