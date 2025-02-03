@@ -1376,11 +1376,13 @@ MOD xmlunit
   ART org.xmlunit xmlunit-core
 MOD xmvn
   ART org.fedoraproject.xmvn xmvn-mojo
-    DEP org.apache.maven.resolver maven-resolver-util
+    DEP org.fedoraproject.xmvn xmvn-api
+    DEP org.fedoraproject.xmvn xmvn-core
+    DEP org.apache.maven.resolver maven-resolver-util 2.0.5
     DEP org.ow2.asm asm
   ART org.fedoraproject.xmvn xmvn-api
+    DEP io.kojan kojan-xml
   ART org.fedoraproject.xmvn xmvn-core
-    DEP org.fedoraproject.xmvn xmvn-api
 MOD xmvn-generator
   ART org.fedoraproject.xmvn xmvn-generator
 MOD xz-java

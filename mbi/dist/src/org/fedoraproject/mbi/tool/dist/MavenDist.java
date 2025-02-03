@@ -94,6 +94,7 @@ public class MavenDist
         symlink( mavenHome.resolve( "boot" ).resolve( "plexus-classworlds-X.jar" ),
                  distJarPath( "plexus-classworlds" ) );
         symlink( mavenHome.resolve( "lib/ext" ).resolve( "xmvn.jar" ), distJarPath( "xmvn" ) );
+        symlink( mavenHome.resolve( "lib/ext" ).resolve( "kojan-xml.jar" ), distJarPath( "kojan-xml" ) );
 
         Path binDir = dist.getLaunchersPath();
         if ( !binDir.equals( mavenHome.resolve( "bin" ) ) )
@@ -103,12 +104,12 @@ public class MavenDist
         symlink( binDir.resolve( "xmvn" ), dist.getLaunchersPath().resolve( "mvn" ) );
 
         launcher( "xmvn-install", "org.fedoraproject.xmvn.tools.install.cli.InstallerCli", //
-                  "xmvn", "jcommander", "slf4j", "commons-compress", "commons-io", "commons-codec", "commons-lang",
-                  "asm" );
+                  "xmvn", "slf4j", "commons-compress", "commons-io", "commons-codec", "commons-lang",
+                  "asm","kojan-xml","picocli" );
         launcher( "xmvn-resolve", "org.fedoraproject.xmvn.tools.resolve.ResolverCli", //
-                  "xmvn", "jcommander" );
+                  "xmvn", "kojan-xml","picocli");
         launcher( "xmvn-subst", "org.fedoraproject.xmvn.tools.subst.SubstCli", //
-                  "xmvn", "jcommander" );
+                  "xmvn", "kojan-xml","picocli");
         launcher( "cup", "java_cup.Main", "cup" );
         launcher( "jflex", "jflex.Main", "jflex", "cup" );
         launcher( "ant", "org.apache.tools.ant.launch.Launcher", "ant" );
