@@ -8,32 +8,24 @@
     <dependency>sisu-plexus</dependency>
     <dependency>sisu-inject</dependency>
     <dependency>slf4j</dependency>
-    <dependency>maven-resolver</dependency>
+    <dependency>maven-resolver2</dependency>
     <dependency>maven-plugin-tools</dependency>
-    <dependency>jcommander</dependency>
     <dependency>commons-compress</dependency>
     <dependency>commons-io</dependency>
     <dependency>asm</dependency>
-    <dependency>maven-core</dependency>
-    <dependency>maven-artifact</dependency>
-    <dependency>maven-model</dependency>
-    <dependency>maven-model-builder</dependency>
-    <dependency>maven-plugin-api</dependency>
+    <dependency>common-annotations-api</dependency>
+    <dependency>maven4-api-core</dependency>
+    <dependency>maven4-core</dependency>
+    <dependency>maven4-plugin-api</dependency>
+    <dependency>maven4-model</dependency>
+    <dependency>maven4-api-model</dependency>
+    <dependency>maven4-artifact</dependency>
+    <dependency>maven4-api-spi</dependency>
+    <dependency>kojan-xml</dependency>
+    <dependency>picocli</dependency>
     <build>
-      <modello>
-        <model>xmvn-api/src/main/mdo/config.mdo</model>
-        <version>4.0.0</version>
-        <output>java|stax-reader|stax-writer</output>
-        <xpp3dom>false</xpp3dom>
-      </modello>
-      <modello>
-        <model>xmvn-api/src/main/mdo/metadata.mdo</model>
-        <version>4.0.0</version>
-        <output>java|stax-reader|stax-writer</output>
-        <xpp3dom>false</xpp3dom>
-      </modello>
       <compiler>
-        <release>11</release>
+        <release>17</release>
         <addSourceRoot>xmvn-api/src/main/java</addSourceRoot>
         <addSourceRoot>xmvn-connector/src/main/java</addSourceRoot>
         <addSourceRoot>xmvn-core/src/main/java</addSourceRoot>

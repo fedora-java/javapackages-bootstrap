@@ -1,0 +1,26 @@
+From 9c187617d87b0c334190f02f55102842634e4bb3 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 3 Feb 2025 23:26:59 +0100
+Subject: [PATCH] Port to XMvn 5
+
+Forwarded: no
+---
+ .../org/fedoraproject/xmvn/generator/maven/MavenGenerator.java  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/main/java/org/fedoraproject/xmvn/generator/maven/MavenGenerator.java b/src/main/java/org/fedoraproject/xmvn/generator/maven/MavenGenerator.java
+index 2cfa424..db869f0 100644
+--- a/src/main/java/org/fedoraproject/xmvn/generator/maven/MavenGenerator.java
++++ b/src/main/java/org/fedoraproject/xmvn/generator/maven/MavenGenerator.java
+@@ -261,7 +261,7 @@ class MavenGenerator implements Generator {
+                 continue;
+             }
+             for (Dependency dep : umd.amd.getDependencies()) {
+-                if (dep.isOptional() == null || dep.isOptional() == false) {
++                if (dep.isOptional() == false) {
+                     Artifact depa = dep.toArtifact();
+                     if ("UNKNOWN".equals(dep.getResolvedVersion())) {
+                         // XXX improve error message
+-- 
+2.48.1
+
