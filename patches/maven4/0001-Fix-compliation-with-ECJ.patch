@@ -1,7 +1,7 @@
-From 8480bb0d2cce2db6776c80747ac5b9f1eac56d18 Mon Sep 17 00:00:00 2001
+From c2006c5d2ee650038179f0586fb383fd90c48e3d Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 3 Feb 2025 10:11:57 +0100
-Subject: [PATCH] Fix compliation with ECJ
+Subject: [PATCH 1/2] Fix compliation with ECJ
 
 Of two following equivalent declarations, Eclipse compiler rejects the
 first syntax and accepts only the second one.

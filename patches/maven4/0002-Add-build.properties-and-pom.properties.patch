@@ -1,0 +1,41 @@
+From 766e7ba81507ebcc6ab1302e0d2401e30b37f6f5 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 3 Feb 2025 23:01:32 +0100
+Subject: [PATCH 2/2] Add build.properties and pom.properties
+
+Forwarded: not-needed
+---
+ .../maven/org.apache.maven/maven-core/pom.properties   |  1 +
+ .../org/apache/maven/messages/build.properties         | 10 +++++-----
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+ create mode 100644 impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
+
+diff --git a/impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties b/impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
+new file mode 100644
+index 0000000000..5dc7a222c1
+--- /dev/null
++++ b/impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
+@@ -0,0 +1 @@
++version=4.0.0-rc-2
+diff --git a/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties b/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
+index 20f386ba0e..383ba21648 100644
+--- a/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
++++ b/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
+@@ -15,8 +15,8 @@
+ # specific language governing permissions and limitations
+ # under the License.
+ 
+-buildNumber=${buildNumber}
+-version=${project.version}
+-distributionId=${distributionId}
+-distributionShortName=${distributionShortName}
+-distributionName=${distributionName}
+\ No newline at end of file
++buildNumber=javapackages-bootstrap
++version=4.0.0-rc-2
++distributionId=xmvn
++distributionShortName=XMvn
++distributionName=Red Hat XMvn
+-- 
+2.48.1
+
