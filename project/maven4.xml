@@ -58,6 +58,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
       </compiler>
     </build>
   </module>
@@ -260,6 +261,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
       </compiler>
       <sisu/>
     </build>
@@ -357,6 +359,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
       </compiler>
       <sisu/>
     </build>
@@ -616,6 +619,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
         <excludeSourceClass>org/apache/maven/cling/logging/impl/LogbackConfiguration</excludeSourceClass>
       </compiler>
       <sisu/>
@@ -661,6 +665,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
       </compiler>
       <sisu/>
     </build>
@@ -769,6 +774,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
       </compiler>
     </build>
   </module>
@@ -799,6 +805,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
       </compiler>
     </build>
   </module>
