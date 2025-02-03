@@ -64,7 +64,7 @@ class UMod
 /**
  * @author Mikolaj Izdebski
  */
-class GA
+abstract class GA
 {
     final String gid;
 
@@ -91,11 +91,18 @@ class UArt
 {
     final List<UAlias> aliases = new ArrayList<>();
 
-    final List<GA> deps = new ArrayList<>();
+    final List<UDep> deps = new ArrayList<>();
+
+    final List<String> versions = new ArrayList<>();
 
     public UArt( String gid, String aid )
     {
         super( gid, aid );
+    }
+
+    List<String> getVersions()
+    {
+        return versions.isEmpty() ? List.of( "SYSTEM" ) : versions;
     }
 }
 
@@ -111,6 +118,27 @@ class UAlias
     {
         super( gid, aid );
         this.classifier = classifier;
+    }
+}
+
+/**
+ * @author Mikolaj Izdebski
+ */
+class UDep
+    extends GA
+{
+    final String ver;
+
+    public UDep( String gid, String aid, String ver )
+    {
+        super( gid, aid );
+        this.ver = ver;
+    }
+
+    @Override
+    public String toString()
+    {
+        return super.toString() + ":" + ver;
     }
 }
 
@@ -178,7 +206,7 @@ class Director
 
         if ( art != null )
         {
-            Path jarPath = artifactsDir.resolve( aid + ".jar" );
+            Path jarPath = artifactsDir.resolve( aid + "-" + version + ".jar" );
             ToolProvider jarTool = ToolProvider.findFirst( "jar" ).get();
             System.err.println( "Creating jar file " + jarPath.getFileName() );
             int ret = jarTool.run( System.out, System.err, "cf", jarPath.toString(), "-C",
@@ -227,6 +255,7 @@ class Director
             Artifact artifactGlob = new Artifact();
             artifactGlob.setGroupId( gid );
             artifactGlob.setArtifactId( aid );
+            artifactGlob.setVersion( version );
             PackagingRule rule = new PackagingRule();
             rule.setArtifactGlob( artifactGlob );
             for ( var alias : art.aliases )
@@ -237,6 +266,7 @@ class Director
                 aa.setClassifier( alias.classifier );
                 rule.addAlias( aa );
             }
+            rule.setVersions( art.versions );
             configurator.getConfiguration().addArtifactManagement( rule );
         }
     }
@@ -296,11 +326,14 @@ public class ArtifactDist
                     uart = new UArt( line[1], line[2] );
                     mod.artifacts.add( uart );
                     break;
+                case "CVER":
+                    uart.versions.add( line[1] );
+                    break;
                 case "ALIAS":
                     uart.aliases.add( new UAlias( line[1], line[2], line.length > 3 ? line[3] : "" ) );
                     break;
                 case "DEP":
-                    uart.deps.add( new GA( line[1], line[2] ) );
+                    uart.deps.add( new UDep( line[1], line[2], line.length > 3 ? line[3] : "SYSTEM" ) );
                     break;
                 default:
                     throw new IllegalStateException( "Unknown token: " + line[0] );
@@ -316,7 +349,17 @@ public class ArtifactDist
         {
             for ( var art : mod.artifacts )
             {
-                depmap.put( art.toString(), mod );
+                for ( var ver : art.getVersions() )
+                {
+                    depmap.put( art.toString() + ":" + ver, mod );
+                }
+                for ( var alias : art.aliases )
+                {
+                    for ( var ver : art.getVersions() )
+                    {
+                        depmap.put( alias.toString() + ":" + ver, mod );
+                    }
+                }
             }
         }
         for ( var mod : mods )
@@ -328,7 +371,7 @@ public class ArtifactDist
                     UMod depMod = depmap.get( dep.toString() );
                     if ( depMod == null )
                     {
-                        throw new Error( "Unsatisfied dep: " + art + " -> " + dep );
+                        throw new Error( "Unsatisfied dep: " + art + ":" + art.getVersions().get( 0 ) + " -> " + dep );
                     }
                 }
             }
@@ -345,6 +388,13 @@ public class ArtifactDist
             for ( var umd : mod.artifacts )
             {
                 pw.printf( "  ART %s %s%n", umd.gid, umd.aid );
+                for ( String ver : umd.versions )
+                {
+                    if ( !ver.equals( "SYSTEM" ) )
+                    {
+                        pw.printf( "    CVER %s%n", ver );
+                    }
+                }
                 for ( var ua : umd.aliases )
                 {
                     pw.printf( "    ALIAS %s %s%s%n", ua.gid, ua.aid,
@@ -352,7 +402,7 @@ public class ArtifactDist
                 }
                 for ( var ud : umd.deps )
                 {
-                    pw.printf( "    DEP %s %s%n", ud.gid, ud.aid );
+                    pw.printf( "    DEP %s %s%s%n", ud.gid, ud.aid, ud.ver.equals( "SYSTEM" ) ? "" : " " + ud.ver );
                 }
             }
         }
