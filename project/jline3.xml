@@ -15,6 +15,12 @@
         <addSourceRoot>style/src/main/java</addSourceRoot>
         <addSourceRoot>terminal-jni/src/main/java</addSourceRoot>
         <addSourceRoot>terminal/src/main/java</addSourceRoot>
+        <addResource>builtins/src/main/resources</addResource>
+        <addResource>console-ui/src/main/resources</addResource>
+        <addResource>jansi-core/src/main/resources</addResource>
+        <addResource>native/src/main/resources</addResource>
+        <addResource>terminal-jni/src/main/resources</addResource>
+        <addResource>terminal/src/main/resources</addResource>
         <excludeSourceClass>org/jline/builtins/Commands</excludeSourceClass>
         <excludeSourceClass>org/jline/builtins/Less</excludeSourceClass>
         <excludeSourceClass>org/jline/builtins/Nano</excludeSourceClass>
