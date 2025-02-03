@@ -131,6 +131,7 @@ public class PlexusTool
         }
     }
 
+    @SuppressWarnings( "deprecation" )
     private void gleanFromClasses()
         throws Exception
     {
