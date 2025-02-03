@@ -59,27 +59,35 @@ public class MavenDist
     {
         Path mavenHome = dist.getMavenHomePath();
         Path homeTemplate =
-            reactor.getSourceRootDir( reactor.getModule( "maven-core" ) ).resolve( "../apache-maven/src" );
+            reactor.getSourceRootDir( reactor.getModule( "maven4-core" ) ).resolve( "../../apache-maven/src/assembly/maven" );
         for ( var subdir : Arrays.asList( "bin", "conf", "lib" ) )
         {
             Util.copy( homeTemplate.resolve( subdir ), dist.getInstallRoot().resolve( mavenHome ).resolve( subdir ),
                        p -> !p.getFileName().toString().startsWith( "." ) );
         }
-        for ( String executable : Arrays.asList( "mvn", "mvnDebug", "mvnyjp" ) )
+        for ( String executable : Arrays.asList( "mvn", "mvnDebug", "mvnenc", "mvnyjp" ) )
         {
             Files.setPosixFilePermissions( dist.getInstallRoot().resolve( mavenHome ).resolve( "bin" ).resolve( executable ),
                                            PosixFilePermissions.fromString( "rwxr-xr-x" ) );
         }
         for ( String moduleName : Arrays.asList( "aopalliance", "asm", "common-annotations-api", "commons-cli",
-                                                 "commons-io", "commons-lang", "guava", "guice", "injection-api",
-                                                 "jansi", "jsr-305", "maven-artifact", "maven-builder-support",
-                                                 "maven-compat", "maven-core", "maven-embedder", "maven-model-builder",
-                                                 "maven-model", "maven-plugin-api", "maven-repository-metadata",
-                                                 "maven-resolver-provider", "maven-settings-builder", "maven-settings",
-                                                 "maven-resolver", "maven-shared-utils", "maven-wagon", "plexus-cipher",
-                                                 "plexus-classworlds", "plexus-component-annotations",
-                                                 "plexus-interpolation", "plexus-sec-dispatcher", "plexus-utils",
-                                                 "sisu-inject", "sisu-plexus", "slf4j" ) )
+                                                 "commons-codec", "gson", "guava", "guice", "httpcomponents-client",
+                                                 "httpcomponents-core", "injection-api", "jline3", "maven-resolver2",
+                                                 "maven-wagon", "maven4-api-annotations", "maven4-api-cli",
+                                                 "maven4-api-core", "maven4-api-di", "maven4-api-metadata",
+                                                 "maven4-api-model", "maven4-api-plugin", "maven4-api-settings",
+                                                 "maven4-api-spi", "maven4-api-toolchain", "maven4-api-xml",
+                                                 "maven4-artifact", "maven4-builder-support", "maven4-cli",
+                                                 "maven4-compat", "maven4-core", "maven4-di", "maven4-embedder",
+                                                 "maven4-impl", "maven4-jline", "maven4-logging", "maven4-model",
+                                                 "maven4-model-builder", "maven4-plugin-api",
+                                                 "maven4-repository-metadata", "maven4-resolver-provider",
+                                                 "maven4-settings", "maven4-settings-builder",
+                                                 "maven4-toolchain-builder", "maven4-toolchain-model", "maven4-xml",
+                                                 "plexus-component-annotations", "plexus-interactivity",
+                                                 "plexus-interpolation", "plexus-sec-dispatcher4", "plexus-utils",
+                                                 "plexus-xml", "sisu-inject", "sisu-plexus", "slf4j2", "stax2-api",
+                                                 "woodstox" ) )
         {
             symlink( mavenHome.resolve( "lib" ).resolve( moduleName + ".jar" ), distJarPath( moduleName ) );
         }
