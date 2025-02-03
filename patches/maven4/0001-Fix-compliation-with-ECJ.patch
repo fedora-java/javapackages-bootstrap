@@ -1,0 +1,43 @@
+From 8480bb0d2cce2db6776c80747ac5b9f1eac56d18 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Mon, 3 Feb 2025 10:11:57 +0100
+Subject: [PATCH] Fix compliation with ECJ
+
+Of two following equivalent declarations, Eclipse compiler rejects the
+first syntax and accepts only the second one.
+
+    public @Nullable <T> Binding<T> generate(Key<T> key)
+    public <T> @Nullable Binding<T> generate(Key<T> key)
+
+For more info see: https://stackoverflow.com/a/77179346
+
+Forwarded: no
+---
+ .../main/java/org/apache/maven/di/impl/ReflectionUtils.java   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java b/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java
+index 3d49a28ed6..e2903e5697 100644
+--- a/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java
++++ b/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java
+@@ -152,7 +152,7 @@ public static <T extends AnnotatedElement & Member> List<T> getAnnotatedElements
+         return result;
+     }
+ 
+-    public static <T> @Nullable Binding<T> generateImplicitBinding(Key<T> key) {
++    public static @Nullable <T> Binding<T> generateImplicitBinding(Key<T> key) {
+         Binding<T> binding = generateConstructorBinding(key);
+         if (binding != null) {
+             Annotation scope = scopeOf(key.getRawType());
+@@ -165,7 +165,7 @@ public static <T extends AnnotatedElement & Member> List<T> getAnnotatedElements
+     }
+ 
+     @SuppressWarnings("unchecked")
+-    public static <T> @Nullable Binding<T> generateConstructorBinding(Key<T> key) {
++    public static @Nullable <T> Binding<T> generateConstructorBinding(Key<T> key) {
+         Class<?> cls = key.getRawType();
+ 
+         List<Constructor<?>> constructors = Arrays.asList(cls.getDeclaredConstructors());
+-- 
+2.48.1
+
