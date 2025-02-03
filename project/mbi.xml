@@ -58,10 +58,7 @@
     <dependency>commons-compress</dependency>
     <dependency>slf4j</dependency>
     <dependency>asm</dependency>
-    <dependency>plexus-archiver</dependency>
-    <dependency>plexus-io</dependency>
     <dependency>commons-io</dependency>
-    <dependency>plexus-utils</dependency>
     <build>
       <compiler>
         <release>11</release>
