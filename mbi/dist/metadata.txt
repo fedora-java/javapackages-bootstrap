@@ -269,6 +269,8 @@ MOD junit5-vintage
   ART org.junit.vintage junit-vintage-engine
     DEP org.junit.platform junit-platform-engine
     DEP junit junit
+MOD kojan-xml
+  ART io.kojan kojan-xml
 MOD log4j-1.2-api
   ART org.apache.logging.log4j log4j-1.2-api
     ALIAS log4j log4j
