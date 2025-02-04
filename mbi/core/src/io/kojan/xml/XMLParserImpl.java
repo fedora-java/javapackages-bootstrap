@@ -38,10 +38,15 @@ import javax.xml.stream.XMLStreamReader;
 class XMLParserImpl implements XMLParser {
     private static final XMLInputFactory XML_INPUT_FACTORY = XMLInputFactory.newInstance();
     private final XMLStreamReader cursor;
+    // Text at current position, never null
+    private String currText;
+    // Next token after text at current position
+    private int currToken;
 
     public XMLParserImpl(Reader reader) throws XMLException {
         try {
             cursor = XML_INPUT_FACTORY.createXMLStreamReader(reader);
+            lookahead();
         } catch (XMLStreamException e) {
             throw new XMLException(e);
         }
@@ -56,30 +61,49 @@ class XMLParserImpl implements XMLParser {
                         + cursor.getLocation().getColumnNumber());
     }
 
-    public String parseText() throws XMLException {
-        try {
-            for (StringBuilder sb = new StringBuilder(); ; cursor.next()) {
-                if (cursor.getEventType() == CHARACTERS) {
-                    sb.append(cursor.getText());
-                } else if (cursor.getEventType() != COMMENT) {
-                    return sb.toString();
-                }
+    /**
+     * Populate parser lookahead state, i.e. update currText and currToken to reflect current cursor
+     * state. Needs to be called upon cursor initialization and every time the cursor is advanced.
+     *
+     * @throws XMLStreamException
+     */
+    private void lookahead() throws XMLStreamException {
+        StringBuilder sb = new StringBuilder();
+        while (true) {
+            currToken = cursor.getEventType();
+            if (currToken == CHARACTERS) {
+                sb.append(cursor.getText());
+            } else if (currToken == COMMENT) {
+                // Ignore
+            } else {
+                currText = sb.toString();
+                return;
             }
-        } catch (XMLStreamException e) {
-            throw new XMLException(e);
+            cursor.next();
         }
     }
 
-    private void skipWhiteSpace() throws XMLException {
-        if (!parseText().chars().allMatch(Character::isWhitespace)) {
-            throw error("Expected white space");
+    private boolean hasToken(int token) throws XMLException {
+        return currText.isBlank() && currToken == token;
+    }
+
+    private void advance() throws XMLStreamException {
+        if (!currText.isBlank()) {
+            throw new IllegalStateException(
+                    "Tried to advance parser, but text was not consumed yet");
         }
+        cursor.next();
+        lookahead();
+    }
+
+    public String parseText() throws XMLException {
+        String text = currText;
+        currText = "";
+        return text;
     }
 
     public boolean hasStartElement() throws XMLException {
-        skipWhiteSpace();
-
-        return cursor.getEventType() == START_ELEMENT;
+        return hasToken(START_ELEMENT);
     }
 
     public boolean hasStartElement(String tag) throws XMLException {
@@ -92,7 +116,7 @@ class XMLParserImpl implements XMLParser {
                 throw error("Expected a start element");
             }
             String tag = cursor.getLocalName();
-            cursor.next();
+            advance();
             return tag;
         } catch (XMLStreamException e) {
             throw new XMLException(e);
@@ -100,20 +124,14 @@ class XMLParserImpl implements XMLParser {
     }
 
     public void parseStartElement(String tag) throws XMLException {
-        try {
-            if (!hasStartElement(tag)) {
-                throw error("Expected <" + tag + "> start element");
-            }
-            cursor.next();
-        } catch (XMLStreamException e) {
-            throw new XMLException(e);
+        if (!hasStartElement(tag)) {
+            throw error("Expected <" + tag + "> start element");
         }
+        parseStartElement();
     }
 
     private void expectToken(int token, String description) throws XMLException {
-        skipWhiteSpace();
-
-        if (cursor.getEventType() != token) {
+        if (!hasToken(token)) {
             throw error("Expected " + description);
         }
     }
@@ -121,22 +139,22 @@ class XMLParserImpl implements XMLParser {
     public void parseEndElement(String tag) throws XMLException {
         try {
             expectToken(END_ELEMENT, "</" + tag + "> end element");
-            cursor.next();
+            advance();
         } catch (XMLStreamException e) {
             throw new XMLException(e);
         }
     }
 
-    private void parseStartDocument() throws XMLException {
+    void parseStartDocument() throws XMLException {
         expectToken(START_DOCUMENT, "start of document");
         try {
-            cursor.next();
+            advance();
         } catch (XMLStreamException e) {
             throw new XMLException(e);
         }
     }
 
-    private void parseEndDocument() throws XMLException {
+    void parseEndDocument() throws XMLException {
         expectToken(END_DOCUMENT, "end of document");
     }
 
