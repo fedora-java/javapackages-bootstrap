@@ -1,19 +1,16 @@
 # Exclude automatically generated requires on java interpreter which is not
 # owned by any package
-%global         __requires_exclude ^%{_jvmdir}/jre
-
+%global __requires_exclude ^%{_jvmdir}/jre
 # Generated list of bundled packages
-%global         _local_file_attrs local_generator
-%global         __local_generator_provides cat %{_builddir}/%{buildsubdir}/bundled-provides.txt
-%global         __local_generator_path ^%{metadataPath}/.*$
-
-%global         debug_package %{nil}
-
-%global         javaHomePath %{_jvmdir}/jre-21-openjdk
-%global         mavenHomePath %{_datadir}/%{name}
-%global         metadataPath %{mavenHomePath}/maven-metadata
-%global         artifactsPath %{_prefix}/lib
-%global         launchersPath %{_libexecdir}/%{name}
+%global _local_file_attrs local_generator
+%global __local_generator_provides cat %{_builddir}/%{buildsubdir}/bundled-provides.txt
+%global __local_generator_path ^%{metadataPath}/.*$
+%global debug_package %{nil}
+%global javaHomePath %{_jvmdir}/jre-21-openjdk
+%global mavenHomePath %{_datadir}/%{name}
+%global metadataPath %{mavenHomePath}/maven-metadata
+%global artifactsPath %{_prefix}/lib
+%global launchersPath %{_libexecdir}/%{name}
 
 Name:           javapackages-bootstrap
 Version:        [...]
@@ -25,10 +22,8 @@ URL:            https://github.com/fedora-java/javapackages-bootstrap
 ExclusiveArch:  %{java_arches}
 
 Source:         https://github.com/fedora-java/javapackages-bootstrap/releases/download/%{version}/javapackages-bootstrap-%{version}.tar.zst
-
 # License breakdown
 Source:         javapackages-bootstrap-PACKAGE-LICENSING
-
 # To obtain the following sources:
 # tar -xf ${name}-${version}.tar.zst
 # pushd ${name}-${version}
@@ -37,20 +32,17 @@ Source:         javapackages-bootstrap-PACKAGE-LICENSING
 # ./downstream.sh archive
 # The results are in the archive directory
 Source:         [...]
-
 BuildRequires:  byaccj
 BuildRequires:  gcc
 BuildRequires:  java-21-openjdk-devel
 BuildRequires:  jurand
 BuildRequires:  rpm-devel
-
 Requires:       bash
 Requires:       coreutils
 Requires:       java-21-openjdk-devel
-Requires:       procps-ng
-Requires:       lujavrite%{?_isa}
-
 Requires:       javapackages-common
+Requires:       lujavrite%{?_isa}
+Requires:       procps-ng
 
 %description
 In a nutshell, Java Packages Bootstrap (JPB) is a standalone build of all Java
