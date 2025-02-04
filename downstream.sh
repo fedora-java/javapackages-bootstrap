@@ -132,7 +132,7 @@ function save_patches()
 
 function bundled_provides()
 {
-    echo "bundled(${rpm_name:-$p}) = $version"
+    echo "bundled(${rpm_name:-$p}) = ${rpm_version}"
 }
 
 function source_list()
@@ -171,6 +171,7 @@ for p; do
     . project/$p.properties
     sub_version ref
     sub_version url
+    rpm_version=${version//-/.}
     if [[ "$cmd" = clone ]] || [[ "$cmd" = prep ]]; then
         echo >&2
         echo "=============================================" >&2
