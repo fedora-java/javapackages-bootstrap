@@ -1,4 +1,4 @@
-From 9c187617d87b0c334190f02f55102842634e4bb3 Mon Sep 17 00:00:00 2001
+From d39ecbca6a3b3454db3e1291173cd4f56a1f85a8 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 3 Feb 2025 23:26:59 +0100
 Subject: [PATCH] Port to XMvn 5
@@ -6,7 +6,8 @@ Subject: [PATCH] Port to XMvn 5
 Forwarded: no
 ---
  .../org/fedoraproject/xmvn/generator/maven/MavenGenerator.java  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ src/main/rpm/macros.xmvngen                                     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/main/java/org/fedoraproject/xmvn/generator/maven/MavenGenerator.java b/src/main/java/org/fedoraproject/xmvn/generator/maven/MavenGenerator.java
 index 2cfa424..db869f0 100644
@@ -21,6 +22,19 @@ index 2cfa424..db869f0 100644
                      Artifact depa = dep.toArtifact();
                      if ("UNKNOWN".equals(dep.getResolvedVersion())) {
                          // XXX improve error message
+diff --git a/src/main/rpm/macros.xmvngen b/src/main/rpm/macros.xmvngen
+index 5623fb2..bc0feea 100644
+--- a/src/main/rpm/macros.xmvngen
++++ b/src/main/rpm/macros.xmvngen
+@@ -8,7 +8,7 @@
+ # Class path of nested JVM.  This should be a colon-separated list of
+ # JARs that contains xmvn-generator.jar, JARs with third-party
+ # generators or hooks (if any), and all other dependencies.
+-%__xmvngen_classpath %{_jnidir}/xmvn-generator.jar:%{_javadir}/objectweb-asm/asm.jar:%{_javadir}/commons-compress.jar:%{_javadir}/commons-io.jar:%{_javadir}/xmvn/xmvn-api.jar:%{_javadir}/xmvn/xmvn-core.jar:%{_javadir}/maven/maven-model.jar:%{_javadir}/plexus/utils.jar
++%__xmvngen_classpath %{_jnidir}/xmvn-generator.jar:%{_javadir}/objectweb-asm/asm.jar:%{_javadir}/commons-compress.jar:%{_javadir}/commons-io.jar:%{_javadir}/xmvn/xmvn-api.jar:%{_javadir}/xmvn/xmvn-core.jar:%{_javadir}/kojan-xml/kojan-xml.jar:%{_javadir}/maven/maven-model.jar:%{_javadir}/plexus/utils.jar
+ 
+ # Specify which dependency generators should be ran.
+ # Values should be a space-separated list of qualified class names of
 -- 
 2.48.1
 
