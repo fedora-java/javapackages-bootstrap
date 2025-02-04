@@ -1,13 +1,11 @@
 <project>
   <licensing>
-    <tag>FIXME</tag>
-    <!-- <file></file> -->
+    <tag>Apache-2.0</tag>
   </licensing>
   <module>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
-        <!-- <automaticModuleName></automaticModuleName> -->
       </compiler>
     </build>
   </module>
