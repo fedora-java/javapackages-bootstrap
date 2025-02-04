@@ -451,7 +451,8 @@
     <dependency>maven-resolver2</dependency>
     <dependency>injection-api</dependency>
     <dependency>slf4j2</dependency>
-    <dependency>plexus-utils</dependency>
+    <dependency>plexus-utils4</dependency>
+    <dependency>plexus-xml-api</dependency>
     <dependency>sisu-inject</dependency>
     <build>
       <compiler>
@@ -588,7 +589,7 @@
     <dependency>sisu-plexus</dependency>
     <dependency>commons-cli</dependency>
     <dependency>plexus-sec-dispatcher4</dependency>
-    <dependency>plexus-utils</dependency>
+    <dependency>plexus-utils4</dependency>
     <dependency>maven4-logging</dependency>
     <dependency>jline3</dependency>
     <dependency>guice</dependency>

@@ -85,7 +85,7 @@ public class MavenDist
                                                  "maven4-settings", "maven4-settings-builder",
                                                  "maven4-toolchain-builder", "maven4-toolchain-model", "maven4-xml",
                                                  "plexus-component-annotations", "plexus-interactivity",
-                                                 "plexus-interpolation", "plexus-sec-dispatcher4", "plexus-utils",
+                                                 "plexus-interpolation", "plexus-sec-dispatcher4", "plexus-utils4",
                                                  "plexus-xml", "sisu-inject", "sisu-plexus", "slf4j2", "stax2-api",
                                                  "woodstox" ) )
         {
@@ -104,12 +104,12 @@ public class MavenDist
         symlink( binDir.resolve( "xmvn" ), dist.getLaunchersPath().resolve( "mvn" ) );
 
         launcher( "xmvn-install", "org.fedoraproject.xmvn.tools.install.cli.InstallerCli", //
-                  "xmvn", "slf4j", "commons-compress", "commons-io", "commons-codec", "commons-lang",
-                  "asm","kojan-xml","picocli" );
+                  "xmvn", "slf4j", "commons-compress", "commons-io", "commons-codec", "commons-lang", "asm",
+                  "kojan-xml", "picocli" );
         launcher( "xmvn-resolve", "org.fedoraproject.xmvn.tools.resolve.ResolverCli", //
-                  "xmvn", "kojan-xml","picocli");
+                  "xmvn", "kojan-xml", "picocli" );
         launcher( "xmvn-subst", "org.fedoraproject.xmvn.tools.subst.SubstCli", //
-                  "xmvn", "kojan-xml","picocli");
+                  "xmvn", "kojan-xml", "picocli" );
         launcher( "cup", "java_cup.Main", "cup" );
         launcher( "jflex", "jflex.Main", "jflex", "cup" );
         launcher( "ant", "org.apache.tools.ant.launch.Launcher", "ant" );
