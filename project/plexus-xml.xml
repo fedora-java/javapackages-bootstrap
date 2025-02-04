@@ -12,4 +12,18 @@
       </compiler>
     </build>
   </module>
+  <module>
+    <name>plexus-xml-api</name>
+    <subDir>src</subDir>
+    <dependency>maven4-api-xml</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>main/java</addSourceRoot>
+	<excludeSourceClass>org/codehaus/plexus/util/xml/Xpp3Dom</excludeSourceClass>
+	<excludeSourceClass>org/codehaus/plexus/util/xml/Xpp3DomBuilder</excludeSourceClass>
+	<excludeSourceClass>org/codehaus/plexus/util/xml/Xpp3DomWriter</excludeSourceClass>
+	<excludeSourceClass>org/codehaus/plexus/util/xml/Xpp3DomUtils</excludeSourceClass>
+      </compiler>
+    </build>
+  </module>
 </project>

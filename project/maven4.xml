@@ -415,7 +415,6 @@
     <dependency>maven4-impl</dependency>
     <dependency>maven4-xml</dependency>
     <dependency>plexus-xml</dependency>
-    <dependency>plexus-utils</dependency>
     <build>
       <modello>
         <model>../../api/maven-api-metadata/src/main/mdo/metadata.mdo</model>
@@ -812,7 +811,7 @@
     <name>maven4-xml</name>
     <subDir>impl/maven-xml</subDir>
     <dependency>maven4-api-xml</dependency>
-    <dependency>plexus-utils</dependency>
+    <dependency>plexus-xml-api</dependency>
     <dependency>sisu-plexus</dependency>
     <dependency>stax2-api</dependency>
     <dependency>woodstox</dependency>
