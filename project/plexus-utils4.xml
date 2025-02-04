@@ -1,0 +1,14 @@
+<project>
+  <licensing>
+    <tag>Apache-1.1 AND Apache-2.0 AND xpp AND BSD-3-Clause AND LicenseRef-Fedora-Public-Domain</tag>
+    <file>NOTICE.txt</file>
+  </licensing>
+  <module>
+    <dependency>plexus-xml-api</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

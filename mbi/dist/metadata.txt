@@ -1302,6 +1302,10 @@ MOD plexus-testing
 MOD plexus-utils
   ART org.codehaus.plexus plexus-utils
     ALIAS plexus plexus-utils
+MOD plexus-utils4
+  ART org.codehaus.plexus plexus-utils
+    CVER 4.0.2
+    DEP org.codehaus.plexus plexus-xml
 MOD plexus-xml
   ART org.codehaus.plexus plexus-xml
 MOD qdox
