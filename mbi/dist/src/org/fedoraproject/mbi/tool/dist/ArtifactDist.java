@@ -225,7 +225,7 @@ class Director
             }
             for ( var dep : art.deps )
             {
-                pomRequest.addDependency( new DefaultArtifact( dep.gid, dep.aid ) );
+                pomRequest.addDependency( new DefaultArtifact( dep.gid, dep.aid, dep.ver ) );
             }
         }
         else
