@@ -11,6 +11,7 @@
     <dependency>injection-api</dependency>
     <dependency>jsoup</dependency>
     <dependency>velocity-engine</dependency>
+    <dependency>chhorz-javadoc-parser</dependency>
     <build>
       <compiler>
         <addSourceRoot>modello-core/src/main/java</addSourceRoot>
@@ -21,6 +22,7 @@
         <addSourceRoot>modello-plugins/modello-plugin-sax/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-stax/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-velocity/src/main/java</addSourceRoot>
+        <addSourceRoot>modello-plugins/modello-plugin-xdoc/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xml/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xpp3/src/main/java</addSourceRoot>
         <addSourceRoot>modello-plugins/modello-plugin-xsd/src/main/java</addSourceRoot>
