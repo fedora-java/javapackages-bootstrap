@@ -1,0 +1,12 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <build>
+      <pom>
+        <removePlugin>spotless-maven-plugin</removePlugin>
+      </pom>
+    </build>
+  </module>
+</project>
