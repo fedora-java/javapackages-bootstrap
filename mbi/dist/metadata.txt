@@ -159,6 +159,7 @@ MOD guice
     ALIAS org.sonatype.sisu.inject guice-servlet
     DEP com.google.inject guice
   ART com.google.inject guice
+    ALIAS com.google.inject guice classes
     DEP javax.inject javax.inject
     DEP aopalliance aopalliance
     DEP com.google.guava guava
