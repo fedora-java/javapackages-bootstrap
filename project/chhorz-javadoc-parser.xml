@@ -1,0 +1,12 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+  </licensing>
+  <module>
+    <build>
+      <compiler>
+        <addSourceRoot>javadoc-parser/src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+</project>

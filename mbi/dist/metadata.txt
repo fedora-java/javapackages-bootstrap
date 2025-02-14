@@ -85,6 +85,8 @@ MOD cglib
     ALIAS cglib cglib-nodep
     ALIAS org.sonatype.sisu.inject cglib
     DEP org.ow2.asm asm
+MOD chhorz-javadoc-parser
+  ART com.github.chhorz javadoc-parser
 MOD common-annotations-api
   ART javax.annotation jsr250-api
     ALIAS javax.annotation javax.annotation-api
