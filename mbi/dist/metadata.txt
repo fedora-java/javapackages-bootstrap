@@ -699,6 +699,12 @@ MOD maven-resolver2
     DEP commons-codec commons-codec
     DEP org.slf4j slf4j-api 2.0.16
     DEP org.slf4j jcl-over-slf4j 2.0.16
+  ART org.apache.maven.resolver maven-resolver-transport-jdk
+    CVER 2.0.5
+    DEP org.slf4j slf4j-api
+    DEP org.apache.maven.resolver maven-resolver-api
+    DEP org.apache.maven.resolver maven-resolver-spi
+    DEP org.apache.maven.resolver maven-resolver-util
 MOD maven-resources-plugin
   ART org.apache.maven.plugins maven-resources-plugin
     DEP commons-io commons-io

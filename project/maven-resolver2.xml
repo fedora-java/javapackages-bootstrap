@@ -10,6 +10,7 @@
     <dependency>gson</dependency>
     <build>
       <compiler>
+        <release>11</release>
         <addSourceRoot>maven-resolver-api/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-spi/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-impl/src/main/java</addSourceRoot>
@@ -17,6 +18,7 @@
         <addSourceRoot>maven-resolver-connector-basic/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-transport-file/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-named-locks/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-resolver-transport-jdk-parent/maven-resolver-transport-jdk-11/src/main/java</addSourceRoot>
       </compiler>
       <sisu/>
     </build>
