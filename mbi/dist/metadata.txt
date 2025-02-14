@@ -346,7 +346,7 @@ MOD maven-bundle-plugin
     DEP org.apache.maven maven-archiver
     DEP org.apache.maven.shared maven-dependency-tree
     DEP org.codehaus.plexus plexus-utils
-    DEP org.sonatype.plexus plexus-build-api 0.0.8
+    DEP org.sonatype.plexus plexus-build-api
 MOD maven-common-artifact-filters
   ART org.apache.maven.shared maven-common-artifact-filters
     DEP org.apache.maven maven-artifact
@@ -431,7 +431,7 @@ MOD maven-dependency-plugin
     DEP commons-collections commons-collections
     DEP commons-beanutils commons-beanutils
     DEP javax.inject javax.inject
-    DEP org.sonatype.plexus plexus-build-api 0.0.8
+    DEP org.sonatype.plexus plexus-build-api
 MOD maven-dependency-tree
   ART org.apache.maven.shared maven-dependency-tree
     DEP org.codehaus.plexus plexus-component-annotations
@@ -485,7 +485,7 @@ MOD maven-filtering
     DEP org.apache.maven.shared maven-shared-utils
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-interpolation
-    DEP org.sonatype.plexus plexus-build-api 0.0.8
+    DEP org.sonatype.plexus plexus-build-api
     DEP javax.inject javax.inject
     DEP org.slf4j slf4j-api
 MOD maven-jar-plugin
@@ -551,7 +551,7 @@ MOD maven-plugin-tools
     DEP org.apache.maven.plugin-tools maven-plugin-tools-annotations
     DEP org.apache.maven.plugin-tools maven-plugin-annotations
     DEP org.codehaus.plexus plexus-utils
-    DEP org.sonatype.plexus plexus-build-api 0.0.8
+    DEP org.sonatype.plexus plexus-build-api
   ART org.apache.maven.plugin-tools maven-plugin-tools-annotations
     DEP org.apache.maven maven-plugin-api
     DEP org.apache.maven maven-core
@@ -1249,12 +1249,11 @@ MOD plexus-build-api
     DEP org.codehaus.plexus plexus-utils
     DEP javax.inject javax.inject
     DEP org.slf4j slf4j-api
-    DEP org.sonatype.plexus plexus-build-api 0.0.8
+    DEP org.sonatype.plexus plexus-build-api
     DEP org.eclipse.sisu org.eclipse.sisu.plexus
 MOD plexus-build-api0
-  ART org.sonatype.plexus plexus-build-api
-    CVER 0.0.8
-    CVER 0.0.7
+  ART org.sonatype.plexus plexus-build-api0
+    ALIAS org.sonatype.plexus plexus-build-api
     ALIAS org.sonatype.plexus plexus-build-api tests
     DEP org.codehaus.plexus plexus-utils
 MOD plexus-cipher
@@ -1341,7 +1340,7 @@ MOD sisu-maven-plugin
     DEP org.apache.maven maven-plugin-api
     DEP org.apache.maven.shared maven-common-artifact-filters
     DEP org.codehaus.plexus plexus-utils
-    DEP org.sonatype.plexus plexus-build-api 0.0.8
+    DEP org.sonatype.plexus plexus-build-api
 MOD sisu-plexus
   ART org.eclipse.sisu org.eclipse.sisu.plexus
     ALIAS org.sonatype.sisu sisu-inject-plexus
