@@ -15,12 +15,14 @@
  */
 package org.fedoraproject.mbi.tool.dist;
 
+import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -206,11 +208,21 @@ class Director
 
         if ( art != null )
         {
+            Path classes = reactor.getClassesDir( module );
+            Path mf = classes.resolve( "META-INF" ).resolve( "MANIFEST.MF" );
+            if ( !Files.isRegularFile( mf ) )
+            {
+                Files.createDirectories( mf.getParent() );
+                try ( BufferedWriter bw = Files.newBufferedWriter( mf ) )
+                {
+                    bw.write( "Manifest-Version: 1.0\n" );
+                }
+            }
             Path jarPath = artifactsDir.resolve( aid + "-" + version + ".jar" );
             ToolProvider jarTool = ToolProvider.findFirst( "jar" ).get();
             System.err.println( "Creating jar file " + jarPath.getFileName() );
-            int ret = jarTool.run( System.out, System.err, "cf", jarPath.toString(), "-C",
-                                   reactor.getClassesDir( module ).toString(), "." );
+            int ret = jarTool.run( System.out, System.err, "cfm", jarPath.toString(), mf.toString(), "-C",
+                                   classes.toString(), "." );
             if ( ret != 0 )
             {
                 throw new Exception( "jar tool failed with exit code " + ret );
