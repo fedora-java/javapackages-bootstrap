@@ -701,10 +701,21 @@ MOD maven-resolver2
     DEP org.slf4j jcl-over-slf4j 2.0.16
   ART org.apache.maven.resolver maven-resolver-transport-jdk
     CVER 2.0.5
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.16
     DEP org.apache.maven.resolver maven-resolver-api
     DEP org.apache.maven.resolver maven-resolver-spi
     DEP org.apache.maven.resolver maven-resolver-util
+  ART org.apache.maven.resolver maven-resolver-transport-wagon
+    CVER 2.0.5
+    DEP org.apache.maven.resolver maven-resolver-api 2.0.5
+    DEP org.apache.maven.resolver maven-resolver-spi 2.0.5
+    DEP org.apache.maven.resolver maven-resolver-util 2.0.5
+    DEP org.apache.maven.wagon wagon-provider-api
+    DEP org.codehaus.plexus plexus-classworlds
+    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-xml
+    DEP org.eclipse.sisu org.eclipse.sisu.plexus
+    DEP org.slf4j slf4j-api 2.0.16
 MOD maven-resources-plugin
   ART org.apache.maven.plugins maven-resources-plugin
     DEP commons-io commons-io

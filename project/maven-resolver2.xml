@@ -8,6 +8,10 @@
     <dependency>injection-api</dependency>
     <dependency>sisu-inject</dependency>
     <dependency>gson</dependency>
+    <dependency>maven-wagon</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-xml</dependency>
+    <dependency>plexus-classworlds</dependency>
     <build>
       <compiler>
         <release>11</release>
@@ -19,6 +23,7 @@
         <addSourceRoot>maven-resolver-transport-file/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-named-locks/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-transport-jdk-parent/maven-resolver-transport-jdk-11/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-resolver-transport-wagon/src/main/java</addSourceRoot>
       </compiler>
       <sisu/>
     </build>
