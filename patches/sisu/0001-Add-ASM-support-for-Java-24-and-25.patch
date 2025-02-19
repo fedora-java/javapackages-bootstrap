@@ -1,8 +1,9 @@
-From a8e7f031a18c11bfc82db4de5e62d1feda704c06 Mon Sep 17 00:00:00 2001
+From bbc2de433c54c7a8b7114b2315812ad552ecd676 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Tue, 18 Feb 2025 16:29:04 +0100
 Subject: [PATCH] Add ASM support for Java 24 and 25
 
+Forwarded: no
 ---
  .../src/main/java/org/eclipse/sisu/space/asm/ClassReader.java   | 2 +-
  .../src/main/java/org/eclipse/sisu/space/asm/Opcodes.java       | 2 ++

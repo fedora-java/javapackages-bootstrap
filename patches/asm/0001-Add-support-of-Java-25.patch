@@ -1,8 +1,9 @@
-From 756ccf40723d9ba68872252810f3dbb2b186be0c Mon Sep 17 00:00:00 2001
+From 4caba9055e454d4086ad17a2299a5236b9ef744d Mon Sep 17 00:00:00 2001
 From: forax <forax@univ-mlv.fr>
 Date: Tue, 10 Dec 2024 11:11:49 +0100
 Subject: [PATCH] Add support of Java 25
 
+Forwarded: https://gitlab.ow2.org/asm/asm/-/merge_requests/420
 ---
  asm-util/src/main/java/org/objectweb/asm/util/ASMifier.java | 1 +
  asm/src/main/java/org/objectweb/asm/ClassReader.java        | 2 +-
