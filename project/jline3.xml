@@ -1,6 +1,6 @@
 <project>
   <licensing>
-    <tag>BSD-3-Clause</tag>
+    <tag>BSD-3-Clause AND Apache-2.0</tag>
     <file>LICENSE.txt</file>
   </licensing>
   <module>
