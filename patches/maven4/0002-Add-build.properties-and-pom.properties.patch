@@ -1,4 +1,4 @@
-From 766e7ba81507ebcc6ab1302e0d2401e30b37f6f5 Mon Sep 17 00:00:00 2001
+From 442facf978df22aaadc4ed043b55f05f26443439 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 3 Feb 2025 23:01:32 +0100
 Subject: [PATCH 2/2] Add build.properties and pom.properties
@@ -12,13 +12,13 @@ Forwarded: not-needed
 
 diff --git a/impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties b/impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
 new file mode 100644
-index 0000000000..5dc7a222c1
+index 0000000000..805d4c0ef2
 --- /dev/null
 +++ b/impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
 @@ -0,0 +1 @@
-+version=4.0.0-rc-2
++version=4.0.0-rc-3
 diff --git a/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties b/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
-index 20f386ba0e..383ba21648 100644
+index 20f386ba0e..c90770f3e0 100644
 --- a/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
 +++ b/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
 @@ -15,8 +15,8 @@
@@ -32,7 +32,7 @@ index 20f386ba0e..383ba21648 100644
 -distributionName=${distributionName}
 \ No newline at end of file
 +buildNumber=javapackages-bootstrap
-+version=4.0.0-rc-2
++version=4.0.0-rc-3
 +distributionId=xmvn
 +distributionShortName=XMvn
 +distributionName=Red Hat XMvn

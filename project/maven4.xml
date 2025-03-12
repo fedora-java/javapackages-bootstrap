@@ -247,6 +247,11 @@
     <dependency>maven4-api-metadata</dependency>
     <dependency>maven4-api-core</dependency>
     <dependency>maven4-builder-support</dependency>
+    <dependency>maven4-api-di</dependency>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-jline</dependency>
+    <dependency>plexus-interactivity</dependency>
+    <dependency>sisu-inject</dependency>
     <build>
       <modello>
         <model>src/main/mdo/profiles.mdo</model>
@@ -351,10 +356,12 @@
     <dependency>maven4-builder-support</dependency>
     <dependency>maven4-model</dependency>
     <dependency>maven4-impl</dependency>
+    <dependency>maven4-artifact</dependency>
     <dependency>injection-api</dependency>
     <dependency>plexus-interpolation</dependency>
     <dependency>sisu-inject</dependency>
     <dependency>plexus-xml</dependency>
+    <dependency>plexus-utils4</dependency>
     <build>
       <compiler>
         <release>17</release>
@@ -448,6 +455,7 @@
     <dependency>maven4-repository-metadata</dependency>
     <dependency>maven4-impl</dependency>
     <dependency>maven4-xml</dependency>
+    <dependency>maven4-artifact</dependency>
     <dependency>maven-resolver2</dependency>
     <dependency>injection-api</dependency>
     <dependency>slf4j2</dependency>
@@ -516,6 +524,7 @@
     <dependency>maven4-impl</dependency>
     <dependency>injection-api</dependency>
     <dependency>plexus-sec-dispatcher4</dependency>
+    <dependency>plexus-interpolation</dependency>
     <build>
       <compiler>
         <release>17</release>
@@ -534,6 +543,8 @@
     <dependency>maven4-impl</dependency>
     <dependency>injection-api</dependency>
     <dependency>plexus-interpolation</dependency>
+    <dependency>plexus-xml</dependency>
+    <dependency>maven4-api-xml</dependency>
     <build>
       <compiler>
         <release>17</release>
@@ -621,7 +632,6 @@
         <addResource>src/main/resources</addResource>
         <excludeSourceClass>org/apache/maven/cling/logging/impl/LogbackConfiguration</excludeSourceClass>
       </compiler>
-      <sisu/>
     </build>
   </module>
   <module>
@@ -786,12 +796,12 @@
     <dependency>common-annotations-api</dependency>
     <dependency>injection-api</dependency>
     <dependency>plexus-interactivity</dependency>
+    <dependency>maven4-api-di</dependency>
     <build>
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
-      <sisu/>
     </build>
   </module>
   <module>
@@ -820,6 +830,82 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+      </compiler>
+    </build>
+  </module>
+  <module>
+    <name>maven4-support</name>
+    <subDir>impl/maven-support</subDir>
+    <dependency>maven4-api-model</dependency>
+    <dependency>maven4-api-settings</dependency>
+    <dependency>maven4-api-toolchain</dependency>
+    <dependency>maven4-api-metadata</dependency>
+    <dependency>maven4-api-xml</dependency>
+    <dependency>maven4-xml</dependency>
+    <dependency>maven4-api-annotations</dependency>
+    <dependency>stax2-api</dependency>
+    <dependency>woodstox</dependency>
+    <build>
+      <modello>
+        <model>../../api/maven-api-settings/src/main/mdo/settings.mdo</model>
+        <version>2.0.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
+        <template>merger.vm</template>
+        <template>transformer.vm</template>
+        <template>reader-stax.vm</template>
+        <template>writer-stax.vm</template>
+        <param>forcedIOModelVersion=1.2.0</param>
+        <param>packageModelV3=org.apache.maven.settings</param>
+        <param>packageModelV4=org.apache.maven.api.settings</param>
+        <param>packageToolV4=org.apache.maven.settings.v4</param>
+        <param>locationTracking=true</param>
+        <param>generateLocationClasses=true</param>
+      </modello>
+      <modello>
+        <model>../../api/maven-api-toolchain/src/main/mdo/toolchains.mdo</model>
+        <version>1.2.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
+        <template>merger.vm</template>
+        <template>transformer.vm</template>
+        <template>reader-stax.vm</template>
+        <template>writer-stax.vm</template>
+        <param>packageModelV3=org.apache.maven.toolchain.model</param>
+        <param>packageModelV4=org.apache.maven.api.toolchain</param>
+        <param>packageToolV4=org.apache.maven.toolchain.v4</param>
+        <param>locationTracking=true</param>
+        <param>generateLocationClasses=true</param>
+      </modello>
+      <modello>
+        <model>../../api/maven-api-metadata/src/main/mdo/metadata.mdo</model>
+        <version>1.1.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
+        <template>reader-stax.vm</template>
+        <template>writer-stax.vm</template>
+        <param>packageModelV4=org.apache.maven.api.metadata</param>
+        <param>packageToolV4=org.apache.maven.metadata.v4</param>
+      </modello>
+      <modello>
+        <model>../../api/maven-api-model/src/main/mdo/maven.mdo</model>
+        <version>4.1.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
+        <template>merger.vm</template>
+        <template>transformer.vm</template>
+        <template>reader-stax.vm</template>
+        <template>writer-stax.vm</template>
+        <template>model-version.vm</template>
+        <param>forcedIOModelVersion=4.0.0</param>
+        <param>packageModelV3=org.apache.maven.model</param>
+        <param>packageModelV4=org.apache.maven.api.model</param>
+        <param>packageToolV4=org.apache.maven.model.v4</param>
+        <param>isMavenModel=true</param>
+        <param>minimalVersion=4.0.0</param>
+      </modello>
+      <compiler>
+        <release>17</release>
       </compiler>
     </build>
   </module>
