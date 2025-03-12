@@ -1,4 +1,4 @@
-From c2006c5d2ee650038179f0586fb383fd90c48e3d Mon Sep 17 00:00:00 2001
+From e6d665399ecd75c17d3e7a28f7b290fb2e3fe0d6 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Mon, 3 Feb 2025 10:11:57 +0100
 Subject: [PATCH 1/2] Fix compliation with ECJ
@@ -17,10 +17,10 @@ Forwarded: no
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java b/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java
-index 3d49a28ed6..e2903e5697 100644
+index 809e39e955..f632070de6 100644
 --- a/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java
 +++ b/impl/maven-di/src/main/java/org/apache/maven/di/impl/ReflectionUtils.java
-@@ -152,7 +152,7 @@ public static <T extends AnnotatedElement & Member> List<T> getAnnotatedElements
+@@ -137,7 +137,7 @@ public static <T extends AnnotatedElement & Member> List<T> getAnnotatedElements
          return result;
      }
  
@@ -29,7 +29,7 @@ index 3d49a28ed6..e2903e5697 100644
          Binding<T> binding = generateConstructorBinding(key);
          if (binding != null) {
              Annotation scope = scopeOf(key.getRawType());
-@@ -165,7 +165,7 @@ public static <T extends AnnotatedElement & Member> List<T> getAnnotatedElements
+@@ -150,7 +150,7 @@ public static <T extends AnnotatedElement & Member> List<T> getAnnotatedElements
      }
  
      @SuppressWarnings("unchecked")
