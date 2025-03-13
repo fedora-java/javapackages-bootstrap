@@ -229,6 +229,9 @@ MOD jline3
     DEP org.jline jline-terminal
   ART org.jline jline-terminal
     DEP org.jline jline-native
+  ART org.jline jline-console
+    DEP org.jline jline-builtins
+    DEP org.jline jline-style
 MOD jsoup
   ART org.jsoup jsoup
 MOD jsr-305
