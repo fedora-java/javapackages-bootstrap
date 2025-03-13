@@ -948,7 +948,7 @@ MOD maven4-cli
     DEP org.apache.maven.resolver maven-resolver-util 2.0.7
     DEP org.apache.maven.resolver maven-resolver-impl 2.0.7
     DEP org.codehaus.plexus plexus-classworlds
-    DEP org.codehaus.plexus plexus-sec-dispatcher
+    DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
     DEP org.codehaus.plexus plexus-xml
     DEP org.slf4j slf4j-api
     DEP commons-cli commons-cli
@@ -1050,7 +1050,7 @@ MOD maven4-embedder
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-xml
     DEP org.codehaus.plexus plexus-classworlds
-    DEP org.codehaus.plexus plexus-sec-dispatcher
+    DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
     DEP org.slf4j slf4j-api
     DEP commons-cli commons-cli
     DEP org.slf4j slf4j-simple
@@ -1080,7 +1080,7 @@ MOD maven4-impl
     DEP org.codehaus.woodstox stax2-api
     DEP org.slf4j slf4j-api
     DEP org.apache.maven.resolver maven-resolver-impl 2.0.7
-    DEP org.codehaus.plexus plexus-sec-dispatcher
+    DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
 MOD maven4-jline
   ART org.apache.maven maven-jline
     CVER 4.0.0-rc-3
@@ -1183,7 +1183,7 @@ MOD maven4-settings-builder
     DEP org.apache.maven maven-support 4.0.0-rc-3
     DEP org.apache.maven maven-builder-support 4.0.0-rc-3
     DEP org.apache.maven maven-settings 4.0.0-rc-3
-    DEP org.codehaus.plexus plexus-sec-dispatcher
+    DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
 MOD maven4-support
   ART org.apache.maven maven-support
     CVER 4.0.0-rc-3
@@ -1402,7 +1402,7 @@ MOD plexus-sec-dispatcher
     DEP org.codehaus.plexus plexus-cipher
 MOD plexus-sec-dispatcher4
   ART org.codehaus.plexus plexus-sec-dispatcher
-    CVER 4.0.3
+    CVER 4.1.0
     DEP org.slf4j slf4j-api 2.0.16
 MOD plexus-testing
   ART org.codehaus.plexus plexus-testing
