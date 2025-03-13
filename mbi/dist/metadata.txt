@@ -680,18 +680,18 @@ MOD maven-resolver2
     DEP org.apache.maven.resolver maven-resolver-api 2.0.7
     DEP org.apache.maven.resolver maven-resolver-spi 2.0.7
     DEP org.apache.maven.resolver maven-resolver-util 2.0.7
-    DEP org.slf4j slf4j-api 2.0.16
+    DEP org.slf4j slf4j-api 2.0.17
   ART org.apache.maven.resolver maven-resolver-connector-basic
     CVER 2.0.7
     DEP org.apache.maven.resolver maven-resolver-api 2.0.7
     DEP org.apache.maven.resolver maven-resolver-spi 2.0.7
     DEP org.apache.maven.resolver maven-resolver-util 2.0.7
-    DEP org.slf4j slf4j-api 2.0.16
+    DEP org.slf4j slf4j-api 2.0.17
   ART org.apache.maven.resolver maven-resolver-transport-file
     CVER 2.0.7
     DEP org.apache.maven.resolver maven-resolver-api 2.0.7
     DEP org.apache.maven.resolver maven-resolver-spi 2.0.7
-    DEP org.slf4j slf4j-api 2.0.16
+    DEP org.slf4j slf4j-api 2.0.17
   ART org.apache.maven.resolver maven-resolver-transport-apache
     CVER 2.0.7
     DEP org.apache.maven.resolver maven-resolver-api 2.0.7
@@ -700,11 +700,11 @@ MOD maven-resolver2
     DEP org.apache.httpcomponents httpclient
     DEP org.apache.httpcomponents httpcore
     DEP commons-codec commons-codec
-    DEP org.slf4j slf4j-api 2.0.16
-    DEP org.slf4j jcl-over-slf4j 2.0.16
+    DEP org.slf4j slf4j-api 2.0.17
+    DEP org.slf4j jcl-over-slf4j 2.0.17
   ART org.apache.maven.resolver maven-resolver-transport-jdk
     CVER 2.0.7
-    DEP org.slf4j slf4j-api 2.0.16
+    DEP org.slf4j slf4j-api 2.0.17
     DEP org.apache.maven.resolver maven-resolver-api
     DEP org.apache.maven.resolver maven-resolver-spi
     DEP org.apache.maven.resolver maven-resolver-util
@@ -718,7 +718,7 @@ MOD maven-resolver2
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-xml
     DEP org.eclipse.sisu org.eclipse.sisu.plexus
-    DEP org.slf4j slf4j-api 2.0.16
+    DEP org.slf4j slf4j-api 2.0.17
 MOD maven-resources-plugin
   ART org.apache.maven.plugins maven-resources-plugin
     DEP commons-io commons-io
@@ -950,7 +950,7 @@ MOD maven4-cli
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
     DEP org.codehaus.plexus plexus-xml
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.17
     DEP commons-cli commons-cli
 MOD maven4-compat
   ART org.apache.maven maven-compat
@@ -979,7 +979,7 @@ MOD maven4-compat
     DEP org.codehaus.plexus plexus-interactivity-api
     DEP org.codehaus.plexus plexus-interpolation
     DEP org.apache.maven.wagon wagon-provider-api
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.17
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-xml
     DEP org.codehaus.plexus plexus-component-annotations
@@ -1012,7 +1012,7 @@ MOD maven4-core
     DEP org.apache.maven.resolver maven-resolver-spi 2.0.7
     DEP org.apache.maven.resolver maven-resolver-util 2.0.7
     DEP org.apache.maven.resolver maven-resolver-impl 2.0.7
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.17
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.codehaus.plexus plexus-xml
 MOD maven4-di
@@ -1051,9 +1051,9 @@ MOD maven4-embedder
     DEP org.codehaus.plexus plexus-xml
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.17
     DEP commons-cli commons-cli
-    DEP org.slf4j slf4j-simple
+    DEP org.slf4j slf4j-simple 2.0.17
     DEP org.jline jansi-core
 MOD maven4-executor
   ART org.apache.maven maven-executor
@@ -1078,7 +1078,7 @@ MOD maven4-impl
     DEP org.apache.maven maven-xml 4.0.0-rc-3
     DEP com.fasterxml.woodstox woodstox-core
     DEP org.codehaus.woodstox stax2-api
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.17
     DEP org.apache.maven.resolver maven-resolver-impl 2.0.7
     DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
 MOD maven4-jline
@@ -1100,7 +1100,7 @@ MOD maven4-logging
     CVER 4.0.0-rc-3
     DEP org.apache.maven maven-api-core 4.0.0-rc-3
     DEP org.apache.maven maven-jline 4.0.0-rc-3
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.17
 MOD maven4-model
   ART org.apache.maven maven-model
     CVER 4.0.0-rc-3
@@ -1161,7 +1161,7 @@ MOD maven4-resolver-provider
     DEP org.apache.maven.resolver maven-resolver-connector-basic 2.0.7
     DEP org.apache.maven.resolver maven-resolver-transport-file 2.0.7
     DEP org.apache.maven.resolver maven-resolver-transport-apache 2.0.7
-    DEP org.slf4j slf4j-api
+    DEP org.slf4j slf4j-api 2.0.17
     DEP org.codehaus.plexus plexus-utils
     DEP org.codehaus.plexus plexus-xml
 MOD maven4-settings
@@ -1403,7 +1403,7 @@ MOD plexus-sec-dispatcher
 MOD plexus-sec-dispatcher4
   ART org.codehaus.plexus plexus-sec-dispatcher
     CVER 4.1.0
-    DEP org.slf4j slf4j-api 2.0.16
+    DEP org.slf4j slf4j-api 2.0.17
 MOD plexus-testing
   ART org.codehaus.plexus plexus-testing
     DEP org.eclipse.sisu org.eclipse.sisu.plexus
@@ -1456,13 +1456,13 @@ MOD slf4j
     DEP org.slf4j slf4j-api
 MOD slf4j2
   ART org.slf4j jcl-over-slf4j
-    CVER 2.0.16
-    DEP org.slf4j slf4j-api 2.0.16
+    CVER 2.0.17
+    DEP org.slf4j slf4j-api 2.0.17
   ART org.slf4j slf4j-api
-    CVER 2.0.16
+    CVER 2.0.17
   ART org.slf4j slf4j-simple
-    CVER 2.0.16
-    DEP org.slf4j slf4j-api 2.0.16
+    CVER 2.0.17
+    DEP org.slf4j slf4j-api 2.0.17
 MOD stax2-api
   ART org.codehaus.woodstox stax2-api
 MOD testng
