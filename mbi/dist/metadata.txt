@@ -715,7 +715,7 @@ MOD maven-resolver2
     DEP org.apache.maven.resolver maven-resolver-util 2.0.7
     DEP org.apache.maven.wagon wagon-provider-api
     DEP org.codehaus.plexus plexus-classworlds
-    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-utils 4.0.2
     DEP org.codehaus.plexus plexus-xml
     DEP org.eclipse.sisu org.eclipse.sisu.plexus
     DEP org.slf4j slf4j-api 2.0.17
@@ -980,7 +980,7 @@ MOD maven4-compat
     DEP org.codehaus.plexus plexus-interpolation
     DEP org.apache.maven.wagon wagon-provider-api
     DEP org.slf4j slf4j-api 2.0.17
-    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-utils 4.0.2
     DEP org.codehaus.plexus plexus-xml
     DEP org.codehaus.plexus plexus-component-annotations
 MOD maven4-core
@@ -1047,7 +1047,7 @@ MOD maven4-embedder
     DEP org.apache.maven.resolver maven-resolver-spi 2.0.7
     DEP org.apache.maven.resolver maven-resolver-util 2.0.7
     DEP org.apache.maven.resolver maven-resolver-impl 2.0.7
-    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-utils 4.0.2
     DEP org.codehaus.plexus plexus-xml
     DEP org.codehaus.plexus plexus-classworlds
     DEP org.codehaus.plexus plexus-sec-dispatcher 4.1.0
@@ -1119,7 +1119,7 @@ MOD maven4-model-builder
     DEP org.apache.maven maven-builder-support 4.0.0-rc-3
     DEP org.codehaus.plexus plexus-interpolation
     DEP org.codehaus.plexus plexus-xml
-    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-utils 4.0.2
 MOD maven4-plugin-api
   ART org.apache.maven maven-plugin-api
     CVER 4.0.0-rc-3
@@ -1162,7 +1162,7 @@ MOD maven4-resolver-provider
     DEP org.apache.maven.resolver maven-resolver-transport-file 2.0.7
     DEP org.apache.maven.resolver maven-resolver-transport-apache 2.0.7
     DEP org.slf4j slf4j-api 2.0.17
-    DEP org.codehaus.plexus plexus-utils
+    DEP org.codehaus.plexus plexus-utils 4.0.2
     DEP org.codehaus.plexus plexus-xml
 MOD maven4-settings
   ART org.apache.maven maven-settings
