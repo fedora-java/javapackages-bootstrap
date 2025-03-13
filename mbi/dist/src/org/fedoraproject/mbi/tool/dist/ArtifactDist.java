@@ -35,15 +35,15 @@ import java.util.spi.ToolProvider;
 import org.fedoraproject.mbi.Reactor;
 import org.fedoraproject.mbi.dist.DistRequest;
 import org.fedoraproject.mbi.model.ModuleDescriptor;
-import org.fedoraproject.xmvn.artifact.DefaultArtifact;
 import org.fedoraproject.xmvn.config.Artifact;
 import org.fedoraproject.xmvn.config.Configurator;
 import org.fedoraproject.xmvn.config.PackagingRule;
 import org.fedoraproject.xmvn.config.Repository;
-import org.fedoraproject.xmvn.deployer.Deployer;
-import org.fedoraproject.xmvn.deployer.DeploymentRequest;
 import org.fedoraproject.xmvn.locator.ServiceLocator;
 import org.fedoraproject.xmvn.locator.ServiceLocatorFactory;
+import org.fedoraproject.xmvn.metadata.ArtifactMetadata;
+import org.fedoraproject.xmvn.metadata.Dependency;
+import org.fedoraproject.xmvn.metadata.PackageMetadata;
 import org.fedoraproject.xmvn.resolver.Resolver;
 import org.fedoraproject.xmvn.tools.install.InstallationRequest;
 import org.fedoraproject.xmvn.tools.install.Installer;
@@ -156,25 +156,21 @@ class Director
 
     private final Path workDir;
 
-    private final Path planPath;
-
     private final Configurator configurator;
 
-    private final Deployer deployer;
-
     private final Installer installer;
+
+    private final PackageMetadata packageMetadata = new PackageMetadata();
 
     public Director( DistRequest dist )
     {
         this.reactor = dist.getReactor();
         this.dist = dist;
         this.workDir = dist.getWorkDir();
-        planPath = workDir.resolve( "plan.xml" );
 
         ServiceLocator locator = new ServiceLocatorFactory().createServiceLocator();
         configurator = locator.getService( Configurator.class );
         Resolver resolver = locator.getService( Resolver.class );
-        deployer = locator.getService( Deployer.class );
         installer = new DefaultInstaller( configurator, resolver );
     }
 
@@ -205,7 +201,11 @@ class Director
         Files.createDirectories( artifactsDir );
         String version = reactor.getProject( module.getProjectName() ).getMBIVersion();
 
-        DeploymentRequest pomRequest = new DeploymentRequest();
+        ArtifactMetadata pom = new ArtifactMetadata();
+        pom.setGroupId( gid );
+        pom.setArtifactId( aid );
+        pom.setExtension( "pom" );
+        pom.setVersion( version );
 
         if ( art != null )
         {
@@ -228,22 +228,24 @@ class Director
             {
                 throw new Exception( "jar tool failed with exit code " + ret );
             }
-            DeploymentRequest jarRequest = new DeploymentRequest();
-            jarRequest.setPlanPath( planPath );
-            jarRequest.setArtifact( new DefaultArtifact( gid, aid, version ).setPath( jarPath ) );
-            Exception exception = deployer.deploy( jarRequest ).getException();
-            if ( exception != null )
-            {
-                throw exception;
-            }
+            ArtifactMetadata jar = new ArtifactMetadata();
+            jar.setGroupId( gid );
+            jar.setArtifactId( aid );
+            jar.setVersion( version );
+            jar.setPath( jarPath.toString() );
+            packageMetadata.addArtifact( jar );
             for ( var dep : art.deps )
             {
-                pomRequest.addDependency( new DefaultArtifact( dep.gid, dep.aid, dep.ver ) );
+                Dependency dependency = new Dependency();
+                dependency.setGroupId( dep.gid );
+                dependency.setArtifactId( dep.aid );
+                dependency.setRequestedVersion( dep.ver );
+                pom.addDependency( dependency );
             }
         }
         else
         {
-            pomRequest.addProperty( "type", "pom" );
+            pom.addProperty( "type", "pom" );
         }
 
         Path pomPath = reactor.getPomPath( module );
@@ -255,13 +257,8 @@ class Director
                 writer.write( "Dummy POM file for " + module.getName() + " module" );
             }
         }
-        pomRequest.setPlanPath( planPath );
-        pomRequest.setArtifact( new DefaultArtifact( gid, aid, "pom", version ).setPath( pomPath ) );
-        Exception exception = deployer.deploy( pomRequest ).getException();
-        if ( exception != null )
-        {
-            throw exception;
-        }
+        pom.setPath( pomPath.toString() );
+        packageMetadata.addArtifact( pom );
 
         if ( art != null )
         {
@@ -287,6 +284,9 @@ class Director
     public void install()
         throws Exception
     {
+        Path planPath = workDir.resolve( "plan.xml" );
+        packageMetadata.writeToXML( planPath );
+
         Repository installRepo = new Repository();
         installRepo.setId( "javapackages-bootstrap-install" );
         installRepo.setType( "jpp" );
