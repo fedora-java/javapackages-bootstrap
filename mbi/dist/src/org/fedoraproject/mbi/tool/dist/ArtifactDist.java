@@ -25,9 +25,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.spi.ToolProvider;
 
 import org.fedoraproject.mbi.Reactor;
@@ -94,14 +96,14 @@ class UArt
 
     final List<UDep> deps = new ArrayList<>();
 
-    final List<String> versions = new ArrayList<>();
+    final Set<String> versions = new LinkedHashSet<>();
 
     public UArt( String gid, String aid )
     {
         super( gid, aid );
     }
 
-    List<String> getVersions()
+    Iterable<String> getVersions()
     {
         return versions.isEmpty() ? List.of( "SYSTEM" ) : versions;
     }
@@ -277,7 +279,7 @@ class Director
                 aa.setClassifier( alias.classifier );
                 rule.addAlias( aa );
             }
-            rule.setVersions( art.versions );
+            rule.setVersions( new ArrayList<>( art.versions ) );
             configurator.getConfiguration().addArtifactManagement( rule );
         }
     }
@@ -382,7 +384,8 @@ public class ArtifactDist
                     UMod depMod = depmap.get( dep.toString() );
                     if ( depMod == null )
                     {
-                        throw new Error( "Unsatisfied dep: " + art + ":" + art.getVersions().get( 0 ) + " -> " + dep );
+                        throw new Error( "Unsatisfied dep: " + art + ":" + art.getVersions().iterator().next() + " -> "
+                            + dep );
                     }
                 }
             }
@@ -401,10 +404,7 @@ public class ArtifactDist
                 pw.printf( "  ART %s %s%n", umd.gid, umd.aid );
                 for ( String ver : umd.versions )
                 {
-                    if ( !ver.equals( "SYSTEM" ) )
-                    {
-                        pw.printf( "    CVER %s%n", ver );
-                    }
+                    pw.printf( "    CVER %s%n", ver );
                 }
                 for ( var ua : umd.aliases )
                 {
@@ -437,7 +437,7 @@ public class ArtifactDist
             {
                 director.deployJar( mod.md, art );
                 mod2art.put( mod.md.getName(),
-                             art.aid + ( art.versions.isEmpty() ? "" : "-" + art.versions.get( 0 ) ) );
+                             art.aid + ( art.versions.isEmpty() ? "" : "-" + art.versions.iterator().next() ) );
             }
         }
         for ( var mod : reactor.getModules() )
