@@ -21,6 +21,7 @@
     <dependency>maven4-api-model</dependency>
     <dependency>maven4-artifact</dependency>
     <dependency>maven4-api-spi</dependency>
+    <dependency>maven4-api-toolchain</dependency>
     <dependency>kojan-xml</dependency>
     <dependency>picocli</dependency>
     <build>
@@ -34,7 +35,6 @@
         <addSourceRoot>xmvn-tools/xmvn-resolve/src/main/java</addSourceRoot>
         <addSourceRoot>xmvn-tools/xmvn-subst/src/main/java</addSourceRoot>
         <addResource>xmvn-core/src/main/resources</addResource>
-        <addResource>xmvn-mojo/src/main/resources</addResource>
         <addResource>xmvn-tools/xmvn-install/src/main/resources</addResource>
       </compiler>
       <sisu/>
