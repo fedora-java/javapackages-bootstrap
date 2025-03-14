@@ -1420,6 +1420,7 @@ MOD plexus-utils4
     DEP org.codehaus.plexus plexus-xml
 MOD plexus-xml
   ART org.codehaus.plexus plexus-xml
+    DEP org.apache.maven maven-xml 4.0.0-rc-3
 MOD qdox
   ART com.thoughtworks.qdox qdox
     ALIAS qdox qdox
