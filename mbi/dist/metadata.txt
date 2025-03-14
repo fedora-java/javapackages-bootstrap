@@ -1416,6 +1416,7 @@ MOD plexus-utils
 MOD plexus-utils4
   ART org.codehaus.plexus plexus-utils
     CVER 4.0.2
+    CVER 4.0.1
     DEP org.codehaus.plexus plexus-xml
 MOD plexus-xml
   ART org.codehaus.plexus plexus-xml
