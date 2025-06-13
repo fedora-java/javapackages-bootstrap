@@ -132,8 +132,25 @@ MOD cup
   ART java_cup java_cup-runtime
 MOD disruptor
   ART com.lmax disruptor
+MOD dola-bsx
+  ART io.kojan dola-bsx
+    DEP org.codehaus.plexus plexus-classworlds
+MOD dola-dbs
+  ART io.kojan dola-dbs
+    DEP io.kojan dola-rpm-api
+    DEP org.fedoraproject.xmvn xmvn-api
+MOD dola-generator
+  ART io.kojan dola-generator
+    DEP io.kojan dola-rpm-api
+    DEP org.ow2.asm asm
+    DEP org.apache.commons commons-compress
+    DEP org.fedoraproject.xmvn xmvn-api
+    DEP org.apache.maven maven-model 4.0.0-rc-3
+    DEP org.fedoraproject.xmvn xmvn-core
 MOD dola-gleaner
   ART io.kojan dola-gleaner
+MOD dola-rpm-api
+  ART io.kojan dola-rpm-api
 MOD dola-transformer
   ART io.kojan dola-transformer
 MOD easymock
