@@ -134,6 +134,8 @@ MOD disruptor
   ART com.lmax disruptor
 MOD dola-gleaner
   ART io.kojan dola-gleaner
+MOD dola-transformer
+  ART io.kojan dola-transformer
 MOD easymock
   ART org.easymock easymock
     DEP cglib cglib
