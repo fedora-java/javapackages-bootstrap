@@ -1,0 +1,19 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+    <file>NOTICE</file>
+  </licensing>
+  <module>
+    <dependency>injection-api</dependency>
+    <dependency>maven4-api-model</dependency>
+    <dependency>maven4-api-spi</dependency>
+    <dependency>maven4-api-core</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <release>17</release>
+      </compiler>
+      <sisu/>
+    </build>
+  </module>
+</project>
