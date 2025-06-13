@@ -132,6 +132,8 @@ MOD cup
   ART java_cup java_cup-runtime
 MOD disruptor
   ART com.lmax disruptor
+MOD dola-gleaner
+  ART io.kojan dola-gleaner
 MOD easymock
   ART org.easymock easymock
     DEP cglib cglib
