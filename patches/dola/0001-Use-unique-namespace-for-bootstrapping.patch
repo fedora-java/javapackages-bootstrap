@@ -1,0 +1,291 @@
+From d5b220e9b13f8f8b8e2c7780483c0e90c182c9d8 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 13 Jun 2025 15:49:34 +0200
+Subject: [PATCH] Use unique namespace for bootstrapping
+
+When used in bootstrap mode, update file paths, RPM macro names
+etc. so that they are distinct from non-bootstrap Dola packages.
+
+Forwarded: not-needed
+---
+ dola-bsx/src/main/conf/dola-bsx.conf          |  2 +-
+ dola-bsx/src/main/lua/dola-bsx.lua            |  6 +++---
+ dola-bsx/src/main/rpm/macros.dola-bsx         |  4 ++--
+ dola-dbs/src/main/conf/dola-dbs.conf          |  6 +++---
+ .../io/kojan/dola/imperator/Imperator.java    | 12 +++++------
+ dola-dbs/src/main/lua/dola-dbs.lua            |  2 +-
+ dola-dbs/src/main/rpm/macros.dola-dbs         |  8 +++----
+ .../src/main/conf/dola-generator.conf         | 21 +++++++++++--------
+ .../generator/stub/CompoundGenerator.java     |  8 +++----
+ .../dola/generator/stub/CompoundHook.java     |  4 ++--
+ .../src/main/lua/dola-generator.lua           |  2 +-
+ dola-generator/src/main/rpm/dolagen.attr      |  8 +++----
+ .../src/main/rpm/macros.dola-generator        |  8 +++----
+ .../src/main/rpm/macros.dola-generator-etc    |  2 +-
+ dola-rpm-api/src/main/conf/dola-rpm-api.conf  |  2 +-
+ 15 files changed, 49 insertions(+), 46 deletions(-)
+
+diff --git a/dola-bsx/src/main/conf/dola-bsx.conf b/dola-bsx/src/main/conf/dola-bsx.conf
+index 16ac060..f22bcaf 100644
+--- a/dola-bsx/src/main/conf/dola-bsx.conf
++++ b/dola-bsx/src/main/conf/dola-bsx.conf
+@@ -1,2 +1,2 @@
+ [Realm:bsx]
+-load /usr/share/java/dola/dola-bsx.jar
++load /usr/lib/javapackages-bootstrap/dola-bsx.jar
+diff --git a/dola-bsx/src/main/lua/dola-bsx.lua b/dola-bsx/src/main/lua/dola-bsx.lua
+index e178d0b..6dbba8c 100644
+--- a/dola-bsx/src/main/lua/dola-bsx.lua
++++ b/dola-bsx/src/main/lua/dola-bsx.lua
+@@ -16,9 +16,9 @@
+ 
+ local lujavrite = require "lujavrite"
+ 
+-local libjvm = rpm.expand("%{__dola_libjvm}")
+-local classpath = rpm.expand("%{__dola_classpath}")
+-local classworlds_conf = rpm.expand("%{_javaconfdir}/dola/classworlds")
++local libjvm = rpm.expand("%{__jpb_dola_libjvm}")
++local classpath = rpm.expand("%{__jpb_dola_classpath}")
++local classworlds_conf = rpm.expand("%{_javaconfdir}/javapackages-bootstrap/dola/classworlds")
+ 
+ -- Initialize JVM
+ if not lujavrite.initialized() then
+diff --git a/dola-bsx/src/main/rpm/macros.dola-bsx b/dola-bsx/src/main/rpm/macros.dola-bsx
+index 1cce21e..f0d043e 100644
+--- a/dola-bsx/src/main/rpm/macros.dola-bsx
++++ b/dola-bsx/src/main/rpm/macros.dola-bsx
+@@ -1,5 +1,5 @@
+ # Path to JVM library (libjvm.so).  Java 21 or newer is required.
+-%__dola_libjvm %{_jvmdir}/jre-21-openjdk/lib/server/libjvm.so
++%__jpb_dola_libjvm %{_jvmdir}/jre-21-openjdk/lib/server/libjvm.so
+ 
+ # Class path of nested JVM.
+-%__dola_classpath %{_javadir}/dola/dola-bsx.jar:%{_javadir}/plexus-classworlds.jar
++%__jpb_dola_classpath %{_prefix}/lib/javapackages-bootstrap/dola-bsx.jar:%{_prefix}/lib/javapackages-bootstrap/plexus-classworlds.jar
+diff --git a/dola-dbs/src/main/conf/dola-dbs.conf b/dola-dbs/src/main/conf/dola-dbs.conf
+index 6b389b3..1a91c18 100644
+--- a/dola-dbs/src/main/conf/dola-dbs.conf
++++ b/dola-dbs/src/main/conf/dola-dbs.conf
+@@ -1,5 +1,5 @@
+ [Realm:dbs]
+ import io.kojan.dola.rpm from Realm:rpm-api
+-load /usr/share/java/dola/dola-dbs.jar
+-load /usr/share/java/xmvn5/xmvn-api-5.0.0.jar
+-load /usr/share/java/kojan-xml/kojan-xml.jar
++load /usr/lib/javapackages-bootstrap/dola-dbs.jar
++load /usr/lib/javapackages-bootstrap/xmvn-api.jar
++load /usr/lib/javapackages-bootstrap/kojan-xml.jar
+diff --git a/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java b/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java
+index 8d8510f..51a097e 100644
+--- a/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java
++++ b/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java
+@@ -117,13 +117,13 @@ public class Imperator {
+             }
+ 
+             List<String> args = new ArrayList<>();
+-            args.add("xmvn5");
++            args.add("/usr/libexec/javapackages-bootstrap/xmvn");
+             args.add("--show-version");
+             args.add("--batch-mode");
+             args.add("--offline");
+-            String extCp = "/usr/share/java/dola-gleaner/dola-gleaner.jar";
++            String extCp = "/usr/lib/javapackages-bootstrap/dola-gleaner.jar";
+             if (!ctx.getTransformOptions().isEmpty()) {
+-                extCp += ":/usr/share/java/dola-transformer/dola-transformer.jar";
++                extCp += ":/usr/lib/javapackages-bootstrap/dola-transformer.jar";
+             }
+             args.add("-Dmaven.ext.class.path=" + extCp);
+             args.add("-Ddola.gleaner.outputFile=/dev/fd/4");
+@@ -163,12 +163,12 @@ public class Imperator {
+ 
+     public List<String> build() throws Exception {
+         List<String> args = new ArrayList<>();
+-        args.add("xmvn5");
++        args.add("/usr/libexec/javapackages-bootstrap/xmvn");
+         args.add("--show-version");
+         args.add("--batch-mode");
+         args.add("--offline");
+         if (!ctx.getTransformOptions().isEmpty()) {
+-            String extCp = "/usr/share/java/dola-transformer/dola-transformer.jar";
++            String extCp = "/usr/lib/javapackages-bootstrap/dola-transformer.jar";
+             args.add("-Dmaven.ext.class.path=" + extCp);
+             args.addAll(getTransformerArgs());
+         }
+@@ -192,7 +192,7 @@ public class Imperator {
+ 
+     public List<String> install() throws Exception {
+         List<String> args = new ArrayList<>();
+-        args.add("xmvn5-install");
++        args.add("/usr/libexec/javapackages-bootstrap/xmvn-install");
+         args.add("-R " + ".xmvn-reactor");
+         args.add("-n " + ctx.getBaseName());
+         args.add("-d $RPM_BUILD_ROOT");
+diff --git a/dola-dbs/src/main/lua/dola-dbs.lua b/dola-dbs/src/main/lua/dola-dbs.lua
+index cf2d6aa..e7e0b57 100644
+--- a/dola-dbs/src/main/lua/dola-dbs.lua
++++ b/dola-dbs/src/main/lua/dola-dbs.lua
+@@ -14,7 +14,7 @@
+ -- limitations under the License.
+ --
+ 
+-local bsx = require "dola-bsx"
++local bsx = require "javapackages-bootstrap-dola-bsx"
+ 
+ local function conf()
+    local ret = bsx.call0(
+diff --git a/dola-dbs/src/main/rpm/macros.dola-dbs b/dola-dbs/src/main/rpm/macros.dola-dbs
+index f0331de..d389903 100644
+--- a/dola-dbs/src/main/rpm/macros.dola-dbs
++++ b/dola-dbs/src/main/rpm/macros.dola-dbs
+@@ -1,4 +1,4 @@
+-%buildsystem_maven_conf(-) %{lua:(require "dola-dbs").conf()}
+-%buildsystem_maven_generate_buildrequires(-) %{lua:(require "dola-dbs").generate_buildrequires()}
+-%buildsystem_maven_build(-) %{lua:(require "dola-dbs").build()}
+-%buildsystem_maven_install(-) %{lua:(require "dola-dbs").install()}
++%buildsystem_maven_conf(-) %{lua:(require "javapackages-bootstrap-dola-dbs").conf()}
++%buildsystem_maven_generate_buildrequires(-) %{lua:(require "javapackages-bootstrap-dola-dbs").generate_buildrequires()}
++%buildsystem_maven_build(-) %{lua:(require "javapackages-bootstrap-dola-dbs").build()}
++%buildsystem_maven_install(-) %{lua:(require "javapackages-bootstrap-dola-dbs").install()}
+diff --git a/dola-generator/src/main/conf/dola-generator.conf b/dola-generator/src/main/conf/dola-generator.conf
+index c986b8c..d93d3f7 100644
+--- a/dola-generator/src/main/conf/dola-generator.conf
++++ b/dola-generator/src/main/conf/dola-generator.conf
+@@ -1,11 +1,14 @@
+ [Realm:generator]
+ import io.kojan.dola.rpm from Realm:rpm-api
+-load /usr/share/java/dola/dola-generator.jar
+-load /usr/share/java/objectweb-asm/asm.jar
+-load /usr/share/java/commons-compress.jar
+-load /usr/share/java/commons-io.jar
+-load /usr/share/java/xmvn5/xmvn-api-5.0.0.jar
+-load /usr/share/java/kojan-xml/kojan-xml.jar
+-load /usr/share/java/xmvn5/xmvn-core-5.0.0.jar
+-load /usr/share/java/maven4/maven-api-model-4.0.0-rc-3.jar
+-load /usr/share/java/plexus-utils4/plexus-utils-4.0.2.jar
++load /usr/lib/javapackages-bootstrap/dola-generator.jar
++load /usr/lib/javapackages-bootstrap/asm.jar
++load /usr/lib/javapackages-bootstrap/commons-compress.jar
++load /usr/lib/javapackages-bootstrap/commons-io.jar
++load /usr/lib/javapackages-bootstrap/xmvn-api.jar
++load /usr/lib/javapackages-bootstrap/kojan-xml.jar
++load /usr/lib/javapackages-bootstrap/xmvn-core.jar
++load /usr/lib/javapackages-bootstrap/maven-api-model-4.0.0-rc-3.jar
++load /usr/lib/javapackages-bootstrap/maven-impl-4.0.0-rc-3.jar
++load /usr/lib/javapackages-bootstrap/maven-api-xml-4.0.0-rc-3.jar
++load /usr/lib/javapackages-bootstrap/maven-xml-4.0.0-rc-3.jar
++load /usr/lib/javapackages-bootstrap/plexus-utils-4.0.2.jar
+diff --git a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java b/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java
+index 04641da..1f47f7c 100644
+--- a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java
++++ b/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java
+@@ -44,14 +44,14 @@ class CompoundGenerator {
+ 
+     public CompoundGenerator(BuildContext buildContext) {
+         this.buildContext = buildContext;
+-        if (!buildContext.eval("%{?__dolagen_debug}").isEmpty()) {
++        if (!buildContext.eval("%{?__jpbdolagen_debug}").isEmpty()) {
+             Logger.enableDebug();
+         }
+-        multifile = buildContext.eval("%{?__dolagen_protocol}").equals("multifile");
++        multifile = buildContext.eval("%{?__jpbdolagen_protocol}").equals("multifile");
+         Set<String> provCns =
+-                Set.of(buildContext.eval("%{?__dolagen_provides_generators}").split("\\s+"));
++                Set.of(buildContext.eval("%{?__jpbdolagen_provides_generators}").split("\\s+"));
+         Set<String> reqCns =
+-                Set.of(buildContext.eval("%{?__dolagen_requires_generators}").split("\\s+"));
++                Set.of(buildContext.eval("%{?__jpbdolagen_requires_generators}").split("\\s+"));
+         Set<String> allCns = new LinkedHashSet<>();
+         allCns.addAll(provCns);
+         allCns.addAll(reqCns);
+diff --git a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundHook.java b/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundHook.java
+index 3b62ef2..429cd48 100644
+--- a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundHook.java
++++ b/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundHook.java
+@@ -28,12 +28,12 @@ class CompoundHook {
+     private final List<Hook> hooks = new ArrayList<>();
+ 
+     public CompoundHook(BuildContext buildContext) {
+-        if (!buildContext.eval("%{?__dolagen_debug}").isEmpty()) {
++        if (!buildContext.eval("%{?__jpbdolagen_debug}").isEmpty()) {
+             Logger.enableDebug();
+         }
+         try {
+             ClassLoader cl = Thread.currentThread().getContextClassLoader();
+-            for (String cn : buildContext.eval("%{?__dolagen_post_install_hooks}").split("\\s+")) {
++            for (String cn : buildContext.eval("%{?__jpbdolagen_post_install_hooks}").split("\\s+")) {
+                 if (!cn.isEmpty()) {
+                     HookFactory factory =
+                             (HookFactory) cl.loadClass(cn).getDeclaredConstructor().newInstance();
+diff --git a/dola-generator/src/main/lua/dola-generator.lua b/dola-generator/src/main/lua/dola-generator.lua
+index 531b3e9..c21b3f3 100644
+--- a/dola-generator/src/main/lua/dola-generator.lua
++++ b/dola-generator/src/main/lua/dola-generator.lua
+@@ -14,7 +14,7 @@
+ -- limitations under the License.
+ --
+ 
+-local bsx = require "dola-bsx"
++local bsx = require "javapackages-bootstrap-dola-bsx"
+ 
+ -- Run dola-generator
+ local function generate(kind)
+diff --git a/dola-generator/src/main/rpm/dolagen.attr b/dola-generator/src/main/rpm/dolagen.attr
+index 9f15e77..7304982 100644
+--- a/dola-generator/src/main/rpm/dolagen.attr
++++ b/dola-generator/src/main/rpm/dolagen.attr
+@@ -1,4 +1,4 @@
+-%__dolagen_provides() %{lua:(require "dola-generator").generate('provides')}
+-%__dolagen_requires() %{lua:(require "dola-generator").generate('requires')}
+-%__dolagen_path .*
+-%__dolagen_protocol multifile
++%__jpbdolagen_provides() %{lua:(require "javapackages-bootstrap-dola-generator").generate('provides')}
++%__jpbdolagen_requires() %{lua:(require "javapackages-bootstrap-dola-generator").generate('requires')}
++%__jpbdolagen_path .*
++%__jpbdolagen_protocol multifile
+diff --git a/dola-generator/src/main/rpm/macros.dola-generator b/dola-generator/src/main/rpm/macros.dola-generator
+index f998b8a..f672878 100644
+--- a/dola-generator/src/main/rpm/macros.dola-generator
++++ b/dola-generator/src/main/rpm/macros.dola-generator
+@@ -1,6 +1,6 @@
+ # Debug enable flag.
+ # Setting this to non-empty value enables debugging output.
+-%__dolagen_debug 1
++%__jpbdolagen_debug 1
+ 
+ # Specify which dependency generators should be ran.
+ # Values should be a space-separated list of qualified class names of
+@@ -10,12 +10,12 @@
+ #  * io.kojan.dola.generator.jpscript.JPackageScriptGeneratorFactory
+ #  * io.kojan.dola.generator.jpms.JPMSGeneratorFactory
+ #  * io.kojan.dola.generator.maven.MavenGeneratorFactory
+-%__dolagen_provides_generators io.kojan.dola.generator.filesystem.FilesystemGeneratorFactory io.kojan.dola.generator.jpscript.JPackageScriptGeneratorFactory io.kojan.dola.generator.jpms.JPMSGeneratorFactory io.kojan.dola.generator.maven.MavenGeneratorFactory
+-%__dolagen_requires_generators io.kojan.dola.generator.filesystem.FilesystemGeneratorFactory io.kojan.dola.generator.jpscript.JPackageScriptGeneratorFactory io.kojan.dola.generator.maven.MavenGeneratorFactory
++%__jpbdolagen_provides_generators io.kojan.dola.generator.filesystem.FilesystemGeneratorFactory io.kojan.dola.generator.jpscript.JPackageScriptGeneratorFactory io.kojan.dola.generator.jpms.JPMSGeneratorFactory io.kojan.dola.generator.maven.MavenGeneratorFactory
++%__jpbdolagen_requires_generators io.kojan.dola.generator.filesystem.FilesystemGeneratorFactory io.kojan.dola.generator.jpscript.JPackageScriptGeneratorFactory io.kojan.dola.generator.maven.MavenGeneratorFactory
+ 
+ # Specify which post-install hooks should be ran.
+ # Value should be a space-separated list of qualified class names of
+ # hook factories (classes implementing HookFactory interface).
+ # Available hook factories are:
+ #  * io.kojan.dola.generator.transformer.TransformerHookFactory
+-%__dolagen_post_install_hooks io.kojan.dola.generator.transformer.TransformerHookFactory
++%__jpbdolagen_post_install_hooks io.kojan.dola.generator.transformer.TransformerHookFactory
+diff --git a/dola-generator/src/main/rpm/macros.dola-generator-etc b/dola-generator/src/main/rpm/macros.dola-generator-etc
+index 95e9160..f56fd7b 100644
+--- a/dola-generator/src/main/rpm/macros.dola-generator-etc
++++ b/dola-generator/src/main/rpm/macros.dola-generator-etc
+@@ -1,2 +1,2 @@
+ # Override default __os_install_post hook.
+-%__os_install_post %{lua:(require "dola-generator").os_install_post()}
++%__os_install_post %{lua:(require "javapackages-bootstrap-dola-generator").os_install_post()}
+diff --git a/dola-rpm-api/src/main/conf/dola-rpm-api.conf b/dola-rpm-api/src/main/conf/dola-rpm-api.conf
+index 2c0f672..848ec53 100644
+--- a/dola-rpm-api/src/main/conf/dola-rpm-api.conf
++++ b/dola-rpm-api/src/main/conf/dola-rpm-api.conf
+@@ -1,2 +1,2 @@
+ [Realm:rpm-api]
+-load /usr/lib/java/dola/dola-rpm-api.jar
++load /usr/lib/javapackages-bootstrap/dola-rpm-api.jar
+-- 
+2.49.0
+
