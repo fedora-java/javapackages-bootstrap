@@ -1522,7 +1522,5 @@ MOD xmvn
   ART org.fedoraproject.xmvn xmvn-api
     DEP io.kojan kojan-xml
   ART org.fedoraproject.xmvn xmvn-core
-MOD xmvn-generator
-  ART org.fedoraproject.xmvn xmvn-generator
 MOD xz-java
   ART org.tukaani xz
