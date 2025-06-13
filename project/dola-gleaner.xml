@@ -1,0 +1,29 @@
+<project>
+  <licensing>
+    <tag>Apache-2.0</tag>
+    <file>NOTICE</file>
+  </licensing>
+  <module>
+    <dependency>injection-api</dependency>
+    <dependency>maven4-api-model</dependency>
+    <dependency>maven4-api-core</dependency>
+    <dependency>maven4-api-plugin</dependency>
+    <dependency>maven4-model</dependency>
+    <dependency>maven4-impl</dependency>
+    <dependency>maven4-core</dependency>
+    <dependency>maven4-plugin-api</dependency>
+    <dependency>maven4-artifact</dependency>
+    <dependency>maven-resolver2</dependency>
+    <dependency>sisu-inject</dependency>
+    <dependency>sisu-plexus</dependency>
+    <dependency>plexus-classworlds</dependency>
+    <dependency>slf4j</dependency>
+    <build>
+      <compiler>
+        <addSourceRoot>src/main/java</addSourceRoot>
+        <release>17</release>
+      </compiler>
+      <sisu/>
+    </build>
+  </module>
+</project>
