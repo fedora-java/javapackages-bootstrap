@@ -1,7 +1,7 @@
-From a8e0d38a92cd2e136dbbc35ba17e66612b4dcc87 Mon Sep 17 00:00:00 2001
+From 7c80241a0ecfbed1f5118ede21a0bb783c94b348 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 13 Jun 2025 15:49:34 +0200
-Subject: [PATCH] Use unique namespace for bootstrapping
+Subject: [PATCH 1/2] Use unique namespace for bootstrapping
 
 When used in bootstrap mode, update file paths, RPM macro names
 etc. so that they are distinct from non-bootstrap Dola packages.
@@ -10,20 +10,20 @@ Forwarded: not-needed
 ---
  dola-bsx/src/main/conf/dola-bsx.conf          |  2 +-
  dola-bsx/src/main/lua/dola-bsx.lua            |  6 ++---
- dola-bsx/src/main/rpm/macros.dola-bsx         |  4 ++--
+ dola-bsx/src/main/rpm/macros.dola-bsx         |  4 +--
  dola-dbs/src/main/conf/dola-dbs.conf          |  6 ++---
- .../io/kojan/dola/imperator/Imperator.java    | 12 +++++-----
+ .../io/kojan/dola/imperator/Imperator.java    | 12 ++++-----
  dola-dbs/src/main/lua/dola-dbs.lua            |  2 +-
- dola-dbs/src/main/rpm/macros.dola-dbs         |  8 +++----
- .../src/main/conf/dola-generator.conf         | 24 +++++++++----------
- .../generator/stub/CompoundGenerator.java     |  8 +++----
- .../dola/generator/stub/CompoundHook.java     |  4 ++--
+ dola-dbs/src/main/rpm/macros.dola-dbs         |  8 +++---
+ .../src/main/conf/dola-generator.conf         | 25 ++++++++++---------
+ .../generator/stub/CompoundGenerator.java     |  8 +++---
+ .../dola/generator/stub/CompoundHook.java     |  4 +--
  .../src/main/lua/dola-generator.lua           |  2 +-
- dola-generator/src/main/rpm/dolagen.attr      |  8 +++----
- .../src/main/rpm/macros.dola-generator        |  8 +++----
+ dola-generator/src/main/rpm/dolagen.attr      |  8 +++---
+ .../src/main/rpm/macros.dola-generator        |  8 +++---
  .../src/main/rpm/macros.dola-generator-etc    |  2 +-
  dola-rpm-api/src/main/conf/dola-rpm-api.conf  |  2 +-
- 15 files changed, 49 insertions(+), 49 deletions(-)
+ 15 files changed, 50 insertions(+), 49 deletions(-)
 
 diff --git a/dola-bsx/src/main/conf/dola-bsx.conf b/dola-bsx/src/main/conf/dola-bsx.conf
 index 16ac060..f22bcaf 100644
@@ -147,10 +147,10 @@ index f0331de..d389903 100644
 +%buildsystem_maven_build(-) %{lua:(require "javapackages-bootstrap-dola-dbs").build()}
 +%buildsystem_maven_install(-) %{lua:(require "javapackages-bootstrap-dola-dbs").install()}
 diff --git a/dola-generator/src/main/conf/dola-generator.conf b/dola-generator/src/main/conf/dola-generator.conf
-index 90cb396..d93d3f7 100644
+index 90cb396..e8ab124 100644
 --- a/dola-generator/src/main/conf/dola-generator.conf
 +++ b/dola-generator/src/main/conf/dola-generator.conf
-@@ -1,14 +1,14 @@
+@@ -1,14 +1,15 @@
  [Realm:generator]
  import io.kojan.dola.rpm from Realm:rpm-api
 -load /usr/share/java/dola/dola-generator.jar
@@ -176,6 +176,7 @@ index 90cb396..d93d3f7 100644
 +load /usr/lib/javapackages-bootstrap/maven-impl-4.0.0-rc-3.jar
 +load /usr/lib/javapackages-bootstrap/maven-api-xml-4.0.0-rc-3.jar
 +load /usr/lib/javapackages-bootstrap/maven-xml-4.0.0-rc-3.jar
++load /usr/lib/javapackages-bootstrap/maven-support-4.0.0-rc-3.jar
 +load /usr/lib/javapackages-bootstrap/plexus-utils-4.0.2.jar
 diff --git a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java b/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java
 index 04641da..1f47f7c 100644
@@ -290,5 +291,5 @@ index 2c0f672..848ec53 100644
 -load /usr/lib/java/dola/dola-rpm-api.jar
 +load /usr/lib/javapackages-bootstrap/dola-rpm-api.jar
 -- 
-2.49.0
+2.50.0
 
