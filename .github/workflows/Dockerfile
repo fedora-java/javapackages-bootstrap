@@ -17,12 +17,12 @@
 FROM registry.fedoraproject.org/fedora:rawhide
 
 ENV LC_ALL=C.utf8 \
-    JAVA_HOME=/usr/lib/jvm/java-21
+    JAVA_HOME=/usr/lib/jvm/java-25
 
 RUN dnf -y update \
  && dnf -y install git-core \
                    unzip \
-                   java-21-devel \
+                   java-25-devel \
                    byaccj \
                    gcc \
                    rpm-devel \
