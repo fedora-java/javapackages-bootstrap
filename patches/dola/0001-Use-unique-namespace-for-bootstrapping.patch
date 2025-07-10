@@ -1,4 +1,4 @@
-From d2c88a3e6181b8b84365dec85c8fa35fa4830192 Mon Sep 17 00:00:00 2001
+From 1848d8360cbd5affef98fa7619f1c5499b791034 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 13 Jun 2025 15:49:34 +0200
 Subject: [PATCH] Use unique namespace for bootstrapping
@@ -26,21 +26,21 @@ Forwarded: not-needed
  15 files changed, 50 insertions(+), 50 deletions(-)
 
 diff --git a/dola-bsx-api/src/main/conf/dola-bsx-api.conf b/dola-bsx-api/src/main/conf/dola-bsx-api.conf
-index c4c3159..418030b 100644
+index c4c3159..603aa83 100644
 --- a/dola-bsx-api/src/main/conf/dola-bsx-api.conf
 +++ b/dola-bsx-api/src/main/conf/dola-bsx-api.conf
 @@ -1,2 +1,2 @@
  [Realm:bsx-api]
 -load /usr/lib/java/dola/dola-bsx-api.jar
-+load /usr/lib/javapackages-bootstrap/dola-bsx-api.jar
++load /usr/share/javapackages-bootstrap/dola-bsx-api.jar
 diff --git a/dola-bsx/src/main/conf/dola-bsx.conf b/dola-bsx/src/main/conf/dola-bsx.conf
-index 16ac060..f22bcaf 100644
+index 16ac060..3009881 100644
 --- a/dola-bsx/src/main/conf/dola-bsx.conf
 +++ b/dola-bsx/src/main/conf/dola-bsx.conf
 @@ -1,2 +1,2 @@
  [Realm:bsx]
 -load /usr/share/java/dola/dola-bsx.jar
-+load /usr/lib/javapackages-bootstrap/dola-bsx.jar
++load /usr/share/javapackages-bootstrap/dola-bsx.jar
 diff --git a/dola-bsx/src/main/lua/dola-bsx.lua b/dola-bsx/src/main/lua/dola-bsx.lua
 index e178d0b..6dbba8c 100644
 --- a/dola-bsx/src/main/lua/dola-bsx.lua
@@ -59,7 +59,7 @@ index e178d0b..6dbba8c 100644
  -- Initialize JVM
  if not lujavrite.initialized() then
 diff --git a/dola-bsx/src/main/rpm/macros.dola-bsx b/dola-bsx/src/main/rpm/macros.dola-bsx
-index 1cce21e..f0d043e 100644
+index 1cce21e..bc34ca9 100644
 --- a/dola-bsx/src/main/rpm/macros.dola-bsx
 +++ b/dola-bsx/src/main/rpm/macros.dola-bsx
 @@ -1,5 +1,5 @@
@@ -69,9 +69,9 @@ index 1cce21e..f0d043e 100644
  
  # Class path of nested JVM.
 -%__dola_classpath %{_javadir}/dola/dola-bsx.jar:%{_javadir}/plexus-classworlds.jar
-+%__jpb_dola_classpath %{_prefix}/lib/javapackages-bootstrap/dola-bsx.jar:%{_prefix}/lib/javapackages-bootstrap/plexus-classworlds.jar
++%__jpb_dola_classpath %{_datadir}/javapackages-bootstrap/dola-bsx.jar:%{_datadir}/javapackages-bootstrap/plexus-classworlds.jar
 diff --git a/dola-dbs/src/main/conf/dola-dbs.conf b/dola-dbs/src/main/conf/dola-dbs.conf
-index b06e78b..5d19f8b 100644
+index b06e78b..b07bd36 100644
 --- a/dola-dbs/src/main/conf/dola-dbs.conf
 +++ b/dola-dbs/src/main/conf/dola-dbs.conf
 @@ -1,5 +1,5 @@
@@ -80,11 +80,11 @@ index b06e78b..5d19f8b 100644
 -load /usr/share/java/dola/dola-dbs.jar
 -load /usr/share/java/xmvn5/xmvn-api-5.0.0.jar
 -load /usr/share/java/kojan-xml/kojan-xml.jar
-+load /usr/lib/javapackages-bootstrap/dola-dbs.jar
-+load /usr/lib/javapackages-bootstrap/xmvn-api.jar
-+load /usr/lib/javapackages-bootstrap/kojan-xml.jar
++load /usr/share/javapackages-bootstrap/dola-dbs.jar
++load /usr/share/javapackages-bootstrap/xmvn-api.jar
++load /usr/share/javapackages-bootstrap/kojan-xml.jar
 diff --git a/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java b/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java
-index 662d1d7..99b053f 100644
+index 662d1d7..8ed0f91 100644
 --- a/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java
 +++ b/dola-dbs/src/main/java/io/kojan/dola/imperator/Imperator.java
 @@ -178,13 +178,13 @@ public class Imperator {
@@ -97,10 +97,10 @@ index 662d1d7..99b053f 100644
              args.add("--batch-mode");
              args.add("--offline");
 -            String extCp = "/usr/share/java/dola-gleaner/dola-gleaner.jar";
-+            String extCp = "/usr/lib/javapackages-bootstrap/dola-gleaner.jar";
++            String extCp = "/usr/share/javapackages-bootstrap/dola-gleaner.jar";
              if (!ctx.getTransformOptions().isEmpty()) {
 -                extCp += ":/usr/share/java/dola-transformer/dola-transformer.jar";
-+                extCp += ":/usr/lib/javapackages-bootstrap/dola-transformer.jar";
++                extCp += ":/usr/share/javapackages-bootstrap/dola-transformer.jar";
              }
              args.add("-Dmaven.ext.class.path=" + extCp);
              args.addAll(getGleanerArgs());
@@ -115,7 +115,7 @@ index 662d1d7..99b053f 100644
          args.add("--offline");
          if (!ctx.getTransformOptions().isEmpty()) {
 -            String extCp = "/usr/share/java/dola-transformer/dola-transformer.jar";
-+            String extCp = "/usr/lib/javapackages-bootstrap/dola-transformer.jar";
++            String extCp = "/usr/share/javapackages-bootstrap/dola-transformer.jar";
              args.add("-Dmaven.ext.class.path=" + extCp);
              args.addAll(getTransformerArgs());
          }
@@ -155,7 +155,7 @@ index f0331de..d389903 100644
 +%buildsystem_maven_build(-) %{lua:(require "javapackages-bootstrap-dola-dbs").build()}
 +%buildsystem_maven_install(-) %{lua:(require "javapackages-bootstrap-dola-dbs").install()}
 diff --git a/dola-generator/src/main/conf/dola-generator.conf b/dola-generator/src/main/conf/dola-generator.conf
-index 1f3c286..43a236f 100644
+index 1f3c286..505a40e 100644
 --- a/dola-generator/src/main/conf/dola-generator.conf
 +++ b/dola-generator/src/main/conf/dola-generator.conf
 @@ -1,15 +1,15 @@
@@ -174,19 +174,19 @@ index 1f3c286..43a236f 100644
 -load /usr/share/java/maven4/maven-xml-4.0.0-rc-3.jar
 -load /usr/share/java/maven4/maven-support-4.0.0-rc-3.jar
 -load /usr/share/java/plexus-utils4/plexus-utils-4.0.2.jar
-+load /usr/lib/javapackages-bootstrap/dola-generator.jar
-+load /usr/lib/javapackages-bootstrap/asm.jar
-+load /usr/lib/javapackages-bootstrap/commons-compress.jar
-+load /usr/lib/javapackages-bootstrap/commons-io.jar
-+load /usr/lib/javapackages-bootstrap/xmvn-api.jar
-+load /usr/lib/javapackages-bootstrap/kojan-xml.jar
-+load /usr/lib/javapackages-bootstrap/xmvn-core.jar
-+load /usr/lib/javapackages-bootstrap/maven-api-model-4.0.0-rc-3.jar
-+load /usr/lib/javapackages-bootstrap/maven-impl-4.0.0-rc-3.jar
-+load /usr/lib/javapackages-bootstrap/maven-api-xml-4.0.0-rc-3.jar
-+load /usr/lib/javapackages-bootstrap/maven-xml-4.0.0-rc-3.jar
-+load /usr/lib/javapackages-bootstrap/maven-support-4.0.0-rc-3.jar
-+load /usr/lib/javapackages-bootstrap/plexus-utils-4.0.2.jar
++load /usr/share/javapackages-bootstrap/dola-generator.jar
++load /usr/share/javapackages-bootstrap/asm.jar
++load /usr/share/javapackages-bootstrap/commons-compress.jar
++load /usr/share/javapackages-bootstrap/commons-io.jar
++load /usr/share/javapackages-bootstrap/xmvn-api.jar
++load /usr/share/javapackages-bootstrap/kojan-xml.jar
++load /usr/share/javapackages-bootstrap/xmvn-core.jar
++load /usr/share/javapackages-bootstrap/maven-api-model-4.0.0-rc-3.jar
++load /usr/share/javapackages-bootstrap/maven-impl-4.0.0-rc-3.jar
++load /usr/share/javapackages-bootstrap/maven-api-xml-4.0.0-rc-3.jar
++load /usr/share/javapackages-bootstrap/maven-xml-4.0.0-rc-3.jar
++load /usr/share/javapackages-bootstrap/maven-support-4.0.0-rc-3.jar
++load /usr/share/javapackages-bootstrap/plexus-utils-4.0.2.jar
 diff --git a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java b/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java
 index 04641da..1f47f7c 100644
 --- a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java

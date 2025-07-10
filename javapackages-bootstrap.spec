@@ -9,7 +9,7 @@
 %global javaHomePath %{_jvmdir}/jre-21-openjdk
 %global mavenHomePath %{_datadir}/%{name}
 %global metadataPath %{mavenHomePath}/maven-metadata
-%global artifactsPath %{_prefix}/lib
+%global artifactsPath %{_datadir}
 %global launchersPath %{_libexecdir}/%{name}
 
 Name:           javapackages-bootstrap
@@ -19,7 +19,8 @@ Summary:        A means of bootstrapping Java Packages Tools
 # For detailed info see the file javapackages-bootstrap-PACKAGE-LICENSING
 License:        [...]
 URL:            https://github.com/fedora-java/javapackages-bootstrap
-ExclusiveArch:  %{java_arches}
+BuildArch:      noarch
+ExclusiveArch:  %{java_arches} noarch
 
 Source:         https://github.com/fedora-java/javapackages-bootstrap/releases/download/%{version}/javapackages-bootstrap-%{version}.tar.zst
 # License breakdown
@@ -34,15 +35,13 @@ Source:         javapackages-bootstrap-PACKAGE-LICENSING
 Source:         [...]
 
 BuildRequires:  byaccj
-BuildRequires:  gcc
 BuildRequires:  java-21-openjdk-devel
 BuildRequires:  jurand
-BuildRequires:  rpm-devel
 Requires:       bash
 Requires:       coreutils
 Requires:       java-21-openjdk-devel
 Requires:       javapackages-common
-Requires:       lujavrite%{?_isa}
+Requires:       lujavrite
 Requires:       procps-ng
 
 %description
