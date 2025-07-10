@@ -4,8 +4,8 @@
     <file>NOTICE</file>
   </licensing>
   <module>
-    <name>dola-rpm-api</name>
-    <subDir>dola-rpm-api</subDir>
+    <name>dola-bsx-api</name>
+    <subDir>dola-bsx-api</subDir>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
@@ -27,7 +27,7 @@
   <module>
     <name>dola-dbs</name>
     <subDir>dola-dbs</subDir>
-    <dependency>dola-rpm-api</dependency>
+    <dependency>dola-bsx-api</dependency>
     <dependency>xmvn</dependency>
     <dependency>kojan-xml</dependency>
     <build>
@@ -40,7 +40,7 @@
   <module>
     <name>dola-generator</name>
     <subDir>dola-generator</subDir>
-    <dependency>dola-rpm-api</dependency>
+    <dependency>dola-bsx-api</dependency>
     <dependency>asm</dependency>
     <dependency>commons-compress</dependency>
     <dependency>commons-io</dependency>
