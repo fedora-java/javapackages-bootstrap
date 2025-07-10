@@ -93,7 +93,7 @@ install -D -p -m 644 downstream/dola/dola-generator/src/main/rpm/dolagen.attr %{
 install -D -p -m 644 downstream/dola/dola-bsx/src/main/conf/dola-bsx.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/00-dola-bsx.conf
 install -D -p -m 644 downstream/dola/dola-dbs/src/main/conf/dola-dbs.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/04-dola-dbs.conf
 install -D -p -m 644 downstream/dola/dola-generator/src/main/conf/dola-generator.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/03-dola-generator.conf
-install -D -p -m 644 downstream/dola/dola-rpm-api/src/main/conf/dola-rpm-api.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/02-dola-rpm-api.conf
+install -D -p -m 644 downstream/dola/dola-bsx-api/src/main/conf/dola-bsx-api.conf %{buildroot}%{_javaconfdir}/%{name}/dola/classworlds/02-dola-bsx-api.conf
 
 echo '
 %%__xmvngen_debug 1
