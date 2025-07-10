@@ -6,7 +6,7 @@
 %global __local_generator_provides cat %{_builddir}/%{buildsubdir}/bundled-provides.txt
 %global __local_generator_path ^%{metadataPath}/.*$
 %global debug_package %{nil}
-%global javaHomePath %{_jvmdir}/jre-21-openjdk
+%global javaHomePath %{_jvmdir}/jre-25-openjdk
 %global mavenHomePath %{_datadir}/%{name}
 %global metadataPath %{mavenHomePath}/maven-metadata
 %global artifactsPath %{_datadir}
@@ -35,11 +35,11 @@ Source:         javapackages-bootstrap-PACKAGE-LICENSING
 Source:         [...]
 
 BuildRequires:  byaccj
-BuildRequires:  java-21-openjdk-devel
+BuildRequires:  java-25-openjdk-devel
 BuildRequires:  jurand
 Requires:       bash
 Requires:       coreutils
-Requires:       java-21-openjdk-devel
+Requires:       java-25-openjdk-devel
 Requires:       javapackages-common
 Requires:       lujavrite
 Requires:       procps-ng
