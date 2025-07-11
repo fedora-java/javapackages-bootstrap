@@ -181,11 +181,11 @@ index 1f3c286..505a40e 100644
 +load /usr/share/javapackages-bootstrap/xmvn-api.jar
 +load /usr/share/javapackages-bootstrap/kojan-xml.jar
 +load /usr/share/javapackages-bootstrap/xmvn-core.jar
-+load /usr/share/javapackages-bootstrap/maven-api-model-4.0.0-rc-3.jar
-+load /usr/share/javapackages-bootstrap/maven-impl-4.0.0-rc-3.jar
-+load /usr/share/javapackages-bootstrap/maven-api-xml-4.0.0-rc-3.jar
-+load /usr/share/javapackages-bootstrap/maven-xml-4.0.0-rc-3.jar
-+load /usr/share/javapackages-bootstrap/maven-support-4.0.0-rc-3.jar
++load /usr/share/javapackages-bootstrap/maven-api-model-4.0.0-rc-4.jar
++load /usr/share/javapackages-bootstrap/maven-impl-4.0.0-rc-4.jar
++load /usr/share/javapackages-bootstrap/maven-api-xml-4.0.0-rc-4.jar
++load /usr/share/javapackages-bootstrap/maven-xml-4.0.0-rc-4.jar
++load /usr/share/javapackages-bootstrap/maven-support-4.0.0-rc-4.jar
 +load /usr/share/javapackages-bootstrap/plexus-utils-4.0.2.jar
 diff --git a/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java b/dola-generator/src/main/java/io/kojan/dola/generator/stub/CompoundGenerator.java
 index 04641da..1f47f7c 100644
