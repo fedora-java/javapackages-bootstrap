@@ -160,6 +160,7 @@ public class CompilerTool
             options.add( "--release" );
             options.add( release + "" );
         }
+        options.add( "-proc:full" );
         options.add( "-cp" );
         options.add( getClassPath().stream().map( Path::toString ).collect( Collectors.joining( ":" ) ) );
         StringWriter compilerOutput = new StringWriter();
