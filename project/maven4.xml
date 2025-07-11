@@ -818,6 +818,7 @@
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
+        <addResource>src/main/resources</addResource>
       </compiler>
     </build>
   </module>
