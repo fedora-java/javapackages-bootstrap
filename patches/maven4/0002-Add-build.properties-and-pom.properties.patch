@@ -16,7 +16,7 @@ index 0000000000..805d4c0ef2
 --- /dev/null
 +++ b/impl/maven-core/src/main/resources/META-INF/maven/org.apache.maven/maven-core/pom.properties
 @@ -0,0 +1 @@
-+version=4.0.0-rc-3
++version=4.0.0-rc-4
 diff --git a/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties b/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
 index 20f386ba0e..c90770f3e0 100644
 --- a/impl/maven-core/src/main/resources/org/apache/maven/messages/build.properties
@@ -32,7 +32,7 @@ index 20f386ba0e..c90770f3e0 100644
 -distributionName=${distributionName}
 \ No newline at end of file
 +buildNumber=javapackages-bootstrap
-+version=4.0.0-rc-3
++version=4.0.0-rc-4
 +distributionId=xmvn
 +distributionShortName=XMvn
 +distributionName=Red Hat XMvn
