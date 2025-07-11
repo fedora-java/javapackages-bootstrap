@@ -12,6 +12,8 @@
     <dependency>sisu-plexus</dependency>
     <dependency>plexus-xml</dependency>
     <dependency>plexus-classworlds</dependency>
+    <dependency>httpcomponents-core</dependency>
+    <dependency>httpcomponents-client</dependency>
     <build>
       <compiler>
         <release>11</release>
@@ -24,6 +26,7 @@
         <addSourceRoot>maven-resolver-named-locks/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-transport-jdk-parent/maven-resolver-transport-jdk-11/src/main/java</addSourceRoot>
         <addSourceRoot>maven-resolver-transport-wagon/src/main/java</addSourceRoot>
+        <addSourceRoot>maven-resolver-transport-apache/src/main/java</addSourceRoot>
       </compiler>
       <sisu/>
     </build>
