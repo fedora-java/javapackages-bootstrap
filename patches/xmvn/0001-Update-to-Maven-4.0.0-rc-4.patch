@@ -1,0 +1,63 @@
+From cf5d03e9450603f9f05f5aaf13eb2a30c6d23449 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 11 Jul 2025 13:38:17 +0200
+Subject: [PATCH] Update to Maven 4.0.0-rc-4
+
+Forwarded: https://github.com/fedora-java/xmvn/pull/423
+---
+ .../fedoraproject/xmvn/it/ArchiveLayoutIntegrationTest.java   | 2 ++
+ .../main/java/org/fedoraproject/xmvn/mojo/InstallMojo.java    | 4 ++--
+ xmvn-parent/pom.xml                                           | 2 +-
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/xmvn-it/src/test/java/org/fedoraproject/xmvn/it/ArchiveLayoutIntegrationTest.java b/xmvn-it/src/test/java/org/fedoraproject/xmvn/it/ArchiveLayoutIntegrationTest.java
+index c7e4eb91..7b6013cf 100644
+--- a/xmvn-it/src/test/java/org/fedoraproject/xmvn/it/ArchiveLayoutIntegrationTest.java
++++ b/xmvn-it/src/test/java/org/fedoraproject/xmvn/it/ArchiveLayoutIntegrationTest.java
+@@ -158,6 +158,8 @@ class ArchiveLayoutIntegrationTest extends AbstractIntegrationTest {
+         expect(1, 1, "bin/mvnenc\\.cmd");
+         expect(1, 1, "bin/mvnsh");
+         expect(1, 1, "bin/mvnsh\\.cmd");
++        expect(1, 1, "bin/mvnup");
++        expect(1, 1, "bin/mvnup\\.cmd");
+         expect(1, 1, "bin/mvnyjp");
+         expect(1, 1, "bin/m2\\.conf");
+ 
+diff --git a/xmvn-mojo/src/main/java/org/fedoraproject/xmvn/mojo/InstallMojo.java b/xmvn-mojo/src/main/java/org/fedoraproject/xmvn/mojo/InstallMojo.java
+index b762c582..af04e61a 100644
+--- a/xmvn-mojo/src/main/java/org/fedoraproject/xmvn/mojo/InstallMojo.java
++++ b/xmvn-mojo/src/main/java/org/fedoraproject/xmvn/mojo/InstallMojo.java
+@@ -134,7 +134,7 @@ public class InstallMojo extends AbstractMojo {
+         artifact.setArtifactId(mavenArtifact.getArtifactId());
+         artifact.setExtension(mavenArtifact.getExtension());
+         artifact.setClassifier(mavenArtifact.getClassifier());
+-        artifact.setVersion(mavenArtifact.getVersion().asString());
++        artifact.setVersion(mavenArtifact.getVersion().toString());
+         artifact.setPath(artifactPath.toString());
+         artifact.getProperties().put("type", type);
+ 
+@@ -152,7 +152,7 @@ public class InstallMojo extends AbstractMojo {
+                 dependency.setArtifactId(coords.getArtifactId());
+                 dependency.setExtension(coords.getExtension());
+                 dependency.setClassifier(coords.getClassifier());
+-                dependency.setRequestedVersion(coords.getVersionConstraint().asString());
++                dependency.setRequestedVersion(coords.getVersionConstraint().toString());
+                 dependency.setOptional(mavenDependency.isOptional());
+ 
+                 for (Exclusion mavenExclusion : mavenDependency.getExclusions()) {
+diff --git a/xmvn-parent/pom.xml b/xmvn-parent/pom.xml
+index aaf47662..f724dcee 100644
+--- a/xmvn-parent/pom.xml
++++ b/xmvn-parent/pom.xml
+@@ -68,7 +68,7 @@
+ 
+     <asmVersion>9.8</asmVersion>
+     <mavenResolverVersion>2.0.7</mavenResolverVersion>
+-    <mavenVersion>4.0.0-rc-3</mavenVersion>
++    <mavenVersion>4.0.0-rc-4</mavenVersion>
+     <picocliVersion>4.7.7</picocliVersion>
+     <pluginToolsVersion>3.15.1</pluginToolsVersion>
+     <slf4jVersion>2.0.17</slf4jVersion>
+-- 
+2.50.1
+

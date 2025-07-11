@@ -25,6 +25,8 @@
         <output>velocity</output>
         <velocityBasedir>../../src/mdo</velocityBasedir>
         <template>model.vm</template>
+        <param>locationTracking=true</param>
+        <param>generateLocationClasses=true</param>
         <param>packageModelV4=org.apache.maven.api.cli.extensions</param>
         <param>packageToolV4=org.apache.maven.cli.internal.extension.io</param>
       </modello>
@@ -380,6 +382,7 @@
     <dependency>maven4-artifact</dependency>
     <dependency>maven4-model</dependency>
     <dependency>maven4-xml</dependency>
+    <dependency>maven4-support</dependency>
     <dependency>plexus-xml</dependency>
     <dependency>stax2-api</dependency>
     <dependency>woodstox</dependency>
@@ -387,27 +390,6 @@
     <dependency>plexus-classworlds</dependency>
     <dependency>maven-resolver2</dependency>
     <build>
-      <modello>
-        <model>../../api/maven-api-plugin/src/main/mdo/lifecycle.mdo</model>
-        <version>2.0.0</version>
-        <output>velocity</output>
-        <velocityBasedir>../../src/mdo</velocityBasedir>
-        <template>reader-stax.vm</template>
-        <template>writer-stax.vm</template>
-        <param>packageModelV4=org.apache.maven.api.plugin.descriptor.lifecycle</param>
-        <param>packageToolV4=org.apache.maven.plugin.lifecycle.io</param>
-      </modello>
-      <modello>
-        <model>../../api/maven-api-plugin/src/main/mdo/plugin.mdo</model>
-        <version>2.0.0</version>
-        <output>velocity</output>
-        <velocityBasedir>../../src/mdo</velocityBasedir>
-        <template>reader-stax.vm</template>
-        <template>writer-stax.vm</template>
-        <param>packageModelV3=org.apache.maven.plugin.descriptor</param>
-        <param>packageModelV4=org.apache.maven.api.plugin.descriptor</param>
-        <param>packageToolV4=org.apache.maven.plugin.descriptor.io</param>
-      </modello>
       <compiler>
         <release>17</release>
         <addSourceRoot>src/main/java</addSourceRoot>
@@ -559,6 +541,7 @@
     <dependency>maven4-api-annotations</dependency>
     <dependency>maven4-api-toolchain</dependency>
     <dependency>maven4-api-xml</dependency>
+    <dependency>maven4-support</dependency>
     <dependency>plexus-xml</dependency>
     <build>
       <modello>
@@ -615,6 +598,7 @@
     <dependency>maven4-api-toolchain</dependency>
     <dependency>stax2-api</dependency>
     <dependency>woodstox</dependency>
+    <dependency>jdom2</dependency>
     <build>
       <modello>
         <model>../../api/maven-api-cli/src/main/mdo/core-extensions.mdo</model>
@@ -625,6 +609,7 @@
         <template>writer-stax.vm</template>
         <param>packageModelV4=org.apache.maven.api.cli.extensions</param>
         <param>packageToolV4=org.apache.maven.cling.internal.extension.io</param>
+        <param>locationTracking=true</param>
       </modello>
       <compiler>
         <release>17</release>
@@ -714,8 +699,10 @@
     <dependency>maven4-api-spi</dependency>
     <dependency>maven4-api-toolchain</dependency>
     <dependency>maven4-api-xml</dependency>
+    <dependency>maven4-api-plugin</dependency>
     <dependency>maven4-di</dependency>
     <dependency>maven4-xml</dependency>
+    <dependency>maven4-support</dependency>
     <dependency>stax2-api</dependency>
     <dependency>woodstox</dependency>
     <dependency>maven-resolver2</dependency>
@@ -826,6 +813,7 @@
     <dependency>sisu-plexus</dependency>
     <dependency>stax2-api</dependency>
     <dependency>woodstox</dependency>
+    <dependency>maven4-api-annotations</dependency>
     <build>
       <compiler>
         <release>17</release>
@@ -843,6 +831,7 @@
     <dependency>maven4-api-xml</dependency>
     <dependency>maven4-xml</dependency>
     <dependency>maven4-api-annotations</dependency>
+    <dependency>maven4-api-plugin</dependency>
     <dependency>stax2-api</dependency>
     <dependency>woodstox</dependency>
     <build>
@@ -903,6 +892,27 @@
         <param>packageToolV4=org.apache.maven.model.v4</param>
         <param>isMavenModel=true</param>
         <param>minimalVersion=4.0.0</param>
+      </modello>
+      <modello>
+        <model>../../api/maven-api-plugin/src/main/mdo/lifecycle.mdo</model>
+        <version>2.0.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
+        <template>reader-stax.vm</template>
+        <template>writer-stax.vm</template>
+        <param>packageModelV4=org.apache.maven.api.plugin.descriptor.lifecycle</param>
+        <param>packageToolV4=org.apache.maven.plugin.lifecycle.io</param>
+      </modello>
+      <modello>
+        <model>../../api/maven-api-plugin/src/main/mdo/plugin.mdo</model>
+        <version>2.0.0</version>
+        <output>velocity</output>
+        <velocityBasedir>../../src/mdo</velocityBasedir>
+        <template>reader-stax.vm</template>
+        <template>writer-stax.vm</template>
+        <param>packageModelV3=org.apache.maven.plugin.descriptor</param>
+        <param>packageModelV4=org.apache.maven.api.plugin.descriptor</param>
+        <param>packageToolV4=org.apache.maven.plugin.descriptor.io</param>
       </modello>
       <compiler>
         <release>17</release>
