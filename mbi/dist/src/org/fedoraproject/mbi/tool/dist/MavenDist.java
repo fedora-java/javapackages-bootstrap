@@ -72,7 +72,7 @@ public class MavenDist
         }
         for ( String moduleName : Arrays.asList( "aopalliance", "asm", "common-annotations-api", "commons-cli",
                                                  "commons-codec", "gson", "guava", "guice", "httpcomponents-client",
-                                                 "httpcomponents-core", "injection-api", "jline3", "maven-resolver2",
+                                                 "httpcomponents-core", "injection-api", "jdom2", "jline3", "maven-resolver2",
                                                  "maven-wagon", "maven4-api-annotations", "maven4-api-cli",
                                                  "maven4-api-core", "maven4-api-di", "maven4-api-metadata",
                                                  "maven4-api-model", "maven4-api-plugin", "maven4-api-settings",
