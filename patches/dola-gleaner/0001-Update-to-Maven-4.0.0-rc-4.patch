@@ -1,0 +1,54 @@
+From 35a9090b6ad22a9b17e9eceabe00651de19824ef Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 11 Jul 2025 13:41:16 +0200
+Subject: [PATCH] Update to Maven 4.0.0-rc-4
+
+Forwarded: https://github.com/mizdebsk/dola-gleaner/pull/11
+---
+ pom.xml                                            | 2 +-
+ src/main/java/io/kojan/dola/gleaner/Collector.java | 2 +-
+ src/main/java/io/kojan/dola/gleaner/Gleaner.java   | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index 4e10b92..111576f 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -32,7 +32,7 @@
+   </scm>
+   <properties>
+     <kojan.javaRelease>17</kojan.javaRelease>
+-    <mavenVersion>4.0.0-rc-3</mavenVersion>
++    <mavenVersion>4.0.0-rc-4</mavenVersion>
+   </properties>
+   <dependencies>
+     <dependency>
+diff --git a/src/main/java/io/kojan/dola/gleaner/Collector.java b/src/main/java/io/kojan/dola/gleaner/Collector.java
+index 3adee23..7bf03ba 100644
+--- a/src/main/java/io/kojan/dola/gleaner/Collector.java
++++ b/src/main/java/io/kojan/dola/gleaner/Collector.java
+@@ -38,7 +38,7 @@ public class Collector {
+                         coords.getArtifactId(),
+                         coords.getExtension(),
+                         coords.getClassifier(),
+-                        coords.getVersionConstraint().asString());
++                        coords.getVersionConstraint().toString());
+         dep.coords = coords;
+         return dep;
+     }
+diff --git a/src/main/java/io/kojan/dola/gleaner/Gleaner.java b/src/main/java/io/kojan/dola/gleaner/Gleaner.java
+index 626bbbd..5cf9acc 100644
+--- a/src/main/java/io/kojan/dola/gleaner/Gleaner.java
++++ b/src/main/java/io/kojan/dola/gleaner/Gleaner.java
+@@ -66,7 +66,7 @@ public class Gleaner {
+     private MavenProject lookupReactor(ArtifactCoordinates coords) {
+         String groupId = coords.getGroupId();
+         String artifactId = coords.getArtifactId();
+-        String version = coords.getVersionConstraint().getRecommendedVersion().asString();
++        String version = coords.getVersionConstraint().getRecommendedVersion().toString();
+         return reactorMap
+                 .getOrDefault(groupId, Map.of())
+                 .getOrDefault(artifactId, Map.of())
+-- 
+2.50.1
+
