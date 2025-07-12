@@ -1,4 +1,4 @@
-From 317e281e2fc5331c24ebf412f23372ce18c5fe75 Mon Sep 17 00:00:00 2001
+From cf9b689849a7f0c4f56d726b9d64b2fefa23cca8 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Fri, 13 Jun 2025 15:49:34 +0200
 Subject: [PATCH] Use unique namespace for bootstrapping
@@ -15,15 +15,15 @@ Forwarded: not-needed
  dola-dbs/src/main/conf/dola-dbs.conf          |  6 ++--
  .../io/kojan/dola/imperator/Imperator.java    | 12 ++++----
  dola-dbs/src/main/lua/dola-dbs.lua            |  2 +-
- dola-dbs/src/main/rpm/macros.dola-dbs         |  8 +++---
- .../src/main/conf/dola-generator.conf         | 28 ++++++++++---------
- .../generator/stub/CompoundGenerator.java     |  8 +++---
+ dola-dbs/src/main/rpm/macros.dola-dbs         |  8 ++---
+ .../src/main/conf/dola-generator.conf         | 30 +++++++++----------
+ .../generator/stub/CompoundGenerator.java     |  8 ++---
  .../dola/generator/stub/CompoundHook.java     |  4 +--
  .../src/main/lua/dola-generator.lua           |  2 +-
- dola-generator/src/main/rpm/dolagen.attr      |  8 +++---
- .../src/main/rpm/macros.dola-generator        |  8 +++---
+ dola-generator/src/main/rpm/dolagen.attr      |  8 ++---
+ .../src/main/rpm/macros.dola-generator        |  8 ++---
  .../src/main/rpm/macros.dola-generator-etc    |  2 +-
- 15 files changed, 52 insertions(+), 50 deletions(-)
+ 15 files changed, 52 insertions(+), 52 deletions(-)
 
 diff --git a/dola-bsx-api/src/main/conf/dola-bsx-api.conf b/dola-bsx-api/src/main/conf/dola-bsx-api.conf
 index c4c3159..603aa83 100644
@@ -59,7 +59,7 @@ index e178d0b..6dbba8c 100644
  -- Initialize JVM
  if not lujavrite.initialized() then
 diff --git a/dola-bsx/src/main/rpm/macros.dola-bsx b/dola-bsx/src/main/rpm/macros.dola-bsx
-index 1cce21e..bc34ca9 100644
+index 1cce21e..176a7c8 100644
 --- a/dola-bsx/src/main/rpm/macros.dola-bsx
 +++ b/dola-bsx/src/main/rpm/macros.dola-bsx
 @@ -1,5 +1,5 @@
@@ -155,25 +155,27 @@ index f0331de..d389903 100644
 +%buildsystem_maven_build(-) %{lua:(require "javapackages-bootstrap-dola-dbs").build()}
 +%buildsystem_maven_install(-) %{lua:(require "javapackages-bootstrap-dola-dbs").install()}
 diff --git a/dola-generator/src/main/conf/dola-generator.conf b/dola-generator/src/main/conf/dola-generator.conf
-index 1f3c286..0f114b4 100644
+index 3c7cc57..0f114b4 100644
 --- a/dola-generator/src/main/conf/dola-generator.conf
 +++ b/dola-generator/src/main/conf/dola-generator.conf
-@@ -1,15 +1,17 @@
+@@ -1,17 +1,17 @@
  [Realm:generator]
  import io.kojan.dola.rpm from Realm:bsx-api
--load /usr/share/java/dola/dola-generator.jar
 -load /usr/share/java/objectweb-asm/asm.jar
 -load /usr/share/java/commons-compress.jar
 -load /usr/share/java/commons-io.jar
 -load /usr/share/java/xmvn5/xmvn-api-5.0.0.jar
 -load /usr/share/java/kojan-xml/kojan-xml.jar
 -load /usr/share/java/xmvn5/xmvn-core-5.0.0.jar
--load /usr/share/java/maven4/maven-api-model-4.0.0-rc-3.jar
--load /usr/share/java/maven4/maven-impl-4.0.0-rc-3.jar
--load /usr/share/java/maven4/maven-api-xml-4.0.0-rc-3.jar
--load /usr/share/java/maven4/maven-xml-4.0.0-rc-3.jar
--load /usr/share/java/maven4/maven-support-4.0.0-rc-3.jar
+-load /usr/share/java/maven4/maven-api-model-4.0.0-rc-4.jar
+-load /usr/share/java/maven4/maven-impl-4.0.0-rc-4.jar
+-load /usr/share/java/maven4/maven-api-xml-4.0.0-rc-4.jar
+-load /usr/share/java/maven4/maven-xml-4.0.0-rc-4.jar
+-load /usr/share/java/maven4/maven-support-4.0.0-rc-4.jar
 -load /usr/share/java/plexus-utils4/plexus-utils-4.0.2.jar
+-load /usr/share/java/woodstox-core/woodstox-core.jar
+-load /usr/share/java/stax2-api/stax2-api.jar
+-load /usr/share/java/dola/dola-generator.jar
 +load /usr/share/javapackages-bootstrap/asm.jar
 +load /usr/share/javapackages-bootstrap/commons-compress.jar
 +load /usr/share/javapackages-bootstrap/commons-io.jar
