@@ -65,7 +65,7 @@ public class MavenDist
             Util.copy( homeTemplate.resolve( subdir ), dist.getInstallRoot().resolve( mavenHome ).resolve( subdir ),
                        p -> !p.getFileName().toString().startsWith( "." ) );
         }
-        for ( String executable : Arrays.asList( "mvn", "mvnDebug", "mvnenc", "mvnsh", "mvnyjp" ) )
+        for ( String executable : Arrays.asList( "mvn", "mvnDebug", "mvnenc", "mvnsh", "mvnup", "mvnyjp" ) )
         {
             Files.setPosixFilePermissions( dist.getInstallRoot().resolve( mavenHome ).resolve( "bin" ).resolve( executable ),
                                            PosixFilePermissions.fromString( "rwxr-xr-x" ) );
