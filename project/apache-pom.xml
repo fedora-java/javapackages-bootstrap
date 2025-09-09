@@ -5,6 +5,7 @@
   <module>
     <build>
       <pom>
+        <removePlugin>maven-enforcer-plugin</removePlugin>
         <removePlugin>maven-site-plugin</removePlugin>
       </pom>
     </build>

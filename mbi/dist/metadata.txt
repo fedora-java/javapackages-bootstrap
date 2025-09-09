@@ -158,14 +158,6 @@ MOD easymock
     DEP cglib cglib
     DEP org.ow2.asm asm
     DEP org.objenesis objenesis
-MOD extra-enforcer-rules
-  ART org.codehaus.mojo extra-enforcer-rules
-    DEP org.apache.maven.enforcer enforcer-api
-    DEP org.apache.maven maven-core
-    DEP org.apache.maven maven-compat
-    DEP org.apache.maven.shared maven-dependency-tree
-    DEP commons-codec commons-codec
-    DEP org.apache.maven.shared maven-common-artifact-filters
 MOD felix-utils
   ART org.apache.felix org.apache.felix.utils
 MOD gson
@@ -489,18 +481,6 @@ MOD maven-embedder
     DEP commons-cli commons-cli
     DEP org.apache.commons commons-lang3
     DEP org.fusesource.jansi jansi
-MOD maven-enforcer
-  ART org.apache.maven.enforcer enforcer-rules
-    DEP org.codehaus.plexus plexus-utils
-    DEP org.apache.commons commons-lang3
-    DEP commons-codec commons-codec
-    DEP commons-io commons-io
-    DEP org.apache.maven.enforcer enforcer-api
-    DEP org.apache.maven.resolver maven-resolver-util
-  ART org.apache.maven.plugins maven-enforcer-plugin
-    DEP org.apache.maven.enforcer enforcer-api
-    DEP org.apache.maven.enforcer enforcer-rules
-  ART org.apache.maven.enforcer enforcer-api
 MOD maven-file-management
   ART org.apache.maven.shared file-management
     DEP org.slf4j slf4j-api

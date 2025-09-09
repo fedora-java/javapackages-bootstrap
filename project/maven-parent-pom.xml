@@ -18,6 +18,7 @@
     <subDir>maven-plugins</subDir>
     <build>
       <pom>
+        <removePlugin>maven-enforcer-plugin</removePlugin>
         <removePluginExecution>generate-helpmojo</removePluginExecution>
       </pom>
     </build>
