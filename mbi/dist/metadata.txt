@@ -155,7 +155,7 @@ MOD dola-transformer
   ART io.kojan dola-transformer
 MOD easymock
   ART org.easymock easymock
-    DEP cglib cglib
+    DEP net.bytebuddy byte-buddy
     DEP org.ow2.asm asm
     DEP org.objenesis objenesis
 MOD felix-utils
