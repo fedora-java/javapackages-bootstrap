@@ -6,7 +6,7 @@
     <dependency>junit4</dependency>
     <dependency>junit5-jupiter</dependency>
     <dependency>testng</dependency>
-    <dependency>cglib</dependency>
+    <dependency>byte-buddy</dependency>
     <dependency>objenesis</dependency>
     <dependency>asm</dependency>  <!-- required by Eclipse  -->
     <build>
