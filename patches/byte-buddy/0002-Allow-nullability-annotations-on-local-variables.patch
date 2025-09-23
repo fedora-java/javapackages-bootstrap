@@ -1,4 +1,4 @@
-From 6e945cc133e9b3066788dade1eea1b62d3bc2034 Mon Sep 17 00:00:00 2001
+From 3b446c258ca2a20a4c2aee4722fb106d4f342f11 Mon Sep 17 00:00:00 2001
 From: Mikolaj Izdebski <mizdebsk@redhat.com>
 Date: Thu, 1 Feb 2024 14:49:14 +0100
 Subject: [PATCH 2/2] Allow nullability annotations on local variables
@@ -138,5 +138,5 @@ index 4f9ecf365f..9325e8e636 100644
  @Nonnull(when = When.UNKNOWN)
  @TypeQualifierNickname
 -- 
-2.46.0
+2.51.0
 
