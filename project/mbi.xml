@@ -59,6 +59,7 @@
     <dependency>slf4j</dependency>
     <dependency>asm</dependency>
     <dependency>commons-io</dependency>
+    <dependency>commons-lang</dependency>
     <build>
       <compiler>
         <release>11</release>
