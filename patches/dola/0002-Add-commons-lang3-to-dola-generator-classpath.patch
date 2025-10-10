@@ -1,0 +1,25 @@
+From 899845993742fd70b46271e0d486a296bbbaa534 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Fri, 10 Oct 2025 17:54:17 +0200
+Subject: [PATCH 2/2] Add commons-lang3 to dola-generator classpath
+
+Forwarded: https://github.com/mizdebsk/dola/pull/42
+---
+ dola-generator/src/main/conf/dola-generator.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/dola-generator/src/main/conf/dola-generator.conf b/dola-generator/src/main/conf/dola-generator.conf
+index 0f114b4..c61be88 100644
+--- a/dola-generator/src/main/conf/dola-generator.conf
++++ b/dola-generator/src/main/conf/dola-generator.conf
+@@ -3,6 +3,7 @@ import io.kojan.dola.rpm from Realm:bsx-api
+ load /usr/share/javapackages-bootstrap/asm.jar
+ load /usr/share/javapackages-bootstrap/commons-compress.jar
+ load /usr/share/javapackages-bootstrap/commons-io.jar
++load /usr/share/javapackages-bootstrap/commons-lang3.jar
+ load /usr/share/javapackages-bootstrap/xmvn-api.jar
+ load /usr/share/javapackages-bootstrap/kojan-xml.jar
+ load /usr/share/javapackages-bootstrap/xmvn-core.jar
+-- 
+2.51.0
+
