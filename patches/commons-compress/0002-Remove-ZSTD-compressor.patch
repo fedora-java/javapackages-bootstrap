@@ -1,0 +1,106 @@
+From 9a061729b0976ded5a739765fcdfc0c56bd0e46c Mon Sep 17 00:00:00 2001
+From: Michael Simacek <msimacek@redhat.com>
+Date: Mon, 12 Feb 2018 10:59:55 +0100
+Subject: [PATCH 2/3] Remove ZSTD compressor
+
+Forwarded: not-needed
+---
+ .../archivers/zip/ZipArchiveInputStream.java        |  3 +--
+ .../commons/compress/archivers/zip/ZipFile.java     |  7 ++++---
+ .../compressors/CompressorStreamFactory.java        | 13 ++-----------
+ 3 files changed, 7 insertions(+), 16 deletions(-)
+
+diff --git a/src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java b/src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java
+index b6d0abc..81ddb57 100644
+--- a/src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java
++++ b/src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveInputStream.java
+@@ -45,7 +45,6 @@ import org.apache.commons.compress.archivers.ArchiveEntry;
+ import org.apache.commons.compress.archivers.ArchiveInputStream;
+ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
+ import org.apache.commons.compress.compressors.deflate64.Deflate64CompressorInputStream;
+-import org.apache.commons.compress.compressors.zstandard.ZstdCompressorInputStream;
+ import org.apache.commons.compress.utils.ArchiveUtils;
+ import org.apache.commons.compress.utils.IOUtils;
+ import org.apache.commons.compress.utils.InputStreamStatistics;
+@@ -522,7 +521,7 @@ public class ZipArchiveInputStream extends ArchiveInputStream<ZipArchiveEntry> i
+      * @since 1.28.0
+      */
+     protected InputStream createZstdInputStream(final InputStream in) throws IOException {
+-        return new ZstdCompressorInputStream(in);
++        throw new IOException("Zstandard compression is not available in this build.");
+     }
+ 
+     /**
+diff --git a/src/main/java/org/apache/commons/compress/archivers/zip/ZipFile.java b/src/main/java/org/apache/commons/compress/archivers/zip/ZipFile.java
+index 264ac33..5535a57 100644
+--- a/src/main/java/org/apache/commons/compress/archivers/zip/ZipFile.java
++++ b/src/main/java/org/apache/commons/compress/archivers/zip/ZipFile.java
+@@ -55,7 +55,6 @@ import org.apache.commons.compress.archivers.EntryStreamOffsets;
+ import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
+ import org.apache.commons.compress.compressors.deflate64.Deflate64CompressorInputStream;
+ import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
+-import org.apache.commons.compress.compressors.zstandard.ZstdCompressorInputStream;
+ import org.apache.commons.compress.utils.BoundedArchiveInputStream;
+ import org.apache.commons.compress.utils.BoundedSeekableByteChannelInputStream;
+ import org.apache.commons.compress.utils.IOUtils;
+@@ -1083,8 +1082,10 @@ public class ZipFile implements Closeable {
+      */
+     @SuppressWarnings("resource")
+     InputStream createZstdInputStream(final InputStream in) throws IOException {
+-        // This method is the only location that references ZstdCompressorInputStream directly to avoid requiring the JAR for all use cases.
+-        return zstdInputStreamFactory != null ? zstdInputStreamFactory.apply(in) : new ZstdCompressorInputStream(in);
++        if (zstdInputStreamFactory == null) {
++            throw new IOException("Zstandard compression is not available in this build.");
++        }
++        return zstdInputStreamFactory.apply(in);
+     }
+ 
+     private void fillNameMap() {
+diff --git a/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java b/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
+index 9a65ba4..a7432c4 100644
+--- a/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
++++ b/src/main/java/org/apache/commons/compress/compressors/CompressorStreamFactory.java
+@@ -52,9 +52,6 @@ import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
+ import org.apache.commons.compress.compressors.xz.XZCompressorOutputStream;
+ import org.apache.commons.compress.compressors.xz.XZUtils;
+ import org.apache.commons.compress.compressors.z.ZCompressorInputStream;
+-import org.apache.commons.compress.compressors.zstandard.ZstdCompressorInputStream;
+-import org.apache.commons.compress.compressors.zstandard.ZstdCompressorOutputStream;
+-import org.apache.commons.compress.compressors.zstandard.ZstdUtils;
+ import org.apache.commons.compress.utils.IOUtils;
+ import org.apache.commons.compress.utils.Sets;
+ import org.apache.commons.lang3.StringUtils;
+@@ -266,9 +263,6 @@ public class CompressorStreamFactory implements CompressorStreamProvider {
+         if (compressorNames.contains(LZ4_FRAMED) && FramedLZ4CompressorInputStream.matches(signature, signatureLength)) {
+             return LZ4_FRAMED;
+         }
+-        if (compressorNames.contains(ZSTANDARD) && ZstdUtils.matches(signature, signatureLength)) {
+-            return ZSTANDARD;
+-        }
+         throw new CompressorException("No Compressor found for the stream signature.");
+     }
+ 
+@@ -616,10 +610,7 @@ public class CompressorStreamFactory implements CompressorStreamProvider {
+                 // @formatter:on
+             }
+             if (ZSTANDARD.equalsIgnoreCase(name)) {
+-                if (!ZstdUtils.isZstdCompressionAvailable()) {
+-                    throw new CompressorException("Zstandard compression is not available." + YOU_NEED_ZSTD_JNI);
+-                }
+-                return new ZstdCompressorInputStream(in);
++                throw new CompressorException("Zstandard compression is not available in this build.");
+             }
+             if (LZMA.equalsIgnoreCase(name)) {
+                 if (!LZMAUtils.isLZMACompressionAvailable()) {
+@@ -707,7 +698,7 @@ public class CompressorStreamFactory implements CompressorStreamProvider {
+                 return new FramedLZ4CompressorOutputStream(out);
+             }
+             if (ZSTANDARD.equalsIgnoreCase(name)) {
+-                return new ZstdCompressorOutputStream(out);
++                throw new CompressorException("Zstandard compression is not available in this build.");
+             }
+         } catch (final IOException e) {
+             throw new CompressorException("Could not create CompressorOutputStream.", e);
+-- 
+2.51.0
+
