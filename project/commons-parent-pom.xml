@@ -17,10 +17,10 @@
         <removePlugin>spdx-maven-plugin</removePlugin>
         <removePlugin>cyclonedx-maven-plugin</removePlugin>
         <removePlugin>maven-artifact-plugin</removePlugin>
+        <removePlugin>maven-changes-plugin</removePlugin>
         <removeProfile>animal-sniffer</removeProfile>
         <removeProfile>japicmp</removeProfile>
         <removeProfile>jacoco</removeProfile>
-        <removeProfile>cobertura</removeProfile>
       </pom>
     </build>
   </module>
