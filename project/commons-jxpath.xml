@@ -8,7 +8,7 @@
     <dependency>commons-beanutils</dependency>
     <build>
       <compiler>
-        <addSourceRoot>src/java</addSourceRoot>
+        <addSourceRoot>src/main/java</addSourceRoot>
         <excludeSourceMatching>/org/apache/commons/jxpath/servlet/.*</excludeSourceMatching>
         <automaticModuleName>org.apache.commons.jxpath</automaticModuleName>
       </compiler>
