@@ -16,6 +16,7 @@
     <dependency>common-annotations-api</dependency>
     <dependency>servlet-api</dependency>
     <dependency>cdi</dependency>
+    <dependency>asm</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
@@ -52,7 +53,7 @@
     <dependency>maven-artifact</dependency>
     <dependency>maven-model</dependency>
     <dependency>maven-common-artifact-filters</dependency>
-    <dependency>plexus-build-api0</dependency>
+    <dependency>plexus-build-api</dependency>
     <build>
       <compiler>
         <addSourceRoot>src/main/java</addSourceRoot>
