@@ -1,0 +1,117 @@
+From 8a3e9185f870caecf58f1679edcfd8aa7e45c857 Mon Sep 17 00:00:00 2001
+From: Mikolaj Izdebski <mizdebsk@redhat.com>
+Date: Thu, 19 Feb 2026 17:10:17 +0100
+Subject: [PATCH 5/5] Switch to Lua 5.5
+
+Forwarded: no
+---
+ .../src/main/java/io/kojan/dola/rpm/RPM.java     |  2 +-
+ .../src/main/java/io/kojan/lujavrite/Lua.java    | 16 ++++++++--------
+ .../dola/generator/stub/RpmLujavriteTest.java    |  2 +-
+ 3 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/dola-bsx-api/src/main/java/io/kojan/dola/rpm/RPM.java b/dola-bsx-api/src/main/java/io/kojan/dola/rpm/RPM.java
+index bdea72b..f3f9f57 100644
+--- a/dola-bsx-api/src/main/java/io/kojan/dola/rpm/RPM.java
++++ b/dola-bsx-api/src/main/java/io/kojan/dola/rpm/RPM.java
+@@ -26,7 +26,7 @@ public class RPM {
+     // Load the Lujavrite native shared library necessary to interface with Lua.
+     // This library provides native support for the Lua-Java bridge.
+     static {
+-        System.load("/usr/lib64/lua/5.4/lujavrite.so");
++        System.load("/usr/lib64/lua/5.5/lujavrite.so");
+     }
+ 
+     /**
+diff --git a/dola-bsx-api/src/main/java/io/kojan/lujavrite/Lua.java b/dola-bsx-api/src/main/java/io/kojan/lujavrite/Lua.java
+index 8218773..438e446 100644
+--- a/dola-bsx-api/src/main/java/io/kojan/lujavrite/Lua.java
++++ b/dola-bsx-api/src/main/java/io/kojan/lujavrite/Lua.java
+@@ -25,7 +25,7 @@ package io.kojan.lujavrite;
+  * such a context results in undefined behavior.
+  *
+  * <p>For more detailed documentation of Lua C API, see the <a
+- * href="https://www.lua.org/manual/5.4/manual.html">Lua Reference Manual</a>.
++ * href="https://www.lua.org/manual/5.5/manual.html">Lua Reference Manual</a>.
+  *
+  * <p>This trivial Java class is maintained as part of Lujavrite project, but it is expected to be
+  * source-bundled by projects depending on the Java->Lua calling functionality of LuJavRite. The
+@@ -40,7 +40,7 @@ public class Lua {
+     /**
+      * Pushes the global variable with the given name onto the Lua stack.
+      *
+-     * @see <a href="https://www.lua.org/manual/5.4/manual.html#lua_getglobal">lua_getglobal</a>
++     * @see <a href="https://www.lua.org/manual/5.5/manual.html#lua_getglobal">lua_getglobal</a>
+      *     method documentation in Lua Reference Manual
+      * @param name the name of the global variable to retrieve
+      * @return the type of the value pushed onto the stack
+@@ -50,7 +50,7 @@ public class Lua {
+     /**
+      * Pushes onto the stack the value of a field from a table at the given index.
+      *
+-     * @see <a href=https://www.lua.org/manual/5.4/manual.html#lua_getfield>lua_getfield</a> method
++     * @see <a href=https://www.lua.org/manual/5.5/manual.html#lua_getfield>lua_getfield</a> method
+      *     documentation in Lua Reference Manual
+      * @param index the stack index of the table
+      * @param name the name of the field to retrieve
+@@ -61,7 +61,7 @@ public class Lua {
+     /**
+      * Pushes a Java string onto the Lua stack as a Lua string.
+      *
+-     * @see <a href=https://www.lua.org/manual/5.4/manual.html#lua_pushstring>lua_pushstring</a>
++     * @see <a href=https://www.lua.org/manual/5.5/manual.html#lua_pushstring>lua_pushstring</a>
+      *     method documentation in Lua Reference Manual
+      * @param string the string to push onto the stack
+      */
+@@ -70,7 +70,7 @@ public class Lua {
+     /**
+      * Calls a Lua function with the specified number of arguments and expected results.
+      *
+-     * @see <a href=https://www.lua.org/manual/5.4/manual.html#lua_pcall>lua_pcall</a> method
++     * @see <a href=https://www.lua.org/manual/5.5/manual.html#lua_pcall>lua_pcall</a> method
+      *     documentation in Lua Reference Manual
+      * @param nargs the number of arguments to pass to the function
+      * @param nresults the number of expected return values
+@@ -82,7 +82,7 @@ public class Lua {
+     /**
+      * Converts the Lua value at the given stack index to a Java string.
+      *
+-     * @see <a href=https://www.lua.org/manual/5.4/manual.html#lua_tostring>lua_tostring</a> method
++     * @see <a href=https://www.lua.org/manual/5.5/manual.html#lua_tostring>lua_tostring</a> method
+      *     documentation in Lua Reference Manual
+      * @param index the index of the value on the stack
+      * @return the string representation of the Lua value
+@@ -92,7 +92,7 @@ public class Lua {
+     /**
+      * Removes the top {@code n} elements from the Lua stack.
+      *
+-     * @see <a href=https://www.lua.org/manual/5.4/manual.html#lua_pop>lua_pop</a> method
++     * @see <a href=https://www.lua.org/manual/5.5/manual.html#lua_pop>lua_pop</a> method
+      *     documentation in Lua Reference Manual
+      * @param n the number of elements to pop
+      * @return the new top index of the stack
+@@ -103,7 +103,7 @@ public class Lua {
+      * Removes the element at the specified index from the Lua stack, shifting elements above it
+      * down.
+      *
+-     * @see <a href=https://www.lua.org/manual/5.4/manual.html#lua_remove>lua_remove</a> method
++     * @see <a href=https://www.lua.org/manual/5.5/manual.html#lua_remove>lua_remove</a> method
+      *     documentation in Lua Reference Manual
+      * @param index the index of the element to remove
+      * @return the new top index of the stack
+diff --git a/dola-generator/src/test/java/io/kojan/dola/generator/stub/RpmLujavriteTest.java b/dola-generator/src/test/java/io/kojan/dola/generator/stub/RpmLujavriteTest.java
+index 77ee8be..368f914 100644
+--- a/dola-generator/src/test/java/io/kojan/dola/generator/stub/RpmLujavriteTest.java
++++ b/dola-generator/src/test/java/io/kojan/dola/generator/stub/RpmLujavriteTest.java
+@@ -39,7 +39,7 @@ class RpmLujavriteTest {
+ 
+     @BeforeAll
+     static void setUpClass() {
+-        System.load("/usr/lib64/lua/5.4/lujavrite.so");
++        System.load("/usr/lib64/lua/5.5/lujavrite.so");
+     }
+ 
+     @Test
+-- 
+2.51.0
+
