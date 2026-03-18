@@ -12,10 +12,6 @@
         <addSourceRoot>src/main</addSourceRoot>
         <addResource>src/main</addResource>
         <addResource>src/resources</addResource>
-        <excludeSourceClass>org/apache/tools/ant/attribute/BaseIfAttribute</excludeSourceClass>
-        <excludeSourceClass>org/apache/tools/ant/attribute/IfBlankAttribute</excludeSourceClass>
-        <excludeSourceClass>org/apache/tools/ant/attribute/IfSetAttribute</excludeSourceClass>
-        <excludeSourceClass>org/apache/tools/ant/attribute/IfTrueAttribute</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/dispatch/DispatchTask</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/filters/ConcatFilter</excludeSourceClass>
         <excludeSourceClass>org/apache/tools/ant/filters/Native2AsciiFilter</excludeSourceClass>
