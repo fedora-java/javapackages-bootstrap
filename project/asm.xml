@@ -16,6 +16,7 @@
     <subDir>asm</subDir>
     <build>
       <compiler>
+        <release>11</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
       <retrofitter/>
@@ -28,6 +29,7 @@
     <dependency>asm-tree</dependency>
     <build>
       <compiler>
+        <release>11</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
       <retrofitter/>
@@ -40,6 +42,7 @@
     <dependency>asm-tree</dependency>
     <build>
       <compiler>
+        <release>11</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
       <retrofitter/>
@@ -51,6 +54,7 @@
     <dependency>asm</dependency>
     <build>
       <compiler>
+        <release>11</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
       <retrofitter/>
@@ -64,6 +68,7 @@
     <dependency>asm-tree</dependency>
     <build>
       <compiler>
+        <release>11</release>
         <addSourceRoot>src/main/java</addSourceRoot>
       </compiler>
       <retrofitter/>
